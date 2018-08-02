@@ -1,0 +1,220 @@
+climate.000a15e8589bf8:
+  friendly_name: Bedroom
+  homebridge_hidden: true
+  icon: mdi:temperature-celsius
+switch.0001d3c98dd8ab:
+  friendly_name: Lava Lamp
+  homebridge_hidden: true
+  icon: mdi:lamp
+switch.000213c99094ff:
+  friendly_name: Floorlight
+  homebridge_hidden: true
+  icon: mdi:lamp
+climate.000393c98d14a3:
+  friendly_name: Bureau
+  homebridge_hidden: true
+  icon: mdi:temperature-celsius
+climate.000393c98d143e:
+  friendly_name: Living
+  homebridge_hidden: true
+  icon: mdi:temperature-celsius
+binary_sensor.0000d3c98c9611_state:
+  friendly_name: Backdoor
+  homebridge_hidden: true
+  icon: mdi:door
+  templates:
+    icon: if (state === 'on') return 'mdi:run-fast'; else return 'mdi:door';
+    rgb_color: if (state === 'on') return [54, 95, 140]; else return [54, 95, 140];
+binary_sensor.0000d5e8588c39_state:
+  friendly_name: Frontdoor
+  homebridge_hidden: true
+  icon: mdi:door
+binary_sensor.0000d5e8588b9e_state:
+  friendly_name: Window
+  homebridge_hidden: true
+  homebridge_name: Window
+  icon: mdi:window-closed
+group.living:
+  entity_id:
+  - climate.000393c98d143e
+  - climate.000393c98d14a3
+  - switch.0001d3c98dd8ab
+  - switch.000213c99094ff
+  - binary_sensor.0000d3c98c9611_state
+  - binary_sensor.0000d5e8588b9e_state
+light.ikea_lamp_1:
+  homebridge_hidden: true
+light.ikea_lamp_3:
+  homebridge_hidden: true
+  id: ikea3
+group.bureau: {}
+group.bedroom:
+  homebridge_hidden: true
+  icon: mdi:light
+  order: 6
+group.bathroom:
+  homebridge_hidden: true
+  order: 7
+group.entrance:
+  homebridge_hidden: true
+  order: 1
+sensor.current_activity:
+  icon: mdi:monitor
+light.bureau_lamp_links:
+  homebridge_hidden: true
+light.bureau_lamp_rechts:
+  homebridge_hidden: true
+light.hal:
+  homebridge_hidden: true
+light.wc:
+  homebridge_hidden: true
+light.badkamer:
+  homebridge_hidden: true
+remote.apple_tv:
+  homebridge_hidden: true
+media_player.apple_tv:
+  homebridge_hidden: true
+group.ikea_lamp:
+  homebridge_name: IKEA Lamp
+light.bedroom_back:
+  homebridge_hidden: true
+media_player.sony_hub:
+  homebridge_hidden: true
+light.bedroom_1:
+  homebridge_hidden: true
+light.bedroom_2:
+  homebridge_hidden: true
+group.ikea_lights:
+  homebridge_hidden: true
+  icon: mdi:lamp
+group.bureau_lights:
+  homebridge_hidden: true
+  icon: mdi:lamp
+  order: 1
+light.bedroom:
+  homebridge_hidden: true
+  icon: mdi:light
+light.bathroom_light:
+  homebridge_hidden: true
+  icon: mdi:lightbulb
+group.bedroom_lights:
+  homebridge_hidden: true
+  icon: mdi:lightbulb
+group.bedroom_lights_group:
+  homebridge_hidden: true
+  icon: mdi:lightbulb
+sensor.0001d3c98dd8ab_current:
+  homebridge_hidden: true
+sensor.0001d3c98dd8ab_energy_counter:
+  homebridge_hidden: true
+sensor.0001d3c98dd8ab_frequency:
+  homebridge_hidden: true
+sensor.0001d3c98dd8ab_power:
+  homebridge_hidden: true
+sensor.0001d3c98dd8ab_voltage:
+  homebridge_hidden: true
+climate.000a15e8589919:
+  friendly_name: Entrance
+  homebridge_hidden: true
+group.all_automations:
+  homebridge_hidden: true
+group.all_devices:
+  homebridge_hidden: true
+group.all_lights:
+  homebridge_hidden: true
+group.living_floor:
+  homebridge_hidden: true
+light.toilet_light:
+  homebridge_hidden: true
+light.toilet:
+  homebridge_hidden: true
+group.harmony:
+  homebridge_hidden: true
+  order: 3
+light.slaapkamer_1:
+  homebridge_hidden: true
+light.slaapkamer_2:
+  homebridge_hidden: true
+light.living_room:
+  homebridge_hidden: true
+group.living_room:
+  homebridge_hidden: true
+  order: 2
+media_player.living_room:
+  homebridge_hidden: true
+group.kitchen_floor:
+  homebridge_hidden: true
+light.ikea_lamp_2:
+  homebridge_hidden: true
+remote.harmonyhub:
+  homebridge_hidden: true
+automation.harmony_update:
+  homebridge_hidden: true
+automation.harmony:
+  homebridge_hidden: true
+light.entrance_light:
+  homebridge_hidden: true
+group.entrance_floor:
+  homebridge_hidden: true
+light.entrance:
+  homebridge_hidden: true
+light.entertainment_area_1:
+  homebridge_hidden: true
+light.diner_2:
+  homebridge_hidden: true
+light.diner_1:
+  homebridge_hidden: true
+light.bureaulamp_right:
+  homebridge_hidden: true
+light.bureaulamp_left:
+  homebridge_hidden: true
+light.bureau_lightstrip:
+  homebridge_hidden: true
+light.bedroom_lights:
+  homebridge_hidden: true
+group.bedroom_floor:
+  homebridge_hidden: true
+light.bathroom:
+  homebridge_hidden: true
+group.bedroom_bathroom_group:
+  homebridge_hidden: true
+light.all_living:
+  homebridge_hidden: true
+light.accessoires:
+  homebridge_hidden: true
+light.bureau:
+  homebridge_hidden: true
+device_tracker.iphone_7_enterprise:
+  homebridge_hidden: true
+device_tracker.330e_iperformance:
+  homebridge_hidden: true
+device_tracker.ac1f74719b9d:
+  friendly_name: Fabian
+  homebridge_name: iPhone 7 Device Tracker
+device_tracker.38378b02967d:
+  friendly_name: Andreia
+  homebridge_name: Huawei Tracker
+light.hue_color_candle_2:
+  homebridge_hidden: true
+light.hue_color_candle_1:
+  homebridge_hidden: true
+light.kitchen:
+  homebridge_hidden: true
+light.car:
+  homebridge_hidden: true
+group.kitchen_lights:
+  icon: mdi:lightbulb
+group.kitchen:
+  order: 5
+light.hue_ambiance_spot_2:
+  homebridge_hidden: true
+light.hue_ambiance_spot_1:
+  homebridge_hidden: true
+light.hue_ambiance_spot_3:
+  homebridge_hidden: true
+group.bmw:
+  order: 8
+camera.bmw_330e:
+  order: 9
+light.hgrp0130088952:
+  homebridge_hidden: true

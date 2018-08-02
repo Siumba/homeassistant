@@ -1,0 +1,9 @@
+harmony:
+  name: Current Activity
+  options:
+    - Powered Off
+    - Watch TV
+    - Watch Apple TV
+    - Watch Mac mini
+    - Watch Netflix
+  icon: mdi:monitor

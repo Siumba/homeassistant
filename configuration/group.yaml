@@ -1,0 +1,165 @@
+#Views for tabs
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+        - group.entrance
+        - group.living_room
+        - group.harmony
+        - group.bureau
+        - group.kitchen
+        - group.bedroom
+        - group.bathroom
+        - group.bmw
+        - camera.bmw_330e
+        - binary_sensor.0000d5e8588c39_state
+        - binary_sensor.0000d3c98c9611_state
+        - binary_sensor.0000d5e8588b9e_state
+        - device_tracker.ac1f74719b9d
+        - device_tracker.38378b02967d
+  living_floor:
+    name: Living Room
+    view: yes
+    icon: mdi:sofa
+    entities:
+        - group.living_room
+        - group.bureau
+        - group.harmony
+        - binary_sensor.0000d5e8588b9e_state
+  bedroom_floor:
+    name: Bedroom
+    view: yes
+    icon: mdi:hotel
+    entities:
+        - climate.000a15e8589bf8
+        - group.bedroom_bathroom_group
+  kitchen_floor:
+    name: Kitchen
+    view: yes
+    icon: mdi:stove
+    entities:
+        - binary_sensor.0000d3c98c9611_state
+        - group.kitchen_lights_group
+  entrance_floor:
+    name: Entrance
+    view: yes
+    icon: mdi:door-open
+    entities:
+        - binary_sensor.0000d5e8588c39_state
+        - group.entrance
+  car:
+    name: BMW 330e
+    view: yes
+    icon: mdi:car
+    entities:
+        - binary_sensor.330e_iperformance_door_lock_state
+        - binary_sensor.330e_iperformance_lids
+        - binary_sensor.330e_iperformance_windows
+        - sensor.330e_iperformance_charging_level_hv
+        - sensor.charge_status
+        - sensor.330e_iperformance_charging_time_remaining
+        - sensor.330e_iperformance_remaining_range_total
+        - sensor.330e_iperformance_mileage
+        - group.bmw
+        - camera.bmw_330e
+        
+#Groups of devices 
+  living_room:
+    name: Living Room
+    entities:
+        - climate.000393c98d14a3
+        - climate.000393c98d143e
+        - switch.0001d3c98dd8ab
+        - switch.000213c99094ff
+        - group.ikea_lights
+  bureau:
+    name: Bureau
+    entities:
+        - group.bureau_lights
+  harmony:
+    name: TV
+    entities:
+        - input_select.harmony
+        - media_player.apple_tv
+  bathroom:
+    name: Bathroom
+    entities:
+        - light.bathroom_light
+  bedroom:
+    name: Bedroom
+    entities:
+        - climate.000a15e8589bf8
+        - group.bedroom_lights
+  kitchen:
+    name: Kitchen
+    entities:
+        - group.kitchen_lights
+  entrance:
+    name: Entrance
+    entities:
+        - light.entrance_light
+        - light.toilet_light
+  bmw:
+    name: BMW 330e
+    control: hidden
+    entities:
+        - switch.330e_iperformance_climate
+        - switch.330e_iperformance_horn
+        - switch.330e_iperformance_light
+        - lock.330e_iperformance_lock
+  bmw_group:
+    name: BMW 330e
+    control: hidden
+    entities:
+        - binary_sensor.330e_iperformance_door_lock_state
+        - binary_sensor.330e_iperformance_lids
+        - binary_sensor.330e_iperformance_windows
+        - sensor.330e_iperformance_charging_level_hv
+        - sensor.charge_status
+        - sensor.330e_iperformance_charging_time_remaining
+        - sensor.330e_iperformance_remaining_range_total
+        - sensor.330e_iperformance_mileage
+        - switch.330e_iperformance_climate
+        - switch.330e_iperformance_horn
+        - switch.330e_iperformance_light
+        - lock.330e_iperformance_lock
+        
+### Grouping of lights
+  bedroom_lights:
+    name: Bedroom Light
+    entities:
+        - light.slaapkamer_1
+        - light.slaapkamer_2
+  bedroom_lights_group:
+    name: Bedroom Light
+    entities:
+        - group.bedroom_lights
+  bedroom_bathroom_group:
+    name: Bedroom
+    entities:
+        - group.bedroom_lights_group
+        - light.bathroom_light
+        - light.hue_color_candle_1
+        - light.hue_color_candle_2
+  kitchen_lights:
+    name: Kitchen Light
+    entities:
+        - light.hue_ambiance_spot_2
+        - light.hue_ambiance_spot_1
+        - light.hue_ambiance_spot_3
+  kitchen_lights_group:
+    name: Kitchen Light
+    entities:
+        - group.kitchen_lights
+  ikea_lights:
+    name: IKEA Light
+    entities:
+        - light.ikea_lamp_1
+        - light.ikea_lamp_2
+        - light.ikea_lamp_3
+  bureau_lights:
+    name: Bureau
+    entities:
+        - light.bureaulamp_left
+        - light.bureau_lightstrip
+        - light.bureaulamp_right
