@@ -1,0 +1,39 @@
+- alias: Harmony
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.harmony
+  action:
+    - service: remote.turn_on
+      entity_id: remote.harmonyhub
+      data_template:
+        activity: >
+          {% if is_state("input_select.harmony", "Watch TV") %}
+            31071270
+          {% elif is_state("input_select.harmony", "Watch Apple TV") %}
+            31074811
+          {% elif is_state("input_select.harmony", "Watch Mac mini") %}
+            31071271
+          {% elif is_state("input_select.harmony", "Watch Netflix") %}
+            31983339
+          {% else %}
+            -1
+          {% endif %}
+
+# This next automation is to update the input_select when the Harmony's
+# activity was changed from somewhere else, e.g. using its physical remote.
+- alias: Harmony Update
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: remote.harmonyhub
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.harmony
+        option: >
+          {% if states.remote.harmonyhub.attributes.current_activity == "PowerOff" %}
+            Powered Off
+          {% else %}
+            {{ states.remote.harmonyhub.attributes.current_activity }}
+          {% endif %}
