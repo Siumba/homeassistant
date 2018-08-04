@@ -9,7 +9,7 @@ switch.0001d3c98dd8ab:
 switch.000213c99094ff:
   friendly_name: Floorlight
   homebridge_hidden: true
-  icon: mdi:lamp
+  icon: mdi:floor-lamp
 climate.000393c98d14a3:
   friendly_name: Bureau
   homebridge_hidden: true
@@ -86,7 +86,7 @@ light.bedroom_2:
   homebridge_hidden: true
 group.ikea_lights:
   homebridge_hidden: true
-  icon: mdi:lamp
+  icon: mdi:floor-lamp
 group.bureau_lights:
   homebridge_hidden: true
   icon: mdi:lamp
@@ -116,6 +116,7 @@ sensor.0001d3c98dd8ab_voltage:
 climate.000a15e8589919:
   friendly_name: Entrance
   homebridge_hidden: true
+  icon: mdi:temperature-celsius
 group.all_automations:
   homebridge_hidden: true
 group.all_devices:
@@ -218,3 +219,7 @@ camera.bmw_330e:
   order: 9
 light.hgrp0130088952:
   homebridge_hidden: true
+group.diner_lights:
+  icon: mdi:ceiling-light
+group.bedroom_sidelights_group:
+  icon: mdi:desk-lamp

@@ -31,8 +31,7 @@
     view: yes
     icon: mdi:hotel
     entities:
-        - climate.000a15e8589bf8
-        - group.bedroom_bathroom_group
+        - group.bedroom
   kitchen_floor:
     name: Kitchen
     view: yes
@@ -45,7 +44,7 @@
     view: yes
     icon: mdi:door-open
     entities:
-        - binary_sensor.0000d5e8588c39_state
+        - binary_sensor.000A15E8589919_state
         - group.entrance
   car:
     name: BMW 330e
@@ -69,9 +68,10 @@
     entities:
         - climate.000393c98d14a3
         - climate.000393c98d143e
-        - switch.0001d3c98dd8ab
-        - switch.000213c99094ff
+        - group.diner_lights
         - group.ikea_lights
+        - switch.000213c99094ff
+        - switch.0001d3c98dd8ab
   bureau:
     name: Bureau
     entities:
@@ -90,6 +90,7 @@
     entities:
         - climate.000a15e8589bf8
         - group.bedroom_lights
+        - group.bedroom_sidelights_group
   kitchen:
     name: Kitchen
     entities:
@@ -97,6 +98,7 @@
   entrance:
     name: Entrance
     entities:
+        - climate.000a15e8589919
         - light.entrance_light
         - light.toilet_light
   bmw:
@@ -130,23 +132,22 @@
     entities:
         - light.slaapkamer_1
         - light.slaapkamer_2
-  bedroom_lights_group:
-    name: Bedroom Light
+  bedroom_sidelights_group:
+    name: Bedroom Sidelights
     entities:
-        - group.bedroom_lights
-  bedroom_bathroom_group:
-    name: Bedroom
+        - light.fabians_lamp
+        - light.andreias_lamp
+  diner_lights:
+    name: Diner
     entities:
-        - group.bedroom_lights_group
-        - light.bathroom_light
-        - light.hue_color_candle_1
-        - light.hue_color_candle_2
+        - light.diner_1
+        - light.diner_2
   kitchen_lights:
     name: Kitchen Light
     entities:
-        - light.hue_ambiance_spot_2
-        - light.hue_ambiance_spot_1
-        - light.hue_ambiance_spot_3
+        - light.kitchen_2
+        - light.kitchen_1
+        - light.kitchen_3
   kitchen_lights_group:
     name: Kitchen Light
     entities:
