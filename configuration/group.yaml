@@ -17,6 +17,7 @@
         - binary_sensor.0000d5e8588b9e_state
         - device_tracker.ac1f74719b9d
         - device_tracker.38378b02967d
+        - sensor.pihole_ads_blocked_today
   living_floor:
     name: Living Room
     view: yes

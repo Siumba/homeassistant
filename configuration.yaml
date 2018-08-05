@@ -16,6 +16,8 @@ homeassistant:
 # Show links to resources in log and frontend
 #introduction:
 
+hassio:
+
 # Enables the frontend
 frontend:
   # Add themes
@@ -32,10 +34,16 @@ panel_iframe:
     title: IDE
     icon: mdi:code-braces
     url: http://hassio.local:8321
+  pihole:
+    title: Pi-hole
+    icon: mdi:block-helper
+    url: http://hassio.local/admin/index.php
 
 http:
   # Uncomment this to add a password (recommended!)
   api_password: !secret login_password
+  cors_allowed_origins:
+    - http://192.168.1.10:7080
   trusted_proxies: 172.16.0.0/12
   trusted_networks: 172.16.0.0/12
   use_x_forwarded_for: true

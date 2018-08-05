@@ -27,3 +27,4 @@
             mdi:weather-sunset
            {% endif %}
 - platform: yr
+- platform: pi_hole
