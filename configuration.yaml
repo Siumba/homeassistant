@@ -1,4 +1,7 @@
 homeassistant:
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
   # Name of the location where Home Assistant is running
   name: iHouse
   # Location required to calculate the time the sun rises and sets
@@ -13,6 +16,7 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
+auth:
 # Show links to resources in log and frontend
 #introduction:
 
@@ -37,7 +41,11 @@ panel_iframe:
   pihole:
     title: Pi-hole
     icon: mdi:block-helper
-    url: http://hassio.local/admin/index.php
+    url: http://hassio.local:4865/admin/index.php
+  ccu2:
+    title: 'Homematic'
+    icon: 'mdi:router-wireless'
+    url: 'http://192.168.1.12'
 
 http:
   # Uncomment this to add a password (recommended!)
@@ -93,7 +101,10 @@ sun:
 #  - platform: google
 
 # Cloud
-cloud:
+#cloud:
+
+automation:     !include automations.yaml
+script:         !include scripts.yaml
 
 sensor:         !include ./configuration/sensor.yaml
 remote:         !include ./configuration/remote.yaml       
@@ -101,9 +112,9 @@ group:          !include ./configuration/group.yaml
 input_select:   !include ./configuration/input_select.yaml
 #media_player:   !include ./configuration/media_player.yaml
 #device_tracker: !include ./configuration/device_tracker.yaml
-automation:     !include_dir_merge_list ./automation/
-script: !include scripts.yaml
-
+homekit:        !include ./configuration/homekit.yaml
+switch:         !include ./configuration/switch.yaml
+input_boolean:  !include ./configuration/input_boolean.yaml
 
 bmw_connected_drive:
   name:
@@ -115,7 +126,7 @@ bmw_connected_drive:
 camera:
     - platform: generic
       name: BMW 330e
-      still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker['330e_iperformance'].attributes.latitude }},{{ states.device_tracker['330e_iperformance'].attributes.longitude }}&zoom=13&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.device_tracker['330e_iperformance'].attributes.latitude }},{{ states.device_tracker['330e_iperformance'].attributes.longitude }}
+      still_image_url: !secret google_api_car
       limit_refetch_to_url_change: true
 
 apple_tv:
@@ -128,9 +139,29 @@ hue:
   bridges:
     - host: 192.168.1.11
 
+notify:
+  - name: notify
+    platform: pushover
+    api_key: aq7rniee1h3fpcuodwwm9qig9uavhx
+    user_key: rBTaty5Ut6qzyLhakyCfiVHqbBqNu8
+
 #homematic interface
 homematic:
   interfaces:
     ip:
+      resolvenames: json
       host: 192.168.1.12
       port: 2010
+      username: Admin
+      password: !secret login_password
+    rf:
+      resolvenames: json
+      host: 192.168.1.12
+      port: 2001
+      username: Admin
+      password: !secret login_password
+  hosts:
+    ccu2:
+      host: 192.168.1.12
+      username: Admin
+      password: !secret login_password

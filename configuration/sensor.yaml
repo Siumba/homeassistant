@@ -26,5 +26,44 @@
            {% else %}
             mdi:weather-sunset
            {% endif %}
+- platform: template
+  sensors:
+    battery_status:
+      friendly_name: "Battery Status"
+      entity_id:
+      - input_boolean.battery_status_update_bool
+      value_template: >
+        {%- set threshold = 'Low' -%}
+        {%- set domains = ['binary_sensor', 'climate', 'sensor'] -%}
+        {%- for domain in domains -%}
+        {%- for item in states[domain] if ((item.attributes.battery is defined and item.attributes['battery'] | string == threshold) or ("battery" in item.name | lower and ((item.state | string == threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
+        {%- if (item.attributes.battery is defined and item.attributes['battery'] | string == threshold) -%}
+        {{ item.name }} ({{ item.attributes['battery'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
+        {%- if "battery" in item.name | lower and ((item.state | string == threshold and item.state|string != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
+        {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
+        {%- endfor -%}
+        {%- endfor -%}
+
+- platform: template
+  sensors:
+    bmw_connectioncharge_status:
+      friendly_name: 'BMW Connection Status'
+      value_template: >-
+          {% if is_state_attr('binary_sensor.330e_iperformance_connection_status', 'connection_status', 'CONNECTED') and is_state_attr('binary_sensor.330e_iperformance_charging_status', 'charging_status', 'ERROR') %}
+            ERROR
+          {% else %}
+            NA
+          {% endif %}
+
 - platform: yr
 - platform: pi_hole
+  host: localhost:4865
+  monitored_conditions:
+    - ads_blocked_today
+    - dns_queries_today
+    - unique_clients
+    
+- platform: cure_waste
+  location: Eindhoven
+  postalcode: 5653NV
+  housenumber: 42

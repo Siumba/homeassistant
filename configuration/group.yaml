@@ -12,6 +12,7 @@
         - group.bathroom
         - group.bmw
         - camera.bmw_330e
+        - group.trash_sensors
         - binary_sensor.0000d5e8588c39_state
         - binary_sensor.0000d3c98c9611_state
         - binary_sensor.0000d5e8588b9e_state
@@ -45,7 +46,7 @@
     view: yes
     icon: mdi:door-open
     entities:
-        - binary_sensor.000A15E8589919_state
+        - binary_sensor.0000d5e8588c39_state
         - group.entrance
   car:
     name: BMW 330e
@@ -64,6 +65,15 @@
         - camera.bmw_330e
         
 #Groups of devices 
+  trash_sensors:
+    name: Afval sensoren
+    entities:
+        - sensor.eindhoven_biodegradable_waste
+        - sensor.eindhoven_general_waste
+        - sensor.eindhoven_paper_waste
+        - sensor.eindhoven_biodegradable_waste_countdown
+        - sensor.eindhoven_general_waste_countdown
+        - sensor.eindhoven_paper_waste_countdown
   living_room:
     name: Living Room
     entities:
@@ -73,6 +83,7 @@
         - group.ikea_lights
         - switch.000213c99094ff
         - switch.0001d3c98dd8ab
+        - script.set_temperature
   bureau:
     name: Bureau
     entities:
@@ -106,9 +117,9 @@
     name: BMW 330e
     control: hidden
     entities:
-        - switch.330e_iperformance_climate
-        - switch.330e_iperformance_horn
-        - switch.330e_iperformance_light
+        - script.bmw_airco
+        - script.bmw_horn
+        - script.bmw_light
         - lock.330e_iperformance_lock
   bmw_group:
     name: BMW 330e
@@ -122,9 +133,9 @@
         - sensor.330e_iperformance_charging_time_remaining
         - sensor.330e_iperformance_remaining_range_total
         - sensor.330e_iperformance_mileage
-        - switch.330e_iperformance_climate
-        - switch.330e_iperformance_horn
-        - switch.330e_iperformance_light
+        - script.bmw_airco
+        - script.bmw_horn
+        - script.bmw_light
         - lock.330e_iperformance_lock
         
 ### Grouping of lights

@@ -8,14 +8,12 @@
       entity_id: remote.harmonyhub
       data_template:
         activity: >
-          {% if is_state("input_select.harmony", "Watch TV") %}
+          {% if is_state("input_select.harmony", "TV") %}
             31071270
-          {% elif is_state("input_select.harmony", "Watch Apple TV") %}
+          {% elif is_state("input_select.harmony", "Movies") %}
             31074811
-          {% elif is_state("input_select.harmony", "Watch Mac mini") %}
+          {% elif is_state("input_select.harmony", "View Mac mini") %}
             31071271
-          {% elif is_state("input_select.harmony", "Watch Netflix") %}
-            31983339
           {% else %}
             -1
           {% endif %}
