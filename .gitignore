@@ -2,6 +2,7 @@
 !*.yaml
 !automation
 !configuration
+!custom_components
 !.gitignore
 secrets.yaml
 known_devices.yaml

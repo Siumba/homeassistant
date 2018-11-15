@@ -103,7 +103,7 @@ sun:
 # Cloud
 #cloud:
 
-automation:     !include automations.yaml
+automation:     !include_dir_merge_list automation/
 script:         !include scripts.yaml
 
 sensor:         !include ./configuration/sensor.yaml

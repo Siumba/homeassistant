@@ -1,0 +1,35 @@
+- id: '1539012359670'
+  alias: Battery Full
+  trigger:
+  - entity_id: sensor.330e_iperformance_charging_level_hv
+    platform: state
+  condition:
+  - condition: state
+    entity_id: sensor.330e_iperformance_charging_level_hv
+    state: '100'
+  action:
+  - service: notify.notify
+    data:
+      title: Car fully charged
+      message: Car is fully charged at {{ states('sensor.330e_iperformance_charging_level_hv')
+        }}%
+  # - service: persistent_notification.create
+  #   data:
+  #     title: Car fully charged
+  #     message: Car is fully charged at {{ states('sensor.330e_iperformance_charging_level_hv')
+  #       }}%
+  #     notification_id: fully_charged_car
+- id: battery_charge_error
+  alias: Battery Charge Error
+  trigger:
+  - entity_id: sensor.bmw_connectioncharge_status
+    platform: state
+  condition:
+  - condition: state
+    entity_id: sensor.bmw_connectioncharge_status
+    state: 'ERROR'
+  action:
+  - service: notify.notify
+    data:
+      message: Car is not charging due to connection error
+      title: Car not charging
