@@ -3,7 +3,8 @@
 !automation
 !configuration
 !custom_components
-!.gitignore
+!gitupdater.sh
+.gitignore
 secrets.yaml
 known_devices.yaml
 entity_registry.yaml
