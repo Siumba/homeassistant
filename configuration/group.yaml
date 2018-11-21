@@ -13,40 +13,40 @@
         - group.bmw
         - camera.bmw_330e
         - group.trash_sensors
-        - binary_sensor.0000d5e8588c39_state
-        - binary_sensor.0000d3c98c9611_state
-        - binary_sensor.0000d5e8588b9e_state
+        - binary_sensor.frontdoor_state
+        - binary_sensor.backdoor_state
+        - binary_sensor.window_state
         - device_tracker.ac1f74719b9d
         - device_tracker.38378b02967d
         - sensor.pihole_ads_blocked_today
   living_floor:
-    name: Living Room
+    name: Woonkamer
     view: yes
     icon: mdi:sofa
     entities:
         - group.living_room
         - group.bureau
         - group.harmony
-        - binary_sensor.0000d5e8588b9e_state
+        - binary_sensor.window_state
   bedroom_floor:
-    name: Bedroom
+    name: Slaapkamer
     view: yes
     icon: mdi:hotel
     entities:
         - group.bedroom
   kitchen_floor:
-    name: Kitchen
+    name: Keuken
     view: yes
     icon: mdi:stove
     entities:
-        - binary_sensor.0000d3c98c9611_state
+        - binary_sensor.backdoor_state
         - group.kitchen_lights_group
   entrance_floor:
-    name: Entrance
+    name: Hal
     view: yes
     icon: mdi:door-open
     entities:
-        - binary_sensor.0000d5e8588c39_state
+        - binary_sensor.frontdoor_state
         - group.entrance
   car:
     name: BMW 330e
@@ -66,23 +66,21 @@
         
 #Groups of devices 
   trash_sensors:
-    name: Afval sensoren
+    name: Afval
     entities:
         - sensor.eindhoven_biodegradable_waste
-        - sensor.eindhoven_general_waste
-        - sensor.eindhoven_paper_waste
         - sensor.eindhoven_biodegradable_waste_countdown
-        - sensor.eindhoven_general_waste_countdown
+        - sensor.eindhoven_paper_waste
         - sensor.eindhoven_paper_waste_countdown
   living_room:
-    name: Living Room
+    name: Woonkamer
     entities:
-        - climate.000393c98d14a3
-        - climate.000393c98d143e
+        - climate.living_room
+        - climate.bureau
         - group.diner_lights
         - group.ikea_lights
-        - switch.000213c99094ff
-        - switch.0001d3c98dd8ab
+        - switch.floorlight
+        - switch.lava_lamp
         - script.set_temperature
   bureau:
     name: Bureau
@@ -94,23 +92,23 @@
         - input_select.harmony
         - media_player.apple_tv
   bathroom:
-    name: Bathroom
+    name: Badkamer
     entities:
         - light.bathroom_light
   bedroom:
-    name: Bedroom
+    name: Slaapkamer
     entities:
-        - climate.000a15e8589bf8
+        - climate.bedroom
         - group.bedroom_lights
         - group.bedroom_sidelights_group
   kitchen:
-    name: Kitchen
+    name: Keuken
     entities:
         - group.kitchen_lights
   entrance:
-    name: Entrance
+    name: Hal
     entities:
-        - climate.000a15e8589919
+        - climate.entrance
         - light.entrance_light
         - light.toilet_light
   bmw:
@@ -140,32 +138,32 @@
         
 ### Grouping of lights
   bedroom_lights:
-    name: Bedroom Light
+    name: Badkamer Lamp
     entities:
         - light.slaapkamer_1
         - light.slaapkamer_2
   bedroom_sidelights_group:
-    name: Bedroom Sidelights
+    name: Bed Lampen
     entities:
         - light.fabians_lamp
         - light.andreias_lamp
   diner_lights:
-    name: Diner
+    name: Eettafel
     entities:
         - light.diner_1
         - light.diner_2
   kitchen_lights:
-    name: Kitchen Light
+    name: Keuken Lamp
     entities:
         - light.kitchen_2
         - light.kitchen_1
         - light.kitchen_3
   kitchen_lights_group:
-    name: Kitchen Light
+    name: Keuken Lamp
     entities:
         - group.kitchen_lights
   ikea_lights:
-    name: IKEA Light
+    name: IKEA Lamp
     entities:
         - light.ikea_lamp_1
         - light.ikea_lamp_2

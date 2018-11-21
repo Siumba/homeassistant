@@ -10,19 +10,49 @@ filter:
     - switch.turn_on_tv
     - switch.turn_on_atv
     - switch.turn_on_mac
-    - binary_sensor.0000d5e8588c39_state
-    - binary_sensor.0000d3c98c9611_state
-    - binary_sensor.0000d5e8588b9e_state
-    - climate.000393c98d14a3
-    - climate.000393c98d143e
-    - climate.000a15e8589bf8
-    - climate.000a15e8589919
-    - switch.000213c99094ff
-    - switch.0001d3c98dd8ab
+    - binary_sensor.backdoor_state
+    - binary_sensor.frontdoor_state
+    - binary_sensor.window_state
+    - climate.bedroom
+    - climate.bureau
+    - climate.living_room
+    - climate.entrance
+    - switch.floorlight
+    - switch.lava_lamp
 entity_config:
   switch.turn_on_tv:
     name: TV
   switch.turn_on_atv:
     name: Movies
   switch.turn_on_mac:
-    name: View Mac mini
+    name: Mac mini
+  binary_sensor.330e_iperformance_lids:
+    name: Kofferruimte
+  binary_sensor.330e_iperformance_windows:
+    name: Ramen
+  script.bmw_airco:
+    name: Airco
+  script.bmw_horn:
+    name: Claxon
+  script.bmw_light:
+    name: Lampen
+  lock.330e_iperformance_lock:
+    name: BMW
+  binary_sensor.backdoor_state:
+    name: Keukendeur
+  binary_sensor.frontdoor_state:
+    name: Voordeur
+  binary_sensor.window_state:
+    name: Woonkamer Raam
+  climate.entrance:
+    name: Hal
+  climate.bedroom:
+    name: Slaapkamer
+  climate.living_room:
+    name: Woonkamer
+  climate.bureau:
+    name: Bureau
+  switch.floorlight:
+    name: Staande Lamp
+  switch.lava_lamp:
+    name: Kerstboom

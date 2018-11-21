@@ -89,3 +89,11 @@ switch.turn_on_atv:
   friendly_name: Movies
 switch.turn_on_mac:
   friendly_name: View Mac mini
+sensor.eindhoven_biodegradable_waste:
+  friendly_name: Groene Bak
+sensor.eindhoven_biodegradable_waste_countdown:
+  friendly_name: Aantal dagen resterend
+sensor.eindhoven_paper_waste:
+  friendly_name: Oud Papier
+sensor.eindhoven_paper_waste_countdown:
+  friendly_name: Aantal dagen resterend

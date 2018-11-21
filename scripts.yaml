@@ -1,39 +1,43 @@
 bmw_airco:
   sequence:
-  - service: bmw_connected_drive.activate_air_conditioning
-    data:
+  - data:
       vin: WBA8E11040K418183
+    service: bmw_connected_drive.activate_air_conditioning
+  alias: Airco
 bmw_horn:
   sequence:
-  - service: bmw_connected_drive.sound_horn
-    data:
+  - data:
       vin: WBA8E11040K418183
+    service: bmw_connected_drive.sound_horn
+  alias: Claxon
 bmw_light:
   sequence:
-  - service: bmw_connected_drive.light_flash
-    data:
+  - data:
       vin: WBA8E11040K418183
+    service: bmw_connected_drive.light_flash
+  alias: Lampen
 bmw_refresh:
   sequence:
-  - service: bmw_connected_drive.update_state
-    data:
+  - data:
       vin: WBA8E11040K418183
+    service: bmw_connected_drive.update_state
+  alias: BMW Update State
 set_temperature:
-  alias: Climate to 15 degrees
+  alias: Alles op 15 graden
   sequence:
-  - service: climate.set_temperature
-    data:
+  - data:
       entity_id: climate.000393c98d14a3
       temperature: 15
-  - service: climate.set_temperature
-    data:
+    service: climate.set_temperature
+  - data:
       entity_id: climate.000393c98d143e
       temperature: 15
-  - service: climate.set_temperature
-    data:
+    service: climate.set_temperature
+  - data:
       entity_id: climate.000a15e8589bf8
       temperature: 15
-  - service: climate.set_temperature
-    data:
+    service: climate.set_temperature
+  - data:
       entity_id: climate.000a15e8589919
       temperature: 15
+    service: climate.set_temperature
