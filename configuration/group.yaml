@@ -40,7 +40,7 @@
     icon: mdi:stove
     entities:
         - binary_sensor.backdoor_state
-        - group.kitchen_lights_group
+        - group.kitchen
   entrance_floor:
     name: Hal
     view: yes
@@ -138,7 +138,7 @@
         
 ### Grouping of lights
   bedroom_lights:
-    name: Badkamer Lamp
+    name: Slaapkamer Lamp
     entities:
         - light.slaapkamer_1
         - light.slaapkamer_2

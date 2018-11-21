@@ -1,8 +1,8 @@
 harmony:
-  name: Current Activity
+  name: Huidig
   options:
-    - Powered Off
+    - Uitgeschakeld
     - TV
     - Movies
-    - View Mac mini
+    - Mac mini
   icon: mdi:monitor
