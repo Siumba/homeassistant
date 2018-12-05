@@ -27,32 +27,32 @@ entity_config:
   switch.turn_on_mac:
     name: Mac mini
   binary_sensor.330e_iperformance_lids:
-    name: Kofferruimte
+    name: Trunk & Bonnet
   binary_sensor.330e_iperformance_windows:
-    name: Ramen
+    name: Windows
   script.bmw_airco:
-    name: Airco
+    name: Climate Control
   script.bmw_horn:
-    name: Claxon
+    name: Horn
   script.bmw_light:
-    name: Lampen
+    name: Flash Lights
   lock.330e_iperformance_lock:
     name: BMW
   binary_sensor.backdoor_state:
-    name: Keukendeur
+    name: Backdoor
   binary_sensor.frontdoor_state:
-    name: Voordeur
+    name: Frontdoor
   binary_sensor.window_state:
-    name: Woonkamer Raam
+    name: Living Room Window
   climate.entrance:
-    name: Hal
+    name: Hallway Climate
   climate.bedroom:
-    name: Slaapkamer
+    name: Bedroom Climate
   climate.living_room:
-    name: Woonkamer
+    name: Living Room Climate
   climate.bureau:
-    name: Bureau
+    name: Bureau Climate
   switch.floorlight:
-    name: Staande Lamp
+    name: Floorlamp
   switch.lava_lamp:
-    name: Kerstboom
+    name: Christmas Tree

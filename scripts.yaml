@@ -3,19 +3,19 @@ bmw_airco:
   - data:
       vin: WBA8E11040K418183
     service: bmw_connected_drive.activate_air_conditioning
-  alias: Airco
+  alias: Climate Control
 bmw_horn:
   sequence:
   - data:
       vin: WBA8E11040K418183
     service: bmw_connected_drive.sound_horn
-  alias: Claxon
+  alias: Horn
 bmw_light:
   sequence:
   - data:
       vin: WBA8E11040K418183
     service: bmw_connected_drive.light_flash
-  alias: Lampen
+  alias: Flash Lights
 bmw_refresh:
   sequence:
   - data:
@@ -23,7 +23,7 @@ bmw_refresh:
     service: bmw_connected_drive.update_state
   alias: BMW Update State
 set_temperature:
-  alias: Alles op 15 graden
+  alias: Set iHouse to 15°C
   sequence:
   - data:
       entity_id: climate.000393c98d14a3

@@ -20,7 +20,7 @@
         - device_tracker.38378b02967d
         - sensor.pihole_ads_blocked_today
   living_floor:
-    name: Woonkamer
+    name: Living room
     view: yes
     icon: mdi:sofa
     entities:
@@ -29,20 +29,20 @@
         - group.harmony
         - binary_sensor.window_state
   bedroom_floor:
-    name: Slaapkamer
+    name: Bedroom
     view: yes
     icon: mdi:hotel
     entities:
         - group.bedroom
   kitchen_floor:
-    name: Keuken
+    name: Kitchen
     view: yes
     icon: mdi:stove
     entities:
         - binary_sensor.backdoor_state
         - group.kitchen
   entrance_floor:
-    name: Hal
+    name: Hallway
     view: yes
     icon: mdi:door-open
     entities:
@@ -66,14 +66,14 @@
         
 #Groups of devices 
   trash_sensors:
-    name: Afval
+    name: Waste
     entities:
         - sensor.eindhoven_biodegradable_waste
         - sensor.eindhoven_biodegradable_waste_countdown
         - sensor.eindhoven_paper_waste
         - sensor.eindhoven_paper_waste_countdown
   living_room:
-    name: Woonkamer
+    name: Living room
     entities:
         - climate.living_room
         - climate.bureau
@@ -92,21 +92,21 @@
         - input_select.harmony
         - media_player.apple_tv
   bathroom:
-    name: Badkamer
+    name: Bathroom
     entities:
         - light.bathroom_light
   bedroom:
-    name: Slaapkamer
+    name: Bedroom
     entities:
         - climate.bedroom
         - group.bedroom_lights
         - group.bedroom_sidelights_group
   kitchen:
-    name: Keuken
+    name: Kitchen
     entities:
         - group.kitchen_lights
   entrance:
-    name: Hal
+    name: Hallway
     entities:
         - climate.entrance
         - light.entrance_light
@@ -138,28 +138,28 @@
         
 ### Grouping of lights
   bedroom_lights:
-    name: Slaapkamer Lamp
+    name: Bedroom Lamp
     entities:
         - light.slaapkamer_1
         - light.slaapkamer_2
   bedroom_sidelights_group:
-    name: Bed Lampen
+    name: Bedroom Sidelights
     entities:
         - light.fabians_lamp
         - light.andreias_lamp
   diner_lights:
-    name: Eettafel
+    name: Diner Lamps
     entities:
         - light.diner_1
         - light.diner_2
   kitchen_lights:
-    name: Keuken Lamp
+    name: Kitchen Lamp
     entities:
         - light.kitchen_2
         - light.kitchen_1
         - light.kitchen_3
   kitchen_lights_group:
-    name: Keuken Lamp
+    name: Kitchen Lamp
     entities:
         - group.kitchen_lights
   ikea_lights:

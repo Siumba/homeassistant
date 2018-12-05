@@ -1,7 +1,7 @@
 harmony:
-  name: Huidig
+  name: Current activity
   options:
-    - Uitgeschakeld
+    - Off
     - TV
     - Movies
     - Mac mini

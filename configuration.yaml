@@ -37,15 +37,15 @@ panel_iframe:
   ide:
     title: IDE
     icon: mdi:code-braces
-    url: http://hassio.local:8321
+    url: http://hassio:8321
   pihole:
     title: Pi-hole
     icon: mdi:block-helper
-    url: http://hassio.local:4865/admin/index.php
+    url: http://hassio:4865/admin/index.php
   ccu2:
     title: 'Homematic'
     icon: 'mdi:router-wireless'
-    url: 'http://192.168.1.12'
+    url: http://192.168.1.12
 
 http:
   # Uncomment this to add a password (recommended!)
