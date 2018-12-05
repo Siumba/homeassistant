@@ -1,7 +1,7 @@
 harmony:
   name: Current activity
   options:
-    - Off
+    - Powered Off
     - TV
     - Movies
     - Mac mini

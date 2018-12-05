@@ -142,8 +142,8 @@ hue:
 notify:
   - name: notify
     platform: pushover
-    api_key: aq7rniee1h3fpcuodwwm9qig9uavhx
-    user_key: rBTaty5Ut6qzyLhakyCfiVHqbBqNu8
+    api_key: !secret notify_api_key
+    user_key: !secret notify_user_key
 
 #homematic interface
 homematic:

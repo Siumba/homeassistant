@@ -13,12 +13,9 @@
         - group.bmw
         - camera.bmw_330e
         - group.trash_sensors
-        - binary_sensor.frontdoor_state
-        - binary_sensor.backdoor_state
-        - binary_sensor.window_state
-        - device_tracker.ac1f74719b9d
-        - device_tracker.38378b02967d
-        - sensor.pihole_ads_blocked_today
+        - binary_sensor.0000d5e8588c39_state
+        - binary_sensor.0000d3c98c9611_state
+        - binary_sensor.0000d5e8588b9e_state
   living_floor:
     name: Living room
     view: yes
@@ -27,7 +24,7 @@
         - group.living_room
         - group.bureau
         - group.harmony
-        - binary_sensor.window_state
+        - binary_sensor.0000d5e8588b9e_state
   bedroom_floor:
     name: Bedroom
     view: yes
@@ -39,14 +36,14 @@
     view: yes
     icon: mdi:stove
     entities:
-        - binary_sensor.backdoor_state
+        - binary_sensor.0000d3c98c9611_state
         - group.kitchen
   entrance_floor:
     name: Hallway
     view: yes
     icon: mdi:door-open
     entities:
-        - binary_sensor.frontdoor_state
+        - binary_sensor.0000d5e8588c39_state
         - group.entrance
   car:
     name: BMW 330e
@@ -75,12 +72,12 @@
   living_room:
     name: Living room
     entities:
-        - climate.living_room
-        - climate.bureau
+        - climate.000393c98d143e
+        - climate.000393c98d14a3
         - group.diner_lights
         - group.ikea_lights
-        - switch.floorlight
-        - switch.lava_lamp
+        - switch.000213c99094ff
+        - switch.0001d3c98dd8ab
         - script.set_temperature
   bureau:
     name: Bureau
@@ -94,11 +91,11 @@
   bathroom:
     name: Bathroom
     entities:
-        - light.bathroom_light
+        - light.bathroom_lamp
   bedroom:
     name: Bedroom
     entities:
-        - climate.bedroom
+        - climate.000a15e8589bf8
         - group.bedroom_lights
         - group.bedroom_sidelights_group
   kitchen:
@@ -108,9 +105,9 @@
   entrance:
     name: Hallway
     entities:
-        - climate.entrance
-        - light.entrance_light
-        - light.toilet_light
+        - climate.000a15e8589919
+        - light.hallway_lamp
+        - light.toilet_lamp
   bmw:
     name: BMW 330e
     control: hidden
@@ -140,8 +137,8 @@
   bedroom_lights:
     name: Bedroom Lamp
     entities:
-        - light.slaapkamer_1
-        - light.slaapkamer_2
+        - light.bedroom_1
+        - light.bedroom_2
   bedroom_sidelights_group:
     name: Bedroom Sidelights
     entities:
@@ -155,13 +152,9 @@
   kitchen_lights:
     name: Kitchen Lamp
     entities:
-        - light.kitchen_2
         - light.kitchen_1
+        - light.kitchen_2
         - light.kitchen_3
-  kitchen_lights_group:
-    name: Kitchen Lamp
-    entities:
-        - group.kitchen_lights
   ikea_lights:
     name: IKEA Lamp
     entities:
@@ -171,6 +164,6 @@
   bureau_lights:
     name: Bureau
     entities:
-        - light.bureaulamp_left
+        - light.bureau_lamp_left
         - light.bureau_lightstrip
-        - light.bureaulamp_right
+        - light.bureau_lamp_right

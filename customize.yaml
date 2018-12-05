@@ -1,17 +1,14 @@
 climate.000a15e8589bf8:
   friendly_name: Bedroom
   icon: mdi:temperature-celsius
-switch.0001d3c98dd8ab:
-  friendly_name: Lava Lamp
-  icon: mdi:lamp
-switch.000213c99094ff:
-  friendly_name: Floorlight
-  icon: mdi:floor-lamp
 climate.000393c98d14a3:
   friendly_name: Bureau
   icon: mdi:temperature-celsius
 climate.000393c98d143e:
   friendly_name: Living
+  icon: mdi:temperature-celsius
+climate.000a15e8589919:
+  friendly_name: Hallway
   icon: mdi:temperature-celsius
 binary_sensor.0000d3c98c9611_state:
   friendly_name: Backdoor
@@ -26,6 +23,12 @@ binary_sensor.0000d5e8588b9e_state:
   friendly_name: Window
   homebridge_name: Window
   icon: mdi:window-closed
+switch.0001d3c98dd8ab:
+  friendly_name: Christmas Tree
+  icon: mdi:lamp
+switch.000213c99094ff:
+  friendly_name: Floorlight
+  icon: mdi:floor-lamp
 group.living:
   entity_id:
   - climate.000393c98d143e
@@ -58,19 +61,10 @@ group.bedroom_lights:
   icon: mdi:lightbulb
 group.bedroom_lights_group:
   icon: mdi:lightbulb
-climate.000a15e8589919:
-  friendly_name: Entrance
-  icon: mdi:temperature-celsius
 group.harmony:
   order: 3
 group.living_room:
   order: 2
-device_tracker.ac1f74719b9d:
-  friendly_name: Fabian
-  homebridge_name: iPhone 7 Device Tracker
-device_tracker.38378b02967d:
-  friendly_name: Andreia
-  homebridge_name: Huawei Tracker
 group.kitchen_lights:
   icon: mdi:lightbulb
 group.kitchen:

@@ -10,15 +10,15 @@ filter:
     - switch.turn_on_tv
     - switch.turn_on_atv
     - switch.turn_on_mac
-    - binary_sensor.backdoor_state
-    - binary_sensor.frontdoor_state
-    - binary_sensor.window_state
-    - climate.bedroom
-    - climate.bureau
-    - climate.living_room
-    - climate.entrance
-    - switch.floorlight
-    - switch.lava_lamp
+    - binary_sensor.0000d3c98c9611_state
+    - binary_sensor.0000d5e8588c39_state
+    - binary_sensor.0000d5e8588b9e_state
+    - climate.000a15e8589bf8
+    - climate.000393c98d14a3
+    - climate.000393c98d143e
+    - climate.000a15e8589919
+    - switch.000213c99094ff
+    - switch.0001d3c98dd8ab
 entity_config:
   switch.turn_on_tv:
     name: TV
@@ -38,21 +38,21 @@ entity_config:
     name: Flash Lights
   lock.330e_iperformance_lock:
     name: BMW
-  binary_sensor.backdoor_state:
+  binary_sensor.0000d3c98c9611_state:
     name: Backdoor
-  binary_sensor.frontdoor_state:
+  binary_sensor.0000d5e8588c39_state:
     name: Frontdoor
-  binary_sensor.window_state:
-    name: Living Room Window
-  climate.entrance:
+  binary_sensor.0000d5e8588b9e_state:
+    name: Living room Window
+  climate.000a15e8589919:
     name: Hallway Climate
-  climate.bedroom:
+  climate.000a15e8589bf8:
     name: Bedroom Climate
-  climate.living_room:
-    name: Living Room Climate
-  climate.bureau:
+  climate.000393c98d143e:
+    name: Living room Climate
+  climate.000393c98d14a3:
     name: Bureau Climate
-  switch.floorlight:
+  switch.000213c99094ff:
     name: Floorlamp
-  switch.lava_lamp:
+  switch.0001d3c98dd8ab:
     name: Christmas Tree
