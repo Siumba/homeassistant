@@ -1,7 +1,6 @@
 homeassistant:
   auth_providers:
-   - type: homeassistant
-   - type: legacy_api_password
+    - type: homeassistant
   # Name of the location where Home Assistant is running
   name: iHouse
   # Location required to calculate the time the sun rises and sets
@@ -15,153 +14,14 @@ homeassistant:
   time_zone: Europe/Amsterdam
   # Customization file
   customize: !include customize.yaml
-
-auth:
-# Show links to resources in log and frontend
-#introduction:
-
-hassio:
-
-# Enables the frontend
-frontend:
-  # Add themes
-  themes: !include themes.yaml
-  # Enable ES6 features
-  javascript_version: latest
-    
-
-# Enables configuration UI
-config:
+  packages: !include_dir_named packages
 
 panel_iframe:
   ide:
     title: IDE
     icon: mdi:code-braces
-    url: http://hassio:8321
-  pihole:
-    title: Pi-hole
-    icon: mdi:block-helper
-    url: http://hassio:4865/admin/index.php
-  ccu2:
-    title: 'Homematic'
-    icon: 'mdi:router-wireless'
-    url: http://192.168.1.12
-
-http:
-  # Uncomment this to add a password (recommended!)
-  api_password: !secret login_password
-  cors_allowed_origins:
-    - http://192.168.1.10:7080
-  trusted_proxies: 172.16.0.0/12
-  trusted_networks: 172.16.0.0/12
-  use_x_forwarded_for: true
-  ip_ban_enabled: true
-  login_attempts_threshold: 3
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
-
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
-#discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-#conversation:
-
-# Enables support for tracking state changes over time
-history:
-  exclude:
-    domains:
-      - groups
-    entities:
-      - camera.bmw_330e
-      - device_tracker.330e_iperformance
-
-# View all events in a logbook
-logbook:
-
-#Logging
-#logger:
-
-# Enables a map showing the location of tracked devices
-#map:
-
-# Track the sun
-sun:
-
-# Text to speech
-#tts:
-#  - platform: google
-
-# Cloud
-#cloud:
-
-automation:     !include_dir_merge_list automation/
-script:         !include scripts.yaml
-
-sensor:         !include ./configuration/sensor.yaml
-remote:         !include ./configuration/remote.yaml       
-group:          !include ./configuration/group.yaml
-input_select:   !include ./configuration/input_select.yaml
-#media_player:   !include ./configuration/media_player.yaml
-#device_tracker: !include ./configuration/device_tracker.yaml
-homekit:        !include ./configuration/homekit.yaml
-switch:         !include ./configuration/switch.yaml
-input_boolean:  !include ./configuration/input_boolean.yaml
-
-bmw_connected_drive:
-  name:
-    username: !secret bmw_login_name
-    password: !secret bmw_password
-    region: rest_of_world
-
-# Car tracker
-camera:
-    - platform: generic
-      name: BMW 330e
-      still_image_url: !secret google_api_car
-      limit_refetch_to_url_change: true
-
-apple_tv:
-  - host: 192.168.1.51
-    login_id: 00000000-0b8c-cac3-92fc-5fee640a4b94
-    start_off: true
-
-#Hue component
-hue:
-  bridges:
-    - host: 192.168.1.11
-
-notify:
-  - name: notify
-    platform: pushover
-    api_key: !secret notify_api_key
-    user_key: !secret notify_user_key
-
-#homematic interface
-homematic:
-  interfaces:
-    ip:
-      resolvenames: json
-      host: 192.168.1.12
-      port: 2010
-      username: Admin
-      password: !secret login_password
-    rf:
-      resolvenames: json
-      host: 192.168.1.12
-      port: 2001
-      username: Admin
-      password: !secret login_password
-  hosts:
-    ccu2:
-      host: 192.168.1.12
-      username: Admin
-      password: !secret login_password
+    url: https://ihouse:8321
+  # pihole:
+  #   title: Pi-hole
+  #   icon: mdi:block-helper
+  #   url: https://ihouse:4865/admin/index.php

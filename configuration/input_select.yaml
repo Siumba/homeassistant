@@ -1,8 +1,0 @@
-harmony:
-  name: Current activity
-  options:
-    - Powered Off
-    - TV
-    - Movies
-    - Mac mini
-  icon: mdi:monitor

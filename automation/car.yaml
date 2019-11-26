@@ -10,9 +10,9 @@
   action:
   - service: notify.notify
     data:
-      title: Car fully charged
-      message: Car is fully charged at {{ states('sensor.330e_iperformance_charging_level_hv')
-        }}%
+      title: BMW 330e
+      message: Car is fully charged ({{ states('sensor.330e_iperformance_charging_level_hv')
+        }})%
   # - service: persistent_notification.create
   #   data:
   #     title: Car fully charged
@@ -32,4 +32,4 @@
   - service: notify.notify
     data:
       message: Car is not charging due to connection error
-      title: Car not charging
+      title: BMW 330e
