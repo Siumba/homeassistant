@@ -1,0 +1,92 @@
+bmw_connected_drive:
+  name:
+    username: !secret bmw_login_name
+    password: !secret bmw_password
+    region: rest_of_world
+    
+camera:
+  - platform: generic
+    name: BMW 330e
+    still_image_url: !secret google_api_car
+    limit_refetch_to_url_change: true
+
+sensor:
+  - platform: template
+    sensors:
+      charge_status:
+        friendly_name: "Charge Status"
+        value_template: >-
+          {% if is_state('sensor.330e_iperformance_charging_status', 'ChargingState.FINISHED_FULLY_CHARGED') %}
+            Full
+          {% elif is_state('sensor.330e_iperformance_charging_status', 'ChargingState.CHARGING') %}
+            Charging
+          {% else %}
+            Not Charging
+          {% endif %}
+  - platform: template
+    sensors:
+      bmw_connectioncharge_status:
+        friendly_name: 'BMW Connection Status'
+        value_template: >-
+          {% if is_state_attr('binary_sensor.330e_iperformance_connection_status', 'connection_status', 'CONNECTED') and is_state_attr('binary_sensor.330e_iperformance_charging_status', 'charging_status', 'ERROR') %}
+            ERROR
+          {% else %}
+            NA
+          {% endif %}
+
+script:
+  bmw_airco:
+    sequence:
+    - data:
+        vin: !secret bmw_vin
+      service: bmw_connected_drive.activate_air_conditioning
+    alias: Climate Control
+  bmw_horn:
+    sequence:
+    - data:
+        vin: !secret bmw_vin
+      service: bmw_connected_drive.sound_horn
+    alias: Horn
+  bmw_light:
+    sequence:
+    - data:
+        vin: !secret bmw_vin
+      service: bmw_connected_drive.light_flash
+    alias: Flash Lights
+  bmw_refresh:
+    sequence:
+    - data:
+        vin: !secret bmw_vin
+      service: bmw_connected_drive.update_state
+    alias: BMW Update State
+
+automation:    
+- id: '1539012359670'
+  alias: Battery Full
+  trigger:
+  - entity_id: sensor.330e_iperformance_charging_level_hv
+    platform: state
+  condition:
+  - condition: state
+    entity_id: sensor.330e_iperformance_charging_level_hv
+    state: '100'
+  action:
+  - service: notify.notify
+    data:
+      title: BMW 330e
+      message: Car is fully charged ({{ states('sensor.330e_iperformance_charging_level_hv')
+        }})%
+- id: battery_charge_error
+  alias: Battery Charge Error
+  trigger:
+  - entity_id: sensor.bmw_connectioncharge_status
+    platform: state
+  condition:
+  - condition: state
+    entity_id: sensor.bmw_connectioncharge_status
+    state: 'ERROR'
+  action:
+  - service: notify.notify
+    data:
+      message: Car is not charging due to connection error
+      title: BMW 330e

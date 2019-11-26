@@ -1,0 +1,32 @@
+homekit:
+  name: HassIO Bridge
+  filter:
+    include_entities:
+      - binary_sensor.330e_iperformance_lids
+      - binary_sensor.330e_iperformance_windows
+      - script.bmw_airco
+      - script.bmw_horn
+      - script.bmw_light
+      - lock.330e_iperformance_lock
+      - switch.turn_on_tv
+      - switch.turn_on_atv
+      - binary_sensor.frontdoor_state
+      - binary_sensor.backdoor_state
+      - binary_sensor.window_state
+  entity_config:
+    switch.turn_on_tv:
+      name: TV
+    switch.turn_on_atv:
+      name: Movies
+    binary_sensor.330e_iperformance_lids:
+      name: Trunk & Bonnet
+    binary_sensor.330e_iperformance_windows:
+      name: Windows
+    script.bmw_airco:
+      name: Climate Control
+    script.bmw_horn:
+      name: Horn
+    script.bmw_light:
+      name: Flash Lights
+    lock.330e_iperformance_lock:
+      name: BMW

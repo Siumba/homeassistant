@@ -1,0 +1,7 @@
+#ring interface
+ring:
+  username: !secret ring_user
+  password: !secret ring_user_key
+  
+camera:
+  - platform: ring

@@ -3,6 +3,7 @@
 !automation
 !configuration
 !custom_components
+!packages
 !.gitignore
 secrets.yaml
 known_devices.yaml

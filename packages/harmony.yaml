@@ -1,0 +1,101 @@
+remote:
+  - platform: harmony
+    name: HarmonyHub
+    host: 192.168.1.13
+    
+input_select:
+  harmony:
+    name: Current activity
+    options:
+      - Powered Off
+      - TV
+      - Movies
+      - Mac mini
+    icon: mdi:monitor
+
+switch:
+  - platform: template
+    switches:
+      # TV HARMONY ACTIVITY
+      turn_on_tv:
+        friendly_name: TV
+        value_template: "{{ is_state_attr('remote.harmonyhub', 'current_activity', 'TV') }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'TV'
+        turn_off:
+          service: remote.turn_off
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'PowerOff'
+      
+      # MOVIES HARMONY ACTIVITY
+      turn_on_atv:
+        friendly_name: Movies
+        value_template: "{{ is_state_attr('remote.harmonyhub', 'current_activity', 'Movies') }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'Movies'
+        turn_off:
+          service: remote.turn_off
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'PowerOff'
+        
+      # MAC MINI HARMONY ACTIVITY
+      turn_on_mac:
+        friendly_name: View Mac mini
+        value_template: "{{ is_state_attr('remote.harmonyhub', 'current_activity', 'View Mac mini') }}"
+        turn_on:
+          service: remote.turn_on
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'View Mac mini'
+        turn_off:
+          service: remote.turn_off
+          data:
+            entity_id: remote.harmonyhub
+            activity: 'PowerOff'
+
+automation:
+- alias: Harmony
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.harmony
+  action:
+    - service: remote.turn_on
+      entity_id: remote.harmonyhub
+      data_template:
+        activity: >
+          {% if is_state("input_select.harmony", "TV") %}
+            31071270
+          {% elif is_state("input_select.harmony", "Movies") %}
+            31074811
+          {% elif is_state("input_select.harmony", "View Mac mini") %}
+            31071271
+          {% else %}
+            -1
+          {% endif %}
+
+# This next automation is to update the harmony when the Harmony's
+# activity was changed from somewhere else, e.g. using its physical remote.
+- alias: Harmony Update
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: remote.harmonyhub
+  action:
+    - service: harmony.select_option
+      data_template:
+        entity_id: input_select.harmony
+        option: >
+          {% if states.remote.harmonyhub.attributes.current_activity == "PowerOff" %}
+            Powered Off
+          {% else %}
+            {{ states.remote.harmonyhub.attributes.current_activity }}
+          {% endif %}

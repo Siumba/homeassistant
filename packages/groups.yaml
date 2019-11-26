@@ -1,0 +1,31 @@
+#Views for tabs
+group:
+### Grouping of lights
+  livingroom_tv_lights:
+    name: Living Room TV Lamp
+    entities:
+        - light.living_room_tv1
+        - light.living_room_tv2
+  bedroom_sidelights_group:
+    name: Bedroom Sidelights
+    entities:
+        - light.fabians_lamp
+        - light.andreias_lamp
+  kitchen_lights:
+    name: Kitchen Lamp
+    entities:
+        - light.kitchen_1
+        - light.kitchen_2
+        - light.kitchen_3
+  ikea_lights:
+    name: IKEA Lamp
+    entities:
+        - light.ikea_lamp_1
+        - light.ikea_lamp_2
+        - light.ikea_lamp_3
+  bureau_lights:
+    name: Bureau
+    entities:
+        - light.bureau_lamp_left
+        - light.bureau_lightstrip
+        - light.bureau_lamp_right

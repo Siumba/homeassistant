@@ -1,0 +1,7 @@
+apple_tv:
+  - host: 192.168.1.51
+    login_id: 00000000-0b8c-cac3-92fc-5fee640a4b94
+    start_off: true
+
+media_player:
+  - platform: plex
