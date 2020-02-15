@@ -1,6 +1,8 @@
 homeassistant:
   auth_providers:
     - type: homeassistant
+    - type: legacy_api_password
+      api_password: !secret login_password
   # Name of the location where Home Assistant is running
   name: iHouse
   # Location required to calculate the time the sun rises and sets

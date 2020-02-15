@@ -28,6 +28,7 @@ views:
         title: Entrance
         show_header_toggle: true
         entities:
+          - camera.front_door
           - light.entrance_lamp
       - type: entities
         title: Living Room
@@ -56,20 +57,6 @@ views:
         show_header_toggle: true
         entities:
           - light.bathroom_light
-      - type: entities
-        title: BMW 330e
-        show_header_toggle: false
-        entities:
-          - script.bmw_airco
-          - script.bmw_horn
-          - script.bmw_light
-          - lock.330e_iperformance_lock
-      - type: picture-entity
-        title: BMW 330e
-        entity: camera.bmw_330e
-        camera_image: camera.bmw_330e
-        show_info: true
-        tap_action: dialog
       - type: custom:auto-entities
         show_empty: false
         card:
@@ -78,29 +65,44 @@ views:
           show_header_toggle: false
         filter:
           include:
-            - entity_id: sensor.cure_restafval
-            - entity_id: sensor.cure_gft
-            - entity_id: sensor.cure_papier
+            - entity_id: sensor.restafval
+            - entity_id: sensor.gft
+            - entity_id: sensor.papier
         sort:
           method: state
           reverse: true
   - title: Living Room
     icon: mdi:sofa
     cards:
-      - type: entities
-        title: Diner
-        show_header_toggle: true
-        entities:
-          - light.diner_lamp
-          - group.livingroom_tv_lights
-          - group.ikea_lights
-      - type: entities
-        title: TV
-        show_header_toggle: true
-        entities:
-          - input_select.harmony
-      - type: media-control
-        entity: media_player.apple_tv
+      - type: vertical-stack
+        cards:
+        - type: entities
+          title: Living Room
+          show_header_toggle: true
+          entities:
+            - group.livingroom_tv_lights
+            - group.ikea_lights
+            - switch.floorlight
+            - light.diner_lamp
+        - type: entities
+          title: TV
+          show_header_toggle: false
+          entities:
+            - input_select.harmony
+        - type: media-control
+          entity: media_player.apple_tv
+      - type: vertical-stack
+        cards:
+        - type: entities
+          title: Kitchen
+          show_header_toggle: true
+          entities:
+            - group.kitchen_lights
+        - type: glance
+          title: Doors
+          entities:
+            - binary_sensor.kitchen_door_state
+            - binary_sensor.garden_door_state
   - title: Bureau
     icon: mdi:desk
     cards:
@@ -113,27 +115,18 @@ views:
     icon: mdi:hotel
     cards:
       - type: entities
-        title: Bedroom Light
+        title: Bedroom
         show_header_toggle: true
         entities:
           - light.slaapkamer_1
           - light.slaapkamer_2
+          - cover.bedroom_shutter
       - type: entities
         title: Bedroom Sidelights
         show_header_toggle: true
         entities:
           - light.fabians_lamp
           - light.andreias_lamp
-  - title: Kitchen
-    icon: mdi:stove
-    cards:
-      - type: entities
-        title: Kitchen Light
-        show_header_toggle: true
-        entities:
-          - light.kitchen_2
-          - light.kitchen_1
-          - light.kitchen_3
   - title: Entrance
     icon: mdi:door-open
     cards:
@@ -143,30 +136,21 @@ views:
         entities:
           - light.entrance_lamp
           - light.toilet_light
-  - title: BMW 330e
+  - title: Tesla
     icon: mdi:car
     cards:
       - type: entities
         entities:
-          - binary_sensor.330e_iperformance_door_lock_state
-          - binary_sensor.330e_iperformance_lids
-          - binary_sensor.330e_iperformance_windows
-          - sensor.330e_iperformance_charging_level_hv
-          - sensor.charge_status
-          - sensor.330e_iperformance_charging_time_remaining
-          - sensor.330e_iperformance_remaining_range_total
-          - sensor.330e_iperformance_mileage
-      - type: entities
-        title: BMW 330e
-        show_header_toggle: false
+          - binary_sensor.sonic_charger_sensor
+          - climate.sonic_hvac_climate_system
+          - lock.sonic_door_lock
+          - lock.sonic_charger_door_lock
+          - switch.sonic_charger_switch
+          - sensor.sonic_battery_sensor
+          - sensor.sonic_mileage_sensor
+          - sensor.sonic_range_sensor
+      - type: map
+        aspect_ratio: 16:9
+        default_zoom: 14
         entities:
-          - script.bmw_airco
-          - script.bmw_horn
-          - script.bmw_light
-          - lock.330e_iperformance_lock
-      - type: picture-entity
-        title: BMW 330e
-        entity: camera.bmw_330e
-        camera_image: camera.bmw_330e
-        show_info: true
-        tap_action: dialog
+          - device_tracker.tesla_model_3_594222_location_tracker

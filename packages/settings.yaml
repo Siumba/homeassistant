@@ -14,7 +14,7 @@ config:
 # Enables the frontend
 frontend:
   # Add themes
-  themes: !include ../themes.yaml
+  themes: !include_dir_merge_named ../themes
   # Enable ES6 features
   javascript_version: latest
 
@@ -36,7 +36,7 @@ http:
     - http://192.168.1.10:7080
   trusted_proxies: 172.16.0.0/12
   use_x_forwarded_for: true
-  ip_ban_enabled: true
+  ip_ban_enabled: false
   login_attempts_threshold: 3
 
 # View all events in a logbook
@@ -47,9 +47,6 @@ history:
   exclude:
     domains:
       - groups
-    entities:
-      - camera.bmw_330e
-      - device_tracker.330e_iperformance
 
 #HassIO Comunity Store
 hacs:

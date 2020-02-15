@@ -5,13 +5,12 @@ sensor:
         - restafval
         - gft
         - papier
-        - pmd
       postcode: !secret afvalwijzer_postcode
       streetnumber: !secret afvalwijzer_huisnummer
       upcomingsensor: 0
       dateformat: '%d-%m-%Y'
       dateonly: 0
       name: ''
-      nameprefix: 1
+      nameprefix: 0
       builtinicons: 0
       dutch: 1
