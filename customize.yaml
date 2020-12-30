@@ -1,3 +1,20 @@
-device_tracker.tesla_model_3_594222_location_tracker:
-  entity_picture: '"/local/tesla-192x192.png"'
-  picture: '"/local/tesla-192x192.png"'
+sensor.afvalwijzer_today:
+  friendly_name: Vandaag
+sensor.afvalwijzer_tomorrow:
+  friendly_name: Morgen
+sensor.afvalwijzer_next_item:
+  friendly_name: Next pickup item
+sensor.afvalwijzer_next_in_days:
+  friendly_name: Next pickup in days
+sensor.afvalwijzer_gft:
+  friendly_name: GFT
+  entity_picture: /local/images/afvalwijzer/GFT.png
+sensor.afvalwijzer_papier:
+  friendly_name: Papier
+  entity_picture: /local/images/afvalwijzer/Papier.png
+sensor.afvalwijzer_pmd:
+  friendly_name: PMD
+  entity_picture: /local/images/afvalwijzer/PMD.png
+sensor.afvalwijzer_restafval:
+  friendly_name: Restafval
+  entity_picture: /local/images/afvalwijzer/Restafval.png

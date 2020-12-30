@@ -1,16 +1,49 @@
 sensor:
-    - platform: afvalbeheer
-      wastecollector: Cure
-      resources:
-        - restafval
-        - gft
-        - papier
-      postcode: !secret afvalwijzer_postcode
-      streetnumber: !secret afvalwijzer_huisnummer
-      upcomingsensor: 0
-      dateformat: '%d-%m-%Y'
-      dateonly: 0
-      name: ''
-      nameprefix: 0
-      builtinicons: 0
-      dutch: 1
+  - platform: afvalwijzer
+    provider: mijnafvalwijzer # (required, default = mijnafvalwijzer) either choose mijnafvalwijzer or afvalstoffendienstkalender
+    postal_code: 5627GG # (required, default = '')
+    street_number: 12 # (required, default = '')
+    include_date_today: false # (optional, default = false) to take or not to take Today into account in the next pickup.
+    default_label: Geen # (optional, default = Geen) label if no date found
+
+  - platform: template
+    sensors:
+      afvalwijzer_next_item_formatted:
+        value_template: >-
+          {% if is_state('sensor.afvalwijzer_next_item', 'gft') %}GFT
+          {% elif is_state('sensor.afvalwijzer_next_item', 'papier') %}Papier
+          {% elif is_state('sensor.afvalwijzer_next_item', 'pmd') %}PMD
+          {% elif is_state('sensor.afvalwijzer_next_item', 'restafval') %}Restafval
+          {% else %}Geen
+          {% endif %}
+        friendly_name: "Next pickup item"
+
+      afvalwijzer_today_formatted:
+        value_template: >-
+          {% if is_state('sensor.afvalwijzer_today', 'gft') %}GFT
+          {% elif is_state('sensor.afvalwijzer_today', 'papier') %}Papier
+          {% elif is_state('sensor.afvalwijzer_today', 'pmd') %}PMD
+          {% elif is_state('sensor.afvalwijzer_today', 'restafval') %}Restafval
+          {% else %}Geen
+          {% endif %}
+        friendly_name: "Vandaag"
+
+      afvalwijzer_tomorrow_formatted:
+        value_template: >-
+          {% if is_state('sensor.afvalwijzer_tomorrow', 'gft') %}GFT
+          {% elif is_state('sensor.afvalwijzer_tomorrow', 'papier') %}Papier
+          {% elif is_state('sensor.afvalwijzer_tomorrow', 'pmd') %}PMD
+          {% elif is_state('sensor.afvalwijzer_tomorrow', 'restafval') %}Restafval
+          {% else %}Geen
+          {% endif %}
+        friendly_name: "Morgen"
+
+      afvalwijzer_day_after_tomorrow_formatted:
+        value_template: >-
+          {% if is_state('sensor.afvalwijzer_day_after_tomorrow', 'gft') %}GFT
+          {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'papier') %}Papier
+          {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'pmd') %}PMD
+          {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'restafval') %}Restafval
+          {% else %}Geen
+          {% endif %}
+        friendly_name: "Overmorgen"

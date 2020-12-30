@@ -1,11 +1,7 @@
-*
-!*.yaml
-!automation
-!configuration
-!custom_components
-!packages
 !.gitignore
+home-assistant.log
 home-assistant_v2.db
 secrets.yaml
 known_devices.yaml
 entity_registry.yaml
+harmony_12047253.conf

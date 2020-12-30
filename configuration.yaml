@@ -1,29 +1,12 @@
-homeassistant:
-  auth_providers:
-    - type: homeassistant
-    - type: legacy_api_password
-      api_password: !secret login_password
-  # Name of the location where Home Assistant is running
-  name: iHouse
-  # Location required to calculate the time the sun rises and sets
-  latitude: 51.4212
-  longitude: 5.4579
-  # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 17
-  # metric for Metric, imperial for Imperial
-  unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: Europe/Amsterdam
-  # Customization file
-  customize: !include customize.yaml
-  packages: !include_dir_named packages
+# Text to speech
+# tts:
+#   - platform: google_translate
 
-panel_iframe:
-  ide:
-    title: IDE
-    icon: mdi:code-braces
-    url: https://ihouse:8321
-  # pihole:
-  #   title: Pi-hole
-  #   icon: mdi:block-helper
-  #   url: https://ihouse:4865/admin/index.php
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+homeassistant:
+  packages: !include_dir_named packages
+  customize: !include customize.yaml
+  time_zone: Europe/Amsterdam

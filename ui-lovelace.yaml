@@ -1,156 +1,255 @@
-############# MOVE FROM "custom_updater" TO "HACS"!!! ##########################
-## https://custom-components.github.io/hacs/
-## BASICALLY YOU NEED TO ADD EVERY CUSTOM REPO TO HACS 
-## AND CHANGE ALL URL FROM:" /customcards/custom_lovelace_cards/XXXXXXXXX"
-## TO "/community_plugin/XXXXXXXXX/XXXXXXXXX.js" 
-## More info at: https://custom-components.github.io/hacs/#add-custom-repos
-################################################################################
-
-#################################################################
-#                             JS                                #
-################################################################# 
-resources: 
-## https://github.com/thomasloven/lovelace-card-modder 
-  - url: /community_plugin/lovelace-card-modder/card-modder.js
-    type: js
-## https://github.com/thomasloven/lovelace-card-tools
-  - url: /community_plugin/lovelace-card-tools/card-tools.js    
-    type: js
-  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
-    type: module
-    
 title: iHouse
 views:
   - title: default_view
     icon: mdi:home
+    badges:
+      - binary_sensor.front_door_state
+      - binary_sensor.kitchen_door_state
+      - binary_sensor.garden_door_state
     cards:
-      - type: entities
-        title: Entrance
-        show_header_toggle: true
-        entities:
-          - camera.front_door
-          - light.entrance_lamp
-      - type: entities
-        title: Living Room
-        show_header_toggle: true
-        entities:
-          - light.diner_lamp
-          - group.livingroom_tv_lights
-          - group.ikea_lights
-      - type: entities
-        title: Bureau
-        show_header_toggle: true
-        entities:
-          - group.bureau_lights
-      - type: entities
-        title: Kitchen
-        show_header_toggle: true
-        entities:
-          - group.kitchen_lights
-      - type: entities
-        title: Bedroom
-        show_header_toggle: true
-        entities:
-          - group.bedroom_sidelights_group
-      - type: entities
-        title: Bathroom
-        show_header_toggle: true
-        entities:
-          - light.bathroom_light
-      - type: custom:auto-entities
-        show_empty: false
-        card:
-          type: entities
-          title: Afvalwijzer
-          show_header_toggle: false
-        filter:
-          include:
-            - entity_id: sensor.restafval
-            - entity_id: sensor.gft
-            - entity_id: sensor.papier
-        sort:
-          method: state
-          reverse: true
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.ihouse
+            show_forecast: true
+          - type: "custom:auto-entities"
+            card:
+              type: glance
+            filter:
+              include:
+                - entity_id: sensor.afvalwijzer_gft
+                - entity_id: sensor.afvalwijzer_papier
+                - entity_id: sensor.afvalwijzer_restafval
+            sort:
+              attribute: days_until_collection_date
+              method: attribute
+              numeric: true
+      - type: vertical-stack
+        cards:
+          - type: picture-entity
+            entity: camera.front_door
+          - type: entity-filter
+            card:
+              type: glance
+            entities:
+              - entity: light.ikea_lamp
+                name: IKEA Lamp
+                tap_action:
+                  action: toggle
+              - entity: switch.floorlight
+                name: Vloerlamp
+                tap_action:
+                  action: toggle
+              - entity: light.hue_go_one
+                name: Hue Go One
+                tap_action:
+                  action: toggle
+              - entity: light.living_room_tv_lamp
+                name: Woonkamer Lamp
+                tap_action:
+                  action: toggle
+              - entity: light.eettafel_lamp
+                name: Eettafel Lamp
+                tap_action:
+                  action: toggle
+              - entity: light.kitchen_lamp
+                name: Keuken Lamp
+                tap_action:
+                  action: toggle
+              - entity: light.hal
+                name: Hal Lamp
+                tap_action:
+                  action: toggle
+              - entity: light.bureau_lights
+                name: Bureau Lampen
+                tap_action:
+                  action: toggle
+            state_filter:
+              - "on"
+
   - title: Living Room
     icon: mdi:sofa
     cards:
       - type: vertical-stack
         cards:
-        - type: entities
-          title: Living Room
-          show_header_toggle: true
-          entities:
-            - group.livingroom_tv_lights
-            - group.ikea_lights
-            - switch.floorlight
-            - light.diner_lamp
-        - type: entities
-          title: TV
-          show_header_toggle: false
-          entities:
-            - input_select.harmony
-        - type: media-control
-          entity: media_player.apple_tv
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.living_room_tv_lamp
+              - type: light
+                entity: light.eettafel_lamp
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.ikea_lamp
+              - type: button
+                tap_action:
+                  action: toggle
+                entity: switch.floorlight
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.hue_go_one
+              - type: light
+                entity: light.hue_go_tv
+          - type: entities
+            title: TV
+            show_header_toggle: false
+            entities:
+              - input_select.harmony
       - type: vertical-stack
         cards:
-        - type: entities
-          title: Kitchen
-          show_header_toggle: true
-          entities:
-            - group.kitchen_lights
-        - type: glance
-          title: Doors
-          entities:
-            - binary_sensor.kitchen_door_state
-            - binary_sensor.garden_door_state
+          - type: light
+            entity: light.kitchen_lamp
+
   - title: Bureau
     icon: mdi:desk
     cards:
-      - type: entities
-        title: Bureau
-        show_header_toggle: true
-        entities:
-          - group.bureau_lights
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.bureau_lights
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                show_header_toggle: false
+                entities:
+                  - cover.bureau_shutter
+                  - type: custom:slider-entity-row
+                    entity: cover.bureau_shutter
+                    full_row: true
+      - type: vertical-stack
+        cards:
+          - type: media-control
+            entity: media_player.bureau
+          - type: entities
+            entities:
+              - input_select.favorites
+
   - title: Bedroom
-    icon: mdi:hotel
+    icon: mdi:bed-double
     cards:
-      - type: entities
-        title: Bedroom
-        show_header_toggle: true
-        entities:
-          - light.slaapkamer_1
-          - light.slaapkamer_2
-          - cover.bedroom_shutter
-      - type: entities
-        title: Bedroom Sidelights
-        show_header_toggle: true
-        entities:
-          - light.fabians_lamp
-          - light.andreias_lamp
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: light
+                entity: light.fabians_lamp
+              - type: light
+                entity: light.aimees_lamp
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                show_header_toggle: false
+                entities:
+                  - cover.bedroom_shutter
+                  - type: custom:slider-entity-row
+                    entity: cover.bedroom_shutter
+                    full_row: true
+
   - title: Entrance
     icon: mdi:door-open
     cards:
-      - type: entities
-        title: Entrance
-        show_header_toggle: true
-        entities:
-          - light.entrance_lamp
-          - light.toilet_light
+      - type: light
+        entity:
+          light.hal_lamp
+          # - light.toilet_light
   - title: Tesla
-    icon: mdi:car
+    badges: []
+    icon: "mdi:car-connected"
     cards:
+      - type: vertical-stack
+        cards:
+          - type: glance
+            entities:
+              - entity: sensor.tesla_battery_level
+                name: Battery Level
+              - entity: sensor.tesla_state
+                name: Car State
+              - entity: sensor.tesla_plugged_in
+                name: Plugged In
+          - type: glance
+            entities:
+              - entity: sensor.tesla_park_brake
+                name: Park Brake
+              - entity: sensor.tesla_sentry_mode
+                name: Sentry Mode
+              - entity: sensor.tesla_speed
+                name: Speed
+          - type: glance
+            entities:
+              - entity: sensor.tesla_healthy
+                name: Car Health
+              - entity: sensor.tesla_windows_open
+                name: Window Status
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                entity: sensor.tesla_locked
+                name: Charger Door
+                show_state: true
+                state:
+                  - value: locked
+                    icon: "mdi:lock"
+                    color: green
+                    tap_action:
+                      action: call-service
+                      service: lock.unlock
+                      service_data:
+                        entity_id: lock.tesla_model_3_charger_door_lock
+                  - value: unlocked
+                    icon: "mdi:lock-open"
+                    color: red
+                    tap_action:
+                      action: call-service
+                      service: lock.lock
+                      service_data:
+                        entity_id: lock.tesla_model_3_charger_door_lock
+              - type: "custom:button-card"
+                entity: lock.tesla_door_lock
+                name: Car Door
+                show_state: true
+                state:
+                  - value: locked
+                    icon: "mdi:lock"
+                    color: green
+                    tap_action:
+                      action: call-service
+                      service: lock.unlock
+                      service_data:
+                        entity_id: lock.tesla_model_3_door_lock
+                  - value: unlocked
+                    icon: "mdi:lock-open"
+                    color: red
+                    tap_action:
+                      action: call-service
+                      service: lock.lock
+                      service_data:
+                        entity_id: lock.tesla_model_3_door_lock
+      - type: vertical-stack
+        cards:
+          - type: map
+            entities:
+              - device_tracker.tesla_location
+          - type: thermostat
+            entity: climate.tesla_model_3_hvac_climate_system
       - type: entities
         entities:
-          - binary_sensor.sonic_charger_sensor
-          - climate.sonic_hvac_climate_system
-          - lock.sonic_door_lock
-          - lock.sonic_charger_door_lock
-          - switch.sonic_charger_switch
-          - sensor.sonic_battery_sensor
-          - sensor.sonic_mileage_sensor
-          - sensor.sonic_range_sensor
-      - type: map
-        aspect_ratio: 16:9
-        default_zoom: 14
-        entities:
-          - device_tracker.tesla_model_3_594222_location_tracker
+          - entity: sensor.tesla_charge_limit
+            name: SOC Charge Limit
+          - entity: sensor.tesla_charge_energy_added
+            name: Last Charge Energy Added
+          - entity: sensor.tesla_odometer
+            name: Odometer
+          - entity: sensor.tesla_estimated_range
+            name: Estimated Range
+          - entity: sensor.tesla_rated_range
+            name: Rated Range
+          - entity: sensor.tesla_inside_temp
+            name: Tesla Temperature (inside)
+          - entity: sensor.tesla_outside_temp
+            name: Tesla Temperature (outside)
+          - entity: proximity.home_tesla
+            name: Distance to Home

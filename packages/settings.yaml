@@ -1,5 +1,5 @@
 #Enables HassIO
-hassio:
+# hassio:
 
 # Checks for available updates
 updater:
@@ -7,18 +7,43 @@ updater:
 #Enables lovelace
 lovelace:
   mode: yaml
+  resources:
+    - url: /local/community/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /local/community/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /local/community/lovelace-slider-entity-row/slider-entity-row.js
+      type: module
+    - url: /local/community/button-card/button-card.js
+      type: module
+    - url: /local/community/lovelace-hui-element/hui-element.js
+      type: module
+    - url: /local/community/light-popup-card/light-popup-card.js
+      type: module
+    - url: /browser_mod.js
+      type: module
+  # Add more dashboards
+  dashboards:
+    lovelace-homekit: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: homekit-lovelace.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true
 
 # Enables configuration UI
 config:
-  
+
 # Enables the frontend
 frontend:
   # Add themes
-  themes: !include_dir_merge_named ../themes
+  # themes: !include_dir_merge_named ../themes
   # Enable ES6 features
   javascript_version: latest
 
-    
+browser_mod:
+
 # Track the sun
 sun:
 
@@ -26,18 +51,18 @@ sun:
 tts:
   - platform: google_translate
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+# conversation:
 
 # Settings for http requests
-http:
-  ssl_certificate: /ssl/certificate.pem
-  ssl_key: /ssl/privkey.pem
-  cors_allowed_origins:
-    - http://192.168.1.10:7080
-  trusted_proxies: 172.16.0.0/12
-  use_x_forwarded_for: true
-  ip_ban_enabled: false
-  login_attempts_threshold: 3
+# http:
+#   ssl_certificate: /ssl/certificate.pem
+#   ssl_key: /ssl/privkey.pem
+#   cors_allowed_origins:
+#     - http://192.168.1.10:7080
+#   trusted_proxies: 172.16.0.0/12
+#   use_x_forwarded_for: true
+#   ip_ban_enabled: false
+#   login_attempts_threshold: 3
 
 # View all events in a logbook
 logbook:
@@ -47,7 +72,6 @@ history:
   exclude:
     domains:
       - groups
-
 #HassIO Comunity Store
-hacs:
-  token: !secret hacs_token
+# hacs:
+#   token: !secret hacs_token

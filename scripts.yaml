@@ -1,0 +1,18 @@
+play_radio_538:
+  alias: Play Radio 538
+  sequence:
+    - service: media_player.select_source
+      data:
+        source: Radio 538
+      entity_id: media_player.bureau
+  mode: single
+
+play_home_alone:
+  alias: Play Home Alone
+  sequence:
+    - service: media_player.play_media
+      data_template:
+        entity_id:
+          - media_player.bureau_display
+        media_content_id: /local/audio/i'm-gonna-give-you-to-the-count-of-10-to-get-your-ugly-yellow-no-good-keister-off-my-property-before-i-pump-your-guts-full-of-lead.mp3
+        media_content_type: audio/mp3

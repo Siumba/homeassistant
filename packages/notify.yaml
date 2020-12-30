@@ -1,5 +1,0 @@
-notify:
-  - name: notify
-    platform: pushover
-    api_key: !secret notify_api_key
-    user_key: !secret notify_user_key

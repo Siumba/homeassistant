@@ -1,0 +1,46 @@
+- id: '1608774094962'
+  alias: Daily Shutters - Open
+  description: ''
+  trigger:
+  - platform: time
+    at: '12:00'
+  condition: []
+  action:
+  - service: cover.open_cover
+    data: {}
+    entity_id: cover.bedroom_shutter
+  - service: cover.open_cover
+    data: {}
+    entity_id: cover.bureau_shutter
+  mode: single
+- id: '1608774150395'
+  alias: Daily Shutters - Close
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 00:15
+  condition: []
+  action:
+  - service: cover.close_cover
+    data: {}
+    entity_id: cover.bedroom_shutter
+  - service: cover.close_cover
+    data: {}
+    entity_id: cover.bureau_shutter
+  mode: single
+- id: play_radio
+  alias: Play Radio
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.favorites
+  action:
+  - service: "{% if is_state(\"input_select.favorites\", \"Off\") %}\n    media_player.media_stop\n\
+      \  {% else %}\n    media_player.select_source\n  {% endif %}\n"
+    entity_id: media_player.bureau
+    data_template:
+      source: '{% if not is_state("input_select.favorites", "Off") %} {{ states.input_select.favorites.state
+        }} {% else %} {% endif %}
+
+        '
