@@ -1,14 +1,14 @@
 light:
   - platform: group
-    name: Entrance Door Lights
+    name: Driveway Door Lights
     entities:
-      - light.oprit_deur_spot_links
-      - light.oprit_deur_spot_rechts
+      - light.driveway_door_spot_links
+      - light.driveway_door_spot_rechts
   - platform: group
     name: Living Room TV Lamp
     entities:
-      - light.woonkamer_lamp_1
-      - light.woonkamer_lamp_2
+      - light.living_room_lamp_1
+      - light.living_room_lamp_lamp_2
   - platform: group
     name: Bedroom Sidelights
     entities:
@@ -17,9 +17,9 @@ light:
   - platform: group
     name: Kitchen Lamp
     entities:
-      - light.keuken_spot_1
-      - light.keuken_spot_2
-      - light.keuken_spot_3
+      - light.kitchen_spot_1
+      - light.kitchen_spot_2
+      - light.kitchen_spot_3
   - platform: group
     name: IKEA Lamp
     entities:
@@ -29,9 +29,17 @@ light:
   - platform: group
     name: Bureau Lights
     entities:
-      - light.bureau_lamp_links
+      - light.bureau_light_left
       - light.bureau_lightstrip
-      - light.bureau_lamp_rechts
+      - light.bureau_light_right
+  - platform: group
+    name: Hallway Spots
+    entities:
+      - light.hallway_upstairs_spot_1
+      - light.hallway_upstairs_spot_2
+      - light.hallway_upstairs_spot_3
+      - light.hallway_upstairs_spot_4
+      - light.hallway_upstairs_spot_5
 # group:
 #   ### Grouping of lights
 #   entrance_door_lights:

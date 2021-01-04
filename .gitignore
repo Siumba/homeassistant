@@ -1,6 +1,9 @@
 !.gitignore
+# *__pycache__*
 .cloud/
 .storage/
+tts/
+homebridge/
 home-assistant.log
 home-assistant_v2.db
 secrets.yaml

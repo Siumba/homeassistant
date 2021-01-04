@@ -1,4 +1,4 @@
-base:
+base_with_state:
   aspect_ratio: 1/1
   show_state: true
   show_icon: false
@@ -10,15 +10,84 @@ base:
         state: [color: "rgba(0, 0, 0, 0.6)"]
   tap_action:
     ui_sound: |
-      [[[ if (entity.state === 'off' && states['switch.fullykiosk_screensaver'].state === 'off') {
-      hass.callService('media_player', 'play_media', {entity_id: 'media_player.tablet', media_content_id: '/local/sound/on.m4a', media_content_type: 'music'}); }
-      else if (entity.state === 'on' && states['switch.fullykiosk_screensaver'].state === 'off') {
-      hass.callService('media_player', 'play_media', {entity_id: 'media_player.tablet', media_content_id: '/local/sound/off.m4a', media_content_type: 'music'}); } ]]]
+      [[[ if (entity.state === 'off') {
+      hass.callService('media_player', 'play_media', {entity_id: 'media_player.tablet', media_content_id: '/local/audio/on.m4a', media_content_type: 'music'}); }
+      else if (entity.state === 'on') {
+      hass.callService('media_player', 'play_media', {entity_id: 'media_player.tablet', media_content_id: '/local/audio/off.m4a', media_content_type: 'music'}); } ]]]
     action: toggle
     haptic: light
   styles:
-    name: [top: 57.7%, left: 11%, line-height: 2vw, position: absolute]
-    state: [top: 74%, left: 11%, line-height: 2vw, position: absolute]
+    name: [
+        top: 57.7%,
+        left: 11%,
+        right: 11%,
+        # line-height: 2vw,
+        position: absolute,
+        white-space: normal,
+      ]
+    state: [
+        top: 74%,
+        left: 11%,
+        font-weight: bold,
+        # line-height: 2vw,
+        position: absolute,
+      ]
+    card:
+      [
+        font-family: Sf Display,
+        letter-spacing: 0.05vw,
+        font-weight: 400,
+        color: "rgba(255, 255, 255, 0.3)",
+        font-size: 1.34vw,
+        background-color: "rgba(115, 115, 115, 0.2)",
+        border-radius: 0.8vw,
+        box-shadow: none,
+        transition: none,
+      ]
+    custom_fields:
+      circle:
+        [
+          top: 8.5%,
+          left: 56.2%,
+          width: 3.5vw,
+          position: absolute,
+          letter-spacing: 0.03vw,
+        ]
+
+base_no_state:
+  aspect_ratio: 1/1
+  show_state: false
+  show_icon: false
+  state:
+    - value: "on"
+      styles:
+        card: [background-color: "rgba(255, 255, 255, 0.8)"]
+        name: [color: "rgba(0, 0, 0, 0.6)"]
+        state: [color: "rgba(0, 0, 0, 0.6)"]
+  tap_action:
+    ui_sound: |
+      [[[ if (entity.state === 'off') {
+      hass.callService('media_player', 'play_media', {entity_id: 'media_player.d29beaad_3b14eab9', media_content_id: '/local/audio/on.m4a', media_content_type: 'music'}); }
+      else if (entity.state === 'on') {
+      hass.callService('media_player', 'play_media', {entity_id: 'media_player.d29beaad_3b14eab9', media_content_id: '/local/audio/off.m4a', media_content_type: 'music'}); } ]]]
+    action: toggle
+    haptic: light
+  styles:
+    name: [
+        top: 57.7%,
+        left: 11%,
+        right: 11%,
+        # line-height: 2vw,
+        position: absolute,
+        white-space: normal,
+      ]
+    state: [
+        top: 74%,
+        left: 11%,
+        font-weight: bold,
+        # line-height: 2vw,
+        position: absolute,
+      ]
     card:
       [
         font-family: Sf Display,
@@ -42,10 +111,10 @@ base:
         ]
 
 loader:
-  custom_fields:
-    loader: >
-      [[[ if (states[entity.entity_id.replace(entity.entity_id.split('.')[0], 'input_boolean')].state === 'on') { 
-      return '<img src="/local/loader.svg" width="100%">'; } ]]]
+  # custom_fields:
+  #   loader: >
+  #     [[[ if (states[entity.entity_id.replace(entity.entity_id.split('.')[0], 'input_boolean')].state === 'on') {
+  #     return '<img src="/local/assets/loader.svg" width="100%">'; } ]]]
   styles:
     custom_fields:
       loader:
@@ -59,7 +128,7 @@ loader:
         ]
 
 person:
-  template: ["base"]
+  template: ["base_with_state"]
   show_entity_picture: true
   state_display: >
     [[[ return entity.state === 'home' ? 'Ja' : 'Nej'; ]]]
@@ -92,7 +161,7 @@ person:
       <text x="50%" y="54%" fill="#8d8e90" font-size="14" text-anchor="middle" alignment-baseline="middle">${last_changed}</text></svg>`; ]]]
 
 light:
-  template: ["base"]
+  template: ["base_no_state"]
   custom_fields:
     circle: >
       [[[ if (entity.state === 'on' && entity.attributes.brightness) {
@@ -186,7 +255,7 @@ shared_media:
       ]
 
 media:
-  template: ["base", "shared_media"]
+  template: ["base_with_state", "shared_media"]
   styles:
     custom_fields:
       icon:
@@ -212,7 +281,7 @@ media:
       ]
 
 conditional_media:
-  template: ["base", "shared_media"]
+  template: ["base_with_state", "shared_media"]
   state_display: >
     [[[ if (entity.attributes.media_title === 'Nothing playing' || entity.attributes.media_title === 'No title' && entity.state === 'paused' ) { return 'Inget spelas'; }
     if (entity.attributes.media_title === 'No title' && entity.state === 'playing') { return 'Ingen titel'; }

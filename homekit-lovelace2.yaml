@@ -1,0 +1,196 @@
+##########################################################################
+#                                                                        #
+#                              * SETTINGS *                              #
+#                                                                        #
+##########################################################################
+anchors:
+  ⚓₁: &title
+    entity: sensor.placeholder
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    type: state-label
+  ⚓₂: &title-style
+    color: "#bcbebf"
+    font-family: SF Text
+    font-size: 2.4vw
+    font-weight: 500
+    max-width: 1px
+    cursor: default
+
+button_card_templates: !include button_card_templates.yaml
+
+##########################################################################
+#                                                                        #
+#                              * LOVELACE *                              #
+#                                                                        #
+##########################################################################
+
+title: iHouse
+views:
+  - panel: true
+    path: default_view
+    cards:
+      - type: "custom:homekit-card"
+        home: true
+        rules: |
+          {% if "Vandaag" in states('sensor.blink_gft') %} <li>Vandaag groenebak aan de straat</li> {% endif %}
+          {% if "Vandaag" in states('sensor.blink_papier') %} <li>Vandaag oudpapier aan de straat</li> {% endif %}
+          {% if "Vandaag" in states('sensor.blink_pmd') %} <li>Vandaag plastic aan de straat</li> {% endif %}
+          {% if "Vandaag" in states('sensor.blink_restafval') %} <li>Vandaag grijzebak aan de straat</li> {% endif %}
+          {% if states('sensor.current_lights_on') | float > 0 %} <li>{{states('sensor.current_lights_on')}} lampen aan</li> {% endif %}
+          {% if states('sensor.current_media_players_on') | float > 0 %} <li>{{states('sensor.current_media_players_on')}} speakers aan</li> {% endif %}
+        title: "Home"
+        useBrightness: false
+        useTemperature: false
+        titleColor: "#FFF"
+        enableColumns: true
+        statePositionTop: true
+        # rows:
+        #   - row: 1
+        #     columns:
+        #       - column: 1
+        #         tileOnRow: 4
+        entities:
+          - title: Bureau
+            popup:
+              type: custom:light-popup-card
+              scenesInARow: 2
+              brightnessWidth: 130px
+              brightnessHeight: 350px
+              switchWidth: 110px
+              switchHeight: 300px
+            entities:
+              - entity: light.bureau_main
+                name: Lamp
+                icon: mdi:lightbulb
+              - entity: light.bureau_lights
+                name: Bureau
+                icon: mdi:lightbulb
+                # popupExtend:
+                #   actions:
+                #     - service: scene.turn_on
+                #       service_data:
+                #         entity_id: scene.ontspannen
+                #       color: "#FDCA64"
+                #       name: ontspannen
+                #     - service: scene.turn_on
+                #       service_data:
+                #         entity_id: scene.helder
+                #       color: "#FFE7C0"
+                #       name: helder
+                #     - service: scene.turn_on
+                #       service_data:
+                #         entity_id: scene.concentreren
+                #       color: "#BBEEF3"
+                #       name: concentreren
+                #     - service: scene.turn_on
+                #       service_data:
+                #         entity_id: scene.energie
+                #       color: "#8BCBDD"
+                #       name: energie
+              # - entity: light.zithoek
+              #   name: Zithoek
+              #   icon: mdi:floor-lamp
+              # - entity: light.eettafel
+              #   name: Eettafel
+              #   icon: mdi:ceiling-light
+              # - entity: light.kookeiland
+              #   name: Kookeiland
+              #   icon: mdi:ceiling-light
+              # - column: 1
+              #   tileOnRow: 3
+              #   entities:
+              #     - title:
+              #       entities:
+              - entity: media_player.bureau
+                icon: mdi:speaker-wireless
+                offIcon: "mdi:garage"
+                offStates:
+                  - "off"
+                  - "unavailable"
+                  - "paused"
+              - entity: media_player.living_room
+                icon: mdi:speaker-wireless
+                offStates:
+                  - "off"
+                  - "unavailable"
+                  - "paused"
+              - entity: media_player.slaapkamer
+                icon: mdi:speaker-wireless
+                offStates:
+                  - "off"
+                  - "unavailable"
+                  - "paused"
+          # - row: 2
+          #   columns:
+          #     - column: 1
+          #       tileOnRow: 4
+          #       entities:
+          #         - title: "Overig"
+          #           entities:
+          #             - card: custom:blinds-tile-card
+          #               tap_action:
+          #                 action: more-info
+          #                 entity: input_number.blindone
+          #               cardOptions:
+          #                 name: Luxaflex
+          #                 entities:
+          #                   - entity: input_number.blindone
+          #                     positions:
+          #                       - 60
+          #                       - 0
+          #                       - -45
+          #                   - entity: input_number.blindtwo
+          #                     positions:
+          #                       - 75
+          #                       - 0
+          #                       - -50
+          #                   - entity: input_number.blindthree
+          #                     positions:
+          #                       - -65
+          #                       - 0
+          #                       - 50
+          #             - card: custom:mini-graph-card
+          #               noPadding: true
+          #               cardOptions:
+          #                 entities:
+          #                   - sensor.wasmachine_energieverbruik
+          #             - entity: binary_sensor.wasmachine_status
+          #             - entity: weather.weersverwachting
+          #     - column: 2
+          #       tileOnRow: 3
+          #       entities:
+          #         - title: Muziek
+          #           entities:
+          #             - entity: media_player.bureau
+          #               icon: mdi:speaker-wireless
+          #               offIcon: "mdi:garage"
+          #               offStates:
+          #                 - "off"
+          #                 - "unavailable"
+          #                 - "paused"
+          #             - entity: media_player.living_room
+          #               icon: mdi:speaker-wireless
+          #               offStates:
+          #                 - "off"
+          #                 - "unavailable"
+          #                 - "paused"
+          #             - entity: media_player.slaapkamer
+          #               icon: mdi:speaker-wireless
+          #               offStates:
+          #                 - "off"
+          #                 - "unavailable"
+          #                 - "paused"
+          # - row: 3
+          #   columns:
+          #     - column: 3
+          #       entities:
+          #         - title: Overig
+          #           entities:
+          #             - entity: switch.doorbell_chime_active
+          #               spin: true
+          #             - entity: switch.doorbell_chime
+          #             - entity: switch.doorbell_restart
+          #             - entity: binary_sensor.doorbell_button

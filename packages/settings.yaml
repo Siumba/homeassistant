@@ -20,8 +20,16 @@ lovelace:
       type: module
     - url: /local/community/light-popup-card/light-popup-card.js
       type: module
+    - url: /local/community/light-entity-card/light-entity-card.js
+      type: module
+    - url: /local/community/Homekit-panel-card/homekit-panel-card.js
+      type: module
+    - url: /local/community/mini-media-player/mini-media-player-bundle.js
+      type: module
     - url: /browser_mod.js
       type: module
+    - url: /local/font.css
+      type: css
   # Add more dashboards
   dashboards:
     lovelace-homekit: # Needs to contain a hyphen (-)
@@ -31,6 +39,19 @@ lovelace:
       icon: mdi:tools
       show_in_sidebar: true
       require_admin: true
+    lovelace2-homekit: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: homekit-lovelace2.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true
+
+sensor:
+  - platform: template
+    sensors:
+      placeholder:
+        value_template: " "
 
 # Enables configuration UI
 config:
