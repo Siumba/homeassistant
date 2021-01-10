@@ -1,1 +1,98 @@
-[]
+- id: '1609974483346'
+  name: Driveway & Garden Lights - After Midnight
+  entities:
+    light.garden:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 51
+      hs_color:
+      - 31.053
+      - 44.706
+      rgb_color:
+      - 255
+      - 200
+      - 140
+      xy_color:
+      - 0.448
+      - 0.384
+      is_hue_group: true
+      friendly_name: Garden
+      supported_features: 63
+      state: 'on'
+    light.driveway_door_lights:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 51
+      hs_color:
+      - 33.988
+      - 67.843
+      rgb_color:
+      - 255
+      - 179
+      - 82
+      xy_color:
+      - 0.515
+      - 0.406
+      effect: none
+      entity_id:
+      - light.driveway_door_spot_left
+      - light.driveway_door_spot_right
+      friendly_name: Driveway Door Lights
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+- id: '1609975077007'
+  name: Driveway & Garden Lights - After Sunset
+  entities:
+    light.driveway_door_lights:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 128
+      hs_color:
+      - 32.982
+      - 67.059
+      rgb_color:
+      - 255
+      - 177
+      - 83
+      xy_color:
+      - 0.516
+      - 0.403
+      effect: none
+      entity_id:
+      - light.driveway_door_spot_left
+      - light.driveway_door_spot_right
+      friendly_name: Driveway Door Lights
+      icon: mdi:lightbulb-group
+      supported_features: 63
+      state: 'on'
+    light.garden:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 128
+      hs_color:
+      - 29.474
+      - 44.706
+      rgb_color:
+      - 255
+      - 197
+      - 140
+      xy_color:
+      - 0.45
+      - 0.38
+      is_hue_group: true
+      friendly_name: Garden
+      supported_features: 63
+      state: 'on'
