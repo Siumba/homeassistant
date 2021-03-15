@@ -1,0 +1,41 @@
+title: Automation
+icon: mdi:robot
+path: automation
+visible: true
+panel: true
+  
+cards:
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:decluttering-card
+          template: view_title
+          variables:
+            - title: Automation
+ 
+        - type: horizontal-stack
+          cards:
+
+            - type: custom:button-card
+              template: shoulder_blank_card
+                
+            - type: custom:layout-card
+              min_columns: 1
+              max_columns: 3
+              cards:
+
+                - !include /config/lovelace/cards/homeassistant/card_automations_lights.yaml
+
+                - !include /config/lovelace/cards/homeassistant/card_automations_climate.yaml
+
+                - !include /config/lovelace/cards/homeassistant/card_automations_presence.yaml
+
+                - !include /config/lovelace/cards/homeassistant/card_automations_misc.yaml
+
+                #- !include /config/lovelace/styles/view_bottom_gap.yaml
+
+            - type: custom:button-card
+              template: shoulder_blank_card
+
+        - !include /config/lovelace/styles/separator_card.yaml

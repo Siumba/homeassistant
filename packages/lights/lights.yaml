@@ -1,0 +1,77 @@
+light:
+  ############################################################################
+  #                                                                          #
+  #   From Switches                                                          #
+  #                                                                          #
+  ############################################################################
+  - platform: switch
+    name: Floorlight
+    entity_id: switch.floorlight
+
+  - platform: switch
+    name: Garden Lights
+    entity_id: switch.garden_lights
+
+  - platform: switch
+    name: Kitchen Lights
+    entity_id: switch.kitchen_lights
+
+  ############################################################################
+  #                                                                          #
+  #   Groups                                                                 #
+  #                                                                          #
+  ############################################################################
+  - platform: group
+    name: Driveway Door Lights
+    entities:
+      - light.driveway_door_spot_left
+      - light.driveway_door_spot_right
+
+  - platform: group
+    name: Bedroom Sidelights
+    entities:
+      - light.fabians_lamp
+      - light.aimees_lamp
+
+  - platform: group
+    name: Kitchen Lamp
+    entities:
+      - light.kitchen_spot_1
+      - light.kitchen_spot_2
+      - light.kitchen_spot_3
+
+  - platform: group
+    name: IKEA Lamp
+    entities:
+      - light.ikea_lamp_1
+      - light.ikea_lamp_2
+      - light.ikea_lamp_3
+
+  - platform: group
+    name: Diner Filaments
+    entities:
+      - light.diner_lamp_1
+      - light.diner_lamp_2
+      - light.diner_lamp_3
+
+  - platform: group
+    name: Bureau Lights
+    entities:
+      - light.bureau_light_left
+      - light.bureau_lightstrip
+      - light.bureau_light_right
+
+  - platform: group
+    name: Hallway Spots
+    entities:
+      - light.hallway_upstairs_spot_1
+      - light.hallway_upstairs_spot_2
+      - light.hallway_upstairs_spot_3
+      - light.hallway_upstairs_spot_4
+      - light.hallway_upstairs_spot_5
+
+  - platform: group
+    name: Hallway Lamp
+    entities:
+      - light.hallway_downstairs_lamp_1
+      - light.hallway_downstairs_lamp_2

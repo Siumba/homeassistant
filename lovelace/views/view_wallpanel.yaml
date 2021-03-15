@@ -1,0 +1,33 @@
+title: Wall Panel
+icon: mdi:view-dashboard
+path: wallpanel
+visible: true
+panel: true
+  
+cards:
+
+    - type: vertical-stack
+      cards:
+
+        - type: custom:decluttering-card
+          template: view_title
+          variables:
+            - title: Wall Panel
+ 
+        - type: horizontal-stack
+          cards:
+
+            - type: custom:button-card
+              template: shoulder_blank_card
+                
+            - type: custom:layout-card
+              min_columns: 1
+              max_columns: 3
+              cards:
+
+                - !include /config/lovelace/cards/wallpanel/card_fully.yaml
+
+                #- !include /config/lovelace/styles/view_bottom_gap.yaml
+
+            - type: custom:button-card
+              template: shoulder_blank_card

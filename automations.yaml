@@ -1,32 +1,34 @@
-- id: "1608774094962"
+- id: '1608774094962'
   alias: Daily Shutters - Open
-  description: ""
+  description: ''
   trigger:
-    - platform: time
-      at: "12:00"
+  - platform: time
+    at: '12:00'
   condition: []
   action:
-    - service: cover.open_cover
-      data: {}
-      entity_id: cover.bedroom_shutter
-    - service: cover.open_cover
-      data: {}
-      entity_id: cover.bureau_shutter
+  - service: cover.open_cover
+    data: {}
+    entity_id: cover.bedroom_shutter
+  - service: cover.open_cover
+    data: {}
+    entity_id: cover.bureau_shutter
   mode: single
-- id: "1608774150395"
+- id: '1608774150395'
   alias: Daily Shutters - Close
-  description: ""
+  description: ''
   trigger:
-    - platform: sun
-      event: sunset
-      offset: 00:15
+  - platform: sun
+    event: sunset
+    offset: 00:15
   condition: []
   action:
-    - service: cover.close_cover
-      data: {}
+  - service: cover.close_cover
+    data: {}
+    target:
       entity_id: cover.bedroom_shutter
-    - service: cover.close_cover
-      data: {}
+  - service: cover.close_cover
+    data: {}
+    target:
       entity_id: cover.bureau_shutter
   mode: single
 - id: play_radio
@@ -36,141 +38,166 @@
     platform: state
     entity_id: input_select.favorites
   action:
-    - service:
-        "{% if is_state(\"input_select.favorites\", \"Off\") %}\n    media_player.media_stop\n\
-        \  {% else %}\n    media_player.select_source\n  {% endif %}\n"
-      entity_id: media_player.bureau
-      data_template:
-        source:
-          '{% if not is_state("input_select.favorites", "Off") %} {{ states.input_select.favorites.state
-          }} {% else %} {% endif %}
+  - service: "{% if is_state(\"input_select.favorites\", \"Off\") %}\n    media_player.media_stop\n\
+      \  {% else %}\n    media_player.select_source\n  {% endif %}\n"
+    entity_id: media_player.bureau
+    data_template:
+      source: '{% if not is_state("input_select.favorites", "Off") %} {{ states.input_select.favorites.state
+        }} {% else %} {% endif %}
 
-          '
-- id: "1609972081340"
+        '
+- id: '1609972081340'
   alias: Turn off Floorlight
-  description: ""
+  description: ''
   trigger:
-    - device_id: 84aec03607d50505dbf3004df6b83a3f
-      domain: hue
-      platform: device
-      type: remote_button_short_press
-      subtype: button_4
+  - device_id: 84aec03607d50505dbf3004df6b83a3f
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_4
   condition: []
   action:
-    - service: switch.turn_off
-      data: {}
-      entity_id: switch.floorlight
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.floorlight
   mode: single
-- id: "1609972192616"
+- id: '1609972192616'
   alias: Turn on Floorlight
-  description: ""
+  description: ''
   trigger:
-    - device_id: 84aec03607d50505dbf3004df6b83a3f
-      domain: hue
-      platform: device
-      type: remote_button_short_press
-      subtype: button_3
-  condition:
-    - condition: or
-      conditions:
-        - condition: sun
-          after: sunset
-        - condition: sun
-          before: sunrise
-  action:
-    - service: switch.turn_on
-      data: {}
-      entity_id: switch.floorlight
-  mode: single
-- id: "1609972900027"
-  alias: Daily - Everything OFF
-  description: ""
-  trigger:
-    - platform: time
-      at: 02:00
+  - device_id: 84aec03607d50505dbf3004df6b83a3f
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_3
   condition: []
   action:
-    - service: remote.turn_off
-      data: {}
-      entity_id: remote.harmony_living_room
-    - service: light.turn_off
-      entity_id: light.bathroom
-    - service: light.turn_off
-      entity_id: light.bedroom
-    - service: light.turn_off
-      entity_id: light.bureau
-    - service: light.turn_off
-      entity_id: light.guest_room
-    - service: light.turn_off
-      entity_id: light.hallway
-    - service: light.turn_off
-      entity_id: light.living_room
-    - service: light.turn_off
-      entity_id: light.kitchen
-    - service: light.turn_off
-      entity_id: light.toilet
-    - service: switch.turn_off
-      data: {}
-      entity_id: switch.floorlight
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.floorlight
   mode: single
-- id: "1609974493789"
+- id: '1609972900027'
+  alias: Daily - Everything OFF
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00
+  condition: []
+  action:
+  - service: remote.turn_off
+    data: {}
+    entity_id: remote.harmony_living_room
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id:
+      - light.bedroom_main
+      - light.bedroom_sidelights
+      - light.bureau_lights
+      - light.bureau_main
+      - light.diner_filaments
+      - light.guest_room_main
+      - light.hallway_spots
+      - light.hue_go_one
+      - light.hue_go_tv
+      - light.ikea_lamp
+      - light.kitchen_lamp
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.floorlight
+      - switch.garden_lights
+      - switch.harmony_living_room_tv
+      - switch.kitchen_lights
+  mode: single
+- id: '1609974493789'
   alias: Daily - Driveway & Garden Lights - Midnight
   description: Set lights to 20%
   trigger:
-    - platform: time
-      at: 0:00
+  - platform: time
+    at: 0:00
   condition: []
   action:
-    - scene: scene.driveway_garden_lights_after_midnight
+  - scene: scene.driveway_garden_lights_after_midnight
   mode: single
-- id: "1609974785728"
+- id: '1609974785728'
   alias: Daily - Driveway & Garden Lights - Sunrise
   description: Everything OFF
   trigger:
-    - platform: sun
-      event: sunrise
+  - platform: sun
+    event: sunrise
   condition: []
   action:
-    - service: light.turn_off
-      data: {}
-      entity_id: light.driveway
-    - service: light.turn_off
-      data: {}
-      entity_id: light.garden
+  - service: light.turn_off
+    data: {}
+    entity_id: light.driveway
+  - service: light.turn_off
+    data: {}
+    entity_id: light.garden
   mode: single
-- id: "1609975184621"
+- id: '1609975184621'
   alias: Daily - Driveway & Garden Lights - Sunset
   description: Set lights to 50%
   trigger:
-    - platform: sun
-      event: sunset
+  - platform: sun
+    event: sunset
   condition: []
   action:
-    - scene: scene.driveway_garden_lights_after_sunset
+  - scene: scene.driveway_garden_lights_after_sunset
   mode: single
-- id: "1610038641208"
+- id: '1610038641208'
   alias: Subwoofer OFF
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id: remote.harmony_living_room
-      to: "off"
+  - platform: state
+    entity_id: remote.harmony_living_room
+    to: 'off'
   condition: []
   action:
-    - service: switch.turn_off
-      data: {}
-      entity_id: switch.subwoofer
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.subwoofer
   mode: single
-- id: "1610038849104"
+- id: '1610038849104'
   alias: Subwoofer ON
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id: remote.harmony_living_room
-      to: "on"
+  - platform: state
+    entity_id: remote.harmony_living_room
+    to: 'on'
   condition: []
   action:
-    - service: switch.turn_on
-      data: {}
-      entity_id: switch.subwoofer
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.subwoofer
+  mode: single
+- id: '1615329439213'
+  alias: Kitchen Lights - Turn on
+  description: ''
+  trigger:
+  - device_id: 78d3173dfeb7623b2b343bac58059626
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_1
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.kitchen_lights
+  mode: single
+- id: '1615329479726'
+  alias: Kitchen Lights - Turn off
+  description: ''
+  trigger:
+  - device_id: 78d3173dfeb7623b2b343bac58059626
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_2
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.kitchen_lights
   mode: single

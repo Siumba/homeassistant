@@ -1,45 +1,31 @@
-#Enables HassIO
-# hassio:
+frontend:
+  themes: !include_dir_merge_named /config/themes
+
+#Enable Cloud
+cloud:
 
 # Checks for available updates
 updater:
 
-#Enables lovelace
+  #Enables lovelace
 lovelace:
-  mode: storage
-  resources:
-    - url: /hacsfiles/lovelace-card-mod/card-mod.js
-      type: module
-    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
-      type: module
-    - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
-      type: module
-    - url: /hacsfiles/button-card/button-card.js
-      type: module
-    - url: /hacsfiles/lovelace-state-switch/state-switch.js
-      type: module
-    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
-      type: module
-    - url: /hacsfiles/lovelace-card-tools/card-tools.js
-      type: module
-    - url: /hacsfiles/swipe-card/swipe-card.js
-      type: module
-    - url: /hacsfiles/lovelace-hui-element/hui-element.js
-      type: module
-    - url: /hacsfiles/light-popup-card/light-popup-card.js
-      type: module
-    - url: /hacsfiles/light-entity-card/light-entity-card.js
-      type: module
-    - url: /hacsfiles/Homekit-panel-card/homekit-panel-card.js
-      type: module
-    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-      type: module
-    - url: /hacsfiles/lovelace-layout-card/layout-card.js
-      type: module
-    - url: /browser_mod.js
-      type: module
-    - url: /local/font.css
-      type: css
+  mode: yaml
+  resources: !include /config/lovelace/resources.yaml
+  dashboards:
+    lovelace-system:
+      mode: yaml
+      filename: ui-system.yaml
+      title: "System"
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      require_admin: false
+    lovelace-wallpanel:
+      mode: yaml
+      filename: ui-wallpanel.yaml
+      title: "Wall Panel"
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      require_admin: false
 
 sensor:
   - platform: template
@@ -80,6 +66,3 @@ history:
   exclude:
     domains:
       - groups
-#HassIO Comunity Store
-# hacs:
-#   token: !secret hacs_token
