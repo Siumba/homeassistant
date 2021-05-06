@@ -1,0 +1,25 @@
+- type: custom:decluttering-card # Bedroom
+  template: color_light_button
+  variables:
+    - entity: light.bedroom_main
+    - name: Bedroom
+
+- type: custom:decluttering-card # Bedside Fabian
+  template: color_light_button
+  variables:
+    - entity: light.fabians_lamp
+    - name: Fabian's Lamp
+    - icon: mdi:lamp
+    - svg_path: "M8,2H16L20,14H4L8,2M11,15H13V20H18V22H6V20H11V15Z"
+    - svg_path_on: "m 8,2 h 8 l 4,12 H 4 L 8,2"
+
+- type: custom:decluttering-card # Bedside Aimee
+  template: color_light_button
+  variables:
+    - entity: light.aimees_lamp
+    - name: Aimee's Lamp
+    - icon: mdi:lamp
+    - svg_path: "M8,2H16L20,14H4L8,2M11,15H13V20H18V22H6V20H11V15Z"
+    - svg_path_on: "m 8,2 h 8 l 4,12 H 4 L 8,2"
+
+- !include /config/lovelace-library/templates/styles/separator_card.yaml

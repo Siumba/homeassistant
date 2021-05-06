@@ -1,0 +1,33 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Badges                                                                 #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 4
+    square: false
+    cards:
+      - type: custom:decluttering-card # Climate
+        template: badge_climate_button
+        variables:
+          - name: Climate
+
+      - type: custom:decluttering-card # Lights
+        template: badge_lights_button
+        variables:
+          - name: Lights
+
+      # - type: custom:decluttering-card # Motion
+      #   template: badge_motion_button
+      #   variables:
+      #     - name: Motion
+
+      # - type: custom:decluttering-card # Climate
+      #   template: badge_climate_button
+      #   variables:
+      #     - name: Climate
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

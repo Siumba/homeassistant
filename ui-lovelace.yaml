@@ -1,67 +1,38 @@
 title: Home
 
-# custom_header: 
+# custom_header:
 #   !include /config/lovelace/custom_header.yaml
 
-# Button card templates  
+# Button card templates
 decluttering_templates:
   #!include /config/lovelace/decluttering_templates/decluttering_templates.yaml
-  !include_dir_merge_named /config/lovelace/decluttering_templates/
+  !include_dir_merge_named /config/lovelace-library/templates/decluttering_templates/
 
 button_card_templates:
   #!include /config/lovelace/button_card_templates/button_card_templates.yaml
-  !include_dir_merge_named /config/lovelace/button_card_templates/
-   
-background: var(--background-image)    
+  !include_dir_merge_named /config/lovelace-library/templates/button_card_templates/
+
+background: var(--background-image)
 views:
-
-    # Main
-    - !include /config/lovelace/views/view_main.yaml
-    # Menu
-    #- !include /config/lovelace/views/view_menu.yaml
-    # Lights
-    #- !include /config/lovelace/views/view_lights.yaml
-    # Living Room
-    - !include /config/lovelace/views/view_living_room.yaml
-    # Kitchen
-    - !include /config/lovelace/views/view_kitchen.yaml
-    # Bedroom
-    - !include /config/lovelace/views/view_bedroom.yaml
-    # Kids Room
-    - !include /config/lovelace/views/view_kids_room.yaml    
-    # Work Room
-    - !include /config/lovelace/views/view_work_room.yaml   
-    # Hallway
-    - !include /config/lovelace/views/view_hallway.yaml 
-    # Switcher
-    #- !include /config/lovelace/views/view_switcher.yaml
-    # Climate
-    #- !include /config/lovelace/views/view_climate.yaml
-    # Devices
-    #- !include /config/lovelace/views/view_devices.yaml
-    # Tablets
-    #- !include /config/lovelace/views/view_tablets.yaml
-    # Printer
-    #- !include /config/lovelace/views/view_printer.yaml
-    # Motion
-    #- !include /config/lovelace/views/view_motion.yaml
-    # Home Assistant
-    #- !include /config/lovelace/views/view_homeassistant.yaml
-    # Fully
-    #- !include /config/lovelace/views/view_fully.yaml
-    # Automation
-    #- !include /config/lovelace/views/view_automation.yaml
-    # Tasmota
-    #- !include /config/lovelace/views/view_tasmota.yaml
-    # Batteries
-    #- !include /config/lovelace/views/view_batteries.yaml
-    # Synology
-    #- !include /config/lovelace/views/view_synology.yaml
-    # Computers
-    #- !include /config/lovelace/views/view_computers.yaml
-    # Media
-    #- !include /config/lovelace/views/view_media.yaml
-    # Health
-    - !include /config/lovelace/views/view_health.yaml
-
-
+  # Maind
+  - !include /config/lovelace-library/tabs/view_main.yaml
+  # Lights
+  - !include /config/lovelace-library/tabs/view_lights.yaml
+  # Climate
+  - !include /config/lovelace-library/tabs/view_climate.yaml
+  # Living Room
+  - !include /config/lovelace-library/tabs/view_living_room.yaml
+  # Kitchen
+  - !include /config/lovelace-library/tabs/view_kitchen.yaml
+  # Bureau
+  - !include /config/lovelace-library/tabs/view_bureau.yaml
+  # Bedroom
+  - !include /config/lovelace-library/tabs/view_bedroom.yaml
+  # Guest Room
+  - !include /config/lovelace-library/tabs/view_guest_room.yaml
+  # Hallway
+  - !include /config/lovelace-library/tabs/view_hallway.yaml
+  # Garden
+  - !include /config/lovelace-library/tabs/view_outside.yaml
+  # Energy
+  - !include /config/lovelace-library/tabs/view_energy.yaml

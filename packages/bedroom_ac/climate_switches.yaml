@@ -1,0 +1,62 @@
+switch:
+  - platform: template
+    switches:
+      bedroom_ac_cool:
+        friendly_name: "Bedroom AC Cool"
+        icon_template: mdi:snowflake
+        value_template: "{{ is_state('climate.bedroom_ac', 'cool') }}"
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "cool"
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "off"
+
+      bedroom_ac_heat:
+        friendly_name: "Bedroom AC Heat"
+        icon_template: mdi:snowflake
+        value_template: "{{ is_state('climate.bedroom_ac', 'heat') }}"
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "heat"
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "off"
+
+      bedroom_ac_auto:
+        friendly_name: "Bedroom AC Auto"
+        icon_template: mdi:fan-auto
+        value_template: "{{ is_state('climate.bedroom_ac', 'auto') }}"
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "cool"
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "off"
+
+      bedroom_ac_off:
+        friendly_name: "Bedroom AC Off"
+        icon_template: mdi:flash-off
+        value_template: "{{ is_state('climate.bedroom_ac', 'off') }}"
+        turn_on:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "off"
+        turn_off:
+          service: climate.set_hvac_mode
+          data:
+            entity_id: climate.bedroom_ac
+            hvac_mode: "off"

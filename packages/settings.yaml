@@ -10,7 +10,7 @@ updater:
   #Enables lovelace
 lovelace:
   mode: yaml
-  resources: !include /config/lovelace/resources.yaml
+  resources: !include /config/lovelace-library/resources.yaml
   dashboards:
     lovelace-system:
       mode: yaml

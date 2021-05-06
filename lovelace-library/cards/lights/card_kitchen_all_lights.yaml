@@ -1,0 +1,11 @@
+- type: custom:decluttering-card # Kitchen
+  template: light_button
+  variables:
+    - entity: light.kitchen_lamp
+    - name: Kitchen
+
+- type: custom:decluttering-card # Kitchen Strips
+  template: light_button
+  variables:
+    - entity: light.kitchen_lights
+    - name: Lightstrip

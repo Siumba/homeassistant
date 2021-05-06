@@ -1,0 +1,51 @@
+sensor:
+  - platform: template
+    sensors:
+      ############################################################################
+      #                                                                          #
+      #   Bedroom                                                                #
+      #                                                                          #
+      ############################################################################
+
+      bedroom_ac_operation_mode:
+        friendly_name: "Bedroom AC Operation Mode"
+        icon_template: mdi:thermostat
+        value_template: >-
+          {% if is_state('climate.bedroom_ac', 'auto') %}
+            Auto
+          {% elif is_state('climate.bedroom_ac', 'cool') %}
+            Cool
+          {% elif is_state('climate.bedroom_ac', 'dry') %}
+            Dry
+          {% elif is_state('climate.bedroom_ac', 'fan_only') %}
+            Fan Only
+          {% elif is_state('climate.bedroom_ac', 'heat') %}
+            Heat
+          {% else %}
+            Off
+          {% endif %}
+
+      bedroom_ac_current_temp:
+        friendly_name: "Bedroom AC Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.bedroom_ac', 'current_temperature') }}
+
+      bedroom_ac_target_temp:
+        friendly_name: "Bedroom AC Target Temperature"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.bedroom_ac', 'temperature') }}
+
+      bedroom_ac_fan_mode:
+        friendly_name: "Bedroom AC Fan"
+        icon_template: mdi:hvac
+        value_template: >-
+          {{ state_attr('climate.bedroom_ac', 'fan_mode') }}
+
+      bedroom_ac_swing_mode:
+        friendly_name: "Bedroom AC Swing Mode"
+        icon_template: mdi:hvac
+        value_template: >-
+          {{ state_attr('climate.bedroom_ac', 'swing_mode') }}

@@ -1,0 +1,17 @@
+- type: custom:decluttering-card # Hallway Downstairs
+  template: color_light_button
+  variables:
+    - entity: light.driveway_door_lights
+    - name: Driveway
+
+- type: custom:decluttering-card # Hallway Downstairs
+  template: color_light_button
+  variables:
+    - entity: light.garden_outside
+    - name: Wall
+
+- type: custom:decluttering-card # Hallway Upstairs
+  template: color_light_button
+  variables:
+    - entity: light.garden_lights
+    - name: Lights

@@ -13,6 +13,11 @@ group:
       - climate.bureau
       - climate.entrance
 
+  all_climate_ac_entities:
+    name: All Climate AC Entities
+    entities:
+      - climate.bedroom_ac
+
   ############################################################################
   #                                                                          #
   #   All Light Entities                                                     #

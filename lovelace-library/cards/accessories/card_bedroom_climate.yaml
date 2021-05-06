@@ -1,0 +1,42 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title                                                                  #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Climate
+
+  ############################################################################
+  #                                                                          #
+  #   Accessories                                                            #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: custom:decluttering-card # Bedroom AC
+        template: climate_button
+        variables:
+          - title: Airconditioner
+          - name: bedroom_ac
+      - type: custom:decluttering-card # Bedroom
+        template: climate_button
+        variables:
+          - title: Radiator
+          - name: bedroom
+      - type: custom:decluttering-card # Bedroom
+        template: aircon_button
+        variables:
+          - title: Airconditioner
+          - name: bedroom_ac
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

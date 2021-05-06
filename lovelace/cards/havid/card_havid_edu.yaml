@@ -1,5 +1,0 @@
-type: custom:decluttering-card
-template: havid_card
-variables:
-  - title: Edu
-  - system: edu

@@ -1,27 +1,6 @@
 - id: '1609974483346'
   name: Driveway & Garden Lights - After Midnight
   entities:
-    light.garden:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      brightness: 51
-      hs_color:
-      - 31.053
-      - 44.706
-      rgb_color:
-      - 255
-      - 200
-      - 140
-      xy_color:
-      - 0.448
-      - 0.384
-      is_hue_group: true
-      friendly_name: Garden
-      supported_features: 63
-      state: 'on'
     light.driveway_door_lights:
       min_mireds: 153
       max_mireds: 500
@@ -30,22 +9,46 @@
       - random
       brightness: 51
       hs_color:
-      - 33.988
-      - 67.843
+      - 33.488
+      - 67.451
       rgb_color:
       - 255
-      - 179
+      - 178
       - 82
       xy_color:
-      - 0.515
-      - 0.406
+      - 0.516
+      - 0.404
       effect: none
       entity_id:
       - light.driveway_door_spot_left
       - light.driveway_door_spot_right
-      friendly_name: Driveway Door Lights
-      icon: mdi:lightbulb-group
+      friendly_name: Spots
+      icon: mdi:wall-sconce-round
       supported_features: 63
+      room: driveway
+      state: 'on'
+    light.garden_outside:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 51
+      hs_color:
+      - 31.304
+      - 45.098
+      rgb_color:
+      - 255
+      - 199
+      - 140
+      xy_color:
+      - 0.448
+      - 0.382
+      effect: none
+      friendly_name: Shed
+      supported_features: 63
+      room: garden
+      icon: mdi:coach-lamp
       state: 'on'
 - id: '1609975077007'
   name: Driveway & Garden Lights - After Sunset
@@ -71,28 +74,101 @@
       entity_id:
       - light.driveway_door_spot_left
       - light.driveway_door_spot_right
-      friendly_name: Driveway Door Lights
-      icon: mdi:lightbulb-group
+      friendly_name: Spots
+      icon: mdi:wall-sconce-round
       supported_features: 63
+      room: driveway
       state: 'on'
-    light.garden:
+    light.garden_outside:
       min_mireds: 153
       max_mireds: 500
       effect_list:
       - colorloop
       - random
-      brightness: 128
+      brightness: 51
       hs_color:
-      - 29.474
+      - 30.526
       - 44.706
       rgb_color:
       - 255
-      - 197
+      - 198
       - 140
       xy_color:
-      - 0.45
-      - 0.38
-      is_hue_group: true
-      friendly_name: Garden
+      - 0.449
+      - 0.381
+      effect: none
+      friendly_name: Shed
       supported_features: 63
+      room: garden
+      icon: mdi:coach-lamp
+      state: 'on'
+- id: '1617924531703'
+  name: Living Room Lighting
+  entities:
+    light.hue_go_one:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 57
+      hs_color:
+      - 29.7
+      - 78.431
+      rgb_color:
+      - 255
+      - 154
+      - 55
+      xy_color:
+      - 0.561
+      - 0.391
+      effect: none
+      friendly_name: Corner Bloom
+      supported_features: 63
+      room: living_room
+      icon: mdi:wall-sconce-round-variant
+      state: 'on'
+    light.floorlight:
+      friendly_name: Floorlight
+      supported_features: 0
+      state: 'on'
+    switch.salt_lamp:
+      friendly_name: Salt Lamp
+      state: 'on'
+    light.diner_filaments:
+      brightness: 48
+      entity_id:
+      - light.diner_lamp_1
+      - light.diner_lamp_2
+      - light.diner_lamp_3
+      friendly_name: Diner Filaments
+      icon: mdi:lightbulb-group
+      supported_features: 41
+      state: 'on'
+    light.ikea_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - random
+      - colorloop
+      brightness: 78
+      hs_color:
+      - 35.511
+      - 70.065
+      rgb_color:
+      - 255
+      - 182
+      - 76
+      xy_color:
+      - 0.515
+      - 0.413
+      effect: none
+      entity_id:
+      - light.ikea_lamp_1
+      - light.ikea_lamp_2
+      - light.ikea_lamp_3
+      friendly_name: IKEA Lamp
+      icon: mdi:floor-lamp-variant
+      supported_features: 63
+      room: living_room
       state: 'on'

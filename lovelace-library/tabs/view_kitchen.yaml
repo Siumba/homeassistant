@@ -1,0 +1,27 @@
+title: Kitchen
+icon: mdi:stove
+path: kitchen
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: Kitchen
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+          - type: custom:layout-card
+            min_columns: 1
+            max_columns: 1
+            cards:
+              - !include /config/lovelace-library/cards/accessories/card_kitchen_lights.yaml
+
+          - type: custom:button-card
+            template: shoulder_blank_card

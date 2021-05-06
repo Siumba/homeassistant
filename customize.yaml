@@ -86,3 +86,12 @@ remote.harmony_living_room:
 media_player.bureau_display:
   friendly_name: Nest Hub
   icon: mdi:tablet-dashboard
+
+sensor.daily_energy_meter:
+  friendly_name: Daily Energy
+sensor.daily_gas_meter:
+  friendly_name: Daily Gas
+sensor.monthly_energy_meter:
+  friendly_name: Monthly Energy
+sensor.monthly_gas_meter:
+  friendly_name: Monthly Gas

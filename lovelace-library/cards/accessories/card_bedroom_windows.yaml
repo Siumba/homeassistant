@@ -1,0 +1,31 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title                                                                  #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Windows
+
+  ############################################################################
+  #                                                                          #
+  #   Accessories                                                            #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: custom:decluttering-card # Bedroom Cover
+        template: cover_button
+        variables:
+          - name: Shutter
+          - entity: cover.bedroom_shutter
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

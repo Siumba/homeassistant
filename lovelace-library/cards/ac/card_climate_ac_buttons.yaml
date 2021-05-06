@@ -1,0 +1,35 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title AC                                                               #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Air Conditioning
+
+  ############################################################################
+  #                                                                          #
+  #   Climate AC Buttons                                                     #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: custom:decluttering-card # Bedroom AC
+        template: climate_button
+        variables:
+          - title: Bedroom
+          - name: bedroom_ac
+
+      - type: "custom:button-card"
+        color_type: blank-card
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

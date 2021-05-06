@@ -1,0 +1,28 @@
+title: Living Room
+icon: mdi:sofa
+path: living-room
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: Living Room
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+          - type: custom:layout-card
+            min_columns: 1
+            max_columns: 1
+            cards:
+              - !include /config/lovelace-library/cards/accessories/card_living_room_climate.yaml
+              - !include /config/lovelace-library/cards/accessories/card_living_room_lights.yaml
+
+          - type: custom:button-card
+            template: shoulder_blank_card

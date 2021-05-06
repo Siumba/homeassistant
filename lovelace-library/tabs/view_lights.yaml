@@ -1,0 +1,33 @@
+title: Lights
+icon: mdi:lightbulb-group
+path: lights
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: Lights
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+          - type: custom:layout-card
+            min_columns: 1
+            max_columns: 1
+            cards:
+              - !include /config/lovelace-library/cards/lights/card_living_room_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_kitchen_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_bureau_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_bedroom_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_guest_room_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_hallway_lightsview.yaml
+              - !include /config/lovelace-library/cards/lights/card_outside_lightsview.yaml
+
+          - type: custom:button-card
+            template: shoulder_blank_card

@@ -3,15 +3,12 @@
   description: ''
   trigger:
   - platform: time
-    at: '12:00'
+    at: '11:00'
   condition: []
   action:
   - service: cover.open_cover
     data: {}
     entity_id: cover.bedroom_shutter
-  - service: cover.open_cover
-    data: {}
-    entity_id: cover.bureau_shutter
   mode: single
 - id: '1608774150395'
   alias: Daily Shutters - Close
@@ -47,7 +44,7 @@
 
         '
 - id: '1609972081340'
-  alias: Turn off Floorlight
+  alias: Turn off - Floorlight
   description: ''
   trigger:
   - device_id: 84aec03607d50505dbf3004df6b83a3f
@@ -62,7 +59,7 @@
     entity_id: switch.floorlight
   mode: single
 - id: '1609972192616'
-  alias: Turn on Floorlight
+  alias: Turn on - Floorlight
   description: ''
   trigger:
   - device_id: 84aec03607d50505dbf3004df6b83a3f
@@ -95,13 +92,15 @@
       - light.bedroom_sidelights
       - light.bureau_lights
       - light.bureau_main
-      - light.diner_filaments
       - light.guest_room_main
+      - light.diner_filaments
       - light.hallway_spots
+      - light.hallway_lamp
       - light.hue_go_one
       - light.hue_go_tv
       - light.ikea_lamp
       - light.kitchen_lamp
+      - light.living_room_lamp
   - service: switch.turn_off
     target:
       entity_id:
@@ -109,6 +108,7 @@
       - switch.garden_lights
       - switch.harmony_living_room_tv
       - switch.kitchen_lights
+      - switch.salt_lamp
   mode: single
 - id: '1609974493789'
   alias: Daily - Driveway & Garden Lights - Midnight
@@ -130,10 +130,10 @@
   action:
   - service: light.turn_off
     data: {}
-    entity_id: light.driveway
-  - service: light.turn_off
-    data: {}
-    entity_id: light.garden
+    target:
+      entity_id:
+      - light.driveway_door_lights
+      - light.garden_outside
   mode: single
 - id: '1609975184621'
   alias: Daily - Driveway & Garden Lights - Sunset
@@ -200,4 +200,90 @@
   - service: switch.turn_off
     data: {}
     entity_id: switch.kitchen_lights
+  mode: single
+- id: '1616083063299'
+  alias: Turn on - Salt Lamp
+  description: ''
+  trigger:
+  - device_id: 0ebc63631c79382336aa98c33cfab803
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_1
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.salt_lamp
+  mode: single
+- id: '1616083103638'
+  alias: Turn off - Salt Lamp
+  description: ''
+  trigger:
+  - device_id: 0ebc63631c79382336aa98c33cfab803
+    domain: hue
+    platform: device
+    type: remote_button_short_press
+    subtype: button_2
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.salt_lamp
+  mode: single
+- id: '1616754008519'
+  alias: Aimee Home
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 84476d7bb4d60e9482f8f290035012ab
+    domain: device_tracker
+    entity_id: device_tracker.iphone_van_aimee
+    type: enters
+    zone: zone.home
+  condition: []
+  action:
+  - service: scene.create
+    data:
+      scene_id: before
+      snapshot_entities:
+      - light.bureau_light_left
+      - light.bureau_light_right
+  - service: light.turn_on
+    data:
+      flash: short
+      rgb_color:
+      - 252
+      - 3
+      - 3
+    target:
+      entity_id:
+      - light.bureau_light_left
+      - light.bureau_light_right
+  - delay: 5
+  - service: scene.turn_on
+    entity_id: scene.before
+  mode: single
+- id: '1618259026456'
+  alias: Daily - Living Room Evening Lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-1:00'
+  condition: []
+  action:
+  - scene: scene.living_room_lighting
+  mode: single
+- id: '1618390213380'
+  alias: Open Bureau Shutter
+  description: Daily
+  trigger:
+  - platform: time
+    at: '9:00'
+  condition: []
+  action:
+  - service: cover.open_cover
+    target:
+      entity_id: cover.bureau_shutter
   mode: single

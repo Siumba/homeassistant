@@ -1,0 +1,37 @@
+title: Home
+icon: mdi:home
+path: main
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: Home
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+          - type: custom:layout-card
+            min_columns: 1
+            max_columns: 1
+            cards:
+              - !include /config/lovelace-library/cards/badges/card_badges_home.yaml
+
+              #- !include /config/lovelace/cards/presence/card_presence.yaml
+
+              #- !include /config/lovelace/cards/menu/card_main_menu_buttons.yaml
+
+              #- !include /config/lovelace/cards/menu/card_menu_buttons.yaml
+
+              - !include /config/lovelace-library/cards/accessories/card_accessories_home.yaml
+
+              - !include /config/lovelace-library/templates/styles/view_bottom_gap.yaml
+
+          - type: custom:button-card
+            template: shoulder_blank_card

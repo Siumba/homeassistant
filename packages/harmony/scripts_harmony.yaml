@@ -1,0 +1,44 @@
+script:
+  ############################################################################
+  #                                                                          #
+  #   Living Room Receiver                                                   #
+  #                                                                          #
+  ############################################################################
+
+  receiver_volume_up:
+    alias: Volume Up
+    sequence:
+      - delay:
+          milliseconds: 100
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_living_room
+          command:
+            - VolumeUp
+          device: 59394436
+          num_repeats: 5
+
+  receiver_volume_down:
+    alias: Volume Down
+    sequence:
+      - delay:
+          milliseconds: 100
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_living_room
+          command:
+            - VolumeDown
+          device: 59394436
+          num_repeats: 5
+
+  receiver_volume_mute:
+    alias: Mute
+    sequence:
+      - delay:
+          milliseconds: 100
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_living_room
+          command:
+            - Mute
+          device: 59394436

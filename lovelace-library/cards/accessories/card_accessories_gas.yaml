@@ -1,0 +1,82 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title                                                                  #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Daily Consumption
+
+  ############################################################################
+  #                                                                          #
+  #   Accessories                                                            #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.daily_energy_meter
+        hours_to_show: 168
+        aggregate_func: last
+        group_by: date
+        show:
+          graph: bar
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.daily_gas_meter
+        hours_to_show: 168
+        aggregate_func: last
+        group_by: date
+        show:
+          graph: bar
+  # ############################################################################
+  # #                                                                          #
+  # #   Title                                                                  #
+  # #                                                                          #
+  # ############################################################################
+
+  # - type: horizontal-stack
+  #   cards:
+  #     - type: custom:decluttering-card
+  #       template: title_button_card
+  #       variables:
+  #         - name: Montly Consumption
+
+  # ############################################################################
+  # #                                                                          #
+  # #   Accessories                                                            #
+  # #                                                                          #
+  # ############################################################################
+
+  # - type: grid
+  #   columns: 2
+  #   square: false
+  #   cards:
+  #     - type: custom:mini-graph-card
+  #       entities:
+  #         - entity: sensor.monthly_energy_meter
+  #       hours_to_show: 168
+  #       aggregate_func: max
+  #       group_by: date
+  #       show:
+  #         graph: bar
+  #     - type: custom:mini-graph-card
+  #       entities:
+  #         - entity: sensor.monthly_gas_meter
+  #       hours_to_show: 168
+  #       aggregate_func: max
+  #       group_by: date
+  #       show:
+  #         graph: bar
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

@@ -1,0 +1,27 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title                                                                  #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Hallway
+
+  ############################################################################
+  #                                                                          #
+  #   Rooms Lights                                                           #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 3
+    square: false
+    cards: !include /config/lovelace-library/cards/lights/card_hallway_all_lights.yaml
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

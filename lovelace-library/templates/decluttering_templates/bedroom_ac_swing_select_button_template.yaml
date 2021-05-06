@@ -1,0 +1,39 @@
+bedroom_ac_swing_select_button:
+  default:
+    - selected_color: var(--button-card-on-background)
+    - selected_text_color: var(--button-card-on-text-color)
+    - color_type: card
+    - show_name: true
+    - show_icon: true
+    - font_size: 18px
+    - font_weight: normal
+    - transform_icon: ""
+
+  card:
+    type: custom:decluttering-card
+    template: simple_button
+    variables:
+      - entity: "[[entity]]"
+      - name: "[[name]]"
+      - icon: "[[icon]]"
+      - transform_icon: "[[transform_icon]]"
+      - color_type: "[[color_type]]"
+      - show_name: "[[show_name]]"
+      - show_icon: "[[show_icon]]"
+      - font_size: "[[font_size]]"
+      - font_weight: "[[font_weight]]"
+      - tap_action:
+          action: call-service
+          service: climate.set_swing_mode
+          service_data:
+            entity_id: "[[climate_entity]]"
+            swing_mode: "[[swing_mode]]"
+      - hold_action:
+          action: none
+      - state:
+          - value: "[[swing_mode]]"
+            styles:
+              card:
+                - background-color: "[[selected_color]]"
+              name:
+                - color: "[[selected_text_color]]"

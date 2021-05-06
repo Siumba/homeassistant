@@ -71,6 +71,40 @@ sensor:
 
       ############################################################################
       #                                                                          #
+      #   Number of Climates AC On                                                  #
+      #                                                                          #
+      ############################################################################
+
+      number_of_climate_ac_entities_on:
+        friendly_name: "Number of Climates AC On"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {% set count = namespace(value=0) %}
+          {% for entity_id in state_attr('group.all_climate_ac_entities','entity_id') %}
+            {% if (states(entity_id) == 'on' or states(entity_id) == 'heat' or states(entity_id) == 'cool') %}
+              {% set count.value = count.value + 1 %}
+            {% endif %}
+          {% endfor %}
+          {{ count.value }}
+
+      ############################################################################
+      #                                                                          #
+      #   Only Climate On                                                        #
+      #                                                                          #
+      ############################################################################
+
+      only_climate_ac_on:
+        friendly_name: "Only Climate On"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {% for entity_id in state_attr('group.all_climate_ac_entities','entity_id') %}
+            {% if (states(entity_id) == 'on' or states(entity_id) == 'heat' or states(entity_id) == 'cool') %}
+              {{ states[entity_id].attributes.friendly_name }}
+            {% endif %}
+          {% endfor %}
+
+      ############################################################################
+      #                                                                          #
       #   Number of Devices On                                                   #
       #                                                                          #
       ############################################################################

@@ -1,0 +1,13 @@
+- type: custom:decluttering-card # Hallway Downstairs
+  template: color_light_button
+  variables:
+    - entity: light.hallway_lamp
+    - name: Hallway
+
+- type: custom:decluttering-card # Hallway Upstairs
+  template: color_light_button
+  variables:
+    - entity: light.hallway_spots
+    - name: Spots
+
+- !include /config/lovelace-library/templates/styles/separator_card.yaml

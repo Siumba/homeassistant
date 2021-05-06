@@ -1,0 +1,21 @@
+script:
+  ############################################################################
+  #                                                                          #
+  #   Sensibo Kids Room                                                      #
+  #                                                                          #
+  ############################################################################
+  bedroom_ac_increase_target_temp:
+    alias: Increase
+    sequence:
+      - service: climate.set_temperature
+        data_template:
+          entity_id: climate.bedroom_ac
+          temperature: "{{ (state_attr('climate.bedroom_ac', 'temperature')|round(0)) + 1 }}"
+
+  bedroom_ac_decrease_target_temp:
+    alias: Decrease
+    sequence:
+      - service: climate.set_temperature
+        data_template:
+          entity_id: climate.bedroom_ac
+          temperature: "{{ (state_attr('climate.bedroom_ac', 'temperature')|round(0)) - 1 }}"

@@ -1,0 +1,42 @@
+# Koppeling van de Connectix.nl slimme meter via WiFi adapter
+sensor:
+  - platform: dsmr
+    host: 192.168.1.190
+    port: 23
+    dsmr_version: 5
+
+  # Calculate Remaining Power
+  - platform: template
+    sensors:
+      actual_consumption:
+        value_template: >
+          {{ '%0.2f' | format(states.sensor.power_consumption.state | float - 
+                              states.sensor.power_production.state | float) }}
+        unit_of_measurement: "kW"
+        friendly_name: Actual Power Consumption
+  - platform: template
+    sensors:
+      actual_consumption_kwh:
+        value_template: >
+          {{ '%0.2f' | format(states.sensor.energy_consumption_tarif_1.state | float + 
+                              states.sensor.energy_consumption_tarif_2.state | float - 
+                              states.sensor.energy_production_tarif_1.state | float - 
+                              states.sensor.energy_production_tarif_2.state | float) }}
+        unit_of_measurement: "kWh"
+        friendly_name: Actual Power Consumption kWh
+
+utility_meter:
+  daily_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: daily
+    net_consumption: true
+  monthly_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: monthly
+    net_consumption: true
+  daily_gas_meter:
+    source: sensor.gas_consumption
+    cycle: daily
+  monthly_gas_meter:
+    source: sensor.gas_consumption
+    cycle: monthly
