@@ -41,13 +41,6 @@ light:
       - light.kitchen_spot_3
 
   - platform: group
-    name: IKEA Lamp
-    entities:
-      - light.ikea_lamp_1
-      - light.ikea_lamp_2
-      - light.ikea_lamp_3
-
-  - platform: group
     name: Diner Filaments
     entities:
       - light.diner_lamp_1
@@ -71,7 +64,9 @@ light:
       - light.hallway_upstairs_spot_5
 
   - platform: group
-    name: Hallway Lamp
+    name: Patio Spots
     entities:
-      - light.hallway_downstairs_lamp_1
-      - light.hallway_downstairs_lamp_2
+      - light.patio_spot_1
+      - light.patio_spot_2
+      - light.patio_spot_3
+      - light.patio_spot_4

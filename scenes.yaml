@@ -105,37 +105,10 @@
 - id: '1617924531703'
   name: Living Room Lighting
   entities:
-    light.hue_go_one:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      brightness: 57
-      hs_color:
-      - 29.7
-      - 78.431
-      rgb_color:
-      - 255
-      - 154
-      - 55
-      xy_color:
-      - 0.561
-      - 0.391
-      effect: none
-      friendly_name: Corner Bloom
-      supported_features: 63
-      room: living_room
-      icon: mdi:wall-sconce-round-variant
-      state: 'on'
-    light.floorlight:
-      friendly_name: Floorlight
-      supported_features: 0
-      state: 'on'
-    switch.salt_lamp:
-      friendly_name: Salt Lamp
-      state: 'on'
     light.diner_filaments:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
       brightness: 48
       entity_id:
       - light.diner_lamp_1
@@ -143,32 +116,71 @@
       - light.diner_lamp_3
       friendly_name: Diner Filaments
       icon: mdi:lightbulb-group
-      supported_features: 41
+      supported_features: 40
       state: 'on'
-    light.ikea_lamp:
+    light.torch_lamp:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - random
       - colorloop
-      brightness: 78
+      - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 102
       hs_color:
-      - 35.511
-      - 70.065
+      - 38
+      - 82.353
       rgb_color:
       - 255
-      - 182
-      - 76
+      - 177
+      - 44
       xy_color:
-      - 0.515
-      - 0.413
+      - 0.537
+      - 0.422
       effect: none
-      entity_id:
-      - light.ikea_lamp_1
-      - light.ikea_lamp_2
-      - light.ikea_lamp_3
-      friendly_name: IKEA Lamp
-      icon: mdi:floor-lamp-variant
+      friendly_name: Torch Lamp
       supported_features: 63
-      room: living_room
+      state: 'on'
+    light.closet_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 1
+      friendly_name: Closet Lamp
+      supported_features: 41
+      state: 'on'
+    light.tripod_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 22
+      friendly_name: Tripod Lamp
+      supported_features: 41
+      state: 'on'
+    light.bloom_tv:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 63
+      hs_color:
+      - 29.691
+      - 76.078
+      rgb_color:
+      - 255
+      - 157
+      - 61
+      xy_color:
+      - 0.554
+      - 0.392
+      effect: none
+      friendly_name: Bloom TV
+      supported_features: 63
       state: 'on'

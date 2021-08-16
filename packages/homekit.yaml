@@ -1,0 +1,44 @@
+# Example configuration.yaml entry configuring HomeKit
+homekit:
+  # - name: HASS Bridge
+  - filter:
+      include_domains:
+        - camera
+        - climate
+        - cover
+      # include_entity_globs:
+      #   - switch.bedroom_ac*
+      include_entities:
+        - binary_sensor.front_door_state
+        # - binary_sensor.front_door_low_bat
+        - binary_sensor.garden_door_state
+        # - binary_sensor.garden_door_low_bat
+        - binary_sensor.kitchen_door_state
+        # - binary_sensor.living_room_low_bat
+        - media_player.lg_webos_smart_tv
+        - switch.garden_lights
+        - switch.kitchen_lights
+    # entity_config:
+    #   alarm_control_panel.home:
+    #     code: 1234
+    # binary_sensor.front_door_state:
+    #   linked_battery_sensor: binary_sensor.front_door_low_bat
+    # binary_sensor.garden_door_state:
+    #   linked_battery_sensor: binary_sensor.garden_door_low_bat
+    # binary_sensor.kitchen_door_state:
+    #   linked_battery_sensor: binary_sensor.living_room_low_bat
+    #     low_battery_threshold: 31
+    #   light.kitchen_table:
+    #     name: Kitchen Table Light
+    #   lock.front_door:
+    #     code: 1234
+    #   media_player.living_room:
+    #     feature_list:
+    #       - feature: on_off
+    #       - feature: play_pause
+    #       - feature: play_stop
+    #       - feature: toggle_mute
+    #   switch.bedroom_outlet:
+    #     type: outlet
+    #   camera.back_porch:
+    #     support_audio: True

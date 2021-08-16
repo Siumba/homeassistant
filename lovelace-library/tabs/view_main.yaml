@@ -18,8 +18,7 @@ cards:
             template: shoulder_blank_card
 
           - type: custom:layout-card
-            min_columns: 1
-            max_columns: 1
+            layout_type: custom:vertical-layout
             cards:
               - !include /config/lovelace-library/cards/badges/card_badges_home.yaml
 
@@ -31,7 +30,7 @@ cards:
 
               - !include /config/lovelace-library/cards/accessories/card_accessories_home.yaml
 
-              - !include /config/lovelace-library/templates/styles/view_bottom_gap.yaml
+              # - !include /config/lovelace-library/templates/styles/view_bottom_gap.yaml
 
           - type: custom:button-card
             template: shoulder_blank_card

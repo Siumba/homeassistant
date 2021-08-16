@@ -79,10 +79,6 @@ light.hallway_spots:
   room: hallway
   icon: mdi:wall-sconce-round
 
-remote.harmony_living_room:
-  friendly_name: TV
-  icon: mdi:television
-
 media_player.bureau_display:
   friendly_name: Nest Hub
   icon: mdi:tablet-dashboard

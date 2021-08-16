@@ -1,41 +1,41 @@
+- type: custom:decluttering-card # Torch
+  template: color_light_button
+  variables:
+    - entity: light.torch_lamp
+    - name: Torch
+
+- type: custom:decluttering-card # Hue Go Moett
+  template: color_light_button
+  variables:
+    - entity: light.bloom_tv
+    - name: Moët Lamp
+
 - type: custom:decluttering-card # Living Room
-  template: light_button
+  template: color_light_button
   variables:
     - entity: light.living_room_lamp
     - name: Living Room
 
 - type: custom:decluttering-card # Dining
-  template: light_button
+  template: color_light_button
   variables:
     - entity: light.diner_filaments
-    - name: Dining
+    - name: Diner Filaments
 
-- type: custom:decluttering-card # Floorlight
-  template: light_button
-  variables:
-    - entity: switch.floorlight
-    - name: Floorlight
-
-- type: custom:decluttering-card # Hue Go One
+- type: custom:decluttering-card # Tripod
   template: color_light_button
   variables:
-    - entity: light.hue_go_one
-    - name: Hue Go Speaker
+    - entity: light.tripod_lamp
+    - name: Tripod
 
-- type: custom:decluttering-card # Hue Go Other
+- type: custom:decluttering-card # Closet Lamp
   template: color_light_button
   variables:
-    - entity: light.hue_go_tv
-    - name: Hue Go Other
+    - entity: light.closet_lamp
+    - name: Closet Lamp
 
-- type: custom:decluttering-card # IKEA Lamp
+- type: custom:decluttering-card # Hue Go Outside
   template: color_light_button
   variables:
-    - entity: light.ikea_lamp
-    - name: IKEA Lamp
-
-- type: custom:decluttering-card # Salt Lamp
-  template: light_button
-  variables:
-    - entity: switch.salt_lamp
-    - name: Salt Lamp
+    - entity: light.bloom_mobile
+    - name: Bloom Mobile

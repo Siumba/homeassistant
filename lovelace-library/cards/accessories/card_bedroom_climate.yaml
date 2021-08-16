@@ -33,10 +33,5 @@ cards:
         variables:
           - title: Radiator
           - name: bedroom
-      - type: custom:decluttering-card # Bedroom
-        template: aircon_button
-        variables:
-          - title: Airconditioner
-          - name: bedroom_ac
 
   - !include /config/lovelace-library/templates/styles/separator_card.yaml

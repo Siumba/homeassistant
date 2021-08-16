@@ -1,7 +1,7 @@
 - type: custom:decluttering-card # Hallway Downstairs
   template: color_light_button
   variables:
-    - entity: light.hallway_lamp
+    - entity: light.hallway_downstairs
     - name: Hallway
 
 - type: custom:decluttering-card # Hallway Upstairs

@@ -1,0 +1,33 @@
+script:
+  ############################################################################
+  #                                                                          #
+  #   Living Room OLED TV                                                    #
+  #                                                                          #
+  ############################################################################
+
+  tv_volume_up:
+    alias: Volume Up TV
+    sequence:
+      - service: webostv.button
+        target:
+          entity_id: media_player.lg_webos_smart_tv
+        data:
+          button: "VOLUMEUP"
+
+  tv_volume_down:
+    alias: Volume Down TV
+    sequence:
+      - service: webostv.button
+        target:
+          entity_id: media_player.lg_webos_smart_tv
+        data:
+          button: "VOLUMEDOWN"
+
+  tv_volume_mute:
+    alias: Mute TV
+    sequence:
+      - service: webostv.button
+        target:
+          entity_id: media_player.lg_webos_smart_tv
+        data:
+          button: "MUTE"

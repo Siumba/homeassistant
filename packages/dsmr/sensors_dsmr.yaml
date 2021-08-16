@@ -1,10 +1,5 @@
 # Koppeling van de Connectix.nl slimme meter via WiFi adapter
 sensor:
-  - platform: dsmr
-    host: 192.168.1.190
-    port: 23
-    dsmr_version: 5
-
   # Calculate Remaining Power
   - platform: template
     sensors:

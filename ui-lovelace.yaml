@@ -14,12 +14,12 @@ button_card_templates:
 
 background: var(--background-image)
 views:
-  # Maind
+  # Mainddddddddddddddd
   - !include /config/lovelace-library/tabs/view_main.yaml
-  # Lights
-  - !include /config/lovelace-library/tabs/view_lights.yaml
-  # Climate
-  - !include /config/lovelace-library/tabs/view_climate.yaml
+  # # Lights
+  # - !include /config/lovelace-library/tabs/view_lights.yaml
+  # # Climate
+  # - !include /config/lovelace-library/tabs/view_climate.yaml
   # Living Room
   - !include /config/lovelace-library/tabs/view_living_room.yaml
   # Kitchen

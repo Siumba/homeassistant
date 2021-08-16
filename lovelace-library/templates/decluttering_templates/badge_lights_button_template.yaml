@@ -148,8 +148,7 @@ badge_lights_button:
                       template: shoulder_blank_card
 
                     - type: custom:layout-card
-                      min_columns: 1
-                      max_columns: 1
+                      layout_type: custom:vertical-layout
                       cards:
                         - !include /config/lovelace-library/cards/lights/card_living_room_lightsview.yaml
 

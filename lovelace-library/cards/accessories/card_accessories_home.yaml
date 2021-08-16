@@ -39,10 +39,10 @@ cards:
       #     - name: Climate
 
       - type: custom:decluttering-card # Living Room TV
-        template: harmony_button
+        template: oled_tv_button
         variables:
-          - entity: switch.remote_living_room
-          - title: Main TV
+          - entity: media_player.lg_webos_smart_tv
+          - title: OLED TV
           - name: living_room
           - icon: mdi:television
           - svg_path: "M21,17H3V5H21M21,3H3A2,2 0 0,0 1,5V17A2,2 0 0,0 3,19H8V21H16V19H21A2,2 0 0,0 23,17V5A2,2 0 0,0 21,3Z"
@@ -73,35 +73,29 @@ cards:
       #     - entity: light.living_room
       #     - name: Living Room
 
-      - type: custom:decluttering-card # Living Room Light
-        template: light_button
+      - type: custom:decluttering-card # Torch Lamp
+        template: color_light_button
         variables:
-          - entity: light.living_room_lamp
-          - name: Living Room
-
-      - type: custom:decluttering-card # IKEA Lamp
-        template: light_button
-        variables:
-          - entity: light.ikea_lamp
-          - name: IKEA Lamp
+          - entity: light.torch_lamp
+          - name: Torch
 
       - type: custom:decluttering-card # Dining Light
-        template: light_button
+        template: color_light_button
         variables:
           - entity: light.diner_filaments
-          - name: Dining
+          - name: Diner Filaments
 
       - type: custom:decluttering-card # Kitchen Light
-        template: light_button
+        template: color_light_button
         variables:
           - entity: light.kitchen_lamp
           - name: Kitchen
 
       - type: custom:decluttering-card # Kitchen Underlights
-        template: light_button
+        template: color_light_button
         variables:
-          - entity: light.kitchen_lights
-          - name: Kitchen Lights
+          - entity: light.patio_spots
+          - name: Patio
 
       # - type: custom:decluttering-card # Bedside Galit Light
       #   template: color_light_button

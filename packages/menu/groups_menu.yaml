@@ -28,23 +28,23 @@ group:
     name: All Light Entities
     entities:
       - light.living_room_lamp
-      - light.floorlight
-      - light.hue_go_one
-      - light.hue_go_tv
-      - light.ikea_lamp
+      - light.torch_lamp
+      - light.bloom_tv
+      - light.bloom_mobile
       - light.diner_filaments
+      - light.closet_lamp
+      - light.tripod_lamp
       - light.kitchen_lamp
       - light.kitchen_lights
-      - light.garden_outside
       - light.garden_lights
-      - light.hallway_lamp
+      - light.patio_spots
+      - light.hallway_downstairs
       - light.hallway_spots
       - light.bureau_main
       - light.bureau_lights
       - light.bedroom_main
       - light.bedroom_sidelights
       - light.guest_room_main
-      - light.driveway_door_lights
 
   ############################################################################
   #                                                                          #
@@ -52,10 +52,10 @@ group:
   #                                                                          #
   ############################################################################
 
-  all_device_switch_entities:
-    name: All Device Entities
-    entities:
-      - remote.harmony_living_room
+  # all_device_switch_entities:
+  #   name: All Device Entities
+  #   entities:
+  #     - remote.harmony_living_room
 
   ############################################################################
   #                                                                          #

@@ -22,18 +22,6 @@ cards:
   - type: grid
     columns: 3
     square: false
-    cards:
-      - type: custom:decluttering-card # Bureau Ceiling Light
-        template: color_light_button
-        variables:
-          - entity: light.bureau_main
-          - name: Light
-
-      - type: custom:decluttering-card # Bureau Lights
-        template: color_light_button
-        variables:
-          - entity: light.bureau_lights
-          - name: Light
-          - icon: mdi:desk-lamp
+    cards: !include /config/lovelace-library/cards/lights/card_bureau_all_lights.yaml
 
   - !include /config/lovelace-library/templates/styles/separator_card.yaml
