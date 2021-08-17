@@ -4,6 +4,7 @@ __pycache__/
 .storage/
 tts/
 homebridge/
+custom_components/
 home-assistant.log
 home-assistant_v2.db
 home-assistant_v2.db*
