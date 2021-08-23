@@ -60,6 +60,6 @@
 <udn>uuid:23456789-1234-1010-8000-38184CB7A7A8</udn>
 <name>Bedroom TV+</name>
 <mac>bb:bb:5f:7d:be:88</mac>
-<enabled>1</enabled>
+<enabled>0</enabled>
 </device>
 </airupnp>

@@ -12,6 +12,13 @@ lovelace:
   mode: yaml
   resources: !include /config/lovelace-library/resources.yaml
   dashboards:
+    lovelace-dev:
+      mode: yaml
+      filename: ui-dev.yaml
+      title: "DEV"
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+      require_admin: false
     lovelace-system:
       mode: yaml
       filename: ui-system.yaml

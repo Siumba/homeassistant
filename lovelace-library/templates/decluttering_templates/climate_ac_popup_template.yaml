@@ -1,0 +1,288 @@
+climate_ac_popup:
+  card:
+    type: entities
+    state_color: true
+    show_header_toggle: false
+    style: |
+      ha-card.type-entities {
+        background: none;
+        box-shadow: none;
+        padding: 0.3em 1.25em 0.4em 0.5em;
+        text-transform: capitalize;
+      }
+    entities:
+      - entity: "sensor.[[name]]_current_temp"
+        name: Current temperature
+      # - entity: "sensor.[[name]]_operation_mode"
+      #   name: Operation mode
+      # - entity: "sensor.[[name]]_fan_mode"
+      #   name: Fan mode
+      # - entity: "sensor.[[name]]_swing_mode"
+      #   name: Swing mode
+      #- entity: 'sensor.sensibo_[[name]]_target_temp'
+      #   name: Target temperature
+
+      ############################################################################
+      #                                                                          #
+      #   Target Temperature Set                                                 #
+      #                                                                          #
+      ############################################################################
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 1.4em -0.7em 0.7em 0;
+          }
+          bignumber-card {
+            align-self: center;
+          }
+        cards:
+          - type: custom:decluttering-card # Decrease Target Temperature
+            template: simple_script_button
+            variables:
+              - entity: script.[[name]]_decrease_target_temp
+              - icon: mdi:minus
+
+          - type: custom:bignumber-card
+            style: |
+              ha-card {
+                background: none;
+                box-shadow: none;                          
+                padding-top: 4px;
+                padding-bottom: 4px;
+              }
+            entity: sensor.[[name]]_target_temp
+            scale: 28px
+
+          - type: custom:decluttering-card # Increase Target Temperature
+            template: simple_script_button
+            variables:
+              - entity: script.[[name]]_increase_target_temp
+              - icon: mdi:plus
+
+      ############################################################################
+      #                                                                          #
+      #   Operation Mode                                                         #
+      #                                                                          #
+      ############################################################################
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 1.4em -0.7em 0.7em 0;
+          }
+        cards:
+          - type: custom:decluttering-card # Auto Operation Mode
+            template: simple_button
+            variables:
+              - entity: switch.[[name]]_auto
+              - name: Auto
+              - show_name: true
+              - icon: mdi:cached
+              - height: 68px
+              - state:
+                  - value: "on"
+                    styles:
+                      card:
+                        - background-color: "[[green_color]]"
+                      name:
+                        - color: "[[text_on_color]]"
+                      icon:
+                        - color: "[[icon_on_color]]"
+
+          - type: custom:decluttering-card # Cool Operation Mode
+            template: simple_button
+            variables:
+              - entity: switch.[[name]]_cool
+              - name: Cool
+              - show_name: true
+              - icon: mdi:snowflake
+              - height: 68px
+              - state:
+                  - value: "on"
+                    styles:
+                      card:
+                        - background-color: "[[cool_color]]"
+                      name:
+                        - color: "[[text_on_color]]"
+                      icon:
+                        - color: "[[icon_on_color]]"
+
+          - type: custom:decluttering-card # Heat Operation Mode
+            template: simple_button
+            variables:
+              - entity: switch.[[name]]_heat
+              - name: Heat
+              - show_name: true
+              - icon: mdi:fire
+              - height: 68px
+              - state:
+                  - value: "on"
+                    styles:
+                      card:
+                        - background-color: "[[heat_color]]"
+                      name:
+                        - color: "[[text_on_color]]"
+                      icon:
+                        - color: "[[icon_on_color]]"
+
+          - type: custom:decluttering-card # Off Operation Mode
+            template: simple_button
+            variables:
+              - entity: switch.[[name]]_off
+              - name: "Off"
+              - show_name: true
+              - icon: mdi:power
+              - height: 68px
+              - state:
+                  - value: "on"
+                    styles:
+                      card:
+                        - background-color: "[[grey_color]]"
+                      name:
+                        - color: "[[text_on_color]]"
+                      icon:
+                        - color: "[[icon_on_color]]"
+
+      ############################################################################
+      #                                                                          #
+      #   Fan speed set                                                          #
+      #                                                                          #
+      ############################################################################
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 1.6em -0.7em 0.7em 0;
+          }
+        cards:
+          - type: custom:decluttering-card
+            template: title_button_card
+            variables:
+              - name: Fan
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 0 -0.7em 0.7em 0;
+          }
+        cards:
+          - type: custom:decluttering-card # Low Fan
+            template: bedroom_ac_fan_select_button
+            variables:
+              - entity: sensor.[[name]]_fan_mode
+              - name: Low
+              - fan_mode: "1"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # Med Fan
+            template: bedroom_ac_fan_select_button
+            variables:
+              - entity: sensor.[[name]]_fan_mode
+              - name: Med
+              - fan_mode: "2"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # High Fan
+            template: bedroom_ac_fan_select_button
+            variables:
+              - entity: sensor.[[name]]_fan_mode
+              - name: High
+              - fan_mode: "3"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # Auto Fan
+            template: bedroom_ac_fan_select_button
+            variables:
+              - entity: sensor.[[name]]_fan_mode
+              - name: Turbo
+              - fan_mode: "4"
+              - climate_entity: climate.[[name]]
+
+      ############################################################################
+      #                                                                          #
+      #   Swing mode set                                                         #
+      #                                                                          #
+      ############################################################################
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 1.6em -0.7em 0.7em 0;
+          }
+        cards:
+          - type: custom:decluttering-card
+            template: title_button_card
+            variables:
+              - name: Swing
+
+      - type: custom:hui-element
+        card_type: horizontal-stack
+        style: |
+          #root {
+            justify-content: space-evenly;
+            margin: 0 -0.7em 0.7em 0;
+          }
+        cards:
+          - type: custom:decluttering-card # Down Swing
+            template: bedroom_ac_swing_select_button
+            variables:
+              - entity: sensor.[[name]]_swing_mode
+              - name: Down
+              - show_name: false
+              - icon: mdi:arrow-right
+              - transform_icon: rotate(90deg)
+              - swing_mode: "4"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # Low Swing
+            template: bedroom_ac_swing_select_button
+            variables:
+              - entity: sensor.[[name]]_swing_mode
+              - name: Low
+              - show_name: false
+              - icon: mdi:arrow-right
+              - transform_icon: rotate(65deg)
+              - swing_mode: "3"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # Med Swing
+            template: bedroom_ac_swing_select_button
+            variables:
+              - entity: sensor.[[name]]_swing_mode
+              - name: Med
+              - show_name: false
+              - icon: mdi:arrow-right
+              - transform_icon: rotate(40deg)
+              - swing_mode: "2"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # High Swing
+            template: bedroom_ac_swing_select_button
+            variables:
+              - entity: sensor.[[name]]_swing_mode
+              - name: High
+              - show_name: false
+              - icon: mdi:arrow-right
+              - transform_icon: rotate(15deg)
+              - swing_mode: "1"
+              - climate_entity: climate.[[name]]
+
+          - type: custom:decluttering-card # Swing
+            template: bedroom_ac_swing_select_button
+            variables:
+              - entity: sensor.[[name]]_swing_mode
+              - name: Auto
+              - show_icon: false
+              - swing_mode: "Swing"
+              - climate_entity: climate.[[name]]

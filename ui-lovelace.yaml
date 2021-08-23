@@ -9,8 +9,30 @@ decluttering_templates:
   !include_dir_merge_named /config/lovelace-library/templates/decluttering_templates/
 
 button_card_templates:
-  !include lovelace/button_card_templates/button_card_templates.yaml
-  # !include_dir_merge_named /config/lovelace-library/templates/button_card_templates/
+  #!include /config/lovelace/button_card_templates/button_card_templates.yaml
+  !include_dir_merge_named /config/lovelace-library/templates/button_card_templates/
 
 background: var(--background-image)
-views: !include_dir_merge_list lovelace/views/
+views:
+  # Mainddddd
+  - !include /config/lovelace-library/tabs/view_main.yaml
+  # # Lights
+  # - !include /config/lovelace-library/tabs/view_lights.yaml
+  # # Climate
+  # - !include /config/lovelace-library/tabs/view_climate.yaml
+  # Living Room
+  - !include /config/lovelace-library/tabs/view_living_room.yaml
+  # Kitchen
+  - !include /config/lovelace-library/tabs/view_kitchen.yaml
+  # Bureau
+  - !include /config/lovelace-library/tabs/view_bureau.yaml
+  # Bedroom
+  - !include /config/lovelace-library/tabs/view_bedroom.yaml
+  # Guest Room
+  - !include /config/lovelace-library/tabs/view_guest_room.yaml
+  # Hallway
+  - !include /config/lovelace-library/tabs/view_hallway.yaml
+  # Garden
+  - !include /config/lovelace-library/tabs/view_outside.yaml
+  # Energy
+  - !include /config/lovelace-library/tabs/view_energy.yaml
