@@ -1,16 +1,20 @@
 title: Bureau
 icon: mdi:desk
 path: bureau
-visible: true
+visible: false
 panel: true
 
 cards:
   - type: vertical-stack
     cards:
-      - type: custom:decluttering-card
-        template: view_title
-        variables:
-          - title: Bureau
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: back_button_rooms
+          - type: custom:decluttering-card
+            template: view_title
+            variables:
+              - title: Bureau
 
       - type: horizontal-stack
         cards:
@@ -22,6 +26,7 @@ cards:
             cards:
               - !include /config/lovelace-library/cards/accessories/card_bureau_climate.yaml
               - !include /config/lovelace-library/cards/accessories/card_bureau_lights.yaml
+              - !include /config/lovelace-library/cards/accessories/card_bureau_windows.yaml
 
           - type: custom:button-card
             template: shoulder_blank_card

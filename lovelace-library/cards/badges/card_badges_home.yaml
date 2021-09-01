@@ -20,7 +20,12 @@ cards:
         variables:
           - name: Lights
 
-      # - type: custom:decluttering-card # Motion
+      - type: custom:decluttering-card # Shutters
+        template: badge_shutters_button
+        variables:
+          - name: Shutters
+
+          # - type: custom:decluttering-card # Motion
       #   template: badge_motion_button
       #   variables:
       #     - name: Motion

@@ -4,6 +4,8 @@
 #   type: module
 # - url: /hacsfiles/lovelace-gap-card/gap-card.js
 #   type: module
+- url: /hacsfiles/cover-popup-card/cover-popup-card.js
+  type: module
 - url: /hacsfiles/lovelace-fold-entity-row/fold-entity-row.js
   type: module
 - url: /hacsfiles/circle-sensor-card/circle-sensor-card.js

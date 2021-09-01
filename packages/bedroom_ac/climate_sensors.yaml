@@ -49,3 +49,21 @@ sensor:
         icon_template: mdi:hvac
         value_template: >-
           {{ state_attr('climate.bedroom_ac', 'swing_mode') }}
+      
+      bedroom_ac_target_temp_reached:
+        friendly_name: "Bedroom AC Set Temperate Reached"
+        icon_template: mdi:hvac
+        value_template: >-
+          {% if state_attr('climate.bedroom_ac', 'current_temperature') < state_attr('climate.bedroom_ac', 'temperature') %}
+            Auto
+          {% elif is_state('climate.bedroom_ac', 'cool') %}
+            Cool
+          {% elif is_state('climate.bedroom_ac', 'dry') %}
+            Dry
+          {% elif is_state('climate.bedroom_ac', 'fan_only') %}
+            Fan Only
+          {% elif is_state('climate.bedroom_ac', 'heat') %}
+            Heat
+          {% else %}
+            Off
+          {% endif %}

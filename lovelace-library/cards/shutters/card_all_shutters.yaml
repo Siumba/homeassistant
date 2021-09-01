@@ -1,0 +1,44 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Title Shutters                                                         #
+  #                                                                          #
+  ############################################################################
+
+  - type: horizontal-stack
+    cards:
+      - type: custom:decluttering-card
+        template: title_button_card
+        variables:
+          - name: Shutters
+
+  ############################################################################
+  #                                                                          #
+  #   Shutters Buttons                                                       #
+  #                                                                          #
+  ############################################################################
+
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+      - type: custom:decluttering-card # Bedroom Shutter
+        template: shutter_button
+        variables:
+          - name: Bedroom
+          - entity: cover.bedroom_shutter
+
+      - type: custom:decluttering-card # Bedroom Blind
+        template: blind_button
+        variables:
+          - name: Bedroom Blind
+          - entity: cover.bedroom_blind
+
+      - type: custom:decluttering-card # Bureau Shutter
+        template: shutter_button
+        variables:
+          - name: Bureau
+          - entity: cover.bureau_shutter
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

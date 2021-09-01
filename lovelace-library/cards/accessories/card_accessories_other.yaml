@@ -1,0 +1,22 @@
+type: vertical-stack
+cards:
+  ############################################################################
+  #                                                                          #
+  #   Accessories                                                            #
+  #                                                                          #
+  ############################################################################
+  - type: weather-forecast
+    entity: weather.openweathermap
+    show_forecast: true
+  - type: "custom:auto-entities"
+    card:
+      type: glance
+    filter:
+      include:
+        - entity_id: sensor.afvalwijzer_gft
+        - entity_id: sensor.afvalwijzer_papier
+        - entity_id: sensor.afvalwijzer_restafval
+    sort:
+      attribute: days_until_collection_date
+      method: attribute
+      numeric: true

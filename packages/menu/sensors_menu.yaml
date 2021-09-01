@@ -89,16 +89,50 @@ sensor:
 
       ############################################################################
       #                                                                          #
-      #   Only Climate On                                                        #
+      #   Only Climate AC                                                        #
       #                                                                          #
       ############################################################################
 
       only_climate_ac_on:
-        friendly_name: "Only Climate On"
+        friendly_name: "Only Climate AC On"
         icon_template: mdi:thermometer
         value_template: >-
           {% for entity_id in state_attr('group.all_climate_ac_entities','entity_id') %}
             {% if (states(entity_id) == 'on' or states(entity_id) == 'heat' or states(entity_id) == 'cool') %}
+              {{ states[entity_id].attributes.friendly_name }}
+            {% endif %}
+          {% endfor %}
+
+      ############################################################################
+      #                                                                          #
+      #   Number of Shutters Open                                                #
+      #                                                                          #
+      ############################################################################
+
+      number_of_shutters_open:
+        friendly_name: "Number of shutters open"
+        icon_template: mdi:window-shutter
+        value_template: >-
+          {% set count = namespace(value=0) %}
+          {% for entity_id in state_attr('group.all_shutter_entities','entity_id') %}
+            {% if (states(entity_id) == 'open') %}
+              {% set count.value = count.value + 1 %}
+            {% endif %}
+          {% endfor %}
+          {{ count.value }}
+
+      ############################################################################
+      #                                                                          #
+      #   Only Shutter Open                                                      #
+      #                                                                          #
+      ############################################################################
+
+      only_shutter_open:
+        friendly_name: "Only Light On"
+        icon_template: mdi:lightbulb
+        value_template: >-
+          {% for entity_id in state_attr('group.all_shutter_entities','entity_id') %}
+            {% if (states(entity_id) == 'open') %}
               {{ states[entity_id].attributes.friendly_name }}
             {% endif %}
           {% endfor %}

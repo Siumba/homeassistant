@@ -43,8 +43,21 @@ group:
       - light.bureau_main
       - light.bureau_lights
       - light.bedroom_main
-      - light.bedroom_sidelights
+      - light.fabians_lamp
+      - light.aimees_lamp
       - light.guest_room_main
+
+  ############################################################################
+  #                                                                          #
+  #   All Shutter Entities                                                   #
+  #                                                                          #
+  ############################################################################
+
+  all_shutter_entities:
+    name: All Shutter Entities
+    entities:
+      - cover.bedroom_shutter
+      - cover.bureau_shutter
 
   ############################################################################
   #                                                                          #

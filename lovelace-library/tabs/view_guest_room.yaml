@@ -1,16 +1,20 @@
 title: Guest Room
 icon: mdi:bed
 path: guest-room
-visible: true
+visible: false
 panel: true
 
 cards:
   - type: vertical-stack
     cards:
-      - type: custom:decluttering-card
-        template: view_title
-        variables:
-          - title: Guest Room
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: back_button_rooms
+          - type: custom:decluttering-card
+            template: view_title
+            variables:
+              - title: Guest Room
 
       - type: horizontal-stack
         cards:

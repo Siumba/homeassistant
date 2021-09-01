@@ -23,9 +23,16 @@ cards:
     columns: 3
     square: false
     cards:
-      - type: custom:decluttering-card # Bedroom Cover
-        template: cover_button
+      - type: custom:decluttering-card # Bedroom Shutter
+        template: shutter_button
         variables:
           - name: Shutter
           - entity: cover.bedroom_shutter
+
+      - type: custom:decluttering-card # Bedroom Blind
+        template: blind_button
+        variables:
+          - name: Blind
+          - entity: cover.bedroom_blind
+
   - !include /config/lovelace-library/templates/styles/separator_card.yaml

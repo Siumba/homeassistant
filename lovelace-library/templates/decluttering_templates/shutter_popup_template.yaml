@@ -1,0 +1,52 @@
+shutter_popup:
+  default:
+    - icon: mdi:window-shutter
+    - slider_height: 410px
+    - display_type: "auto"
+    - sliderService: cover.set_cover_position
+    - settings: false
+    # - sliderColor: "#ddd"
+    # - sliderTrackColor: "#FFF"
+    # - sliderThumbColor: "#ddd"
+    # - sliderThumbBorderColor: "#FFF"
+    # - sliderTrackStripeColor: "#ddd"
+
+  card:
+    type: custom:cover-popup-card
+    entity: "[[entity]]"
+    sliderService: "[[sliderService]]"
+    # sliderColor: "[[sliderColor]]"
+    # sliderTrackColor: "[[sliderTrackColor]]"
+    # sliderThumbColor: "[[sliderThumbColor]]"
+    # sliderThumbBorderColor: "[[sliderThumbBorderColor]]"
+    # sliderTrackStripeColor: "[[sliderTrackStripeColor]]"
+    icon: "[[icon]]"
+    sliderWidth: 110px
+    sliderHeight: "[[slider_height]]"
+    fullscreen: false
+    settings: "[[settings]]"
+    settingsPosition: bottom
+    actionsInARow: 3
+    actionSize: 30px
+    actions:
+      - service: cover.open_cover
+        service_data:
+          entity_id: "[[entity]]"
+        name: Open
+        icon: mdi:arrow-up
+      - service: cover.stop_cover
+        service_data:
+          entity_id: "[[entity]]"
+        name: Stop
+        icon: mdi:pause
+      - service: cover.close_cover
+        service_data:
+          entity_id: "[[entity]]"
+        name: Close
+        icon: mdi:arrow-down
+      - service: cover.set_cover_position
+        service_data:
+          entity_id: "[[entity]]"
+          position: 20
+        name: Ventilation
+        icon: mdi:window-open

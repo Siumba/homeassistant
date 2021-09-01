@@ -1,0 +1,31 @@
+type: vertical-stack
+cards:
+  - type: grid
+    columns: 2
+    square: false
+    cards:
+      - type: custom:button-card # Bedroom Light
+        template: room_card
+        variables:
+          - view_path: hallway
+          - title: "Hallway"
+
+      - type: custom:decluttering-card # Bedroom Fabians Lamp
+        template: color_light_button
+        variables:
+          - entity: light.fabians_lamp
+          - name: Fabian
+          - icon: mdi:lamp
+          - svg_path: "M8,2H16L20,14H4L8,2M11,15H13V20H18V22H6V20H11V15Z"
+          - svg_path_on: "m 8,2 h 8 l 4,12 H 4 L 8,2"
+
+      - type: custom:decluttering-card # Bedroom Aimees Lamp
+        template: color_light_button
+        variables:
+          - entity: light.aimees_lamp
+          - name: Aimee
+          - icon: mdi:lamp
+          - svg_path: "M8,2H16L20,14H4L8,2M11,15H13V20H18V22H6V20H11V15Z"
+          - svg_path_on: "m 8,2 h 8 l 4,12 H 4 L 8,2"
+
+  - !include /config/lovelace-library/templates/styles/separator_card.yaml

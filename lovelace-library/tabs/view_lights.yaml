@@ -1,16 +1,20 @@
 title: Lights
 icon: mdi:lightbulb-group
 path: lights
-visible: true
+visible: false
 panel: true
 
 cards:
   - type: vertical-stack
     cards:
-      - type: custom:decluttering-card
-        template: view_title
-        variables:
-          - title: Lights
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: back_button
+          - type: custom:decluttering-card
+            template: view_title
+            variables:
+              - title: Lights
 
       - type: horizontal-stack
         cards:

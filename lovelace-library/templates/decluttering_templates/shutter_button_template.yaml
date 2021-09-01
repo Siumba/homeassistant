@@ -1,0 +1,89 @@
+shutter_button:
+  default:
+    - icon: mdi:window-shutter
+    - cust_1_field: "[[[
+        if (entity.state == 'open' && entity.attributes.current_position < 100)
+        return entity.attributes.current_position + '%';
+        else if (entity.state == 'open' && entity.attributes.current_position == 100)
+        return 'Open';
+        else
+        return 'Closed';  ]]]"
+    # - color: auto-no-temperature
+    # - svg_path: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8 15H16V17H8V15M8 18H16V20H8V18Z"
+    # # - svg_fill_on: var(--dmatik-light-blue-color)
+    # - svg_fill_on: var(--button-card-light-color-no-temperature)
+    # - svg_path_on: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9Z"
+    - color: auto-no-temperature
+    - svg_path: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9M8 12H16V14H8V12M8 15H16V17H8V15M8 18H16V20H8V18Z"
+    - svg_fill_on: var(--dmatik-light-blue-color)
+    - svg_path_on: "M3 4H21V8H19V20H17V8H7V20H5V8H3V4M8 9H16V11H8V9Z"
+    - cust_1_text_color: var(--button-card-cust-1-on-text-color)
+
+  card:
+    type: custom:decluttering-card
+    template: button_two_rows_svg
+    variables:
+      - entity: "[[entity]]"
+      - name: "[[name]]"
+      - icon: "[[icon]]"
+      - svg_fill: "[[svg_fill]]"
+      - svg_path: "[[svg_path]]"
+      - svg_fill_on: "[[svg_fill_on]]"
+      - svg_path_on: "[[svg_path_on]]"
+      - color: "[[color]]"
+      - color_type: "[[color_type]]"
+      - corner_text_color: ""
+      - corner_icon_color: ""
+      - cust_1_text_color: "[[cust_1_text_color]]"
+      - cust_1_icon_color: "[[cust_1_icon_color]]"
+      - cust_2_text_color: "[[cust_2_text_color]]"
+      - cust_2_icon_color: "[[cust_2_icon_color]]"
+      - corner_field: ""
+      - cust_1_field: "[[cust_1_field]]"
+      - cust_2_field: "[[cust_2_field]]"
+      - state: "[[state]]"
+      - tap_action:
+          haptic: heavy
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            hide_header: false
+            title: "[[name]]"
+
+            card:
+              type: custom:decluttering-card
+              template: shutter_popup
+              variables:
+                - entity: "[[entity]]"
+                - icon: "[[icon]]"
+                - display_type: "slider"
+      - hold_action:
+          haptic: heavy
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            hide_header: false
+            title: "[[name]]"
+
+            card:
+              type: custom:decluttering-card
+              template: shutter_popup
+              variables:
+                - entity: "[[entity]]"
+                - icon: "[[icon]]"
+                - display_type: "slider"
+      - double_tap_action:
+          haptic: heavy
+          action: fire-dom-event
+          browser_mod:
+            command: popup
+            hide_header: false
+            title: "[[name]]"
+
+            card:
+              type: custom:decluttering-card
+              template: shutter_popup
+              variables:
+                - entity: "[[entity]]"
+                - icon: "[[icon]]"
+                - display_type: "slider"

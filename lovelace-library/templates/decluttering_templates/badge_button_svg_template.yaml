@@ -125,11 +125,21 @@ badge_button_svg:
           - word-break: break-word
 
     custom_fields:
+      # svg_icon: "[[[
+      #   if ( '[[entity]]' == '' || entity.state == '0' )
+      #   return `<svg viewBox='0 0 24 24'>
+      #   <path fill='[[svg_fill]]' d='[[svg_path]]'/>
+      #   <path fill='[[svg_fill_off]]' d='[[svg_path_on]]'/> </svg>`;
+      #   else
+      #   return `<svg viewBox='0 0 24 24'>
+      #   <path fill='[[svg_fill]]' d='[[svg_path]]'/>
+      #   <path fill='[[svg_fill_on]]' d='[[svg_path_on]]'/> </svg>`;
+      #   ]]]"
       svg_icon: "[[[
         if ( '[[entity]]' == '' || entity.state == '0' )
         return `<svg viewBox='0 0 24 24'>
         <path fill='[[svg_fill]]' d='[[svg_path]]'/>
-        <path fill='[[svg_fill_off]]' d='[[svg_path_on]]'/> </svg>`;
+        <path fill='[[svg_fill_off]]' d='[[svg_path]]'/> </svg>`;
         else
         return `<svg viewBox='0 0 24 24'>
         <path fill='[[svg_fill]]' d='[[svg_path]]'/>

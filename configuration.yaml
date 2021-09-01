@@ -8,6 +8,8 @@ homeassistant:
 
   packages: !include_dir_named packages
   customize: !include customize.yaml
+  name: iHouse
   time_zone: Europe/Amsterdam
-
-debugpy:
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 20

@@ -29,6 +29,7 @@ cards:
               #- !include /config/lovelace/cards/menu/card_menu_buttons.yaml
 
               - !include /config/lovelace-library/cards/accessories/card_accessories_home.yaml
+              - !include /config/lovelace-library/cards/accessories/card_accessories_other.yaml
 
               # - !include /config/lovelace-library/templates/styles/view_bottom_gap.yaml
 

@@ -1,16 +1,20 @@
 title: Hallway
-icon: mdi:exit-to-app
+icon: mdi:key-variant
 path: hallway
-visible: true
+visible: false
 panel: true
 
 cards:
   - type: vertical-stack
     cards:
-      - type: custom:decluttering-card
-        template: view_title
-        variables:
-          - title: Hallway
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: back_button_rooms
+          - type: custom:decluttering-card
+            template: view_title
+            variables:
+              - title: Hallway
 
       - type: horizontal-stack
         cards:

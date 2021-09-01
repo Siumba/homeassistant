@@ -2016,3 +2016,61 @@ icon_home:
           </svg>
         `;
       ]]]
+
+back_button:
+  show_icon: true
+  icon: "mdi:arrow-left"
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/main
+  show_name: false
+  show_state: false
+  show_label: true
+  size: 80%
+  styles:
+    img_cell:
+      - width: 24px
+    card:
+      - border-radius: 18px
+      - box-shadow: var(--box-shadow)
+      - height: 36px
+      - width: auto
+      - padding-left: 6px
+      - padding-right: 6px
+      - margin: 10px 0 0 10px
+    grid:
+      - grid-template-areas: '"i"'
+    label:
+      - justify-self: center
+      - padding: 0px 6px
+      - font-weight: bold
+      - font-size: 14px
+
+back_button_rooms:
+  show_icon: true
+  icon: "mdi:arrow-left"
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/rooms
+  show_name: false
+  show_state: false
+  show_label: true
+  size: 80%
+  styles:
+    img_cell:
+      - width: 24px
+    card:
+      - border-radius: 18px
+      - box-shadow: var(--box-shadow)
+      - height: 36px
+      - width: auto
+      - padding-left: 6px
+      - padding-right: 6px
+      - margin: 10px 0 0 10px
+    grid:
+      - grid-template-areas: '"i"'
+    label:
+      - justify-self: center
+      - padding: 0px 6px
+      - font-weight: bold
+      - font-size: 14px

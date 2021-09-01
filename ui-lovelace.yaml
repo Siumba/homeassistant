@@ -4,22 +4,29 @@ title: Home
 #   !include /config/lovelace/custom_header.yaml
 
 # Button card templates
-decluttering_templates:
-  #!include /config/lovelace/decluttering_templates/decluttering_templates.yaml
-  !include_dir_merge_named /config/lovelace-library/templates/decluttering_templates/
+decluttering_templates: !include_dir_merge_named /config/lovelace-library/templates/decluttering_templates/
 
-button_card_templates:
-  #!include /config/lovelace/button_card_templates/button_card_templates.yaml
-  !include_dir_merge_named /config/lovelace-library/templates/button_card_templates/
+button_card_templates: !include_dir_merge_named /config/lovelace-library/templates/button_card_templates/
 
 background: var(--background-image)
 views:
-  # Mainddddddddddddddd
+  ### VISIBLE VIEWS
+  # Maindssffsdfdsdfsdsfdfsdsfkl
   - !include /config/lovelace-library/tabs/view_main.yaml
-  # # Lights
-  # - !include /config/lovelace-library/tabs/view_lights.yaml
-  # # Climate
-  # - !include /config/lovelace-library/tabs/view_climate.yaml
+  # Rooms
+  - !include /config/lovelace-library/tabs/view_rooms.yaml
+  # Energy
+  - !include /config/lovelace-library/tabs/view_energy.yaml
+
+  ### NOT VISIBLE, ONLY NAVIGATION - DEVICES
+  # Climate
+  - !include /config/lovelace-library/tabs/view_climate.yaml
+  # Shutters
+  - !include /config/lovelace-library/tabs/view_shutters.yaml
+  # Lights
+  - !include /config/lovelace-library/tabs/view_lights.yaml
+
+  ### NOT VISIBLE, ONLY NAVIGATION - ROOMS
   # Living Room
   - !include /config/lovelace-library/tabs/view_living_room.yaml
   # Kitchen
@@ -34,5 +41,3 @@ views:
   - !include /config/lovelace-library/tabs/view_hallway.yaml
   # Garden
   - !include /config/lovelace-library/tabs/view_outside.yaml
-  # Energy
-  - !include /config/lovelace-library/tabs/view_energy.yaml

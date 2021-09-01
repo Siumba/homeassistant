@@ -109,7 +109,7 @@
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 48
+      brightness: 51
       entity_id:
       - light.diner_lamp_1
       - light.diner_lamp_2
@@ -130,15 +130,15 @@
       color_mode: hs
       brightness: 102
       hs_color:
-      - 38
-      - 82.353
+      - 37.321
+      - 81.961
       rgb_color:
       - 255
-      - 177
-      - 44
+      - 176
+      - 45
       xy_color:
-      - 0.537
-      - 0.422
+      - 0.538
+      - 0.42
       effect: none
       friendly_name: Torch Lamp
       supported_features: 63
@@ -155,7 +155,7 @@
       supported_color_modes:
       - brightness
       color_mode: brightness
-      brightness: 22
+      brightness: 64
       friendly_name: Tripod Lamp
       supported_features: 41
       state: 'on'
@@ -171,15 +171,15 @@
       color_mode: hs
       brightness: 63
       hs_color:
-      - 29.691
-      - 76.078
+      - 29.684
+      - 74.51
       rgb_color:
       - 255
-      - 157
-      - 61
+      - 158
+      - 64
       xy_color:
-      - 0.554
-      - 0.392
+      - 0.551
+      - 0.391
       effect: none
       friendly_name: Bloom TV
       supported_features: 63
