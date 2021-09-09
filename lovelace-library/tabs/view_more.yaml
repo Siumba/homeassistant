@@ -1,0 +1,66 @@
+title: More
+icon: mdi:menu
+path: more
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: More
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+          - type: custom:layout-card
+            layout_type: custom:vertical-layout
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: grid
+                    columns: 1
+                    square: false
+                    cards:
+                      - type: custom:atomic-calendar-revive
+                        entities:
+                          - entity: calendar.unknown
+                      - type: "custom:auto-entities"
+                        card:
+                          type: glance
+                        filter:
+                          include:
+                            - entity_id: sensor.afvalwijzer_gft
+                            - entity_id: sensor.afvalwijzer_papier
+                            - entity_id: sensor.afvalwijzer_restafval
+                        sort:
+                          attribute: days_until_collection_date
+                          method: attribute
+                          numeric: true
+                      - type: custom:decluttering-card # Bathroom
+                        template: simple_room_button
+                        variables:
+                          - name: Rooms
+                          - icon: mdi:view-grid
+                          - view_path: rooms
+                      - type: custom:decluttering-card # Bathroom
+                        template: simple_room_button
+                        variables:
+                          - name: Energy
+                          - icon: mdi:flash
+                          - view_path: energy
+                      - type: custom:decluttering-card # Bathroom
+                        template: simple_room_button
+                        variables:
+                          - name: Batteries
+                          - icon: mdi:battery
+                          - view_path: batteries
+
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+      - type: custom:decluttering-card # Bottom space
+        template: blank_card

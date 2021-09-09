@@ -1,0 +1,5 @@
+calendar:
+  - platform: caldav
+    username: !secret icloud_email
+    password: !secret icloud_calendar_pass
+    url: https://caldav.icloud.com

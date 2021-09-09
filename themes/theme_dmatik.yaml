@@ -358,6 +358,6 @@ dmatik:
           paper-tab {
                 padding-left: 0px;
                 padding-right: 0px;
-                width: calc(100% / 3);
+                width: calc(100% / 5);
                 color: var(--header-all-tabs-color) !important;
           }

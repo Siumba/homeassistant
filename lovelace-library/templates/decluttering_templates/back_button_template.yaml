@@ -1,8 +1,6 @@
 back_button:
   default:
-    tap_action:
-      action: navigate
-      navigation_path: /lovelace/main
+    view_path: "main"
 
   card:
     type: custom:button-card

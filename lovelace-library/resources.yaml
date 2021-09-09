@@ -36,8 +36,12 @@
   type: module
 # - url: /hacsfiles/Homekit-panel-card/homekit-panel-card.js
 #   type: module
-# - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-#   type: module
+- url: /hacsfiles/atomic-calendar-revive/atomic-calendar-revive.js
+  type: module
+- url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+  type: module
+- url: /hacsfiles/battery-state-card/battery-state-card.js
+  type: module
 - url: /hacsfiles/lovelace-layout-card/layout-card.js
   type: module
 - url: /browser_mod.js

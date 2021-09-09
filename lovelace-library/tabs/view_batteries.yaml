@@ -1,6 +1,6 @@
-title: Hallway
-icon: mdi:key-variant
-path: hallway
+title: Batteries
+icon: mdi:battery
+path: batteries
 visible: false
 panel: true
 
@@ -10,11 +10,11 @@ cards:
       - type: horizontal-stack
         cards:
           - type: custom:button-card
-            template: back_button_rooms
+            template: back_button_more
           - type: custom:decluttering-card
             template: view_title
             variables:
-              - title: Hallway
+              - title: Batteries
 
       - type: horizontal-stack
         cards:
@@ -23,7 +23,17 @@ cards:
           - type: custom:layout-card
             layout_type: custom:vertical-layout
             cards:
-              - !include /config/lovelace-library/cards/accessories/card_hallway_lights.yaml
+              - type: vertical-stack
+                cards:
+                  - type: grid
+                    columns: 1
+                    square: false
+                    cards:
+                      - type: custom:battery-state-card
+                        entities:
+                          - entity: sensor.fyrtur_block_out_roller_blind_battery_level
+                            name: "Bedroom Blind"
+
           - type: custom:button-card
             template: shoulder_blank_card
 

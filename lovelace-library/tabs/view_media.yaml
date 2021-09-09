@@ -1,0 +1,67 @@
+title: Media
+icon: mdi:spotify
+path: media
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:decluttering-card
+        template: view_title
+        variables:
+          - title: Media
+
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            template: shoulder_blank_card
+          - type: custom:layout-card
+            layout_type: custom:vertical-layout
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: grid
+                    columns: 1
+                    square: false
+                    cards:
+                      - entity: media_player.garden
+                        type: custom:mini-media-player
+                        artwork: cover
+                        source: icon
+                        # hide:
+                        #   volume: false
+                        shortcuts:
+                          columns: 4 # Max buttons per row
+                          buttons:
+                            # Start predefined playlist
+                            - name: Soweto Radio
+                              type: playlist
+                              id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZF1E8HIbEsv1g8XX # Where XXXXXXX is your User ID
+                            - name: Discovery Weekly
+                              type: playlist
+                              id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZEVXcMwuIW27p3a2 # Where XXXXXXX is your User ID
+                            - name: Hot Hits NL
+                              type: playlist
+                              id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZF1DWSBi5svWQ9Nk # Where XXXXXXX is your User ID
+                            # Change the source to bathroom=
+                            # - icon: mdi:dog
+                            #   type: source
+                            #   id: Bathroom
+                            # # Trigger script
+                            # - icon: mdi:dog
+                            #   type: script
+                            #   id: script.script_name
+                            # # Trigger custom service
+                            # - name: Crooners Playlist
+                            #   type: service
+                            #   id: spotcast.start
+                            #   data:
+                            #     entity_id: media_player.googlehome1234
+                            #     uri: spotify:playlist:37i9dQZF1DX9XiAcF7t1s5
+
+          - type: custom:button-card
+            template: shoulder_blank_card
+
+      - type: custom:decluttering-card # Bottom space
+        template: blank_card

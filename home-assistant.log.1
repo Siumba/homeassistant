@@ -1,19 +1,21 @@
-2021-09-01 22:22:35 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration unifiprotect which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:35 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration lovelace_gen which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:35 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:35 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration browser_mod which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:35 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration fasthue which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:35 WARNING (SyncWorker_3) [homeassistant.loader] We found a custom integration afvalwijzer which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
-2021-09-01 22:22:41 WARNING (SyncWorker_6) [pyhomematic._hm] Skipping init for homeassistant-ccu2
-2021-09-01 22:22:44 ERROR (MainThread) [homeassistant.helpers.event] Error while processing template: Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_device_switch_entities','entity_id') %}
+2021-09-09 15:45:11 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration lovelace_gen which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:11 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration unifiprotect which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:11 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration fasthue which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:11 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration browser_mod which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:11 WARNING (SyncWorker_2) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:11 WARNING (SyncWorker_3) [homeassistant.loader] We found a custom integration afvalwijzer which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-09-09 15:45:16 WARNING (MainThread) [homeassistant.components.sensor] Entity sensor.daily_energy_meter (<class 'homeassistant.components.utility_meter.sensor.UtilityMeterSensor'>) with state_class measurement has set last_reset. Setting last_reset is deprecated and will be unsupported from Home Assistant Core 2021.11. Please update your configuration if state_class is manually configured, otherwise create a bug report at https://github.com/home-assistant/core/issues?q=is%3Aopen+is%3Aissue+label%3A%22integration%3A+utility_meter%22
+2021-09-09 15:45:16 WARNING (MainThread) [homeassistant.components.sensor] Entity sensor.monthly_energy_meter (<class 'homeassistant.components.utility_meter.sensor.UtilityMeterSensor'>) with state_class measurement has set last_reset. Setting last_reset is deprecated and will be unsupported from Home Assistant Core 2021.11. Please update your configuration if state_class is manually configured, otherwise create a bug report at https://github.com/home-assistant/core/issues?q=is%3Aopen+is%3Aissue+label%3A%22integration%3A+utility_meter%22
+2021-09-09 15:45:17 WARNING (SyncWorker_0) [pyhomematic._hm] Skipping init for homeassistant-ccu2
+2021-09-09 15:45:19 ERROR (MainThread) [homeassistant.helpers.event] Error while processing template: Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_device_switch_entities','entity_id') %}
   {% if (states(entity_id) == 'on') %}
     {% set count.value = count.value + 1 %}
   {% endif %}
 {% endfor %} {{ count.value }}")
 Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 393, in async_render
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 394, in async_render
     render_result = _render_with_context(self.template, compiled, **kwargs)
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1398, in _render_with_context
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1477, in _render_with_context
     return template.render(**kwargs)
   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1304, in render
     self.environment.handle_exception()
@@ -25,25 +27,25 @@ TypeError: 'NoneType' object is not iterable
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 509, in async_render_to_info
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 510, in async_render_to_info
     render_info._result = self.async_render(variables, strict=strict, **kwargs)
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 395, in async_render
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 396, in async_render
     raise TemplateError(err) from err
 homeassistant.exceptions.TemplateError: TypeError: 'NoneType' object is not iterable
-2021-09-01 22:22:44 ERROR (MainThread) [homeassistant.components.template.template_entity] TemplateError('TypeError: 'NoneType' object is not iterable') while processing template 'Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_device_switch_entities','entity_id') %}
+2021-09-09 15:45:19 ERROR (MainThread) [homeassistant.components.template.template_entity] TemplateError('TypeError: 'NoneType' object is not iterable') while processing template 'Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_device_switch_entities','entity_id') %}
   {% if (states(entity_id) == 'on') %}
     {% set count.value = count.value + 1 %}
   {% endif %}
-{% endfor %} {{ count.value }}")' for attribute '_attr_state' in entity 'sensor.number_of_devices_on'
-2021-09-01 22:22:44 ERROR (MainThread) [homeassistant.helpers.event] Error while processing template: Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_computer_switch_entities','entity_id') %}
+{% endfor %} {{ count.value }}")' for attribute '_attr_native_value' in entity 'sensor.number_of_devices_on'
+2021-09-09 15:45:19 ERROR (MainThread) [homeassistant.helpers.event] Error while processing template: Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_computer_switch_entities','entity_id') %}
   {% if (states(entity_id) == 'on') %}
     {% set count.value = count.value + 1 %}
   {% endif %}
 {% endfor %} {{ count.value }}")
 Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 393, in async_render
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 394, in async_render
     render_result = _render_with_context(self.template, compiled, **kwargs)
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1398, in _render_with_context
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 1477, in _render_with_context
     return template.render(**kwargs)
   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1304, in render
     self.environment.handle_exception()
@@ -55,40 +57,18 @@ TypeError: 'NoneType' object is not iterable
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 509, in async_render_to_info
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 510, in async_render_to_info
     render_info._result = self.async_render(variables, strict=strict, **kwargs)
-  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 395, in async_render
+  File "/usr/src/homeassistant/homeassistant/helpers/template.py", line 396, in async_render
     raise TemplateError(err) from err
 homeassistant.exceptions.TemplateError: TypeError: 'NoneType' object is not iterable
-2021-09-01 22:22:44 ERROR (MainThread) [homeassistant.components.template.template_entity] TemplateError('TypeError: 'NoneType' object is not iterable') while processing template 'Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_computer_switch_entities','entity_id') %}
+2021-09-09 15:45:19 ERROR (MainThread) [homeassistant.components.template.template_entity] TemplateError('TypeError: 'NoneType' object is not iterable') while processing template 'Template("{% set count = namespace(value=0) %} {% for entity_id in state_attr('group.all_computer_switch_entities','entity_id') %}
   {% if (states(entity_id) == 'on') %}
     {% set count.value = count.value + 1 %}
   {% endif %}
-{% endfor %} {{ count.value }}")' for attribute '_attr_state' in entity 'sensor.number_of_computers_on'
-2021-09-01 22:22:44 WARNING (MainThread) [homeassistant.components.homekit] The bridge Home Assistant Bridge has entity camera.front_door. For best performance, and to prevent unexpected unavailability, create and pair a separate HomeKit instance in accessory mode for this entity
-2021-09-01 22:22:44 WARNING (MainThread) [homeassistant.components.homekit] The bridge Home Assistant Bridge has entity media_player.lg_webos_smart_tv. For best performance, and to prevent unexpected unavailability, create and pair a separate HomeKit instance in accessory mode for this entity
-2021-09-01 22:23:40 WARNING (MainThread) [slixmpp.stringprep] Using slower stringprep, consider compiling the faster cython/libidn one.
-2021-09-01 22:23:42 WARNING (MainThread) [slixmpp.basexmpp] Legacy XMPP 0.9 protocol detected.
-2021-09-01 22:29:21 ERROR (MainThread) [homeassistant] Error doing job: Future exception was never retrieved
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.9/concurrent/futures/thread.py", line 52, in run
-    result = self.fn(*self.args, **self.kwargs)
-TypeError: close() takes 1 positional argument but 2 were given
-2021-09-01 22:29:22 ERROR (MainThread) [homeassistant.components.hassio.handler] Client error on /core/update request Server disconnected
-2021-09-01 22:29:22 ERROR (MainThread) [homeassistant.components.hassio] Failed to to call /core/update - 
-2021-09-01 22:29:22 ERROR (MainThread) [homeassistant.core] Unable to remove unknown job listener (<Job HassJobType.Callback <function EventBus.async_listen_once.<locals>._onetime_listener at 0x7fd0d4d8fa60>>, None)
-Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/components/dsmr/sensor.py", line 146, in connect_and_reconnect
-    await protocol.wait_closed()
-  File "/usr/local/lib/python3.9/site-packages/dsmr_parser/clients/protocol.py", line 141, in wait_closed
-    await self._closed.wait()
-  File "/usr/local/lib/python3.9/asyncio/locks.py", line 226, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/usr/src/homeassistant/homeassistant/core.py", line 848, in _async_remove_listener
-    self._listeners[event_type].remove(filterable_job)
-KeyError: 'homeassistant_stop'
+{% endfor %} {{ count.value }}")' for attribute '_attr_native_value' in entity 'sensor.number_of_computers_on'
+2021-09-09 15:45:19 WARNING (MainThread) [homeassistant.components.homekit] The bridge Home Assistant Bridge has entity camera.front_door. For best performance, and to prevent unexpected unavailability, create and pair a separate HomeKit instance in accessory mode for this entity
+2021-09-09 15:45:19 WARNING (MainThread) [homeassistant.components.homekit] The bridge Home Assistant Bridge has entity media_player.lg_webos_smart_tv. For best performance, and to prevent unexpected unavailability, create and pair a separate HomeKit instance in accessory mode for this entity
+2021-09-09 15:45:20 WARNING (MainThread) [slixmpp.stringprep] Using slower stringprep, consider compiling the faster cython/libidn one.
+2021-09-09 15:57:22 ERROR (MainThread) [homeassistant] Error doing job: Task was destroyed but it is pending!
+2021-09-09 15:59:14 ERROR (MainThread) [homeassistant.components.hassio.handler] Client error on /homeassistant/restart request Server disconnected

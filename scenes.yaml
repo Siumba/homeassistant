@@ -1,186 +1,186 @@
-- id: '1609974483346'
+- id: "1609974483346"
   name: Driveway & Garden Lights - After Midnight
   entities:
     light.driveway_door_lights:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       brightness: 51
       hs_color:
-      - 33.488
-      - 67.451
+        - 33.488
+        - 67.451
       rgb_color:
-      - 255
-      - 178
-      - 82
+        - 255
+        - 178
+        - 82
       xy_color:
-      - 0.516
-      - 0.404
+        - 0.516
+        - 0.404
       effect: none
       entity_id:
-      - light.driveway_door_spot_left
-      - light.driveway_door_spot_right
+        - light.driveway_door_spot_left
+        - light.driveway_door_spot_right
       friendly_name: Spots
       icon: mdi:wall-sconce-round
       supported_features: 63
       room: driveway
-      state: 'on'
+      state: "on"
     light.garden_outside:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       brightness: 51
       hs_color:
-      - 31.304
-      - 45.098
+        - 31.304
+        - 45.098
       rgb_color:
-      - 255
-      - 199
-      - 140
+        - 255
+        - 199
+        - 140
       xy_color:
-      - 0.448
-      - 0.382
+        - 0.448
+        - 0.382
       effect: none
       friendly_name: Shed
       supported_features: 63
       room: garden
       icon: mdi:coach-lamp
-      state: 'on'
-- id: '1609975077007'
+      state: "on"
+- id: "1609975077007"
   name: Driveway & Garden Lights - After Sunset
   entities:
     light.driveway_door_lights:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       brightness: 128
       hs_color:
-      - 32.982
-      - 67.059
+        - 32.982
+        - 67.059
       rgb_color:
-      - 255
-      - 177
-      - 83
+        - 255
+        - 177
+        - 83
       xy_color:
-      - 0.516
-      - 0.403
+        - 0.516
+        - 0.403
       effect: none
       entity_id:
-      - light.driveway_door_spot_left
-      - light.driveway_door_spot_right
+        - light.driveway_door_spot_left
+        - light.driveway_door_spot_right
       friendly_name: Spots
       icon: mdi:wall-sconce-round
       supported_features: 63
       room: driveway
-      state: 'on'
+      state: "on"
     light.garden_outside:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       brightness: 51
       hs_color:
-      - 30.526
-      - 44.706
+        - 30.526
+        - 44.706
       rgb_color:
-      - 255
-      - 198
-      - 140
+        - 255
+        - 198
+        - 140
       xy_color:
-      - 0.449
-      - 0.381
+        - 0.449
+        - 0.381
       effect: none
       friendly_name: Shed
       supported_features: 63
       room: garden
       icon: mdi:coach-lamp
-      state: 'on'
-- id: '1617924531703'
-  name: Living Room Lighting
+      state: "on"
+- id: "good_evening_lighting"
+  name: Good Evening Lighting
   entities:
     light.diner_filaments:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 51
       entity_id:
-      - light.diner_lamp_1
-      - light.diner_lamp_2
-      - light.diner_lamp_3
+        - light.diner_lamp_1
+        - light.diner_lamp_2
+        - light.diner_lamp_3
       friendly_name: Diner Filaments
       icon: mdi:lightbulb-group
       supported_features: 40
-      state: 'on'
+      state: "on"
     light.torch_lamp:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       supported_color_modes:
-      - color_temp
-      - hs
+        - color_temp
+        - hs
       color_mode: hs
       brightness: 102
       hs_color:
-      - 37.321
-      - 81.961
+        - 37.321
+        - 81.961
       rgb_color:
-      - 255
-      - 176
-      - 45
+        - 255
+        - 176
+        - 45
       xy_color:
-      - 0.538
-      - 0.42
+        - 0.538
+        - 0.42
       effect: none
       friendly_name: Torch Lamp
       supported_features: 63
-      state: 'on'
+      state: "on"
     light.closet_lamp:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 1
       friendly_name: Closet Lamp
       supported_features: 41
-      state: 'on'
+      state: "on"
     light.tripod_lamp:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 64
       friendly_name: Tripod Lamp
       supported_features: 41
-      state: 'on'
+      state: "on"
     light.bloom_tv:
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - colorloop
-      - random
+        - colorloop
+        - random
       supported_color_modes:
-      - color_temp
-      - hs
+        - color_temp
+        - hs
       color_mode: hs
       brightness: 63
       hs_color:
-      - 29.684
-      - 74.51
+        - 29.684
+        - 74.51
       rgb_color:
-      - 255
-      - 158
-      - 64
+        - 255
+        - 158
+        - 64
       xy_color:
-      - 0.551
-      - 0.391
+        - 0.551
+        - 0.391
       effect: none
       friendly_name: Bloom TV
       supported_features: 63
-      state: 'on'
+      state: "on"

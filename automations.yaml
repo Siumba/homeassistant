@@ -19,6 +19,11 @@
       entity_id:
       - cover.bedroom_shutter
       - cover.bureau_shutter
+  - service: cover.set_cover_position
+    target:
+      entity_id: cover.bedroom_blind
+    data:
+      position: 40
   mode: single
 - id: '1609972900027'
   alias: Daily - Everything OFF
@@ -114,6 +119,7 @@
       entity_id:
       - cover.bedroom_shutter
       - cover.bureau_shutter
+      - cover.bedroom_blind
   mode: single
 - id: '1628539023619'
   alias: Weekends - Open Shutters
@@ -133,15 +139,23 @@
       entity_id:
       - cover.bedroom_shutter
       - cover.bureau_shutter
+  - service: cover.set_cover_position
+    target:
+      entity_id: cover.bedroom_blind
+    data:
+      position: 40
   mode: single
 - id: '1630148105598'
   alias: Auto - Turn on AC when Temperature > 21C
   description: Fires between 22:00 - 08:00
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.bedroom_ac_current_temp
-    above: '21'
-    for: 00:30:00
+  - platform: template
+    value_template: '{{ state_attr(''climate.bedroom_ac'', ''current_temperature'')
+      | float >=  21.0 | float }}
+
+      '
+    for:
+      minutes: 30
   condition:
   - condition: and
     conditions:
@@ -161,14 +175,12 @@
     target:
       entity_id: switch.bedroom_ac_cool
   - service: climate.set_swing_mode
-    target:
-      entity_id: climate.bedroom_ac
     data:
+      entity_id: climate.bedroom_ac
       swing_mode: '4'
   - service: climate.set_fan_mode
-    target:
-      entity_id: climate.bedroom_ac
     data:
+      entity_id: climate.bedroom_ac
       fan_mode: '1'
   - service: climate.set_temperature
     target:
