@@ -1,5 +1,5 @@
 blueprint:
-  name: deCONZ - Philips Friends of Hue Smart Switch (4 buttons)
+  name: Philips Friends of Hue Smart Switch (4 buttons)
   description: >
     Philips Friends of Hue Smart Switch (4 buttons), like senic https://de.senic.com based on PTM 215ZE EnOcean Alliance
   domain: automation
@@ -10,9 +10,7 @@ blueprint:
       description: Senic remote
       selector:
         device:
-          integration: hue
-          manufacturer: PhilipsFoH
-          model: FOHSWITCH
+          domain: switch
     button_one_single_press:
       name: 1 button - Single press
       description: Action to run on a single press of the button 1
@@ -127,7 +125,7 @@ max_exceeded: silent
 
 trigger:
 - platform: event
-  event_type: hue_event
+  event_type: state
   event_data:
     device_id: !input 'remote'
 
