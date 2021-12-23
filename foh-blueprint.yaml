@@ -131,59 +131,59 @@ trigger:
 
 action:
 - variables:
-    event: '{{ trigger.event.data.hue_event }}'
+    hue_event: '{{ trigger.event.data.event }}'
 - choose:
   - conditions:
-    - '{{ event == 1001 }}'
+    - '{{ hue_event == 1001 }}'
     sequence: !input 'button_one_hold_in'
   - conditions:
-    - '{{ event == 1002 }}'
+    - '{{ hue_event == 1002 }}'
     sequence: !input 'button_one_single_press'
   - conditions:
-    - '{{ event == 1003 }}'
+    - '{{ hue_event == 1003 }}'
     sequence: !input 'button_one_hold_release'
   - conditions:
-    - '{{ event == 2001 }}'
+    - '{{ hue_event == 2001 }}'
     sequence: !input 'button_two_hold_in'
   - conditions:
-    - '{{ event == 2002 }}'
+    - '{{ hue_event == 2002 }}'
     sequence: !input 'button_two_single_press'
   - conditions:
-    - '{{ event == 2003 }}'
+    - '{{ hue_event == 2003 }}'
     sequence: !input 'button_two_hold_release'
   - conditions:
-    - '{{ event == 3001 }}'
+    - '{{ hue_event == 3001 }}'
     sequence: !input 'button_three_hold_in'
   - conditions:
-    - '{{ event == 3002 }}'
+    - '{{ hue_event == 3002 }}'
     sequence: !input 'button_three_single_press'
   - conditions:
-    - '{{ event == 3003 }}'
+    - '{{ hue_event == 3003 }}'
     sequence: !input 'button_three_hold_release'
   - conditions:
-    - '{{ event == 4001 }}'
+    - '{{ hue_event == 4001 }}'
     sequence: !input 'button_four_hold_in'
   - conditions:
-    - '{{ event == 4002 }}'
+    - '{{ hue_event == 4002 }}'
     sequence: !input 'button_four_single_press'
   - conditions:
-    - '{{ event == 4003 }}'
+    - '{{ hue_event == 4003 }}'
     sequence: !input 'button_four_hold_release'
   - conditions:
-    - '{{ event == 5001 }}'
+    - '{{ hue_event == 5001 }}'
     sequence: !input 'both_buttons_one_and_two_hold_in'
   - conditions:
-    - '{{ event == 5002 }}'
+    - '{{ hue_event == 5002 }}'
     sequence: !input 'both_buttons_one_and_two_single_press'
   - conditions:
-    - '{{ event == 5003 }}'
+    - '{{ hue_event == 5003 }}'
     sequence: !input 'both_buttons_one_and_two_hold_release'
   - conditions:
-    - '{{ event == 6001 }}'
+    - '{{ hue_event == 6001 }}'
     sequence: !input 'both_buttons_three_and_four_hold_in'
   - conditions:
-    - '{{ event == 6002 }}'
+    - '{{ hue_event == 6002 }}'
     sequence: !input 'both_buttons_three_and_four_single_press'
   - conditions:
-    - '{{ event == 6003 }}'
+    - '{{ hue_event == 6003 }}'
     sequence: !input 'both_buttons_three_and_four_hold_release'  
