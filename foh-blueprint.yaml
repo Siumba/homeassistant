@@ -124,8 +124,9 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-- platform: state
-  entity_id: !input 'remote'
+- platform: event
+  event_data:
+    device_id: !input 'remote'
 
 action:
 - variables:
