@@ -124,8 +124,8 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-- platform: hue_event
-  data:
+- platform: device
+  event_data:
     device_id: !input 'remote'
 
 action:
