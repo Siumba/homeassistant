@@ -125,7 +125,7 @@ max_exceeded: silent
 
 trigger:
 - platform: hue_event
-  event_data:
+  data:
     device_id: !input 'remote'
 
 action:
