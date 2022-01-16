@@ -5,11 +5,11 @@ blueprint:
   domain: automation
   source_url: https://github.com/myGithub-Markus/home-assistant_blueprints/blob/main/deconz_friends_of_hue_smart_switch_fourfold_button.yaml
   input:
-    remote:
-      name: Remote
-      description: Senic remote
+    switch:
+      name: Switch
+      description: Senic Switch
       selector:
-        entity:
+        device:
           integration: hue
     button_one_single_press:
       name: 1 button - Single press
@@ -125,7 +125,7 @@ max_exceeded: silent
 
 trigger:
 - platform: state
-  entity_id: !input 'remote'
+  entity_id: !input 'switch'
   attribute: action
 
 action:
