@@ -9,7 +9,7 @@ blueprint:
       name: Remote
       description: Senic remote
       selector:
-        device:
+        entity:
           integration: hue
     button_one_single_press:
       name: 1 button - Single press
@@ -124,9 +124,9 @@ mode: restart
 max_exceeded: silent
 
 trigger:
-- platform: device
-  event_data:
-    device_id: !input 'remote'
+- platform: state
+  entity_id: !input 'remote'
+  attribute: action
 
 action:
 - variables:
