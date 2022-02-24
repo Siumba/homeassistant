@@ -9,7 +9,9 @@ home-assistant.log*
 home-assistant_v2.db
 home-assistant_v2.db*
 secrets.yaml
+airsonos.xml
 known_devices.yaml
 entity_registry.yaml
 harmony_12047253.conf
+rtsp2webrtc_v5_amd64
 secrets.yaml
