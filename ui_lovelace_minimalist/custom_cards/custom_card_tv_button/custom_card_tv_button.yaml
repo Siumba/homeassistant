@@ -1,0 +1,22 @@
+custom_card_tv_button:
+  template:
+    - "icon_info_bg"
+    - "yellow"
+    - "ulm_language_variables"
+  variables:
+    ulm_card_attached_media_player:
+  triggers_update: "all"
+  tap_action:
+    action: toggle
+  label: |-
+    [[[
+      if (entity.state === "on") {
+        return variables.ulm_on;
+      } else if (entity.state === "off") {
+        return variables.ulm_off;
+      } else if (entity.state === "unavailable") {
+        return variables.ulm_unavailable;
+      } else {
+        return entity.state;
+      }
+    ]]]

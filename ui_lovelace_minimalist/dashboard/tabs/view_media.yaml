@@ -1,0 +1,32 @@
+title: Media
+icon: mdi:spotify
+path: media
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - entity: media_player.garden
+            type: custom:mini-media-player
+            artwork: cover
+            source: icon
+            # hide:
+            #   volume: false
+            shortcuts:
+              columns: 4 # Max buttons per row
+              buttons:
+                # Start predefined playlist
+                - name: Soweto Radio
+                  type: playlist
+                  id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZF1E8HIbEsv1g8XX # Where XXXXXXX is your User ID
+                - name: Discovery Weekly
+                  type: playlist
+                  id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZEVXcMwuIW27p3a2 # Where XXXXXXX is your User ID
+                - name: Hot Hits NL
+                  type: playlist
+                  id: spotify:user:de5e6327d1524c9a:playlist:37i9dQZF1DWSBi5svWQ9Nk # Where XXXXXXX is your User ID

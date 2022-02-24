@@ -8,17 +8,17 @@ sensor:
           {{ '%0.2f' | format(states.sensor.power_consumption.state | float - 
                               states.sensor.power_production.state | float) }}
         unit_of_measurement: "kW"
-        friendly_name: Actual Power Consumption
+        friendly_name: Echt verbruik (kW)
   - platform: template
     sensors:
       actual_consumption_kwh:
         value_template: >
-          {{ '%0.2f' | format(states.sensor.energy_consumption_tarif_1.state | float + 
-                              states.sensor.energy_consumption_tarif_2.state | float - 
-                              states.sensor.energy_production_tarif_1.state | float - 
-                              states.sensor.energy_production_tarif_2.state | float) }}
+          {{ '%0.2f' | format((states.sensor.energy_consumption_tarif_1.state | float + 
+                              states.sensor.energy_consumption_tarif_2.state | float) - 
+                              (states.sensor.energy_production_tarif_1.state | float + 
+                              states.sensor.energy_production_tarif_2.state | float)) }}
         unit_of_measurement: "kWh"
-        friendly_name: Actual Power Consumption kWh
+        friendly_name: Echt verbruik (kWh)
 
 utility_meter:
   daily_energy_meter:

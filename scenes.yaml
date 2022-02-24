@@ -1,186 +1,411 @@
-- id: "1609974483346"
+- id: '1609974483346'
   name: Driveway & Garden Lights - After Midnight
   entities:
-    light.driveway_door_lights:
+    light.voordeur_spots:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
-      brightness: 51
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 25
       hs_color:
-        - 33.488
-        - 67.451
+      - 32.982
+      - 67.059
       rgb_color:
-        - 255
-        - 178
-        - 82
+      - 255
+      - 178
+      - 84
       xy_color:
-        - 0.516
-        - 0.404
-      effect: none
+      - 0.516
+      - 0.403
       entity_id:
-        - light.driveway_door_spot_left
-        - light.driveway_door_spot_right
-      friendly_name: Spots
-      icon: mdi:wall-sconce-round
-      supported_features: 63
-      room: driveway
-      state: "on"
-    light.garden_outside:
+      - light.oprit_deur_spot_links
+      - light.oprit_deur_spot_rechts
+      icon: mdi:lightbulb-group
+      friendly_name: Voordeur Spots
+      supported_features: 40
+      state: 'on'
+    light.schuur_lamp:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
-      brightness: 51
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 26
       hs_color:
-        - 31.304
-        - 45.098
+      - 30
+      - 44.706
       rgb_color:
-        - 255
-        - 199
-        - 140
+      - 255
+      - 198
+      - 141
       xy_color:
-        - 0.448
-        - 0.382
-      effect: none
-      friendly_name: Shed
-      supported_features: 63
-      room: garden
-      icon: mdi:coach-lamp
-      state: "on"
-- id: "1609975077007"
+      - 0.449
+      - 0.381
+      mode: normal
+      dynamics: none
+      friendly_name: Schuur Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1609975077007'
   name: Driveway & Garden Lights - After Sunset
   entities:
-    light.driveway_door_lights:
+    light.voordeur_spots:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
       brightness: 128
       hs_color:
-        - 32.982
-        - 67.059
+      - 32.982
+      - 67.059
       rgb_color:
-        - 255
-        - 177
-        - 83
+      - 255
+      - 178
+      - 84
       xy_color:
-        - 0.516
-        - 0.403
-      effect: none
+      - 0.516
+      - 0.403
       entity_id:
-        - light.driveway_door_spot_left
-        - light.driveway_door_spot_right
-      friendly_name: Spots
-      icon: mdi:wall-sconce-round
-      supported_features: 63
-      room: driveway
-      state: "on"
-    light.garden_outside:
+      - light.oprit_deur_spot_links
+      - light.oprit_deur_spot_rechts
+      icon: mdi:lightbulb-group
+      friendly_name: Voordeur Spots
+      supported_features: 40
+      state: 'on'
+    light.schuur_lamp:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
-      brightness: 51
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 128
       hs_color:
-        - 30.526
-        - 44.706
+      - 30
+      - 44.706
       rgb_color:
-        - 255
-        - 198
-        - 140
+      - 255
+      - 198
+      - 141
       xy_color:
-        - 0.449
-        - 0.381
-      effect: none
-      friendly_name: Shed
-      supported_features: 63
-      room: garden
-      icon: mdi:coach-lamp
-      state: "on"
-- id: "good_evening_lighting"
+      - 0.449
+      - 0.381
+      mode: normal
+      dynamics: none
+      friendly_name: Schuur Lamp
+      supported_features: 40
+      state: 'on'
+- id: good_evening_lighting
   name: Good Evening Lighting
   entities:
-    light.diner_filaments:
+    light.plafondstraler:
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
-        - brightness
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 102
+      hs_color:
+      - 37.212
+      - 81.569
+      rgb_color:
+      - 255
+      - 176
+      - 47
+      xy_color:
+      - 0.538
+      - 0.42
+      mode: normal
+      dynamics: none
+      friendly_name: Plafondstraler
+      supported_features: 40
+      state: 'on'
+    light.hoeklamp_tv:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 63
+      hs_color:
+      - 29.362
+      - 73.725
+      rgb_color:
+      - 255
+      - 159
+      - 67
+      xy_color:
+      - 0.551
+      - 0.391
+      mode: normal
+      dynamics: none
+      friendly_name: Hoeklamp TV
+      supported_features: 40
+      state: 'on'
+    light.driepoot_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 64
+      mode: normal
+      dynamics: none
+      friendly_name: Driepoot Lamp
+      supported_features: 40
+      state: 'on'
+    light.eettafel:
+      supported_color_modes:
+      - brightness
       color_mode: brightness
       brightness: 51
       entity_id:
-        - light.diner_lamp_1
-        - light.diner_lamp_2
-        - light.diner_lamp_3
-      friendly_name: Diner Filaments
+      - light.eettafel_lamp_1
+      - light.eettafel_lamp_2
+      - light.eettafel_lamp_3
       icon: mdi:lightbulb-group
+      friendly_name: Eettafel
       supported_features: 40
-      state: "on"
+      state: 'on'
+    light.gang_tafel_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 25
+      mode: normal
+      dynamics: none
+      friendly_name: Gang Tafel Lamp
+      supported_features: 40
+      state: 'on'
+- id: '1636367115047'
+  name: Good Morning Lighting
+  entities:
+    light.hoeklamp_tv:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 63
+      hs_color:
+      - 29.362
+      - 73.725
+      rgb_color:
+      - 255
+      - 159
+      - 67
+      xy_color:
+      - 0.551
+      - 0.391
+      mode: normal
+      dynamics: none
+      friendly_name: Hoeklamp TV
+      supported_features: 40
+      state: 'on'
+    light.gang_tafel_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 51
+      mode: normal
+      dynamics: none
+      friendly_name: Gang Tafel Lamp
+      supported_features: 40
+      state: 'on'
+    light.woonkamer_kast_lamp:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 3
+      mode: normal
+      dynamics: none
+      friendly_name: Woonkamer Kast Lamp
+      supported_features: 40
+      state: 'on'
+    light.plafondstraler:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 51
+      hs_color:
+      - 37.212
+      - 81.569
+      rgb_color:
+      - 255
+      - 176
+      - 47
+      xy_color:
+      - 0.538
+      - 0.42
+      mode: normal
+      dynamics: none
+      friendly_name: Plafondstraler
+      supported_features: 40
+      state: 'on'
+- id: '1641660769251'
+  name: WIDM
+  entities:
     light.torch_lamp:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
       supported_color_modes:
-        - color_temp
-        - hs
-      color_mode: hs
+      - color_temp
+      - xy
+      color_mode: xy
       brightness: 102
       hs_color:
-        - 37.321
-        - 81.961
+      - 124.941
+      - 100
       rgb_color:
-        - 255
-        - 176
-        - 45
+      - 0
+      - 255
+      - 21
       xy_color:
-        - 0.538
-        - 0.42
-      effect: none
+      - 0.1718
+      - 0.7406
+      mode: normal
+      dynamics: none
       friendly_name: Torch Lamp
-      supported_features: 63
-      state: "on"
-    light.closet_lamp:
-      supported_color_modes:
-        - brightness
-      color_mode: brightness
-      brightness: 1
-      friendly_name: Closet Lamp
-      supported_features: 41
-      state: "on"
-    light.tripod_lamp:
-      supported_color_modes:
-        - brightness
-      color_mode: brightness
-      brightness: 64
-      friendly_name: Tripod Lamp
-      supported_features: 41
-      state: "on"
+      supported_features: 40
+      state: 'on'
     light.bloom_tv:
       min_mireds: 153
       max_mireds: 500
-      effect_list:
-        - colorloop
-        - random
       supported_color_modes:
-        - color_temp
-        - hs
-      color_mode: hs
+      - color_temp
+      - xy
+      color_mode: xy
       brightness: 63
       hs_color:
-        - 29.684
-        - 74.51
+      - 135.529
+      - 100
       rgb_color:
-        - 255
-        - 158
-        - 64
+      - 0
+      - 255
+      - 66
       xy_color:
-        - 0.551
-        - 0.391
-      effect: none
+      - 0.17
+      - 0.7
+      mode: normal
+      dynamics: none
       friendly_name: Bloom TV
-      supported_features: 63
-      state: "on"
+      supported_features: 40
+      state: 'on'
+- id: '1642243188215'
+  name: Bedroom Evening Good Night
+  entities:
+    light.slaapkamer_bedlampen:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 443
+      hs_color:
+      - 29.599
+      - 82.123
+      rgb_color:
+      - 255
+      - 148
+      - 45
+      xy_color:
+      - 0.574
+      - 0.388
+      entity_id:
+      - light.fabians_lamp
+      - light.aimees_lamp
+      icon: mdi:lightbulb-group
+      friendly_name: Slaapkamer Bedlampen
+      supported_features: 40
+      state: 'on'
+    light.slaapkamer_lichtstrip:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 443
+      hs_color:
+      - 29.599
+      - 82.123
+      rgb_color:
+      - 255
+      - 148
+      - 45
+      xy_color:
+      - 0.574
+      - 0.388
+      mode: normal
+      dynamics: none
+      friendly_name: Slaapkamer Lichtstrip
+      supported_features: 40
+      state: 'on'
+- id: '1645737141503'
+  name: Garden Lights Cozy
+  entities:
+    switch.garden_lights:
+      friendly_name: Garden Lights
+      state: 'on'
+    light.overkapping_spots:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 102
+      hs_color:
+      - 25.373
+      - 78.824
+      rgb_color:
+      - 255
+      - 139
+      - 54
+      xy_color:
+      - 0.5833
+      - 0.3744
+      entity_id:
+      - light.overkapping_spot_1
+      - light.overkapping_spot_2
+      - light.overkapping_spot_3
+      - light.overkapping_spot_4
+      icon: mdi:lightbulb-group
+      friendly_name: Overkapping Spots
+      supported_features: 40
+      state: 'on'
+    light.schuur_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 26
+      hs_color:
+      - 30
+      - 44.706
+      rgb_color:
+      - 255
+      - 198
+      - 141
+      xy_color:
+      - 0.449
+      - 0.381
+      mode: normal
+      dynamics: none
+      friendly_name: Schuur Lamp
+      supported_features: 40
+      state: 'on'

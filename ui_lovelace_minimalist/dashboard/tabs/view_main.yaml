@@ -1,0 +1,270 @@
+title: "iHouse"
+path: main
+icon: mdi:home
+visible: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: chip_temperature
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-minimalist/climate
+            variables:
+              ulm_chip_temperature_inside: sensor.airconditioner_bedroom_current_temp
+              ulm_chip_temperature_outside: sensor.outside_temperature
+              ulm_chip_temperature_weather: weather.ihouse
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+              if (states[variables.ulm_chip_mdi_icon_state_entity].state > 0) {
+                return states[variables.ulm_chip_mdi_icon_state_entity].state + ' ' + variables.ulm_on.toLowerCase()
+              } else {
+                return variables.ulm_off;
+              }
+            ]]]"
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-minimalist/lights
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:lightbulb-group
+              ulm_chip_mdi_icon_state_entity: sensor.number_of_lights_on
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+              if (states[variables.ulm_chip_mdi_icon_state_entity].state > 0) {
+                return states[variables.ulm_chip_mdi_icon_state_entity].state + ' open'
+              } else {
+                return 'Gesloten';
+              }
+            ]]]"
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-minimalist/shutters
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:window-shutter
+              ulm_chip_mdi_icon_state_entity: sensor.number_of_shutters_open
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+                return states[variables.ulm_chip_mdi_icon_state_entity].state + ' ' + 'kWh';
+            ]]]"
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-minimalist/energy
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:lightning-bolt
+              ulm_chip_mdi_icon_state_entity: sensor.daily_energy_meter
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+                var state = Math.round(states[variables.ulm_chip_mdi_icon_state_entity].state * 100) / 100
+                
+                return state + ' m3';
+            ]]]"
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace-minimalist/energy
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:fire
+              ulm_chip_mdi_icon_state_entity: sensor.daily_gas_meter
+          - type: "custom:button-card"
+            color_type: blank-card
+          
+      - type: "custom:button-card"
+        template: card_title
+        name: iHouse
+        label: "Personen"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: custom_card_person_tracker
+            variables:
+              ulm_card_person_tracker_entity: !secret person1
+              ulm_card_person_tracker_wifi_tracker: !secret device-tracker-person1
+              ulm_card_person_tracker_gps_tracker: !secret device-tracker-person1
+              ulm_card_person_tracker_use_entity_picture: true
+              ulm_card_person_tracker_zones:
+                - zone.home
+                - zone.work
+          - type: "custom:button-card"
+            template: custom_card_person_tracker
+            variables:
+              ulm_card_person_tracker_entity: !secret person2
+              ulm_card_person_tracker_wifi_tracker: !secret device-tracker-person2
+              ulm_card_person_tracker_gps_tracker: !secret device-tracker-person2
+              ulm_card_person_tracker_use_entity_picture: true
+              ulm_card_person_tracker_zones:
+                - zone.home
+                - zone.work
+      - type: "custom:button-card"
+        template: card_title
+        label: "Scenes"
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                template: custom_vertical_buttons_custom_state
+                entity: scene.good_morning_lighting
+                name: "Morgen"
+                icon: "mdi:weather-sunny"
+                variables:
+                  color: yellow
+              - type: custom:button-card
+                template: custom_vertical_buttons_custom_state
+                entity: scene.good_evening_lighting
+                name: "Avond"
+                icon: "mdi:weather-night"
+                variables:
+                  color: "red"
+              - type: custom:button-card
+                template: custom_vertical_buttons_custom_state
+                entity: scene.garden_lights_cozy
+                name: "Tuin"
+                icon: "mdi:pine-tree"
+                variables:
+                  color: "green"
+      - type: "custom:button-card"
+        template: card_title
+        label: "Favorieten"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: custom_card_tv_button
+            entity: media_player.oled_tv
+            name: OLED TV
+            icon: mdi:television
+          - type: "custom:button-card"
+            template: custom_card_power_outlet_blue
+            entity: switch.coffee_machine_power
+            name: Koffiezetapparaat
+            icon: mdi:coffee
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Plafondstraler
+              ulm_card_light_enable_popup: true
+              ulm_card_light_enable_color: true
+            entity: light.plafondstraler
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Eettafel
+              ulm_card_light_enable_popup: true
+            entity: light.eettafel
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Keuken Spots
+              ulm_card_light_enable_popup: true
+            entity: light.keuken_spots
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Overkapping
+              ulm_card_light_enable_popup: true
+              ulm_card_light_enable_color: true
+            entity: light.overkapping_spots
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: "custom:webrtc-camera"
+            url: !secret rtsp_url_front_door
+            muted: false # disable sound, default true
+            background: true # run stream when not displayed (ex. for quick video loading), default false
+            mse: false # disable MSE mode, if you want save NabuCasa traffic
+            webrtc: true
+      - type: "custom:button-card"
+        template: card_title
+        label: "Kamers"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/driveway
+              ulm_card_navigate_title: Oprit
+              ulm_card_navigate_icon: mdi:car
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/hallway
+              ulm_card_navigate_title: Gang & Overloop
+              ulm_card_navigate_icon: mdi:dome-light
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/bureau
+              ulm_card_navigate_title: Bureau
+              ulm_card_navigate_icon: mdi:desk
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/livingroom
+              ulm_card_navigate_title: Woonkamer
+              ulm_card_navigate_icon: mdi:ceiling-light-multiple
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/kitchen
+              ulm_card_navigate_title: Keuken
+              ulm_card_navigate_icon: mdi:stove
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/bedroom
+              ulm_card_navigate_title: Slaapkamer
+              ulm_card_navigate_icon: mdi:bed-double
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/bathroom
+              ulm_card_navigate_title: Badkamer
+              ulm_card_navigate_icon: mdi:shower-head
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/guestroom
+              ulm_card_navigate_title: Logeerkamer
+              ulm_card_navigate_icon: mdi:light-recessed
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/garden
+              ulm_card_navigate_title: Tuin
+              ulm_card_navigate_icon: mdi:tree
+          - type: custom:button-card
+            template: card_navigate
+            variables:
+              ulm_card_navigate_path: /lovelace-minimalist/toilet
+              ulm_card_navigate_title: Toilet
+              ulm_card_navigate_icon: mdi:toilet

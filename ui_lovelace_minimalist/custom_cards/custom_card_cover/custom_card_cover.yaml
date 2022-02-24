@@ -1,0 +1,16 @@
+custom_card_cover:
+  template: card_cover_buttons
+  custom_fields:
+    item1:
+      card:
+        type: "custom:button-card"
+        template:
+          - icon_info
+          - ulm_language_variables
+          - cover
+        tap_action:
+          action: "call-service"
+          service: "cover.toggle"
+          service_data:
+            entity_id: "[[[ return variables.ulm_card_cover_buttons_entity ]]]"
+        name: "[[[ return variables.ulm_card_cover_buttons_name ]]]"

@@ -1,0 +1,47 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Plafondstraler
+      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_color: true
+    entity: light.plafondstraler
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Hoeklamp TV
+      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_color: true
+    entity: light.hoeklamp_tv
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Woonkamer
+      ulm_card_light_enable_popup: true
+    entity: light.woonkamer_lamp
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Eettafel
+      ulm_card_light_enable_popup: true
+    entity: light.eettafel
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Driepoot Lamp
+      ulm_card_light_enable_popup: true
+    entity: light.driepoot_lamp
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Kast Lamp
+      ulm_card_light_enable_popup: true
+    entity: light.woonkamer_kast_lamp

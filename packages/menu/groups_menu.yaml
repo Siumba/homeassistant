@@ -8,10 +8,9 @@ group:
   all_climate_entities:
     name: All Climate Entities
     entities:
-      - climate.living_room
-      - climate.bedroom
-      - climate.bureau
-      - climate.entrance
+      - climate.logeerkamer_thermostaat
+      - climate.slaapkamer_thermostaat
+      - climate.bureau_thermostaat
 
   all_climate_ac_entities:
     name: All Climate AC Entities
@@ -27,25 +26,25 @@ group:
   all_light_entities:
     name: All Light Entities
     entities:
-      - light.living_room_lamp
-      - light.torch_lamp
-      - light.bloom_tv
-      - light.bloom_mobile
-      - light.diner_filaments
-      - light.closet_lamp
-      - light.tripod_lamp
-      - light.kitchen_lamp
-      - light.kitchen_lights
-      - light.garden_lights
-      - light.patio_spots
-      - light.hallway_downstairs
-      - light.hallway_spots
-      - light.bureau_main
-      - light.bureau_lights
-      - light.bedroom_main
+      - light.woonkamer_lamp
+      - light.plafondstraler
+      - light.hoeklamp_tv
+      - light.eettafel
+      - light.woonkamer_kast_lamp
+      - light.driepoot_lamp
+      - light.keuken_lamp
+      - light.keuken_spots
+      - light.tuin_lampen
+      - light.overkapping_spots
+      - light.gang_beneden
+      - light.overloop_spots
+      - light.bureau_lamp
+      - light.bureau_hoeklampen
+      - light.slaapkamer_lamp
       - light.fabians_lamp
       - light.aimees_lamp
-      - light.guest_room_main
+      - light.slaapkamer_lichtstrip
+      - light.logeerkamer_lamp
 
   ############################################################################
   #                                                                          #
@@ -56,8 +55,9 @@ group:
   all_shutter_entities:
     name: All Shutter Entities
     entities:
-      - cover.bedroom_shutter
-      - cover.bureau_shutter
+      - cover.slaapkamer_rolluik
+      - cover.slaapkamer_rolgordijn
+      - cover.bureau_rolluik
 
   ############################################################################
   #                                                                          #
@@ -105,9 +105,14 @@ group:
   all_motion_sensor_entities:
     name: All Motion Sensor Entities
     entities:
-      - binary_sensor.front_door_state
-      - binary_sensor.kitchen_door_state
-      - binary_sensor.garden_door_state
+      - binary_sensor.front_door_contact
+      - binary_sensor.kitchen_door_contact
+      - binary_sensor.garden_door_contact
+      - binary_sensor.bedroom_window_left_contact
+      - binary_sensor.bedroom_window_right_contact
+      - binary_sensor.bureau_window_left_contact
+      - binary_sensor.bureau_window_right_contact
+      - binary_sensor.guest_room_window_contact
 
   ############################################################################
   #                                                                          #
@@ -118,10 +123,7 @@ group:
   all_batteries_sensor_entities:
     name: All Batteries Sensor Entities
     entities:
-      - binary_sensor.front_door_low_bat
-      - binary_sensor.kitchen_door_low_bat
-      - binary_sensor.garden_door_ow_bat
-      - sensor.iphone_xs_enterprise_battery_state
+      - sensor.slaapkamer_rolgordijn_batterij
 
   ############################################################################
   #                                                                          #

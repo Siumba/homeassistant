@@ -1,10 +1,10 @@
 binary_sensor:
   - platform: threshold
-    entity_id: sensor.bedroom_ac_current_temp
+    entity_id: sensor.airconditioner_bedroom_current_temp
     lower: 21
     upper: 99
     hysteresis: 0.0
-    name: bedroom_ac_threshold
+    name: airconditioner_bedroom_threshold
 
 sensor:
   - platform: template
@@ -15,63 +15,52 @@ sensor:
       #                                                                          #
       ############################################################################
 
-      bedroom_ac_operation_mode:
-        friendly_name: "Bedroom AC Operation Mode"
+      airconditioner_bedroom_operation_mode:
+        friendly_name: "Airconditioner Bedroom Operation Mode"
         icon_template: mdi:thermostat
         value_template: >-
-          {% if is_state('climate.bedroom_ac', 'auto') %}
+          {% if is_state('climate.airconditioner_bedroom', 'heat_cool') %}
             Auto
-          {% elif is_state('climate.bedroom_ac', 'cool') %}
+          {% elif is_state('climate.airconditioner_bedroom', 'cool') %}
             Cool
-          {% elif is_state('climate.bedroom_ac', 'dry') %}
-            Dry
-          {% elif is_state('climate.bedroom_ac', 'fan_only') %}
-            Fan Only
-          {% elif is_state('climate.bedroom_ac', 'heat') %}
+          {% elif is_state('climate.airconditioner_bedroom', 'dry') %}
+            Droog
+          {% elif is_state('climate.airconditioner_bedroom', 'fan_only') %}
+            Ventilator
+          {% elif is_state('climate.airconditioner_bedroom', 'heat') %}
             Heat
           {% else %}
-            Off
+            Uit
           {% endif %}
 
-      bedroom_ac_current_temp:
-        friendly_name: "Bedroom AC Temperature"
+      airconditioner_bedroom_current_temp:
+        friendly_name: "Airconditioner Bedroom Temperature"
         unit_of_measurement: "°C"
         icon_template: mdi:thermometer
         value_template: >-
-          {{ state_attr('climate.bedroom_ac', 'current_temperature') }}
+          {{ state_attr('climate.airconditioner_bedroom', 'current_temperature') }}
 
-      bedroom_ac_target_temp:
-        friendly_name: "Bedroom AC Target Temperature"
+      airconditioner_bedroom_target_temp:
+        friendly_name: "Airconditioner Bedroom Target Temperature"
         icon_template: mdi:thermometer
         value_template: >-
-          {{ state_attr('climate.bedroom_ac', 'temperature') }}
+          {{ state_attr('climate.airconditioner_bedroom', 'temperature') }}
 
-      bedroom_ac_fan_mode:
-        friendly_name: "Bedroom AC Fan"
+      airconditioner_bedroom_fan_mode:
+        friendly_name: "Airconditioner Bedroom Fan"
         icon_template: mdi:hvac
         value_template: >-
-          {{ state_attr('climate.bedroom_ac', 'fan_mode') }}
+          {{ state_attr('climate.airconditioner_bedroom', 'fan_mode') }}
 
-      bedroom_ac_swing_mode:
-        friendly_name: "Bedroom AC Swing Mode"
+      airconditioner_bedroom_swing_mode:
+        friendly_name: "Airconditioner Bedroom Swing Mode"
         icon_template: mdi:hvac
         value_template: >-
-          {{ state_attr('climate.bedroom_ac', 'swing_mode') }}
+          {{ state_attr('climate.airconditioner_bedroom', 'swing_mode') }}
 
-      bedroom_ac_target_temp_reached:
-        friendly_name: "Bedroom AC Set Temperate Reached"
-        icon_template: mdi:hvac
+      outside_temperature:
+        friendly_name: "Outside Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
         value_template: >-
-          {% if state_attr('climate.bedroom_ac', 'current_temperature') < state_attr('climate.bedroom_ac', 'temperature') %}
-            Auto
-          {% elif is_state('climate.bedroom_ac', 'cool') %}
-            Cool
-          {% elif is_state('climate.bedroom_ac', 'dry') %}
-            Dry
-          {% elif is_state('climate.bedroom_ac', 'fan_only') %}
-            Fan Only
-          {% elif is_state('climate.bedroom_ac', 'heat') %}
-            Heat
-          {% else %}
-            Off
-          {% endif %}
+          {{ state_attr('weather.ihouse', 'temperature') }}

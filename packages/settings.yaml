@@ -7,25 +7,25 @@ cloud:
 # Checks for available updates
 updater:
 
-  #Enables lovelace
+#Enables lovelace
 lovelace:
   mode: yaml
   resources: !include /config/lovelace-library/resources.yaml
   dashboards:
-    lovelace-system:
+    lovelace-minimalist:
       mode: yaml
-      filename: ui-system.yaml
-      title: "System"
+      filename: /config/ui_lovelace_minimalist/dashboard/ui-lovelace.yaml
+      title: "Minimalist"
       icon: mdi:view-dashboard
       show_in_sidebar: true
       require_admin: false
-    lovelace-wallpanel:
-      mode: yaml
-      filename: ui-wallpanel.yaml
-      title: "Wall Panel"
-      icon: mdi:view-dashboard
-      show_in_sidebar: true
-      require_admin: false
+#     lovelace-wallpanel:
+#       mode: yaml
+#       filename: ui-wallpanel.yaml
+#       title: "Wall Panel"
+#       icon: mdi:view-dashboard
+#       show_in_sidebar: true
+#       require_admin: false
 
 sensor:
   - platform: template
@@ -39,6 +39,8 @@ config:
 my:
 
 energy:
+
+media_source:
 
 browser_mod:
 
@@ -72,3 +74,5 @@ history:
   exclude:
     domains:
       - groups
+
+python_script:

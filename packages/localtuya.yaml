@@ -1,0 +1,38 @@
+localtuya:
+  - host: 192.168.1.157
+    device_id: 88055404e868e75874a5
+    local_key: 43521ba4d29c0d66
+    friendly_name: Drinkbak Spock
+    protocol_version: "3.3"
+    entities:
+      - platform: light
+        friendly_name: Drinkbak - LED
+        id: 102
+        brightness: 102
+        brightness_lower: 0
+        brightness_upper: 10
+      - platform: sensor
+        friendly_name: Drinkbak - Waterniveau
+        id: 108
+        unit_of_measurement: "level"
+      - platform: switch
+        friendly_name: Drinkbak - Stroom
+        id: 101
+      - platform: sensor
+        friendly_name: Drinkbak - Filter
+        id: 104
+        unit_of_measurement: "minutes"
+      - platform: sensor
+        friendly_name: Drinkbak - Pomp
+        id: 105
+        unit_of_measurement: "minutes"
+# climate:
+#   - platform: localtuya
+#     host: 192.168.1.133
+#     local_key: "cb483a219994d1aa"
+#     device_id: "146321763c6105ec6ccd"
+#     name: Badkamer Vloerverwarming Thermostaat
+#     scan_interval: 5
+#     min_temp: 5
+#     max_temp: 35
+#     protocol_version: 3.3

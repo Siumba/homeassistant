@@ -1,8 +1,13 @@
 wake_on_lan: # enables `wake_on_lan` integration
 
-webostv:
-  host: 192.168.1.21
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: b4-e6-2a-8e-e9-2c
+# webostv:
+#   host: 192.168.1.21
+#   name: OLED TV
+#   customize:
+#     sources:
+#       - hdmi1
+#       - hdmi3
+#   turn_on_action:
+#     service: wake_on_lan.send_magic_packet
+#     data:
+#       mac: b4-e6-2a-8e-e9-2c

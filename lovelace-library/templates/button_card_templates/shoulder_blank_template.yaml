@@ -1,7 +1,0 @@
-shoulder_blank_card:
-
-  type: 'custom:button-card'
-  color_type: blank-card
-  styles:
-    card:
-      - width: 8px

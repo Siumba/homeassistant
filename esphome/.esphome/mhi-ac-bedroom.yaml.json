@@ -1,0 +1,13 @@
+{
+  "storage_version": 1,
+  "name": "mhi-ac-bedroom",
+  "comment": null,
+  "esphome_version": "2022.1.3",
+  "src_version": 1,
+  "address": "mhi-ac-bedroom.local",
+  "web_port": null,
+  "esp_platform": "ESP8266",
+  "build_path": null,
+  "firmware_bin_path": null,
+  "loaded_integrations": []
+}

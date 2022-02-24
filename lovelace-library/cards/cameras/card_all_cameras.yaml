@@ -1,5 +1,0 @@
-- type: picture-entity
-  entity: camera.front_door
-  camera_view: live
-
-- !include /config/lovelace-library/templates/styles/separator_card.yaml

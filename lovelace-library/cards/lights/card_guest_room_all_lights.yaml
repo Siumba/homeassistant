@@ -1,7 +1,0 @@
-- type: custom:decluttering-card # Guest Room Main Light
-  template: light_button
-  variables:
-    - entity: light.guest_room_main
-    - name: Light
-
-- !include /config/lovelace-library/templates/styles/separator_card.yaml

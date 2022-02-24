@@ -1,0 +1,33 @@
+title: "Climate"
+path: climate
+icon: mdi:thermometer
+visible: false
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: grid
+        # title: Climate
+        columns: 1
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: card_weather
+            entity: weather.ihouse
+            variables:
+              ulm_card_weather_name: "in Eindhoven"
+              ulm_card_weather_primary_info:
+                - wind_speed
+                - precipitation_probability
+              ulm_card_weather_backdrop:
+                fade: true
+      - type: grid
+        title: Climate
+        columns: 2
+        square: false
+        cards:
+          - type: custom:button-card
+            template: custom_card_heat_pump
+            entity: climate.airconditioner_bedroom
+            variables:
+              name: Slaapkamer A/C

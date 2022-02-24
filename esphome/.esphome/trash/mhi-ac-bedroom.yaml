@@ -1,0 +1,25 @@
+esphome:
+  name: mhi-ac-bedroom
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "110b42e585cfbf83cc55d862c575a9eb"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Mhi-Ac-Bedroom Fallback Hotspot"
+    password: "r1S0UZPPLDiC"
+
+captive_portal:

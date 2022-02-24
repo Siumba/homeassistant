@@ -1,23 +1,55 @@
 # Example configuration.yaml entry configuring HomeKit
 homekit:
-  # - name: HASS Bridge
-  - filter:
-      include_domains:
-        - camera
-        - climate
-        - cover
-      # include_entity_globs:
-      #   - switch.bedroom_ac*
+  - port: 51234
+    name: HASS Bridge
+    filter:
       include_entities:
-        - binary_sensor.front_door_state
-        # - binary_sensor.front_door_low_bat
-        - binary_sensor.garden_door_state
-        # - binary_sensor.garden_door_low_bat
-        - binary_sensor.kitchen_door_state
-        # - binary_sensor.living_room_low_bat
-        - media_player.lg_webos_smart_tv
-        - switch.garden_lights
-        - switch.kitchen_lights
+        - binary_sensor.bedroom_window_left_contact
+        - binary_sensor.bedroom_window_right_contact
+        - binary_sensor.bureau_window_left_contact
+        - binary_sensor.bureau_window_right_contact
+        - binary_sensor.front_door_contact
+        - binary_sensor.garden_door_contact
+        - binary_sensor.guest_room_window_contact
+        - binary_sensor.kitchen_door_contact
+        - cover.slaapkamer_rolgordijn
+        - cover.slaapkamer_rolluik
+        - cover.bureau_rolluik
+        - climate.bedroom_ac
+        - light.tuin_lampen
+        - light.keuken_spots
+        - switch.coffee_machine_power
+    entity_config:
+      switch.coffee_machine_power:
+        name: Koffiezetapparaat
+      binary_sensor.bedroom_window_left_contact:
+        name: Slaapkamer Raam Links
+      binary_sensor.bedroom_window_right_contact:
+        name: Slaapkamer Raam Rechts
+      binary_sensor.bureau_window_left_contact:
+        name: Bureau Raam Links
+      binary_sensor.bureau_window_right_contact:
+        name: Bureau Raam Rechts
+      binary_sensor.front_door_contact:
+        name: Voordeur
+      binary_sensor.garden_door_contact:
+        name: Tuindeur
+      binary_sensor.guest_room_window_contact:
+        name: Logeerkamer
+      binary_sensor.kitchen_door_contact:
+        name: Keukendeur
+  - port: 51235
+    name: OLED TV Bridge
+    mode: accessory
+    filter:
+      include_entities:
+        - media_player.oled_tv
+    entity_config:
+      media_player.oled_tv:
+        name: OLED TV
+        feature_list:
+          - feature: on_off
+
     # entity_config:
     #   alarm_control_panel.home:
     #     code: 1234

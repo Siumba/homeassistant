@@ -1,0 +1,33 @@
+################################################
+## Component
+################################################
+ios:
+  push:
+    categories:
+      - name: Afval
+        identifier: "afval"
+        actions:
+          - identifier: "MARK_TRASH_MOVED"
+            title: "Afval verwerkt"
+            activationMode: "background"
+            authenticationRequired: no
+            destructive: yes
+            behavior: "default"
+
+################################################
+## Notify
+################################################
+notify:
+  - platform: group
+    name: family
+    services:
+      - service: mobile_app_iphone_13_pro_fabian
+      - service: mobile_app_iphone_van_aimee
+  - platform: group
+    name: fabian
+    services:
+      - service: mobile_app_iphone_13_pro_fabian
+  - platform: group
+    name: aimee
+    services:
+      - service: mobile_app_iphone_van_aimee

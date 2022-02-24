@@ -1,63 +1,99 @@
 - id: '1608774094962'
-  alias: Weekdays - Open Shutters
-  description: ''
+  alias: Daily - Open Shutters
+  description: Open shutters at 9:00 or 11:00
   trigger:
   - platform: time
     at: 09:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+    id: 9u
+  - platform: time
+    at: '11:00'
+    id: 11u
+  condition: []
   action:
-  - service: cover.open_cover
-    data: {}
-    target:
-      entity_id:
-      - cover.bedroom_shutter
-      - cover.bureau_shutter
-  - service: cover.set_cover_position
-    target:
-      entity_id: cover.bedroom_blind
-    data:
-      position: 40
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 9u
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      sequence:
+      - service: cover.open_cover
+        target:
+          entity_id:
+          - cover.slaapkamer_rolluik
+          - cover.bureau_rolluik
+      - service: cover.set_cover_position
+        data:
+          position: 40
+        target:
+          entity_id: cover.slaapkamer_rolgordijn
+    - conditions:
+      - condition: trigger
+        id: 11u
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+        - sun
+      sequence:
+      - service: cover.open_cover
+        target:
+          entity_id:
+          - cover.slaapkamer_rolluik
+          - cover.bureau_rolluik
+      - service: cover.set_cover_position
+        data:
+          position: 40
+        target:
+          entity_id: cover.slaapkamer_rolgordijn
   mode: single
 - id: '1609972900027'
   alias: Daily - Everything OFF
   description: ''
   trigger:
   - platform: time
-    at: 02:00
+    at: 00:30
   condition: []
   action:
   - service: light.turn_off
     data: {}
     target:
       entity_id:
-      - light.bedroom_main
-      - light.bedroom_sidelights
-      - light.bureau_lights
-      - light.bureau_main
-      - light.guest_room_main
-      - light.diner_filaments
-      - light.kitchen_lamp
-      - light.living_room_lamp
-      - light.torch_lamp
-      - light.closet_lamp
-      - light.tripod_lamp
-      - light.bloom_mobile
-      - light.bloom_tv
-      - light.patio_spots
-      - light.hallway_downstairs
-      - light.hallway_spots
+      - light.slaapkamer_lamp
+      - light.slaapkamer_bedlampen
+      - light.bureau_hoeklampen
+      - light.bureau_lamp
+      - light.logeerkamer_lamp
+      - light.keuken_lamp
+      - light.woonkamer_lamp
+      - light.plafondstraler
+      - light.woonkamer_kast_lamp
+      - light.driepoot_lamp
+      - light.hoeklamp_tv
+      - light.overkapping_spots
+      - light.gang_beneden
+      - light.overloop_spots
+      - light.eettafel
+      - light.gang_tafel_lamp
+      - light.slaapkamer_lichtstrip
   - service: switch.turn_off
     target:
       entity_id:
       - switch.garden_lights
       - switch.kitchen_lights
+      - switch.coffee_machine_power
   mode: single
 - id: '1609974493789'
   alias: Daily - Driveway & Garden Lights - Midnight
@@ -81,8 +117,8 @@
     data: {}
     target:
       entity_id:
-      - light.driveway_door_lights
-      - light.garden_outside
+      - light.voordeur_spots
+      - light.schuur_lamp
   mode: single
 - id: '1609975184621'
   alias: Daily - Driveway & Garden Lights - Sunset
@@ -100,10 +136,10 @@
   trigger:
   - platform: sun
     event: sunset
-    offset: '-1:00'
+    offset: -0:30
   condition: []
   action:
-  - scene: scene.living_room_lighting
+  - scene: scene.good_evening_lighting
   mode: single
 - id: '1628538980655'
   alias: Daily - Close Shutters
@@ -111,51 +147,27 @@
   trigger:
   - platform: sun
     event: sunset
-    offset: -00:30
   condition: []
   action:
   - service: cover.close_cover
     target:
       entity_id:
-      - cover.bedroom_shutter
-      - cover.bureau_shutter
-      - cover.bedroom_blind
-  mode: single
-- id: '1628539023619'
-  alias: Weekends - Open Shutters
-  description: ''
-  trigger:
-  - platform: time
-    at: '11:00'
-  condition:
-  - condition: time
-    weekday:
-    - sat
-    - sun
-  action:
-  - service: cover.open_cover
-    data: {}
-    target:
-      entity_id:
-      - cover.bedroom_shutter
-      - cover.bureau_shutter
-  - service: cover.set_cover_position
-    target:
-      entity_id: cover.bedroom_blind
-    data:
-      position: 40
+      - cover.slaapkamer_rolluik
+      - cover.bureau_rolluik
+      - cover.slaapkamer_rolgordijn
   mode: single
 - id: '1630148105598'
   alias: Auto - Turn on AC when Temperature > 21C
   description: Fires between 22:00 - 08:00
   trigger:
-  - platform: template
-    value_template: '{{ state_attr(''climate.bedroom_ac'', ''current_temperature'')
-      | float >=  21.0 | float }}
-
-      '
+  - platform: numeric_state
+    entity_id: sensor.bedroom_ac_current_temp
+    above: 20.9
     for:
+      hours: 0
       minutes: 30
+      seconds: 0
+      milliseconds: 0
   condition:
   - condition: and
     conditions:
@@ -210,58 +222,505 @@
     target:
       entity_id: climate.bedroom_ac
   mode: single
-- id: '1630329112838'
+- id: '1631545495758'
+  alias: Auto - Turn on AC when Temperature > 21C (TEST)
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bedroom_ac_current_temp
+    above: '20.9'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_xs_enterprise
+    data:
+      message: test ac
+  mode: single
+- id: '1632602572631'
+  alias: Auto - Turn on AC when Temperature > 21C (Daily check)
+  description: Fires between 22:00 - 08:00
+  trigger:
+  - platform: time
+    at: '22:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: zone
+        entity_id: person.aimee
+        zone: zone.home
+      - condition: zone
+        entity_id: person.fabian
+        zone: zone.home
+    - condition: time
+      after: '22:00'
+      before: 08:00
+    - condition: numeric_state
+      entity_id: sensor.bedroom_ac_current_temp
+      above: 20.9
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.bedroom_ac_cool
+  - service: climate.set_swing_mode
+    data:
+      entity_id: climate.bedroom_ac
+      swing_mode: '4'
+  - service: climate.set_fan_mode
+    data:
+      entity_id: climate.bedroom_ac
+      fan_mode: '1'
+  - service: climate.set_temperature
+    target:
+      entity_id: climate.bedroom_ac
+    data:
+      temperature: 20
+  mode: single
+- id: '1636367190052'
+  alias: Daily - Good Morning
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00
+    id: 7u
+  - platform: time
+    id: 9u
+    at: 09:00
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 7u
+      sequence:
+      - scene: scene.good_morning_lighting
+    - conditions:
+      - condition: trigger
+        id: 9u
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.gang_tafel_lamp
+    default: []
+  mode: single
+- id: '1637248229023'
+  alias: Startup theme
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: frontend.set_theme
+    data:
+      name: dmatik
+  mode: single
+- id: '1640511982203'
+  alias: Notification - Water Spock
+  description: ''
+  trigger:
+  - platform: state
+    from: '1'
+    to: '0'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    id: water_level
+    entity_id: sensor.drinkbak_waterniveau
+  - platform: time
+    at: 08:00
+    id: water_refresh
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: water_level
+      sequence:
+      - service: notify.notify
+        data:
+          message: Spock's water is op!
+    - conditions:
+      - condition: trigger
+        id: water_refresh
+      - condition: template
+        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr(''automation.notification_water_level_spock'',
+          ''last_triggered'')) > 432000 }}'
+      sequence:
+      - service: notify.notify
+        data:
+          message: Spock's water moet ververst worden!
+    default: []
+  mode: single
+- id: '1640733746612'
   alias: Kitchen Switch
   description: ''
+  trigger:
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 1
+    unique_id: aa173ae0-8268-4cb2-bfa9-faff5ff7521a
+    id: first_button_push
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: 9121095e-d724-422e-a50e-eb2ecc8e6e61
+    id: second_button_push
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: 6886c900-d6ae-4635-b9bb-340e38296859
+    id: third_button_push
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: b2ab48d3-766a-43a9-ae6c-652d543291fa
+    id: fourth_button_push
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 1
+    unique_id: aa173ae0-8268-4cb2-bfa9-faff5ff7521a
+    id: first_button_hold
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 2
+    unique_id: 9121095e-d724-422e-a50e-eb2ecc8e6e61
+    id: second_button_hold
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 3
+    unique_id: 6886c900-d6ae-4635-b9bb-340e38296859
+    id: third_button_hold
+  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 4
+    unique_id: b2ab48d3-766a-43a9-ae6c-652d543291fa
+    id: fourth_button_hold
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: first_button_push
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.keuken_spots
+    - conditions:
+      - condition: trigger
+        id: second_button_push
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.keuken_spots
+    - conditions:
+      - condition: trigger
+        id: third_button_push
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+        target:
+          entity_id: light.keuken_lamp
+    - conditions:
+      - condition: trigger
+        id: fourth_button_push
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.keuken_lamp
+    default: []
+  mode: single
+- id: '1640734709956'
+  alias: Tesla Remote
+  description: ''
+  trigger:
+  - device_id: 50f0682618fa9ed43107292fadd53f35
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 1
+    unique_id: dfcef1c9-b45d-46d0-9d13-f5394040ae9b
+    id: first_button_push
+  - device_id: 50f0682618fa9ed43107292fadd53f35
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: 13e742b9-baab-4c52-8b31-a321b32fee2d
+    id: second_button_push
+  - device_id: 50f0682618fa9ed43107292fadd53f35
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: 8aaef8a5-8548-4aa1-a4e6-f832d35fa31b
+    id: third_button_push
+  - device_id: 50f0682618fa9ed43107292fadd53f35
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: 30db6d28-163b-4e37-b7c6-264d9b59ebef
+    id: fourth_button_push
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: first_button_push
+      sequence:
+      - repeat:
+          count: '3'
+          sequence:
+          - service: switch.turn_on
+            target:
+              entity_id: switch.sonic_charger_switch
+            data: {}
+    - conditions:
+      - condition: trigger
+        id: second_button_push
+      sequence:
+      - repeat:
+          count: '3'
+          sequence:
+          - service: climate.turn_on
+            target:
+              entity_id: climate.sonic_hvac_climate_system
+            data: {}
+    - conditions:
+      - condition: trigger
+        id: third_button_push
+      sequence: []
+    - conditions:
+      - condition: trigger
+        id: fourth_button_push
+      sequence:
+      - repeat:
+          count: '3'
+          sequence:
+          - service: switch.turn_off
+            target:
+              entity_id: switch.sonic_charger_switch
+            data: {}
+          - delay:
+              hours: 0
+              minutes: 0
+              seconds: 1
+              milliseconds: 0
+          - service: lock.unlock
+            target:
+              entity_id: lock.sonic_charger_door_lock
+            data: {}
+    default: []
+  mode: single
+- id: '1641656149482'
+  alias: WIDM
+  description: ''
+  trigger:
+  - platform: time
+    at: '20:29'
+    id: 'on'
+  - platform: time
+    id: 'off'
+    at: '21:34'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 'on'
+      - condition: time
+        weekday:
+        - sat
+      sequence:
+      - scene: scene.widm
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      - condition: time
+        weekday:
+        - sat
+      sequence:
+      - scene: scene.good_evening_lighting
+    default: []
+  mode: single
+- id: '1642242808158'
+  alias: Bedroom Switch
+  description: ''
+  trigger:
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 1
+    unique_id: 79f7e6b6-8939-4f35-90e5-798b0dbfd620
+    id: first_button_push
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: 16cec480-7f2b-4f6b-94e6-5c6d82d1d6a4
+    id: second_button_push
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: 26618aaf-c954-44e8-814b-aff7c9842f2e
+    id: third_button_push
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: 0db4c1ed-c52f-42c7-b50a-d045830c2a4c
+    id: fourth_button_push
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 1
+    unique_id: 79f7e6b6-8939-4f35-90e5-798b0dbfd620
+    id: first_button_hold
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 2
+    unique_id: 16cec480-7f2b-4f6b-94e6-5c6d82d1d6a4
+    id: second_button_hold
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 3
+    unique_id: 26618aaf-c954-44e8-814b-aff7c9842f2e
+    id: third_button_hold
+  - device_id: 8a88636c0db8274d5a34e355ce1adc42
+    domain: hue
+    platform: device
+    type: repeat
+    subtype: 4
+    unique_id: 0db4c1ed-c52f-42c7-b50a-d045830c2a4c
+    id: fourth_button_hold
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: first_button_push
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.bedroom_evening_good_night
+    - conditions:
+      - condition: trigger
+        id: second_button_push
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id:
+          - light.slaapkamer_bedlampen
+          - light.slaapkamer_lichtstrip
+    - conditions:
+      - condition: trigger
+        id: third_button_push
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.slaapkamer_lamp
+    - conditions:
+      - condition: trigger
+        id: fourth_button_push
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.slaapkamer_lamp
+    default: []
+  mode: single
+- id: '1642330019974'
+  alias: Philips Friends of Hue Smart Switch (4 buttons)
+  description: ''
   use_blueprint:
-    path: myGithub-Markus/deconz_friends_of_hue_smart_switch_fourfold_button.yaml
+    path: Siumba/foh-blueprint.yaml
     input:
-      remote: 58686bd8201c2500456c8a853473211a
+      remote: 7ab2488ae199c0e315d6932429fbe03c
       button_one_single_press:
-      - service: light.turn_on
-        target:
-          entity_id: light.kitchen_lights
-      button_two_single_press:
-      - service: light.turn_off
-        target:
-          entity_id: light.kitchen_lights
-      button_three_single_press:
-      - service: light.turn_on
-        target:
-          entity_id: light.kitchen_lamp
-      button_four_single_press:
-      - service: light.turn_off
-        target:
-          entity_id: light.kitchen_lamp
-      button_four_hold_in:
-      - repeat:
-          count: '30'
-          sequence:
-          - device_id: 3c185ddd2c9feadf022a575a8d345a81
-            domain: light
-            entity_id: light.kitchen_spot_1
-            type: brightness_decrease
-          - device_id: e836e81e18dc6f85bbbc3f99ed08fa3f
-            domain: light
-            entity_id: light.kitchen_spot_2
-            type: brightness_decrease
-          - device_id: 10e90f8f5fd8fbcad622ee22cef71d77
-            domain: light
-            entity_id: light.kitchen_spot_3
-            type: brightness_decrease
-      button_three_hold_in:
-      - repeat:
-          count: '30'
-          sequence:
-          - device_id: 3c185ddd2c9feadf022a575a8d345a81
-            domain: light
-            entity_id: light.kitchen_spot_1
-            type: brightness_increase
-          - device_id: e836e81e18dc6f85bbbc3f99ed08fa3f
-            domain: light
-            entity_id: light.kitchen_spot_2
-            type: brightness_increase
-          - device_id: 10e90f8f5fd8fbcad622ee22cef71d77
-            domain: light
-            entity_id: light.kitchen_spot_3
-            type: brightness_increase
+      - service: notify.fabian
+        data:
+          message: Test
+- id: '1643122910524'
+  alias: Coffee Ready
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.coffee_machine_operation_state
+    from: '99'
+    to: '100'
+  condition: []
+  action:
+  - service: notify.family
+    data:
+      message: De koffie is klaar!
+  mode: single
+- id: '1644526829055'
+  alias: OLED TV - Turn on automation
+  description: ''
+  trigger:
+  - platform: device
+    device_id: f1f0261d6334ee981c88f07b64fc9b09
+    domain: webostv
+    type: webostv.turn_on
+  condition: []
+  action:
+  - service: wake_on_lan.send_magic_packet
+    data:
+      mac: b4-e6-2a-8e-e9-2c
+  mode: single
+- id: '1645451066690'
+  alias: Tesla Charging Override
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.sonic_charger_sensor
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: device_tracker.sonic_location_tracker
+      state: home
+    - condition: time
+      weekday:
+      - sat
+      - sun
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.sonic_charger_switch
+  mode: single

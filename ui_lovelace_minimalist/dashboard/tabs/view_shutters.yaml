@@ -1,0 +1,17 @@
+title: "Rolluiken & Rolgordijnen"
+path: shutters
+icon: mdi:window-shutter
+visible: false
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        template: card_title
+        name: Rolluiken & Rolgordijnen
+        label: "Rolluiken"
+      - !include /config/ui_lovelace_minimalist/dashboard/shutters/all_shutters.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Rolgordijnen"
+      - !include /config/ui_lovelace_minimalist/dashboard/shutters/all_covers.yaml

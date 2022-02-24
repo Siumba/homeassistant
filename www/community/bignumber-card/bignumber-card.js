@@ -1,6 +1,6 @@
 class BigNumberCard extends HTMLElement {
-  _DEFAULT_STYLE = 'var(--label-badge-blue)';
-  _DEFAULT_COLOR = 'var(--primary-text-color)';
+  _DEFAULT_STYLE(){return 'var(--label-badge-blue)';}
+  _DEFAULT_COLOR(){return 'var(--primary-text-color)';}
   
   constructor() {
     super();
@@ -16,6 +16,7 @@ class BigNumberCard extends HTMLElement {
     const cardConfig = Object.assign({}, config);
     if (!cardConfig.scale) cardConfig.scale = "50px";
     if (!cardConfig.from) cardConfig.from = "left";
+    if (!cardConfig.opacity) cardConfig.opacity = "0.5";
     if (!cardConfig.noneString) cardConfig.nonestring = null;
     if (!cardConfig.noneCardClass) cardConfig.noneCardClass = null;
     if (!cardConfig.noneValueClass) cardConfig.noneValueClass = null;
@@ -44,6 +45,7 @@ class BigNumberCard extends HTMLElement {
         line-height: calc(var(--base-unit) * 1.3);
         color: var(--bignumber-color);
       }
+      #value small{opacity: ${cardConfig.opacity}}
       #title {
         font-size: calc(var(--base-unit) * 0.5);
         line-height: calc(var(--base-unit) * 0.5);
@@ -88,7 +90,7 @@ class BigNumberCard extends HTMLElement {
       if (severity && severity.color) return severity.color;
     }
     if (config.color) return config.color;
-    return this._DEFAULT_COLOR;
+    return this._DEFAULT_COLOR();
   }
 
   _getStyle(entityState, config) {
@@ -97,7 +99,7 @@ class BigNumberCard extends HTMLElement {
       if (severity && severity.bnStyle) return severity.bnStyle;
     }
     if (config.bnStyle) return config.bnStyle;
-    return this._DEFAULT_STYLE;
+    return this._DEFAULT_STYLE();
   }
 
   _translatePercent(value, min, max) {
@@ -107,7 +109,9 @@ class BigNumberCard extends HTMLElement {
   set hass(hass) {
     const config = this._config;
     const root = this.shadowRoot;
-    const entityState = hass.states[config.entity].state;
+    const entityState = config.attribute 
+      ? hass.states[config.entity].attributes[config.attribute] 
+      : hass.states[config.entity].state;
     const measurement = hass.states[config.entity].attributes.unit_of_measurement || "";
 
     if (entityState !== this._entityState) {
@@ -116,13 +120,12 @@ class BigNumberCard extends HTMLElement {
       }
       root.querySelector("ha-card").style.setProperty('--bignumber-fill-color', `${this._getStyle(entityState, config)}`);
       root.querySelector("ha-card").style.setProperty('--bignumber-color', `${this._getColor(entityState, config)}`);
-      if (config.hideunit==true) 
-        { root.getElementById("value").textContent = `${entityState}`; }
-      else 
-        { root.getElementById("value").textContent = `${entityState} ${measurement}`; }
       this._entityState = entityState
       let value = (config.round == null ? entityState : parseFloat(entityState).toFixed(config.round)) 
-      root.getElementById("value").textContent = `${value} ${measurement}`;
+      if (config.hideunit==true) 
+        { root.getElementById("value").textContent = `${value}`; }
+      else 
+        { root.getElementById("value").innerHTML = `${value}<small>${measurement}</small>`; }
       if (this.isNoneConfig){
         if (isNaN(value)) {
           if (config.noneString) {

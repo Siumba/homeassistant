@@ -5,15 +5,11 @@ light:
   #                                                                          #
   ############################################################################
   - platform: switch
-    name: Floorlight
-    entity_id: switch.floorlight
-
-  - platform: switch
-    name: Garden Lights
+    name: Tuin Lampen
     entity_id: switch.garden_lights
 
   - platform: switch
-    name: Kitchen Lights
+    name: Keuken Spots
     entity_id: switch.kitchen_lights
 
   ############################################################################
@@ -22,51 +18,51 @@ light:
   #                                                                          #
   ############################################################################
   - platform: group
-    name: Driveway Door Lights
+    name: Voordeur Spots
     entities:
-      - light.driveway_door_spot_left
-      - light.driveway_door_spot_right
+      - light.oprit_deur_spot_links
+      - light.oprit_deur_spot_rechts
 
   - platform: group
-    name: Bedroom Sidelights
+    name: Slaapkamer Bedlampen
     entities:
       - light.fabians_lamp
       - light.aimees_lamp
 
   - platform: group
-    name: Kitchen Lamp
+    name: Keuken Lamp
     entities:
-      - light.kitchen_spot_1
-      - light.kitchen_spot_2
-      - light.kitchen_spot_3
+      - light.keuken_spot_1
+      - light.keuken_spot_2
+      - light.keuken_spot_3
 
   - platform: group
-    name: Diner Filaments
+    name: Eettafel
     entities:
-      - light.diner_lamp_1
-      - light.diner_lamp_2
-      - light.diner_lamp_3
+      - light.eettafel_lamp_1
+      - light.eettafel_lamp_2
+      - light.eettafel_lamp_3
 
   - platform: group
-    name: Bureau Lights
+    name: Bureau Hoeklampen
     entities:
-      - light.bureau_light_left
-      - light.bureau_lightstrip
-      - light.bureau_light_right
+      - light.bureau_lamp_links
+      - light.bureau_lamp_rechts
+      - light.bureau_lichtstrip
 
   - platform: group
-    name: Hallway Spots
+    name: Overloop Spots
     entities:
-      - light.hallway_upstairs_spot_1
-      - light.hallway_upstairs_spot_2
-      - light.hallway_upstairs_spot_3
-      - light.hallway_upstairs_spot_4
-      - light.hallway_upstairs_spot_5
+      - light.overloop_spot_1
+      - light.overloop_spot_2
+      - light.overloop_spot_3
+      - light.overloop_spot_4
+      - light.overloop_spot_5
 
   - platform: group
-    name: Patio Spots
+    name: Overkapping Spots
     entities:
-      - light.patio_spot_1
-      - light.patio_spot_2
-      - light.patio_spot_3
-      - light.patio_spot_4
+      - light.overkapping_spot_1
+      - light.overkapping_spot_2
+      - light.overkapping_spot_3
+      - light.overkapping_spot_4

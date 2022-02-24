@@ -1,0 +1,19 @@
+title: Camera's
+icon: mdi:cctv
+path: cameras
+visible: true
+panel: true
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+          - type: "custom:webrtc-camera"
+            url: !secret rtsp_url_front_door
+            muted: false # disable sound, default true
+            background: true # run stream when not displayed (ex. for quick video loading), default false
+            mse: false # disable MSE mode, if you want save NabuCasa traffic
+            webrtc: true

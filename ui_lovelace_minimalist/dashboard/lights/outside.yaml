@@ -1,0 +1,33 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Voordeur
+      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_color: true
+    entity: light.voordeur_spots
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Schuur
+      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_color: true
+    entity: light.schuur_lamp
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Overkapping
+      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_color: true
+    entity: light.overkapping_spots
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Tuin
+    entity: light.tuin_lampen

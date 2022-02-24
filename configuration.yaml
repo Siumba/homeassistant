@@ -2,9 +2,12 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+http:
+  base_url: !secret external_url
+
 homeassistant:
-  external_url: https://ihaduckdns.duckdns.org
-  internal_url: http://192.168.1.111:8123
+  external_url: !secret external_url
+  internal_url: !secret internal_url
 
   packages: !include_dir_named packages
   customize: !include customize.yaml
