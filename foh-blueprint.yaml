@@ -1,0 +1,188 @@
+blueprint:
+  name: Philips Friends of Hue Smart Switch (4 buttons)
+  description: >
+    Philips Friends of Hue Smart Switch (4 buttons), like senic https://de.senic.com based on PTM 215ZE EnOcean Alliance
+  domain: automation
+  source_url: https://github.com/myGithub-Markus/home-assistant_blueprints/blob/main/deconz_friends_of_hue_smart_switch_fourfold_button.yaml
+  input:
+    remote:
+      name: Remote
+      description: Senic remote
+      selector:
+        device:
+          integration: hue
+    button_one_single_press:
+      name: 1 button - Single press
+      description: Action to run on a single press of the button 1
+      default: []
+      selector:
+        action: {}
+    button_one_hold_in:
+      name: 1 button - Hold in
+      description: Action to run when button 1 held in
+      default: []
+      selector:
+        action: {}
+    button_one_hold_release:
+      name: 1 button - Hold release
+      description:  Action to run when button 1 was held in and released
+      default: []
+      selector:
+        action: {}
+    button_two_single_press:
+      name: 2 button - Single press
+      description: Action to run on a single press of the button 2
+      default: []
+      selector:
+        action: {}
+    button_two_hold_in:
+      name: 2 button - hold in
+      description: Action to run when button 2 held in
+      default: []
+      selector:
+        action: {}
+    button_two_hold_release:
+      name: 2 button - Hold release
+      description:  Action to run when button 2 was held in and released
+      default: []
+      selector:
+        action: {}
+    button_three_single_press:
+      name: 3 button - Single press
+      description: Action to run on a single press of the button 3
+      default: []
+      selector:
+        action: {}
+    button_three_hold_in:
+      name: 3 button - hold in
+      description: Action to run when button 3 held in
+      default: []
+      selector:
+        action: {}
+    button_three_hold_release:
+      name: 3 button - Hold release
+      description:  Action to run when button 3 was held in and released
+      default: []
+      selector:
+        action: {}
+    button_four_single_press:
+      name: 4 button - Single press
+      description: Action to run on a single press of the button 4
+      default: []
+      selector:
+        action: {}
+    button_four_hold_in:
+      name: 4 button - hold in
+      description: Action to run when button 4 held in
+      default: []
+      selector:
+        action: {}
+    button_four_hold_release:
+      name: 4 button - Hold release
+      description: Action to run when button 4 was held in and released
+      default: []
+      selector:
+        action: {}
+    both_buttons_one_and_two_single_press:
+      name: Both buttons 1 + 2 - Single press
+      description: Action to run on a single press of both buttons 1 + 2
+      default: []
+      selector:
+        action: {}
+    both_buttons_one_and_two_hold_in:
+      name: Both buttons 1 + 2 - hold in
+      description: Action to run when both buttons 1 + 2 held in
+      default: []
+      selector:
+        action: {}
+    both_buttons_one_and_two_hold_release:
+      name: Both buttons 1 + 2 - Hold release
+      description: Action to run when both buttons 1 + 2 were held in and released
+      default: []
+      selector:
+        action: {}
+    both_buttons_three_and_four_single_press:
+      name: Both buttons 3 + 4 - Single press
+      description: Action to run on a single press of both buttons 3 + 4
+      default: []
+      selector:
+        action: {}
+    both_buttons_three_and_four_hold_in:
+      name: Both buttons 3 + 4 - hold in
+      description: Action to run when both buttons 3 + 4 held in
+      default: []
+      selector:
+        action: {}
+    both_buttons_three_and_four_hold_release:
+      name: Both buttons 3 + 4 - Hold release
+      description: Action to run when both buttons 3 + 4 were held in and released
+      default: []
+      selector:
+        action: {}
+        
+mode: restart
+max_exceeded: silent
+
+trigger:
+- platform: state
+  device_id: !input 'remote'
+  attribute: action
+
+action:
+- variables:
+    hue_event: '{{ trigger.event.data.event }}'
+- choose:
+  - conditions:
+    - '{{ hue_event == 1001 }}'
+    sequence: !input 'button_one_hold_in'
+  - conditions:
+    - '{{ hue_event == 1002 }}'
+    sequence: !input 'button_one_single_press'
+  - conditions:
+    - '{{ hue_event == 1003 }}'
+    sequence: !input 'button_one_hold_release'
+  - conditions:
+    - '{{ hue_event == 2001 }}'
+    sequence: !input 'button_two_hold_in'
+  - conditions:
+    - '{{ hue_event == 2002 }}'
+    sequence: !input 'button_two_single_press'
+  - conditions:
+    - '{{ hue_event == 2003 }}'
+    sequence: !input 'button_two_hold_release'
+  - conditions:
+    - '{{ hue_event == 3001 }}'
+    sequence: !input 'button_three_hold_in'
+  - conditions:
+    - '{{ hue_event == 3002 }}'
+    sequence: !input 'button_three_single_press'
+  - conditions:
+    - '{{ hue_event == 3003 }}'
+    sequence: !input 'button_three_hold_release'
+  - conditions:
+    - '{{ hue_event == 4001 }}'
+    sequence: !input 'button_four_hold_in'
+  - conditions:
+    - '{{ hue_event == 4002 }}'
+    sequence: !input 'button_four_single_press'
+  - conditions:
+    - '{{ hue_event == 4003 }}'
+    sequence: !input 'button_four_hold_release'
+  - conditions:
+    - '{{ hue_event == 5001 }}'
+    sequence: !input 'both_buttons_one_and_two_hold_in'
+  - conditions:
+    - '{{ hue_event == 5002 }}'
+    sequence: !input 'both_buttons_one_and_two_single_press'
+  - conditions:
+    - '{{ hue_event == 5003 }}'
+    sequence: !input 'both_buttons_one_and_two_hold_release'
+  - conditions:
+    - '{{ hue_event == 6001 }}'
+    sequence: !input 'both_buttons_three_and_four_hold_in'
+  - conditions:
+    - '{{ hue_event == 6002 }}'
+    sequence: !input 'both_buttons_three_and_four_single_press'
+  - conditions:
+    - '{{ hue_event == 6003 }}'
+    sequence: !input 'both_buttons_three_and_four_hold_release'  
