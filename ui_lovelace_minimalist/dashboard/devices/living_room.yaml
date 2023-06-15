@@ -1,0 +1,19 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: custom_card_tv_button
+    entity: media_player.tv_living_room
+    name: OLED TV
+    icon: mdi:television
+  # - type: "custom:button-card"
+  #   template: card_media_player
+  #   entity: media_player.arc
+  #   variables:
+  #     ulm_card_media_player_name: ARC
+  # - type: "custom:button-card"
+  #   template: custom_card_media_player_sonos
+  #   variables:
+  #     ulm_card_media_player_with_controls_name: "ARC"
+  #     ulm_card_media_player_with_controls_entity: media_player.arc

@@ -1,0 +1,51 @@
+home_connect_alt:
+  client_id: E4DEE57C532C46B67277F8707CC9F180DCC6F78CACE4FD4200F9BE0AA2A92604
+  client_secret: 5A036CB23E6AFA3497761FF4070EC59397C834E99623DD8FC888C90138FA549B
+  language: nl
+  sensor_value_translation: server
+
+switch:
+  - platform: template
+    switches:
+      koffiezetapparaat:
+        friendly_name: Koffiezetapparaat
+        value_template: "{{ is_state('select.711090388869000347_bsh_common_setting_powerstate', 'BSH.Common.EnumType.PowerState.On') }}"
+        turn_on:
+          service: select.select_option
+          target:
+            entity_id: select.711090388869000347_bsh_common_setting_powerstate
+          data:
+            option: "BSH.Common.EnumType.PowerState.On"
+        turn_off:
+          service: select.select_option
+          target:
+            entity_id: select.711090388869000347_bsh_common_setting_powerstate
+          data:
+            option: "BSH.Common.EnumType.PowerState.Standby"
+      oven:
+        friendly_name: Oven
+        value_template: "{{ is_state('select.siemens_hm836gpb6_68a40e82d648_bsh_common_setting_powerstate', 'BSH.Common.EnumType.PowerState.On') }}"
+        turn_on:
+          service: select.select_option
+          target:
+            entity_id: select.siemens_hm836gpb6_68a40e82d648_bsh_common_setting_powerstate
+          data:
+            option: "BSH.Common.EnumType.PowerState.On"
+        turn_off:
+          service: select.select_option
+          target:
+            entity_id: select.siemens_hm836gpb6_68a40e82d648_bsh_common_setting_powerstate
+          data:
+            option: "BSH.Common.EnumType.PowerState.Standby"
+binary_sensor:
+  - platform: template
+    sensors:
+      kookplaat:
+        friendly_name: Kookplaat
+        value_template: "{{ is_state('sensor.siemens_ex977lxv5e_68a40e7ca0c2_bsh_common_setting_powerstate', 'BSH.Common.EnumType.PowerState.On') }}"
+        # value_template: >-
+        #   {% if states('sensor.siemens_ex977lxv5e_68a40e7ca0c2_bsh_common_setting_powerstate') == 'BSH.Common.EnumType.PowerState.On' %}
+        #     Aan
+        #   {% else %}
+        #     Uit
+        #   {% endif %}

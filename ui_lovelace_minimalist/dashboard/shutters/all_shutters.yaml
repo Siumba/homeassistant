@@ -3,14 +3,8 @@ columns: 2
 square: false
 cards:
   - type: "custom:button-card"
-    template:
-      - card_cover_buttons
-    variables:
-      ulm_card_cover_buttons_name: "Slaapkamer Rolluik"
-      ulm_card_cover_buttons_entity: cover.slaapkamer_rolluik
+    template: card_cover
+    entity: cover.slaapkamer_rolluik
   - type: "custom:button-card"
-    template:
-      - card_cover_buttons
-    variables:
-      ulm_card_cover_buttons_name: "Bureau Rolluik"
-      ulm_card_cover_buttons_entity: cover.bureau_rolluik
+    template: card_cover
+    entity: cover.bureau_rolluik

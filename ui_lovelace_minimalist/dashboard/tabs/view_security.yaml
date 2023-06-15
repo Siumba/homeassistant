@@ -1,0 +1,48 @@
+title: Security
+path: security
+icon: mdi:security
+visible: false
+
+cards:
+  - type: vertical-stack
+    cards:
+      - type: "custom:alarmo-card"
+        entity: alarm_control_panel.alarmo
+        states:
+          armed_away:
+            hide: false
+            button_label: "Alarm aanzetten"
+            state_label: "Actief"
+          disarmed:
+            hide: false
+            button_label: "Alarm uitzetten"
+            state_label: "Uit"
+      - type: "custom:button-card"
+        template: card_title
+        name: "Kamers"
+        label: "Woonkamer"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/living_room.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Keuken"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/kitchen.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Bureau"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/bureau.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Slaapkamer"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/bedroom.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Badkamer"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/bathroom.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Logeerkamer"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/guest_room.yaml
+      - type: "custom:button-card"
+        template: card_title
+        label: "Overloop"
+      - !include /config/ui_lovelace_minimalist/dashboard/doors_windows/hallway.yaml

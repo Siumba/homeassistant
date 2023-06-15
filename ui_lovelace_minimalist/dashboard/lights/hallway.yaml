@@ -6,13 +6,20 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Gang
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
     entity: light.gang_beneden
 
   - type: "custom:button-card"
     template: card_light
     variables:
       ulm_card_light_name: Overloop
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.overloop_spots
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Tafellamp
+      ulm_card_light_enable_popup: false
+    entity: light.gang_tafel_lamp

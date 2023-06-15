@@ -8,10 +8,55 @@ cards:
     cards:
       - type: "custom:button-card"
         template: card_title
-        name: Rolluiken & Rolgordijnen
-        label: "Rolluiken"
-      - !include /config/ui_lovelace_minimalist/dashboard/shutters/all_shutters.yaml
+        name: Rolluiken, Rolgordijnen, Jaloezieën
+        label: "Woonkamer"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: card_cover
+            entity: cover.woonkamer_jaloezieen
+            variables:
+              ulm_card_cover_name: "Jaloezieën"
       - type: "custom:button-card"
         template: card_title
-        label: "Rolgordijnen"
-      - !include /config/ui_lovelace_minimalist/dashboard/shutters/all_covers.yaml
+        label: "Slaapkamer"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: card_cover
+            entity: cover.slaapkamer_rolluik
+            variables:
+              ulm_card_cover_name: "Rolluik"
+          - type: "custom:button-card"
+            template: card_cover
+            entity: cover.slaapkamer_rolgordijn
+            variables:
+              ulm_card_cover_name: "Rolgordijn"
+      - type: "custom:button-card"
+        template: card_title
+        label: "Bureau"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: card_cover
+            entity: cover.bureau_rolluik
+            variables:
+              ulm_card_cover_name: "Rolluik"
+      - type: "custom:button-card"
+        template: card_title
+        label: "Logeerkamer"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: "custom:button-card"
+            template: card_cover
+            entity: cover.logeerkamer_jaloezieen
+            variables:
+              ulm_card_cover_name: "Jaloezieën"

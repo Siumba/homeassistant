@@ -1,0 +1,9 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: card_cover
+    entity: cover.woonkamer_jaloezieen
+    variables:
+      ulm_card_cover_name: "Jaloezieën"

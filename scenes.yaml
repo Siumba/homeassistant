@@ -129,6 +129,10 @@
     light.hoeklamp_tv:
       min_mireds: 153
       max_mireds: 500
+      effect_list:
+      - None
+      - candle
+      - fire
       supported_color_modes:
       - color_temp
       - xy
@@ -144,44 +148,87 @@
       xy_color:
       - 0.551
       - 0.391
+      effect: None
       mode: normal
       dynamics: none
       friendly_name: Hoeklamp TV
-      supported_features: 40
+      supported_features: 44
       state: 'on'
     light.driepoot_lamp:
+      effect_list:
+      - None
+      - candle
       supported_color_modes:
       - brightness
       color_mode: brightness
       brightness: 64
+      effect: None
       mode: normal
       dynamics: none
       friendly_name: Driepoot Lamp
-      supported_features: 40
+      supported_features: 44
       state: 'on'
     light.eettafel:
       supported_color_modes:
       - brightness
       color_mode: brightness
       brightness: 51
-      entity_id:
-      - light.eettafel_lamp_1
-      - light.eettafel_lamp_2
-      - light.eettafel_lamp_3
+      is_hue_group: true
+      hue_scenes: []
+      hue_type: zone
+      lights:
+      - Eettafel Lamp 3
+      - Eettafel Lamp 1
+      - Eettafel Lamp 2
+      dynamics: false
       icon: mdi:lightbulb-group
       friendly_name: Eettafel
       supported_features: 40
       state: 'on'
     light.gang_tafel_lamp:
+      effect_list:
+      - None
+      - candle
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 25
       mode: normal
       dynamics: none
       friendly_name: Gang Tafel Lamp
-      supported_features: 40
+      supported_features: 44
+      color_mode: brightness
+      brightness: 25
+      effect: None
       state: 'on'
+    light.keuken_hoeklamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - None
+      - candle
+      - fire
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Keuken Hoeklamp
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 417
+      hs_color:
+      - 29.157
+      - 76.348
+      rgb_color:
+      - 255
+      - 154
+      - 60
+      xy_color:
+      - 0.559
+      - 0.389
+      effect: None
+      state: 'on'
+  metadata: {}
 - id: '1636367115047'
   name: Good Morning Lighting
   entities:
@@ -300,64 +347,15 @@
       friendly_name: Bloom TV
       supported_features: 40
       state: 'on'
-- id: '1642243188215'
-  name: Bedroom Evening Good Night
-  entities:
-    light.slaapkamer_bedlampen:
-      min_mireds: 153
-      max_mireds: 500
-      supported_color_modes:
-      - color_temp
-      - xy
-      color_mode: color_temp
-      brightness: 76
-      color_temp: 443
-      hs_color:
-      - 29.599
-      - 82.123
-      rgb_color:
-      - 255
-      - 148
-      - 45
-      xy_color:
-      - 0.574
-      - 0.388
-      entity_id:
-      - light.fabians_lamp
-      - light.aimees_lamp
-      icon: mdi:lightbulb-group
-      friendly_name: Slaapkamer Bedlampen
-      supported_features: 40
-      state: 'on'
-    light.slaapkamer_lichtstrip:
-      min_mireds: 153
-      max_mireds: 500
-      supported_color_modes:
-      - color_temp
-      - xy
-      color_mode: color_temp
-      brightness: 76
-      color_temp: 443
-      hs_color:
-      - 29.599
-      - 82.123
-      rgb_color:
-      - 255
-      - 148
-      - 45
-      xy_color:
-      - 0.574
-      - 0.388
-      mode: normal
-      dynamics: none
-      friendly_name: Slaapkamer Lichtstrip
-      supported_features: 40
-      state: 'on'
 - id: '1645737141503'
-  name: Garden Lights Cozy
+  name: Garden Lights & Patio
   entities:
-    switch.garden_lights:
+    light.garden_lights:
+      supported_color_modes:
+      - onoff
       friendly_name: Garden Lights
+      supported_features: 0
+      color_mode: onoff
       state: 'on'
     light.overkapping_spots:
       min_mireds: 153
@@ -365,6 +363,20 @@
       supported_color_modes:
       - color_temp
       - xy
+      is_hue_group: true
+      hue_scenes:
+      - Miami
+      - Overkapping Chill
+      hue_type: zone
+      lights:
+      - Overkapping Spot 2
+      - Overkapping Spot 3
+      - Overkapping Spot 1
+      - Overkapping Spot 4
+      dynamics: false
+      icon: mdi:lightbulb-group
+      friendly_name: Overkapping Spots
+      supported_features: 40
       color_mode: xy
       brightness: 102
       hs_color:
@@ -377,14 +389,6 @@
       xy_color:
       - 0.5833
       - 0.3744
-      entity_id:
-      - light.overkapping_spot_1
-      - light.overkapping_spot_2
-      - light.overkapping_spot_3
-      - light.overkapping_spot_4
-      icon: mdi:lightbulb-group
-      friendly_name: Overkapping Spots
-      supported_features: 40
       state: 'on'
     light.schuur_lamp:
       min_mireds: 153
@@ -392,6 +396,10 @@
       supported_color_modes:
       - color_temp
       - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Schuur Lamp
+      supported_features: 40
       color_mode: xy
       brightness: 26
       hs_color:
@@ -404,8 +412,5 @@
       xy_color:
       - 0.449
       - 0.381
-      mode: normal
-      dynamics: none
-      friendly_name: Schuur Lamp
-      supported_features: 40
       state: 'on'
+  metadata: {}

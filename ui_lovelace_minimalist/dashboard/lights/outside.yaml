@@ -6,7 +6,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Voordeur
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.voordeur_spots
 
@@ -14,7 +14,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Schuur
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.schuur_lamp
 
@@ -22,7 +22,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Overkapping
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.overkapping_spots
 
@@ -30,4 +30,5 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Tuin
-    entity: light.tuin_lampen
+      ulm_card_light_enable_popup: false
+    entity: light.garden_lights

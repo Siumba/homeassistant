@@ -1,0 +1,1058 @@
+title: "Energie"
+path: energy-year
+icon: mdi:lighting-bolt
+visible: false
+cards:
+  - type: vertical-stack
+    cards:
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: custom:button-card
+      #       name: nu
+      #       tap_action:
+      #         action: call-service
+      #         service: input_number.set_value
+      #         service_data:
+      #           entity_id: input_number.offset_energy_year
+      #           value: 0
+      #     - type: custom:button-card
+      #       name: Dag
+      #       tap_action:
+      #         action: navigate
+      #         navigation_path: /lovelace/energy-day
+      #     - type: custom:button-card
+      #       name: Week
+      #       tap_action:
+      #         action: navigate
+      #         navigation_path: /lovelace/energy-week
+      #     - type: custom:button-card
+      #       name: Maand
+      #       tap_action:
+      #         action: navigate
+      #         navigation_path: /lovelace/energy-month
+      #     - type: custom:button-card
+      #       name: Jaar
+      #       tap_action:
+      #         action: navigate
+      #         navigation_path: /lovelace/energy-year
+      # - type: horizontal-stack
+        # cards:
+        #   - type: custom:button-card
+        #     name: <
+        #     tap_action:
+        #       action: call-service
+        #       service: input_number.increment
+        #       service_data:
+        #         entity_id: input_number.offset_energy_year
+        #   - type: custom:config-template-card
+        #     variables:
+        #       date: |
+        #         a => {
+        #           var date = new Date();
+        #           date.setMonth(date.getMonth() - states['input_number.offset_energy_year'].state);
+        #           return (date.getMonth()+1 + '/' + (date.getFullYear()));
+        #         }
+        #     entities:
+        #       - input_number.offset_energy_year
+        #     card:
+        #       type: custom:button-card
+        #       name: ${(date())}
+        #       tap_action:
+        #         action: call-service
+        #         service: input_number.set_value
+        #         service_data:
+        #           entity_id: input_number.offset_energy_year
+        #           value: 0
+        #   - type: custom:button-card
+        #     name: ">"
+        #     tap_action:
+        #       action: call-service
+        #       service: input_number.decrement
+        #       service_data:
+        #         entity_id: input_number.offset_energy_year
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+                var state = Math.round(states[variables.ulm_chip_mdi_icon_state_entity].state * 100) / 100
+                
+                return state + ' kW';
+            ]]]"
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:lightning-bolt
+              ulm_chip_mdi_icon_state_entity: sensor.electricity_meter_power_consumption
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+                var state = Math.round(states[variables.ulm_chip_mdi_icon_state_entity].state * 100) / 100
+                
+                return state + ' kW';
+            ]]]"
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:solar-power-variant
+              ulm_chip_mdi_icon_state_entity: sensor.solaredge_production_kw
+          - type: "custom:button-card"
+            template: 
+              - "chip_mdi_icon_state"
+              - "ulm_language_variables"
+            label: "[[[ 
+                var state = Math.round(states[variables.ulm_chip_mdi_icon_state_entity].state * 100) / 100
+                
+                return state + ' kW';
+            ]]]"
+            variables:
+              ulm_chip_mdi_icon_state_icon: mdi:ev-plug-type2
+              ulm_chip_mdi_icon_state_entity: sensor.evcharger_nmha_chargerate
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: custom:mod-card
+        card:
+          type: horizontal-stack
+          cards:
+          - type: custom:button-card
+            name: Dag
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 10px 0px 0px 10px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - height: 50px
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/energy-day
+          - type: custom:button-card
+            name: Week
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 0px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - height: 50px
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/energy-week
+          - type: custom:button-card
+            name: Maand
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 0px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - height: 50px
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/energy-month
+          - type: custom:button-card
+            name: Jaar
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 0px 10px 10px 0px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - border-right: 1px solid
+              - height: 50px
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/energy-year
+        card_mod:
+          style: 
+            hui-horizontal-stack-card:
+              $: |
+                #root > * {
+                    margin: 0 !important;
+                }
+      - type: custom:mod-card
+        card:
+          type: horizontal-stack
+          cards:
+          - type: custom:button-card
+            name: <
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 10px 0px 0px 10px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - height: 50px
+            tap_action:
+              action: call-service
+              service: input_number.increment
+              service_data:
+                entity_id: input_number.offset_energy_year
+          - type: custom:config-template-card
+            variables:
+              date: |
+                a => {
+                  var date = new Date();
+                  date.setFullYear(date.getFullYear() - states['input_number.offset_energy_year'].state);
+                  return (date.getFullYear());
+                }
+            entities:
+              - input_number.offset_energy_year
+            card:
+              type: custom:button-card
+              name: ${(date())}
+              styles:
+                card:
+                - -webkit-border-radius: 0
+                - -moz-border-radius: 0
+                - border-radius: 0px
+                - border-top: 1px solid
+                - border-bottom: 1px solid
+                - border-left: 1px solid
+                - height: 50px
+              tap_action:
+                action: call-service
+                service: input_number.set_value
+                service_data:
+                  entity_id: input_number.offset_energy_year
+                  value: 0
+          - type: custom:button-card
+            name: ">"
+            styles:
+              card:
+              - -webkit-border-radius: 0
+              - -moz-border-radius: 0
+              - border-radius: 0px 10px 10px 0px
+              - border-top: 1px solid
+              - border-bottom: 1px solid
+              - border-left: 1px solid
+              - border-right: 1px solid
+              - height: 50px
+            tap_action:
+              action: call-service
+              service: input_number.decrement
+              service_data:
+                entity_id: input_number.offset_energy_year
+          - type: custom:mod-card
+            card:
+              type: horizontal-stack
+              cards:
+                - type: custom:button-card
+                  name: Nu
+                  styles:
+                    card:
+                    - -webkit-border-radius: 0
+                    - -moz-border-radius: 0
+                    - border-radius: 10px
+                    - border: 1px solid
+                    - height: 50px
+                  tap_action:
+                    action: call-service
+                    service: input_number.set_value
+                    service_data:
+                      entity_id: input_number.offset_energy_year
+                      value: 0
+            card_mod:
+              style: |
+                ha-card {
+                    padding-left: 10px;
+                }
+        card_mod:
+          style: 
+            hui-horizontal-stack-card:
+              $: |
+                #root > * {
+                    margin: 0 !important;
+                }
+      - type: custom:config-template-card
+        variables:
+          date: |
+            a => {
+              var date = new Date();
+              date.setFullYear(date.getFullYear() - states['input_number.offset_energy_year'].state);
+              return (date.getFullYear());
+            }
+        entities:
+          - input_number.offset_energy_year
+        card:
+          type: custom:apexcharts-card
+          apex_config:
+            chart:
+              stacked: true
+              type: area
+            legend:
+              show: false
+            annotations:
+              position: back
+              yaxis:
+              - 'y': 0
+                strokeDashArray: 0
+                borderColor: '#DDDDDD'
+                borderWidth: 1
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              decimals: 2
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 1year
+          cache: true
+          span:
+            start: year
+            offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+          header:
+            show: true
+            title: Stroom
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          series:
+            - entity: sensor.actual_solar_consumption_kwh
+              name: Zonnepanelen - Verbruik
+              type: column
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              extend_to: now
+              stroke_width: 2
+              color: "#ff9800"
+              float_precision: 2
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.electricity_meter_energy_consumption_tarif_1
+              name: Daltarief
+              type: column
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              extend_to: now
+              stroke_width: 2
+              color: "#478dbf"
+              float_precision: 2
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.electricity_meter_energy_consumption_tarif_2
+              name: Normaaltarief
+              type: column
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              extend_to: now
+              stroke_width: 2
+              color: "#7bbcf1"
+              float_precision: 2
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.net_production_kwh
+              name: Teruglevering
+              type: column
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              extend_to: now
+              stroke_width: 2
+              color: "#79678e"
+              invert: true
+              float_precision: 2
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.yearly_energy_meter_no_wallbox
+              name: Eigen verbruik
+              type: column
+              group_by:
+                func: max
+                duration: 5m
+              color: "#7bbcf1"
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.yearly_energy_meter_net
+              name: Netto meter
+              type: column
+              group_by:
+                func: max
+                duration: 5m
+              color: "#7bbcf1"
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_wallbox_yearly
+              name: Laadpaal
+              type: column
+              group_by:
+                func: max
+                duration: 5m
+              color: "#1C77C7"
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          date: |
+            a => {
+              var date = new Date();
+              date.setFullYear(date.getFullYear() - states['input_number.offset_energy_year'].state);
+              return (date.getFullYear());
+            }
+        entities:
+          - input_number.offset_energy_year
+        card:
+          type: custom:apexcharts-card
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              min: 0
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 1year
+          cache: true
+          span:
+            start: year
+            offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+          header:
+            show: true
+            title: Gas
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          series:
+            - entity: sensor.gas_meter_gas_consumption
+              name: Gas
+              type: column
+              unit: m³
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              stroke_width: 2
+              extend_to: now
+              color: red
+              float_precision: 2
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.yearly_gas_meter
+              name: Gas
+              type: column
+              group_by:
+                func: max
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: red
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          date: |
+            a => {
+              var date = new Date();
+              date.setFullYear(date.getFullYear() - states['input_number.offset_energy_year'].state);
+              return (date.getFullYear());
+            }
+        entities:
+          - input_number.offset_energy_year
+        card:
+          type: custom:apexcharts-card
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              min: 0
+              max: 5
+              forceNiceScale: true
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 1year
+          cache: true
+          span:
+            start: year
+            offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+          header:
+            show: true
+            title: Zonnepanelen
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          series:
+            - entity: sensor.solaredge_ac_energy_kwh
+              type: column
+              stroke_width: 2
+              extend_to: now
+              color: "#ff9800"
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.util_solaredge_yearly
+              name: Opbrengst
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#ff9800"
+              group_by:
+                func: max
+                duration: 5m
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_solaredge_consumption_yearly
+              name: Gebruik
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#ff9800"
+              group_by:
+                func: max
+                duration: 5m
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.yearly_energy_meter_return
+              name: Teruglevering
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#79678e"
+              group_by:
+                func: max
+                duration: 5m
+              float_precision: 2
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          date: |
+            a => {
+              var date = new Date();
+              date.setFullYear(date.getFullYear() - states['input_number.offset_energy_year'].state);
+              return (date.getFullYear());
+            }
+        entities:
+          - input_number.offset_energy_year
+        card:
+          type: custom:apexcharts-card
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              min: 0
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 1year
+          cache: true
+          span:
+            start: year
+            offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+          header:
+            show: true
+            title: Water
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          all_series_config:
+            unit: L
+          series:
+            - entity: sensor.water_total
+              name: Water
+              type: column
+              statistics:
+                type: state
+                period: month
+              group_by:
+                func: diff
+                duration: 1month
+                fill: last
+                start_with_last: true
+              stroke_width: 2
+              extend_to: now
+              color: "#3C94FA"
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.util_water_usage_yearly
+              name: Water
+              type: column
+              group_by:
+                func: max
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#3C94FA"
+              show:
+                in_chart: false
+                legend_value: false
+      # - type: custom:config-template-card
+      #   variables:
+      #     date: |
+      #       a => {
+      #         var date = new Date();
+      #         date.setMonth(date.getMonth() - states['input_number.offset_energy_year'].state);
+      #         return (date.getMonth()+1 + '/' + (date.getFullYear()));
+      #       }
+      #   entities:
+      #     - input_number.offset_energy_year
+      #   card:
+      #     type: custom:apexcharts-card
+      #     apex_config:
+      #       chart:
+      #         stacked: true
+      #         type: area
+      #       legend:
+      #         show: false
+      #       stroke:
+      #         show: true
+      #         curve: smooth
+      #       yaxis:
+      #         forceNiceScale: true
+      #         min: 0
+      #       responsive:
+      #         - breakpoint: 10000
+      #           options:
+      #             chart:
+      #               height: 250px
+      #     graph_span: 1year
+      #     span:
+      #       start: year
+      #       offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+      #     header:
+      #       show: true
+      #       title: Stroom
+      #       standard_format: true
+      #       show_states: true
+      #       colorize_states: true
+      #     now:
+      #       show: true
+      #     series:
+      #       - entity: sensor.actual_solar_consumption_kwh
+      #         name: Zonnepanelen - Verbruik
+      #         type: column
+      #         statistics:
+      #           type: state
+      #           period: month
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #           fill: last
+      #           start_with_last: true
+      #         extend_to: now
+      #         stroke_width: 2
+      #         color: "#ff9800"
+      #         float_precision: 2
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.electricity_meter_energy_consumption_tarif_1
+      #         name: Daltarief
+      #         type: column
+      #         statistics:
+      #           type: state
+      #           period: month
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #           fill: last
+      #           start_with_last: true
+      #         extend_to: now
+      #         stroke_width: 2
+      #         color: "#478dbf"
+      #         float_precision: 2
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.electricity_meter_energy_consumption_tarif_2
+      #         name: Normaaltarief
+      #         type: column
+      #         statistics:
+      #           type: state
+      #           period: month
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #           fill: last
+      #           start_with_last: true
+      #         extend_to: now
+      #         stroke_width: 2
+      #         color: "#7bbcf1"
+      #         float_precision: 2
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.net_production_kwh
+      #         name: Teruglevering
+      #         type: column
+      #         statistics:
+      #           type: state
+      #           period: month
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #           fill: last
+      #           start_with_last: true
+      #         extend_to: now
+      #         stroke_width: 2
+      #         color: "#79678e"
+      #         invert: true
+      #         float_precision: 2
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.yearly_energy_meter_no_wallbox
+      #         name: Stroomverbruik
+      #         type: column
+      #         group_by:
+      #           func: max
+      #           duration: 5m
+      #         color: "#7bbcf1"
+      #         float_precision: 2
+      #         show:
+      #           in_chart: false
+      #           legend_value: false
+      #       - entity: sensor.util_wallbox_yearly
+      #         name: Laadpaal
+      #         type: column
+      #         group_by:
+      #           func: max
+      #           duration: 5m
+      #         color: "#1C77C7"
+      #         show:
+      #           in_chart: false
+      #           legend_value: false
+      # - type: custom:config-template-card
+      #   variables:
+      #     date: |
+      #       a => {
+      #         var date = new Date();
+      #         date.setMonth(date.getMonth() - states['input_number.offset_energy_year'].state);
+      #         return (date.getMonth()+1 + '/' + (date.getFullYear()));
+      #       }
+      #   entities:
+      #     - input_number.offset_energy_year
+      #   card:
+      #     type: custom:apexcharts-card
+      #     style: |
+      #       #header__states {
+      #         display: grid !important;
+      #         grid-auto-flow: row;
+      #         grid-template-columns: repeat(3, 30%);
+      #       }
+
+      #       #states__state {
+      #         flex-basis: 30%;
+      #         margin: 5px;
+      #       }
+      #     apex_config:
+      #       chart:
+      #         type: area
+      #         height: 150px
+      #       legend:
+      #         show: false
+      #       stroke:
+      #         show: true
+      #         curve: smooth
+      #       yaxis:
+      #         forceNiceScale: true
+      #         min: 0
+      #       responsive:
+      #         - breakpoint: 10000
+      #           options:
+      #             chart:
+      #               height: 250px
+      #     graph_span: 1year
+      #     span:
+      #       start: year
+      #       offset: ${('-' + states['input_number.offset_energy_year'].state + ' month')}
+      #     header:
+      #       show: true
+      #       title: Gas
+      #       standard_format: true
+      #       show_states: true
+      #       colorize_states: true
+      #     now:
+      #       show: true
+      #     all_series_config:
+      #       unit: m³
+      #     series:
+      #       - entity: sensor.gas_meter_gas_consumption
+      #         type: column
+      #         statistics:
+      #           type: state
+      #           period: month
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #           fill: last
+      #           start_with_last: true
+      #         stroke_width: 2
+      #         extend_to: now
+      #         color: red
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.yearly_gas_meter
+      #         type: column
+      #         group_by:
+      #           func: max
+      #           duration: 1m
+      #         stroke_width: 2
+      #         extend_to: now
+      #         color: red
+      #         show:
+      #           in_chart: false
+      #           legend_value: false
+      # - type: custom:config-template-card
+      #   variables:
+      #     date: |
+      #       a => {
+      #         var date = new Date();
+      #         date.setMonth(date.getMonth() - states['input_number.offset_energy_year'].state);
+      #         return (date.getMonth()+1 + '/' + (date.getFullYear()));
+      #       }
+      #   entities:
+      #     - input_number.offset_energy_year
+      #   card:
+      #     type: custom:apexcharts-card
+      #     style: |
+      #       #header__states {
+      #         display: grid !important;
+      #         grid-auto-flow: row;
+      #         grid-template-columns: repeat(3, 30%);
+      #       }
+
+      #       #states__state {
+      #         flex-basis: 30%;
+      #         margin: 5px;
+      #       }
+      #     apex_config:
+      #       chart:
+      #         type: area
+      #         height: 150px
+      #       legend:
+      #         show: false
+      #       stroke:
+      #         show: true
+      #         curve: smooth
+      #       yaxis:
+      #         forceNiceScale: true
+      #       responsive:
+      #         - breakpoint: 10000
+      #           options:
+      #             chart:
+      #               height: 250px
+      #     graph_span: 1year
+      #     span:
+      #       start: year
+      #       offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+      #     header:
+      #       show: true
+      #       title: Zonnepanelen
+      #       standard_format: true
+      #       show_states: true
+      #       colorize_states: true
+      #     now:
+      #       show: true
+      #     series:
+      #       - entity: sensor.solaredge_ac_energy_kwh
+      #         type: column
+      #         stroke_width: 2
+      #         extend_to: now
+      #         color: "#ff9800"
+      #         group_by:
+      #           func: diff
+      #           duration: 1month
+      #         show:
+      #           in_header: false
+      #           legend_value: false
+      #       - entity: sensor.util_solaredge_yearly
+      #         type: column
+      #         stroke_width: 2
+      #         extend_to: now
+      #         color: "#ff9800"
+      #         group_by:
+      #           func: max
+      #           duration: 5m
+      #         show:
+      #           in_chart: false
+      #           legend_value: false
+      # - type: custom:config-template-card
+        # variables:
+        #   date: |
+        #     a => {
+        #       var date = new Date();
+        #       date.setMonth(date.getMonth() - states['input_number.offset_energy_year'].state);
+        #       return (date.getMonth()+1 + '/' + (date.getFullYear()));
+        #     }
+        # entities:
+        #   - input_number.offset_energy_year
+        # card:
+        #   type: custom:apexcharts-card
+        #   style: |
+        #     #header__states {
+        #       display: grid !important;
+        #       grid-auto-flow: row;
+        #       grid-template-columns: repeat(3, 30%);
+        #     }
+
+        #     #states__state {
+        #       flex-basis: 30%;
+        #       margin: 5px;
+        #     }
+        #   apex_config:
+        #     chart:
+        #       type: area
+        #       height: 150px
+        #     legend:
+        #       show: false
+        #     stroke:
+        #       show: true
+        #       curve: smooth
+        #     yaxis:
+        #       forceNiceScale: true
+        #       min: 0
+        #     responsive:
+        #       - breakpoint: 10000
+        #         options:
+        #           chart:
+        #             height: 250px
+        #   graph_span: 1year
+        #   span:
+        #     start: year
+        #     offset: ${('-' + states['input_number.offset_energy_year'].state + 'year')}
+        #   header:
+        #     show: true
+        #     title: Water
+        #     standard_format: true
+        #     show_states: true
+        #     colorize_states: true
+        #   now:
+        #     show: true
+        #   all_series_config:
+        #     unit: L
+        #   series:
+        #     - entity: sensor.water_total
+        #       type: column
+        #       group_by:
+        #         func: diff
+        #         duration: 1month
+        #       stroke_width: 2
+        #       extend_to: now
+        #       color: '#3C94FA'
+        #       show:
+        #         in_header: false
+        #         legend_value: false
+        #     - entity: sensor.util_water_usage_yearly
+        #       type: column
+        #       group_by:
+        #         func: max
+        #         duration: 5m
+        #       stroke_width: 2
+        #       extend_to: now
+        #       color: '#3C94FA'
+        #       show:
+        #         in_chart: false
+        #         legend_value: false

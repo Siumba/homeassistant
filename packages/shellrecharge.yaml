@@ -1,0 +1,71 @@
+# NewMotion/Shell Recharge json sensor
+rest:
+  - resource: "http://192.168.1.155:12800/user/status"
+    method: GET
+    scan_interval: 30
+    sensor:
+      - name: evcharger_nmha_chargerStatus
+        unique_id: evcharger_nmha_chargerStatus
+        value_template: >
+          {% if value_json.connectors.0.transaction is defined %}
+            {{ value_json.connectors.0.transaction.status }}
+          {% else %}
+            {{ "Disconnected" }}
+          {% endif %}
+        icon: mdi:ev-station
+      - name: evcharger_nmha_carStatus
+        unique_id: evcharger_nmha_carStatus
+        value_template: >
+          {% if value_json.connectors.0.transaction is defined %}
+            {{ value_json.connectors.0.transaction.statusCar }}
+          {% else %}
+            {{ "Disconnected" }}
+          {% endif %}
+        icon: mdi:ev-station
+      - name: evcharger_nmha_consumed_session
+        unique_id: evcharger_nmha_consumed_session
+        value_template: >
+          {% if value_json.connectors.0.transaction is defined %}
+            {{ value_json.connectors.0.transaction.consumed | float | multiply(0.001) | round(2) }}
+          {% else %}
+            {{ 0 }}
+          {% endif %}
+        device_class: energy
+        unit_of_measurement: "kWh"
+        icon: mdi:ev-plug-type2
+      - name: evcharger_nmha_chargeRate
+        unique_id: evcharger_nmha_chargeRate
+        value_template: >
+          {% set pattern = '\d+.?\d+' %}
+          {{ value_json.connectors.0.chargingRate | regex_findall_index(pattern) if value_json.connectors.0.chargingRate is search(pattern) else 0 }}
+        device_class: power
+        unit_of_measurement: "kW"
+      - name: evcharger_nmha_chargeNeed
+        unique_id: evcharger_nmha_chargeNeed
+        value_template: >
+          {% set pattern = '\d+.?\d+' %}
+          {{ value_json.connectors.0.chargingNeed | regex_findall_index(pattern) if value_json.connectors.0.chargingNeed is search(pattern) else 0 }}
+        device_class: power
+        unit_of_measurement: "kW"
+  - resource: "http://192.168.1.155:12800/user/transactions"
+    method: GET
+    scan_interval: 30
+    sensor:
+      - name: evcharger_nmha_consumed_total
+        unique_id: evcharger_nmha_consumed_total
+        value_template: >
+          {% set pattern = '\d+.?\d+' %}
+          {% if value_json.value.19.meterStop is defined %}
+            {{ value_json.value.19.meterStop | regex_findall_index(pattern) | int / 1000 if value_json.value.19.meterStop is search(pattern) }}
+          {% else %}
+            {% if value_json.value.19.meterStart is defined %}
+              {% set totalconsumedtemp = value_json.value.19.meterStart | regex_findall_index(pattern) | int / 1000 + states('sensor.evcharger_nmha_consumed_session') | float %}
+              {{ totalconsumedtemp | round(2) if totalconsumedtemp is search(pattern) }}
+            {% else %}
+              {{ states('sensor.evcharger_nmha_consumed_total') | float }}
+            {% endif %}
+          {% endif %}
+        device_class: "energy"
+        unit_of_measurement: "kWh"
+        state_class: "total_increasing"
+        icon: mdi:ev-plug-type2

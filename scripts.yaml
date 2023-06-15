@@ -1,18 +1,128 @@
 play_radio_538:
   alias: Play Radio 538
   sequence:
-    - service: media_player.select_source
-      data:
-        source: Radio 538
-      entity_id: media_player.bureau
+  - service: media_player.select_source
+    data:
+      source: Radio 538
+    entity_id: media_player.bureau
   mode: single
-
 play_home_alone:
   alias: Play Home Alone
   sequence:
-    - service: media_player.play_media
-      data_template:
-        entity_id:
-          - media_player.bureau_display
-        media_content_id: /local/audio/i'm-gonna-give-you-to-the-count-of-10-to-get-your-ugly-yellow-no-good-keister-off-my-property-before-i-pump-your-guts-full-of-lead.mp3
-        media_content_type: audio/mp3
+  - service: media_player.play_media
+    data_template:
+      entity_id:
+      - media_player.bureau_display
+      media_content_id: /local/audio/i'm-gonna-give-you-to-the-count-of-10-to-get-your-ugly-yellow-no-good-keister-off-my-property-before-i-pump-your-guts-full-of-lead.mp3
+      media_content_type: audio/mp3
+thermostat_auto:
+  alias: Thermostat Turn on Auto
+  sequence:
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: auto
+    target:
+      entity_id: '{{ entity }}
+
+        '
+  mode: single
+thermostat_off:
+  alias: Thermostat Turn off
+  sequence:
+  - service: climate.turn_off
+    data: {}
+    target:
+      entity_id: '{{ entity }}
+
+        '
+  mode: single
+siren_on:
+  alias: Siren ON
+  sequence:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.95
+    target:
+      entity_id: media_player.alarm_speakers
+  - repeat:
+      until:
+      - condition: state
+        entity_id: input_boolean.alarm
+        state: 'off'
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: 0.95
+        target:
+          entity_id: media_player.alarm_speakers
+      - service: media_player.play_media
+        target:
+          entity_id: media_player.alarm_speakers
+        data:
+          media_content_id: media-source://media_source/local/alarm.mp3
+          media_content_type: audio/mpeg
+        metadata: {}
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 8
+          milliseconds: 0
+  mode: single
+siren_off:
+  alias: Siren OFF
+  sequence:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.1
+    target:
+      entity_id: media_player.alarm_speakers
+  mode: single
+siren_ticking:
+  alias: Siren Ticking
+  sequence:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.5
+    target:
+      entity_id: media_player.alarm_speakers
+  - repeat:
+      while:
+      - condition: state
+        entity_id: alarm_control_panel.alarmo
+        state: pending
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: 0.5
+        target:
+          entity_id: media_player.alarm_speakers
+      - service: media_player.play_media
+        target:
+          entity_id: media_player.alarm_speakers
+        data:
+          media_content_id: media-source://media_source/local/tick.mp3
+          media_content_type: audio/mpeg
+        metadata: {}
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 1
+          milliseconds: 0
+  mode: single
+living_room_tv_reset:
+  alias: Living Room TV - Reset
+  sequence:
+  - service: media_player.volume_up
+    data: {}
+    target:
+      entity_id: media_player.tv_living_room
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: media_player.volume_down
+    data: {}
+    target:
+      entity_id: media_player.tv_living_room
+  mode: single

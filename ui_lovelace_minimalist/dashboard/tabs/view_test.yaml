@@ -1,0 +1,602 @@
+# title: "Energie"
+# path: energy
+# icon: mdi:lighting-bolt
+# visible: false
+
+# cards:
+#   - type: vertical-stack
+#     cards:
+#       - type: grid
+#         columns: 1
+#         square: false
+#         cards:
+#           - type: energy-date-selection
+#           - type: energy-distribution
+#           - type: energy-usage-graph
+#           - type: energy-solar-graph
+#           - type: energy-gas-graph
+
+#       - type: grid
+#         columns: 1
+#         square: false
+#         cards:
+#           - type: "custom:button-card"
+#             template: card_graph
+#             variables:
+#               ulm_card_graph_color: "var(--google-blue)"
+#               ulm_card_graph_name: Stroomverbruik
+#               ulm_card_graph_entity: sensor.actual_consumption
+#               ulm_card_graph_color2: "var(--google-yellow)"
+#               ulm_card_graph_entity2: sensor.power_production
+#               ulm_card_graph_type: fill
+#               ulm_card_graph_hours: 24
+#       - type: grid
+#         columns: 2
+#         square: false
+#         cards:
+#           - type: custom:mini-graph-card
+#             entities:
+#               - entity: sensor.daily_energy_meter
+#             hours_to_show: 168
+#             aggregate_func: last
+#             group_by: date
+#             show:
+#               graph: bar
+#           - type: custom:mini-graph-card
+#             entities:
+#               - entity: sensor.daily_gas_meter
+#             hours_to_show: 168
+#             aggregate_func: last
+#             group_by: date
+#             show:
+#               graph: bar
+# title: "Energie"
+# path: energy
+# icon: mdi:lighting-bolt
+# visible: false
+title: "Energie"
+path: energy
+icon: mdi:lighting-bolt
+visible: false
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: <
+            tap_action:
+              action: call-service
+              service: input_number.increment
+              service_data:
+                entity_id: input_number.offset_energy_day
+          - type: custom:button-card
+            name: nu
+            tap_action:
+              action: call-service
+              service: input_number.set_value
+              service_data:
+                entity_id: input_number.offset_energy_day
+                value: 0
+          - type: custom:button-card
+            name: ">"
+            tap_action:
+              action: call-service
+              service: input_number.decrement
+              service_data:
+                entity_id: input_number.offset_energy_day
+      - type: custom:config-template-card
+        variables:
+          datum: |
+            a => {
+              var date = new Date();
+              date.setDate(date.getDate() - states['input_number.offset_energy_day'].state);
+              return (date.getDate() + '/' + (date.getMonth()+1));
+            }
+        entities:
+          - input_number.offset_energy_day
+        card:
+          type: custom:apexcharts-card
+          style: |
+            #header__states {
+              display: grid !important;
+              grid-auto-flow: row;
+              grid-template-columns: repeat(3, 30%);
+            }
+
+            #states__state {
+              flex-basis: 30%;
+              margin: 5px;
+            }
+          apex_config:
+            chart:
+              stacked: true
+              type: area
+              height: 150px
+            legend:
+              show: false
+            fill:
+              type:
+                - gradient
+              gradient:
+                shadeIntensity: 1
+                inverseColors: false
+                opacityFrom: 0.45
+                opacityTo: 0.05
+                stops:
+                  - 20
+                  - 100
+                  - 100
+                  - 100
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              min: 0
+              decimals: 2
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 24h
+          span:
+            start: day
+            offset: ${('-' + states['input_number.offset_energy_day'].state + 'd')}
+          header:
+            show: true
+            title: Stroom
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          series:
+            - entity: sensor.hourly_energy_meter_no_wallbox
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: "#6BA547"
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.util_wallbox_hourly
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: "#619ED6"
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.daily_energy_meter_no_wallbox
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#6BA547"
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.monthly_energy_meter_no_wallbox
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#6BA547"
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.current_consumption_no_wallbox_kw
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#6BA547"
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_wallbox_daily
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#619ED6"
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_wallbox_monthly
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#619ED6"
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.evcharger_nmha_chargerate
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: "#619ED6"
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          datum: |
+            a => {
+              var date = new Date();
+              date.setDate(date.getDate() - states['input_number.offset_energy_day'].state);
+              return (date.getDate() + '/' + (date.getMonth()+1));
+            }
+        entities:
+          - input_number.offset_energy_day
+        card:
+          type: custom:apexcharts-card
+          style: |
+            #header__states {
+              display: grid !important;
+              grid-auto-flow: row;
+              grid-template-columns: repeat(3, 30%);
+            }
+
+            #states__state {
+              flex-basis: 30%;
+              margin: 5px;
+            }
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            fill:
+              type:
+                - gradient
+              gradient:
+                shadeIntensity: 1
+                inverseColors: false
+                opacityFrom: 0.45
+                opacityTo: 0.05
+                stops:
+                  - 20
+                  - 100
+                  - 100
+                  - 100
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              min: 0
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 24h
+          span:
+            start: day
+            offset: ${('-' + states['input_number.offset_energy_day'].state + 'd')}
+          header:
+            show: true
+            title: Gas
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          all_series_config:
+            unit: m³
+          series:
+            - entity: sensor.hourly_gas_meter
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: red
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.daily_gas_meter
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: red
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.monthly_gas_meter
+              type: column
+              group_by:
+                func: last
+                duration: 5m
+              stroke_width: 2
+              extend_to: now
+              color: red
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          datum: |
+            a => {
+              var date = new Date();
+              date.setDate(date.getDate() - states['input_number.offset_energy_day'].state);
+              return (date.getDate() + '/' + (date.getMonth()+1));
+            }
+        entities:
+          - input_number.offset_energy_day
+        card:
+          type: custom:apexcharts-card
+          style: |
+            #header__states {
+              display: grid !important;
+              grid-auto-flow: row;
+              grid-template-columns: repeat(3, 30%);
+            }
+
+            #states__state {
+              flex-basis: 30%;
+              margin: 5px;
+            }
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            fill:
+              type:
+                - gradient
+              gradient:
+                shadeIntensity: 1
+                inverseColors: false
+                opacityFrom: 0.45
+                opacityTo: 0.05
+                stops:
+                  - 20
+                  - 100
+                  - 100
+                  - 100
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              min: 0
+              max: 5
+              forceNiceScale: true
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 24h
+          span:
+            start: day
+            offset: ${('-' + states['input_number.offset_energy_day'].state + 'd')}
+          header:
+            show: true
+            title: Zonnepanelen
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          series:
+            - entity: sensor.solaredge_production_kw
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#F7D027"
+              group_by:
+                func: last
+                duration: 15m
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.util_solaredge_daily
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#F7D027"
+              group_by:
+                func: last
+                duration: 15m
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_solaredge_monthly
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#F7D027"
+              group_by:
+                func: last
+                duration: 15m
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.solaredge_production_kw
+              type: area
+              stroke_width: 2
+              extend_to: now
+              color: "#F7D027"
+              group_by:
+                func: last
+                duration: 15m
+              show:
+                in_chart: false
+                legend_value: false
+      - type: custom:config-template-card
+        variables:
+          datum: |
+            a => {
+              var date = new Date();
+              date.setDate(date.getDate() - states['input_number.offset_energy_day'].state);
+              return (date.getDate() + '/' + (date.getMonth()+1));
+            }
+        entities:
+          - input_number.offset_energy_day
+        card:
+          type: custom:apexcharts-card
+          style: |
+            #header__states {
+              display: grid !important;
+              grid-auto-flow: row;
+              grid-template-columns: repeat(3, 30%);
+            }
+
+            #states__state {
+              flex-basis: 30%;
+              margin: 5px;
+            }
+          apex_config:
+            chart:
+              type: area
+              height: 150px
+            legend:
+              show: false
+            fill:
+              type:
+                - gradient
+              gradient:
+                shadeIntensity: 1
+                inverseColors: false
+                opacityFrom: 0.45
+                opacityTo: 0.05
+                stops:
+                  - 20
+                  - 100
+                  - 100
+                  - 100
+            stroke:
+              show: true
+              curve: smooth
+            yaxis:
+              forceNiceScale: true
+              min: 0
+            responsive:
+              - breakpoint: 10000
+                options:
+                  chart:
+                    height: 250px
+          graph_span: 24h
+          span:
+            start: day
+            offset: ${('-' + states['input_number.offset_energy_day'].state + 'd')}
+          header:
+            show: true
+            title: Water
+            standard_format: true
+            show_states: true
+            colorize_states: true
+          now:
+            show: true
+          all_series_config:
+            unit: L
+          series:
+            - entity: sensor.util_water_usage_hourly
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: aqua
+              show:
+                in_header: false
+                legend_value: false
+            - entity: sensor.util_water_usage_daily
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: aqua
+              show:
+                in_chart: false
+                legend_value: false
+            - entity: sensor.util_water_usage_monthly
+              type: column
+              group_by:
+                func: last
+                duration: 1h
+              stroke_width: 2
+              extend_to: now
+              color: aqua
+              show:
+                in_chart: false
+                legend_value: false
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: grid
+  #       columns: 2
+  #       square: false
+  #       cards:
+  #         - type: energy-usage-graph
+  #         - type: energy-solar-graph
+  #         - type: energy-gas-graph
+  #         - type: energy-distribution
+
+  #     - type: grid
+  #       columns: 1
+  #       square: false
+  #       cards:
+  #         - type: "custom:button-card"
+  #           template: card_graph
+  #           variables:
+  #             ulm_card_graph_color: "var(--google-blue)"
+  #             ulm_card_graph_name: Stroomverbruik
+  #             ulm_card_graph_entity: sensor.actual_consumption
+  #             ulm_card_graph_color2: "var(--google-yellow)"
+  #             ulm_card_graph_entity2: sensor.power_production
+  #             ulm_card_graph_type: fill
+  #             ulm_card_graph_hours: 24
+  #     - type: grid
+  #       columns: 2
+  #       square: false
+  #       cards:
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.daily_energy_meter
+  #           hours_to_show: 168
+  #           aggregate_func: last
+  #           group_by: date
+  #           show:
+  #             graph: bar
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.daily_gas_meter
+  #           hours_to_show: 168
+  #           aggregate_func: last
+  #           group_by: date
+  #           show:
+  #             graph: bar

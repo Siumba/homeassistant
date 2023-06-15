@@ -11,11 +11,11 @@ custom_card_tv_button:
   label: |-
     [[[
       if (entity.state === "on") {
-        return variables.ulm_on;
+        return 'Aan';
       } else if (entity.state === "off") {
-        return variables.ulm_off;
+        return 'Uit';
       } else if (entity.state === "unavailable") {
-        return variables.ulm_unavailable;
+        return 'Niet beschikbaar';
       } else {
         return entity.state;
       }

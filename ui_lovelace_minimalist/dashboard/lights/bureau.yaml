@@ -6,7 +6,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Bureau
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.bureau_lamp
 
@@ -14,6 +14,6 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Hoeklampen
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.bureau_hoeklampen

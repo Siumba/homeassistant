@@ -1,168 +1,65 @@
-################################################
-## Sensor
-################################################
 sensor:
   - platform: afvalwijzer
-    provider: mijnafvalwijzer # (required, default = mijnafvalwijzer) either choose mijnafvalwijzer or afvalstoffendienstkalender
+    provider: mijnafvalwijzer # (required, default = mijnafvalwijzer) either choose mijnafvalwijzer, afvalstoffendienstkalender or rova
     postal_code: 5627GG # (required, default = '')
     street_number: 12 # (required, default = '')
-    exclude_pickup_today: false # (optional, default = false) to take or not to take Today into account in the next pickup.
+    suffix: "" # (optional, default = '')
+    exclude_pickup_today: false # (optional, default = true) to take or not to take Today into account in the next pickup.
     default_label: Geen # (optional, default = Geen) label if no date found
+    id: "" # (optional, default = '') use if you'd like to have multiple waste pickup locations in HASS
+    exclude_list: "" # (optional, default = '') comma separated list of wast types (case ignored). F.e. "papier, gft"
 
   - platform: template
     sensors:
       afvalwijzer_next_item_formatted:
         value_template: >-
-          {% if is_state('sensor.afvalwijzer_next_item', 'gft') %}Groene container
+          {% if is_state('sensor.afvalwijzer_next_item', 'gft') %}GFT
           {% elif is_state('sensor.afvalwijzer_next_item', 'papier') %}Papier
           {% elif is_state('sensor.afvalwijzer_next_item', 'pmd') %}PMD
-          {% elif is_state('sensor.afvalwijzer_next_item', 'restafval') %}Grijze container
+          {% elif is_state('sensor.afvalwijzer_next_item', 'restafval') %}Restafval
           {% else %}Geen
           {% endif %}
         friendly_name: "Next pickup item"
 
       afvalwijzer_today_formatted:
         value_template: >-
-          {% if is_state('sensor.afvalwijzer_today', 'gft') %}Groene container
+          {% if is_state('sensor.afvalwijzer_today', 'gft') %}GFT
           {% elif is_state('sensor.afvalwijzer_today', 'papier') %}Papier
           {% elif is_state('sensor.afvalwijzer_today', 'pmd') %}PMD
-          {% elif is_state('sensor.afvalwijzer_today', 'restafval') %}Grijze container
+          {% elif is_state('sensor.afvalwijzer_today', 'restafval') %}Restafval
           {% else %}Geen
           {% endif %}
         friendly_name: "Vandaag"
 
       afvalwijzer_tomorrow_formatted:
         value_template: >-
-          {% if is_state('sensor.afvalwijzer_tomorrow', 'gft') %}Groene container
+          {% if is_state('sensor.afvalwijzer_tomorrow', 'gft') %}GFT
           {% elif is_state('sensor.afvalwijzer_tomorrow', 'papier') %}Papier
           {% elif is_state('sensor.afvalwijzer_tomorrow', 'pmd') %}PMD
-          {% elif is_state('sensor.afvalwijzer_tomorrow', 'restafval') %}Grijze container
+          {% elif is_state('sensor.afvalwijzer_tomorrow', 'restafval') %}Restafval
           {% else %}Geen
           {% endif %}
         friendly_name: "Morgen"
 
       afvalwijzer_day_after_tomorrow_formatted:
         value_template: >-
-          {% if is_state('sensor.afvalwijzer_day_after_tomorrow', 'gft') %}Groene container
+          {% if is_state('sensor.afvalwijzer_day_after_tomorrow', 'gft') %}GFT
           {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'papier') %}Papier
           {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'pmd') %}PMD
-          {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'restafval') %}Grijze container
+          {% elif is_state('sensor.afvalwijzer_day_after_tomorrow', 'restafval') %}Restafval
           {% else %}Geen
           {% endif %}
         friendly_name: "Overmorgen"
 
-################################################
-## Inputs
-################################################
-input_boolean:
-  waste_moved:
-    name: Waste has been moved
-    initial: off
-    icon: mdi:delete-empty
-  waste_reminder:
-    name: Waste reminder enabled
-    initial: on
-    icon: mdi:delete-empty
-  trash_outside:
-    name: Trash outside reminder
-    initial: off
-    icon: mdi:delete-empty
-
-################################################
-## Automation
-################################################
-automation:
-  - alias: Afval - Herstel notificatie
-    trigger:
-      platform: state
-      entity_id: input_boolean.waste_moved
-      to: "on"
-      for:
-        hours: 12
-    action:
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.waste_moved
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.waste_reminder
-
-  - alias: Afval - Bevestig notificatie
-    trigger:
-      - platform: event
-        event_type: mobile_app_notification_action
-        event_data:
-          action: "MARK_WASTE_MOVED"
-    action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.waste_moved
-
-  - alias: Afval - Verzend notificatie - Tomorrow
-    trigger:
-      platform: time_pattern
-      hours: "/1"
-    condition:
-      condition: and
-      conditions:
-        - condition: state
-          entity_id: input_boolean.waste_moved
-          state: "off"
-        - condition: state
-          entity_id: input_boolean.waste_reminder
-          state: "on"
-        - condition: time
-          after: "18:00:00"
-          before: "23:00:00"
-        - condition: template
-          value_template: "{{ states('sensor.afvalwijzer_tomorrow_formatted') != 'Geen' }}"
-    action:
-      - service: notify.family
-        data:
-          title: "Afval"
-          message: "Morgen wordt {{ states.sensor.afvalwijzer_tomorrow_formatted.state }} opgehaald. Zet het afval aan de straat."
-          data:
-            actions:
-              - action: "MARK_WASTE_MOVED"
-                title: "Staat aan de straat"
-                activationMode: "background"
-                authenticationRequired: no
-                destructive: yes
-                behavior: "default"
-      # # TEST
-      # - service: notify.family
-      #   data:
-      #     title: iOS notification
-      #     message: >
-      #       {{states('sensor.afvalwijzer_today')|title}} wordt vandaag opgehaald, zet het afval aan de straat
-      #     data:
-      #       actions:
-      #         - action: MARK_TRASH_MOVED
-      #           title: Afval verwerkt
-      #           authenticationRequired: false
-      #           activationMode: background
-      #           destructive: true
-      #       push:
-      #         badge: 5
-      #       action_data:
-      #         entity_id: input_boolean.trash_outside
-  # TEST
-  - alias: Mark trash as moved outside from notification
-    id: Mark trash as moved outside from notification
-    trigger:
-      platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: MARK_TRASH_MOVED
-    action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.trash_outside
-      - service: persistent_notification.dismiss
-        data:
-          notification_id: >
-            trash-notification-{{'today' if is_state('persistent_notification.trash_notification_today','notifying')
-                                else 'tomorrow'}}
-      - service: notify.family
-        data:
-          title: iOS notification
-          message: Afval staat aan de straat
-          data:
-            push:
-              badge: 0
+ios:
+  push:
+    categories:
+      - name: Afval
+        identifier: "afval"
+        actions:
+          - identifier: "MARK_TRASH_MOVED"
+            title: "Afval verwerkt"
+            activationMode: "background"
+            authenticationRequired: no
+            destructive: yes
+            behavior: "default"

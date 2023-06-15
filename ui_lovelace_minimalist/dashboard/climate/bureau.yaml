@@ -1,0 +1,11 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: custom_card_thermostat
+    entity: climate.bureau_thermostaat
+    variables:
+      ulm_card_thermostat_name: Verwarming
+      ulm_card_thermostat_enable_collapse: true
+      ulm_card_thermostat_enable_popup: true

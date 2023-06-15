@@ -1,0 +1,96 @@
+sensor:
+  - platform: template
+    sensors:
+      ihouse_temperature_range:
+        friendly_name: "iHouse Temperature Range"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {% set min = states('sensor.ihouse_temperature_min') | float %}
+          {% set max = states('sensor.ihouse_temperature_max') | float %}
+          {% if max - min <= 1 %}
+            {{ states('sensor.ihouse_temperature_max') }}
+          {% else %}
+            {{ states('sensor.ihouse_temperature_min') }} - {{ states('sensor.ihouse_temperature_max') }}
+          {% endif %}
+      bedroom_temperature:
+        friendly_name: "Bedroom Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.slaapkamer_thermostaat', 'current_temperature') }}
+      guestroom_temperature:
+        friendly_name: "Guestroom Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.logeerkamer_thermostaat', 'current_temperature') }}
+      bureau_temperature:
+        friendly_name: "Bureau Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.bureau_thermostaat', 'current_temperature') }}
+      bathroom_temperature:
+        friendly_name: "Bathroom Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.mts200_c8a9_thermostat', 'current_temperature') }}
+      woonkamer_temperature:
+        friendly_name: "Livingroom Temperature"
+        unit_of_measurement: "°C"
+        icon_template: mdi:thermometer
+        value_template: >-
+          {{ state_attr('climate.woonkamer_thermostaat', 'current_temperature') }}
+
+      badkamer_thermostaat_low_battery:
+        friendly_name: "Badkamer Thermostaat Batterij"
+        unit_of_measurement: "%"
+        icon_template: mdi:battery
+        value_template: >-
+          {% if states('binary_sensor.badkamer_thermostaat_low_battery') == 'On' %}
+            10
+          {% else %}
+            100
+          {% endif %}
+      bureau_thermostaat_battery:
+        friendly_name: "Bureau Thermostaat Batterij"
+        unit_of_measurement: "%"
+        icon_template: mdi:battery
+        value_template: >-
+          {% if states('binary_sensor.bureau_thermostaat_low_battery') == 'On' %}
+            10
+          {% else %}
+            100
+          {% endif %}
+      logeerkamer_thermostaat_battery:
+        friendly_name: "Logeerkamer Thermostaat Batterij"
+        unit_of_measurement: "%"
+        icon_template: mdi:battery
+        value_template: >-
+          {% if states('binary_sensor.logeerkamer_thermostaat_low_battery') == 'On' %}
+            10
+          {% else %}
+            100
+          {% endif %}
+      slaapkamer_thermostaat_battery:
+        friendly_name: "Slaapkamer Thermostaat Batterij"
+        unit_of_measurement: "%"
+        icon_template: mdi:battery
+        value_template: >-
+          {% if states('binary_sensor.slaapkamer_thermostaat_low_battery') == 'On' %}
+            10
+          {% else %}
+            100
+          {% endif %}
+      woonkamer_thermostaat_battery:
+        friendly_name: "Woonkamer Thermostaat Batterij"
+        unit_of_measurement: "%"
+        icon_template: mdi:battery
+        value_template: >-
+          {% if states('binary_sensor.woonkamer_thermostaat_low_battery') == 'On' %}
+            10
+          {% else %}
+            100
+          {% endif %}

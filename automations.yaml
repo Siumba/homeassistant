@@ -1,66 +1,5 @@
-- id: '1608774094962'
-  alias: Daily - Open Shutters
-  description: Open shutters at 9:00 or 11:00
-  trigger:
-  - platform: time
-    at: 09:00
-    id: 9u
-  - platform: time
-    at: '11:00'
-    id: 11u
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: 9u
-      - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: 'off'
-      - condition: time
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-      sequence:
-      - service: cover.open_cover
-        target:
-          entity_id:
-          - cover.slaapkamer_rolluik
-          - cover.bureau_rolluik
-      - service: cover.set_cover_position
-        data:
-          position: 40
-        target:
-          entity_id: cover.slaapkamer_rolgordijn
-    - conditions:
-      - condition: trigger
-        id: 11u
-      - condition: time
-        weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-        - sat
-        - sun
-      sequence:
-      - service: cover.open_cover
-        target:
-          entity_id:
-          - cover.slaapkamer_rolluik
-          - cover.bureau_rolluik
-      - service: cover.set_cover_position
-        data:
-          position: 40
-        target:
-          entity_id: cover.slaapkamer_rolgordijn
-  mode: single
 - id: '1609972900027'
-  alias: Daily - Everything OFF
+  alias: Daily - Bedtime
   description: ''
   trigger:
   - platform: time
@@ -70,243 +9,12 @@
   - service: light.turn_off
     data: {}
     target:
-      entity_id:
-      - light.slaapkamer_lamp
-      - light.slaapkamer_bedlampen
-      - light.bureau_hoeklampen
-      - light.bureau_lamp
-      - light.logeerkamer_lamp
-      - light.keuken_lamp
-      - light.woonkamer_lamp
-      - light.plafondstraler
-      - light.woonkamer_kast_lamp
-      - light.driepoot_lamp
-      - light.hoeklamp_tv
-      - light.overkapping_spots
-      - light.gang_beneden
-      - light.overloop_spots
-      - light.eettafel
-      - light.gang_tafel_lamp
-      - light.slaapkamer_lichtstrip
+      entity_id: light.all_lights
   - service: switch.turn_off
     target:
       entity_id:
-      - switch.garden_lights
-      - switch.kitchen_lights
-      - switch.coffee_machine_power
-  mode: single
-- id: '1609974493789'
-  alias: Daily - Driveway & Garden Lights - Midnight
-  description: Set lights to 20%
-  trigger:
-  - platform: time
-    at: 00:00
-  condition: []
-  action:
-  - scene: scene.driveway_garden_lights_after_midnight
-  mode: single
-- id: '1609974785728'
-  alias: Daily - Driveway & Garden Lights - Sunrise
-  description: Everything OFF
-  trigger:
-  - platform: sun
-    event: sunrise
-  condition: []
-  action:
-  - service: light.turn_off
+      - switch.koffiezetapparaat
     data: {}
-    target:
-      entity_id:
-      - light.voordeur_spots
-      - light.schuur_lamp
-  mode: single
-- id: '1609975184621'
-  alias: Daily - Driveway & Garden Lights - Sunset
-  description: Set lights to 50%
-  trigger:
-  - platform: sun
-    event: sunset
-  condition: []
-  action:
-  - scene: scene.driveway_garden_lights_after_sunset
-  mode: single
-- id: '1618259026456'
-  alias: Daily - Living Room Evening Lights
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: -0:30
-  condition: []
-  action:
-  - scene: scene.good_evening_lighting
-  mode: single
-- id: '1628538980655'
-  alias: Daily - Close Shutters
-  description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-  condition: []
-  action:
-  - service: cover.close_cover
-    target:
-      entity_id:
-      - cover.slaapkamer_rolluik
-      - cover.bureau_rolluik
-      - cover.slaapkamer_rolgordijn
-  mode: single
-- id: '1630148105598'
-  alias: Auto - Turn on AC when Temperature > 21C
-  description: Fires between 22:00 - 08:00
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.bedroom_ac_current_temp
-    above: 20.9
-    for:
-      hours: 0
-      minutes: 30
-      seconds: 0
-      milliseconds: 0
-  condition:
-  - condition: and
-    conditions:
-    - condition: or
-      conditions:
-      - condition: zone
-        entity_id: person.aimee
-        zone: zone.home
-      - condition: zone
-        entity_id: person.fabian
-        zone: zone.home
-    - condition: time
-      after: '22:00'
-      before: 08:00
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.bedroom_ac_cool
-  - service: climate.set_swing_mode
-    data:
-      entity_id: climate.bedroom_ac
-      swing_mode: '4'
-  - service: climate.set_fan_mode
-    data:
-      entity_id: climate.bedroom_ac
-      fan_mode: '1'
-  - service: climate.set_temperature
-    target:
-      entity_id: climate.bedroom_ac
-    data:
-      temperature: 20
-  mode: single
-- id: '1630168235518'
-  alias: Auto - Turn off AC when Temperature reached
-  description: ''
-  trigger:
-  - platform: template
-    value_template: '{{ state_attr(''climate.bedroom_ac'', ''current_temperature'')
-      | float < state_attr(''climate.bedroom_ac'', ''temperature'') | float }}
-
-      '
-    for: 00:30:00
-  condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: climate.bedroom_ac
-      state: 'off'
-      for: 00:60:00
-  action:
-  - service: climate.turn_off
-    target:
-      entity_id: climate.bedroom_ac
-  mode: single
-- id: '1631545495758'
-  alias: Auto - Turn on AC when Temperature > 21C (TEST)
-  description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.bedroom_ac_current_temp
-    above: '20.9'
-    for:
-      hours: 0
-      minutes: 30
-      seconds: 0
-      milliseconds: 0
-  condition: []
-  action:
-  - service: notify.mobile_app_iphone_xs_enterprise
-    data:
-      message: test ac
-  mode: single
-- id: '1632602572631'
-  alias: Auto - Turn on AC when Temperature > 21C (Daily check)
-  description: Fires between 22:00 - 08:00
-  trigger:
-  - platform: time
-    at: '22:00'
-  condition:
-  - condition: and
-    conditions:
-    - condition: or
-      conditions:
-      - condition: zone
-        entity_id: person.aimee
-        zone: zone.home
-      - condition: zone
-        entity_id: person.fabian
-        zone: zone.home
-    - condition: time
-      after: '22:00'
-      before: 08:00
-    - condition: numeric_state
-      entity_id: sensor.bedroom_ac_current_temp
-      above: 20.9
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.bedroom_ac_cool
-  - service: climate.set_swing_mode
-    data:
-      entity_id: climate.bedroom_ac
-      swing_mode: '4'
-  - service: climate.set_fan_mode
-    data:
-      entity_id: climate.bedroom_ac
-      fan_mode: '1'
-  - service: climate.set_temperature
-    target:
-      entity_id: climate.bedroom_ac
-    data:
-      temperature: 20
-  mode: single
-- id: '1636367190052'
-  alias: Daily - Good Morning
-  description: ''
-  trigger:
-  - platform: time
-    at: 07:00
-    id: 7u
-  - platform: time
-    id: 9u
-    at: 09:00
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: 7u
-      sequence:
-      - scene: scene.good_morning_lighting
-    - conditions:
-      - condition: trigger
-        id: 9u
-      sequence:
-      - service: light.turn_off
-        target:
-          entity_id: light.gang_tafel_lamp
-    default: []
   mode: single
 - id: '1637248229023'
   alias: Startup theme
@@ -318,173 +26,49 @@
   action:
   - service: frontend.set_theme
     data:
-      name: dmatik
-  mode: single
-- id: '1640511982203'
-  alias: Notification - Water Spock
-  description: ''
-  trigger:
-  - platform: state
-    from: '1'
-    to: '0'
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-    id: water_level
-    entity_id: sensor.drinkbak_waterniveau
-  - platform: time
-    at: 08:00
-    id: water_refresh
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: water_level
-      sequence:
-      - service: notify.notify
-        data:
-          message: Spock's water is op!
-    - conditions:
-      - condition: trigger
-        id: water_refresh
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr(''automation.notification_water_level_spock'',
-          ''last_triggered'')) > 432000 }}'
-      sequence:
-      - service: notify.notify
-        data:
-          message: Spock's water moet ververst worden!
-    default: []
-  mode: single
-- id: '1640733746612'
-  alias: Kitchen Switch
-  description: ''
-  trigger:
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 1
-    unique_id: aa173ae0-8268-4cb2-bfa9-faff5ff7521a
-    id: first_button_push
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 2
-    unique_id: 9121095e-d724-422e-a50e-eb2ecc8e6e61
-    id: second_button_push
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 3
-    unique_id: 6886c900-d6ae-4635-b9bb-340e38296859
-    id: third_button_push
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 4
-    unique_id: b2ab48d3-766a-43a9-ae6c-652d543291fa
-    id: fourth_button_push
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 1
-    unique_id: aa173ae0-8268-4cb2-bfa9-faff5ff7521a
-    id: first_button_hold
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 2
-    unique_id: 9121095e-d724-422e-a50e-eb2ecc8e6e61
-    id: second_button_hold
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 3
-    unique_id: 6886c900-d6ae-4635-b9bb-340e38296859
-    id: third_button_hold
-  - device_id: 5a6c8d03f9ad2a5f524940ed967ef34b
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 4
-    unique_id: b2ab48d3-766a-43a9-ae6c-652d543291fa
-    id: fourth_button_hold
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: first_button_push
-      sequence:
-      - service: light.turn_on
-        target:
-          entity_id: light.keuken_spots
-    - conditions:
-      - condition: trigger
-        id: second_button_push
-      sequence:
-      - service: light.turn_off
-        target:
-          entity_id: light.keuken_spots
-    - conditions:
-      - condition: trigger
-        id: third_button_push
-      sequence:
-      - service: light.turn_on
-        data:
-          brightness_pct: 100
-        target:
-          entity_id: light.keuken_lamp
-    - conditions:
-      - condition: trigger
-        id: fourth_button_push
-      sequence:
-      - service: light.turn_off
-        target:
-          entity_id: light.keuken_lamp
-    default: []
+      name: minimalist-desktop
   mode: single
 - id: '1640734709956'
-  alias: Tesla Remote
+  alias: Tesla Automations
   description: ''
   trigger:
-  - device_id: 50f0682618fa9ed43107292fadd53f35
+  - device_id: cdb02ec9ab88a3dbe8e2d769c3956b7d
     domain: hue
     platform: device
     type: initial_press
     subtype: 1
     unique_id: dfcef1c9-b45d-46d0-9d13-f5394040ae9b
     id: first_button_push
-  - device_id: 50f0682618fa9ed43107292fadd53f35
+  - device_id: cdb02ec9ab88a3dbe8e2d769c3956b7d
     domain: hue
     platform: device
     type: initial_press
     subtype: 2
     unique_id: 13e742b9-baab-4c52-8b31-a321b32fee2d
     id: second_button_push
-  - device_id: 50f0682618fa9ed43107292fadd53f35
+  - device_id: cdb02ec9ab88a3dbe8e2d769c3956b7d
     domain: hue
     platform: device
     type: initial_press
     subtype: 3
     unique_id: 8aaef8a5-8548-4aa1-a4e6-f832d35fa31b
     id: third_button_push
-  - device_id: 50f0682618fa9ed43107292fadd53f35
+  - device_id: cdb02ec9ab88a3dbe8e2d769c3956b7d
     domain: hue
     platform: device
     type: initial_press
     subtype: 4
     unique_id: 30db6d28-163b-4e37-b7c6-264d9b59ebef
     id: fourth_button_push
+  - platform: time
+    at: '22:00:00'
+    id: 22u
+  - platform: state
+    entity_id:
+    - sensor.evcharger_nmha_carstatus
+    id: chargeOn
+    to: idle
+    from: Disconnected
   condition: []
   action:
   - choose:
@@ -496,9 +80,9 @@
           count: '3'
           sequence:
           - service: switch.turn_on
-            target:
-              entity_id: switch.sonic_charger_switch
             data: {}
+            target:
+              entity_id: switch.sonic_charger
     - conditions:
       - condition: trigger
         id: second_button_push
@@ -521,19 +105,49 @@
       - repeat:
           count: '3'
           sequence:
-          - service: switch.turn_off
-            target:
-              entity_id: switch.sonic_charger_switch
+          - service: lock.open
             data: {}
-          - delay:
-              hours: 0
-              minutes: 0
-              seconds: 1
-              milliseconds: 0
-          - service: lock.unlock
             target:
-              entity_id: lock.sonic_charger_door_lock
-            data: {}
+              entity_id: lock.sonic_charge_port_latch
+    - conditions:
+      - condition: trigger
+        id: 22u
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.sonic_charger
+          state: 'off'
+        - condition: state
+          entity_id: device_tracker.sonic_location_tracker
+          state: home
+        - condition: numeric_state
+          entity_id: sensor.sonic_battery
+          below: 60
+      sequence:
+      - service: notify.mobile_app_iphone_fabian
+        data:
+          message: Tesla is niet aangesloten!
+          title: 'Batterij is {{ states.sensor.sonic_battery.state }}%
+
+            '
+    - conditions:
+      - condition: trigger
+        id: chargeOn
+      - condition: and
+        conditions:
+        - condition: time
+          weekday:
+          - sat
+          - sun
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sonic_charger
+      - service: notify.mobile_app_iphone_fabian
+        data:
+          message: Tesla charge override!
+          title: Opladen gestart
     default: []
   mode: single
 - id: '1641656149482'
@@ -567,160 +181,1399 @@
       - scene: scene.good_evening_lighting
     default: []
   mode: single
-- id: '1642242808158'
-  alias: Bedroom Switch
+- id: '1647868492640'
+  alias: Steps > TV
   description: ''
   trigger:
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 1
-    unique_id: 79f7e6b6-8939-4f35-90e5-798b0dbfd620
-    id: first_button_push
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 2
-    unique_id: 16cec480-7f2b-4f6b-94e6-5c6d82d1d6a4
-    id: second_button_push
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 3
-    unique_id: 26618aaf-c954-44e8-814b-aff7c9842f2e
-    id: third_button_push
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: initial_press
-    subtype: 4
-    unique_id: 0db4c1ed-c52f-42c7-b50a-d045830c2a4c
-    id: fourth_button_push
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 1
-    unique_id: 79f7e6b6-8939-4f35-90e5-798b0dbfd620
-    id: first_button_hold
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 2
-    unique_id: 16cec480-7f2b-4f6b-94e6-5c6d82d1d6a4
-    id: second_button_hold
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 3
-    unique_id: 26618aaf-c954-44e8-814b-aff7c9842f2e
-    id: third_button_hold
-  - device_id: 8a88636c0db8274d5a34e355ce1adc42
-    domain: hue
-    platform: device
-    type: repeat
-    subtype: 4
-    unique_id: 0db4c1ed-c52f-42c7-b50a-d045830c2a4c
-    id: fourth_button_hold
+  - platform: state
+    entity_id: media_player.oled_tv
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.iphone_van_aimee_steps
+    below: '10000'
+  action:
+  - service: notify.aimee
+    data:
+      message: Nu al TV kijken ja? Dat zijn nog niet genoeg stappen voor vandaag...
+  mode: single
+- id: '1649582581535'
+  alias: Away Mode
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.number_of_persons_home
+    below: '1'
+    id: away
+  - platform: numeric_state
+    entity_id: sensor.number_of_persons_home
+    above: '0'
+    id: somebody_home
   condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
-        id: first_button_push
+        id: away
       sequence:
-      - service: scene.turn_on
+      - service: input_boolean.turn_on
+        data: {}
         target:
-          entity_id: scene.bedroom_evening_good_night
+          entity_id: input_boolean.away_mode
     - conditions:
       - condition: trigger
-        id: second_button_push
+        id: somebody_home
       sequence:
-      - service: light.turn_off
+      - service: input_boolean.turn_off
+        data: {}
         target:
-          entity_id:
-          - light.slaapkamer_bedlampen
-          - light.slaapkamer_lichtstrip
-    - conditions:
-      - condition: trigger
-        id: third_button_push
-      sequence:
-      - service: light.turn_on
-        target:
-          entity_id: light.slaapkamer_lamp
-    - conditions:
-      - condition: trigger
-        id: fourth_button_push
-      sequence:
-      - service: light.turn_off
-        target:
-          entity_id: light.slaapkamer_lamp
+          entity_id: input_boolean.away_mode
     default: []
   mode: single
-- id: '1642330019974'
-  alias: Philips Friends of Hue Smart Switch (4 buttons)
+- id: '1650905291117'
+  alias: TV Turn On
   description: ''
   use_blueprint:
-    path: Siumba/foh-blueprint.yaml
+    path: cvroque/webostv_turn_on.yaml
     input:
-      remote: 7ab2488ae199c0e315d6932429fbe03c
-      button_one_single_press:
-      - service: notify.fabian
-        data:
-          message: Test
-- id: '1643122910524'
-  alias: Coffee Ready
+      webostv_mac: b4-e6-2a-8e-e9-2c
+      webostv: media_player.tv_living_room
+- id: '1650915693740'
+  alias: Appliance - Washing Machine - Finished
+  description: ''
+  use_blueprint:
+    path: sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.wasmachine_power
+      starting_threshold: 9
+      finishing_threshold: 4
+      finishing_hysteresis: 13.75
+      actions:
+      - if:
+        - condition: state
+          entity_id: person.aimee
+          state: home
+        then:
+        - service: notify.mobile_app_iphone_aimee
+          data:
+            message: Wasmachine is klaar
+      - if:
+        - condition: state
+          entity_id: person.fabian
+          state: home
+        then:
+        - service: notify.mobile_app_iphone_fabian
+          data:
+            message: Wasmachine is klaar
+      pre_actions: []
+- id: '1652631415060'
+  alias: Appliance - Dryer - Finished
+  description: ''
+  use_blueprint:
+    path: sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.droger_power
+      starting_hysteresis: 1.5
+      starting_threshold: 500
+      finishing_hysteresis: 6
+      finishing_threshold: 170
+      actions:
+      - if:
+        - condition: state
+          entity_id: person.aimee
+          state: home
+        then:
+        - service: notify.mobile_app_iphone_aimee
+          data:
+            message: Droger is klaar
+      - if:
+        - condition: state
+          entity_id: person.fabian
+          state: home
+        then:
+        - service: notify.mobile_app_iphone_fabian
+          data:
+            message: Droger is klaar
+      pre_actions: []
+- id: '1653390655135'
+  alias: Leaving
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.coffee_machine_operation_state
-    from: '99'
-    to: '100'
+    entity_id:
+    - person.aimee
+    from: Werk
   condition: []
   action:
-  - service: notify.family
+  - service: notify.mobile_app_iphone_fabian
     data:
-      message: De koffie is klaar!
+      message: Test
+  - service: automation.turn_off
+    data: {}
+    target:
+      entity_id: automation.leaving
   mode: single
-- id: '1644526829055'
-  alias: OLED TV - Turn on automation
-  description: ''
-  trigger:
-  - platform: device
-    device_id: f1f0261d6334ee981c88f07b64fc9b09
-    domain: webostv
-    type: webostv.turn_on
-  condition: []
-  action:
-  - service: wake_on_lan.send_magic_packet
-    data:
-      mac: b4-e6-2a-8e-e9-2c
-  mode: single
-- id: '1645451066690'
-  alias: Tesla Charging Override
+- id: '1664389043895'
+  alias: Arriving/Leaving
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.sonic_charger_sensor
+    entity_id:
+    - input_boolean.away_mode
     to: 'on'
+    id: leaving
+    alias: When Leaving
+  - platform: state
+    entity_id:
+    - input_boolean.away_mode
+    to: 'off'
+    alias: When Arriving
+    id: arriving
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: arriving
+      sequence:
+      - service: homematicip_local.disable_away_mode
+        data: {}
+        target:
+          entity_id:
+          - climate.badkamer_thermostaat
+          - climate.bureau_thermostaat
+          - climate.logeerkamer_thermostaat
+          - climate.slaapkamer_thermostaat
+          - climate.woonkamer_thermostaat
+      - if:
+        - condition: sun
+          before: sunset
+        - condition: time
+          after: 07:00:00
+          weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+          - sat
+          - sun
+          alias: After 7:00
+        then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.good_morning_lighting
+          metadata: {}
+        alias: Before sunset
+      - if:
+        - condition: sun
+          before: sunset
+          after: sunset
+        then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.good_evening_lighting
+          metadata: {}
+        alias: After sunset
+      - service: alarm_control_panel.alarm_disarm
+        data:
+          code: '9096'
+        target:
+          entity_id: alarm_control_panel.alarmo
+      - service: climate.set_hvac_mode
+        data:
+          hvac_mode: heat
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+    - conditions:
+      - condition: trigger
+        id: leaving
+      sequence:
+      - service: homematicip_local.enable_away_mode_by_duration
+        data:
+          hours: 999
+          away_temperature: 15
+        target:
+          entity_id:
+          - climate.badkamer_thermostaat
+          - climate.bureau_thermostaat
+          - climate.logeerkamer_thermostaat
+          - climate.slaapkamer_thermostaat
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.all_lights
+      - if:
+        - condition: sun
+          after: sunset
+          alias: After sunset"
+        then:
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 10
+            milliseconds: 0
+        - service: scene.turn_on
+          target:
+            entity_id: scene.good_evening_lighting
+          metadata: {}
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.koffiezetapparaat
+      - service: climate.turn_off
+        data: {}
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: media_player.turn_off
+        data: {}
+        target:
+          entity_id:
+          - media_player.oled_tv
+          - media_player.tv_tuin
+          - media_player.slaapkamer_tv
+      - service: media_player.media_stop
+        data: {}
+        target:
+          entity_id:
+          - media_player.aimees_clock
+          - media_player.fabians_clock
+          - media_player.arc
+          - media_player.bureau_display
+          - media_player.overkapping
+      - service: alarm_control_panel.alarm_arm_away
+        data: {}
+        target:
+          entity_id: alarm_control_panel.alarmo
+        enabled: true
+      - service: climate.set_hvac_mode
+        data:
+          hvac_mode: 'off'
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+  mode: single
+- id: '1665351190822'
+  alias: 'Bathroom Climate/Window - Homematic '
+  description: ''
+  use_blueprint:
+    path: Siumba/HomematicIPLocal_Climate-Window.yaml
+    input:
+      window_entity: binary_sensor.bathroom_window_contact
+      climate_entity: climate.badkamer_thermostaat
+      open_delay: 30
+- id: '1665351323223'
+  alias: Bedroom Climate/Window
+  description: ''
+  use_blueprint:
+    path: Siumba/HomematicIPLocal_Climate-Window.yaml
+    input:
+      window_entity: binary_sensor.bedroom_windows_aircon
+      climate_entity: climate.slaapkamer_thermostaat
+      open_delay: 30
+- id: '1665351356999'
+  alias: Bureau Climate/Window
+  description: ''
+  use_blueprint:
+    path: Siumba/HomematicIPLocal_Climate-Window.yaml
+    input:
+      window_entity: binary_sensor.bureau_windows
+      climate_entity: climate.bureau_thermostaat
+- id: '1665601707693'
+  alias: Appliance - Coffeemaker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.koffiezetapparaat_operationstate
+    to: Afgerond
+    from: Loopt
   condition:
   - condition: and
     conditions:
     - condition: state
-      entity_id: device_tracker.sonic_location_tracker
-      state: home
-    - condition: time
-      weekday:
-      - sat
-      - sun
+      entity_id: switch.koffiezetapparaat
+      state: 'on'
+      for:
+        hours: 0
+        minutes: 1
+        seconds: 0
   action:
-  - service: switch.turn_on
+  - parallel:
+    - if:
+      - condition: state
+        entity_id: person.aimee
+        state: home
+      then:
+      - service: notify.mobile_app_iphone_aimee
+        data:
+          message: '{% set sensor = states("sensor.711090388869000347_bsh_common_option_programname")
+            %} {% if sensor == ''unavailable'' %} {% set sensor = states("sensor.711090388869000347_selected_program")
+            %} {% endif %} {{ sensor }} is klaar!
+
+            '
+    - if:
+      - condition: state
+        entity_id: person.fabian
+        state: home
+      then:
+      - service: notify.mobile_app_iphone_fabian
+        data:
+          message: '{% set sensor = states("sensor.711090388869000347_bsh_common_option_programname")
+            %} {% if sensor == ''unavailable'' %} {% set sensor = states("sensor.711090388869000347_selected_program")
+            %} {% endif %} {{ sensor }} is klaar!
+
+            '
+  mode: single
+- id: '1665658363535'
+  alias: Bedroom AC Automation
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+    id: 7u
+  - platform: time
+    at: '22:00:00'
+    id: 22u
+  - platform: numeric_state
+    entity_id: sensor.bedroom_temperature
+    above: 21.5
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+    alias: Temperature above 21
+    id: aboveTemp
+    enabled: true
+  - platform: template
+    value_template: '{{ state_attr(''climate.slaapkamer_thermostaat'', ''current_temperature'')
+      | float == state_attr(''climate.airconditioner_bedroom'', ''temperature'') |
+      float }}'
+    id: tempReached
+    alias: Temperature reached
+  - platform: time
+    at: 00:00:00
+    id: 0u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: 7u
+        - condition: trigger
+          id: tempReached
+      sequence:
+      - service: climate.turn_off
+        data: {}
+        target:
+          entity_id: climate.airconditioner_bedroom
+    - conditions:
+      - condition: trigger
+        id: 22u
+      - condition: numeric_state
+        entity_id: sensor.bedroom_temperature
+        above: 21.5
+        alias: Temperature above 21
+      - condition: numeric_state
+        entity_id: sensor.number_of_persons_home
+        above: 0
+      sequence:
+      - service: climate.turn_on
+        data: {}
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_hvac_mode
+        data:
+          hvac_mode: cool
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_fan_mode
+        data:
+          fan_mode: Auto
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_swing_mode
+        data:
+          swing_mode: '4'
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_temperature
+        data:
+          temperature: 18
+        target:
+          entity_id: climate.airconditioner_bedroom
+    - conditions:
+      - condition: trigger
+        id: 0u
+      sequence:
+      - service: climate.set_fan_mode
+        data:
+          fan_mode: '1'
+        target:
+          entity_id: climate.airconditioner_bedroom
+    - conditions:
+      - condition: trigger
+        id: 6u
+      - condition: numeric_state
+        entity_id: sensor.bedroom_temperature
+        above: 21.5
+        alias: Temperature above 21
+      - condition: numeric_state
+        entity_id: sensor.number_of_persons_home
+        above: 0
+      sequence:
+      - service: climate.turn_on
+        data: {}
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_hvac_mode
+        data:
+          hvac_mode: cool
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_fan_mode
+        data:
+          fan_mode: '1'
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_swing_mode
+        data:
+          swing_mode: '4'
+        target:
+          entity_id: climate.airconditioner_bedroom
+      - service: climate.set_temperature
+        data:
+          temperature: 18
+        target:
+          entity_id: climate.airconditioner_bedroom
+  mode: single
+- id: '1665661418598'
+  alias: Daily - Lightning
+  description: Lightning automation schedule
+  trigger:
+  - platform: time
+    at: 06:30:00
+    id: 6u
+  - platform: sun
+    event: sunrise
+    offset: 0
+    id: sunrise
+  - platform: sun
+    event: sunset
+    offset: -0:30
+    id: sunset
+  - platform: time
+    at: 00:00:00
+    id: 0u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 6u
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.good_morning_lighting
+        metadata: {}
+    - conditions:
+      - condition: trigger
+        id: sunrise
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id:
+          - light.voordeur_spots
+          - light.schuur_lamp
+          - light.overkapping_spots
+    - conditions:
+      - condition: trigger
+        id: sunset
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.good_evening_lighting
+        metadata: {}
+      - service: scene.turn_on
+        target:
+          entity_id: scene.driveway_garden_lights_after_sunset
+        metadata: {}
+    - conditions:
+      - condition: trigger
+        id: 0u
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.driveway_garden_lights_after_midnight
+        metadata: {}
+  mode: single
+- id: '1665660863253'
+  alias: Daily - Shutters
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 0
+    id: sunset
+  - platform: sun
+    event: sunrise
+    offset: 0
+    id: 'sunrise '
+  - platform: time
+    at: 08:00:00
+    id: 8u
+  - platform: time
+    at: 09:00:00
+    id: 9u
+  - platform: time
+    at: '11:00:00'
+    id: 11u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: sunset
+      sequence:
+      - service: cover.close_cover
+        data: {}
+        target:
+          entity_id:
+          - cover.bureau_rolluik
+          - cover.slaapkamer_rolluik
+          - cover.slaapkamer_rolgordijn
+      - service: cover.set_cover_position
+        data:
+          position: 0
+        target:
+          entity_id:
+          - cover.logeerkamer_jaloezieen_homekit
+          - cover.woonkamer_jaloezieen_homekit
+    - conditions:
+      - condition: trigger
+        id: 9u
+      - condition: state
+        state: 'off'
+        entity_id: input_boolean.sleep_in_mode
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      - condition: state
+        entity_id: input_boolean.tropic_mode
+        state: 'off'
+      sequence:
+      - service: cover.open_cover
+        data: {}
+        target:
+          entity_id:
+          - cover.slaapkamer_rolluik
+      - service: cover.set_cover_position
+        data:
+          position: 60
+        target:
+          entity_id: cover.slaapkamer_rolgordijn
+    - conditions:
+      - condition: trigger
+        id: 11u
+      - condition: state
+        entity_id: input_boolean.tropic_mode
+        state: 'off'
+      sequence:
+      - service: cover.open_cover
+        data: {}
+        target:
+          entity_id:
+          - cover.slaapkamer_rolluik
+      - service: cover.set_cover_position
+        data:
+          position: 60
+        target:
+          entity_id: cover.slaapkamer_rolgordijn
+    - conditions:
+      - condition: trigger
+        id: 'sunrise '
+      - condition: state
+        entity_id: automation.tropic_mode
+        state: 'off'
+      sequence:
+      - service: cover.open_cover
+        data: {}
+        target:
+          entity_id:
+          - cover.bureau_rolluik
+      - service: cover.set_cover_position
+        data:
+          position: 100
+        target:
+          entity_id:
+          - cover.logeerkamer_jaloezieen_homekit
+          - cover.woonkamer_jaloezieen_homekit
+    - conditions:
+      - condition: trigger
+        id: 8u
+      - condition: state
+        entity_id: input_boolean.tropic_mode
+        state: 'off'
+      sequence:
+      - service: cover.set_cover_position
+        data:
+          position: 100
+        target:
+          entity_id:
+          - cover.logeerkamer_jaloezieen_homekit
+          - cover.woonkamer_jaloezieen_homekit
+  mode: single
+- id: '1665947506748'
+  alias: Flash Lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.alarm
+    to: 'on'
+    id: 'on'
+  - platform: state
+    entity_id:
+    - input_boolean.alarm
+    to: 'off'
+    id: 'off'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.alarm_lights
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - service: scene.turn_on
+        target:
+          entity_id: scene.scene_prev
+        metadata: {}
+      - service: script.siren_off
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: 'on'
+      sequence:
+      - service: scene.create
+        data:
+          scene_id: scene_prev
+          snapshot_entities: light.fabians_lamp, light.aimees_lamp, light.slaapkamer_lichtstrip,
+            light.bureau_lamp, light.bureau_lamp_links, light.bureau_lamp_rechts,
+            light.overkapping_spot_1, light.overkapping_spot_2, light.overkapping_spot_3,
+            light.overkapping_spot_4, light.overloop_spot_1, light.overloop_spot_2,
+            light.overloop_spot_3, light.overloop_spot_4, light.overloop_spot_5, light.plafondstraler,
+            light.hoeklamp_tv, light.keuken_hoeklamp, light.keuken_spot_1, light.keuken_spot_2,
+            light.keuken_spot_3, light.keuken_spot_4, light.schuur_lamp
+      - repeat:
+          while:
+          - condition: state
+            entity_id: input_boolean.alarm
+            state: 'on'
+          sequence:
+          - delay:
+              hours: 0
+              minutes: 0
+              seconds: 0
+              milliseconds: 500
+          - service: scene.turn_on
+            target:
+              entity_id: scene.alarm_alarm_on
+            metadata: {}
+          - delay:
+              hours: 0
+              minutes: 0
+              seconds: 0
+              milliseconds: 500
+          - service: scene.turn_on
+            target:
+              entity_id: scene.alarm_alarm_off
+            metadata: {}
+      - service: script.siren_on
+        data: {}
+        enabled: false
+  mode: restart
+- id: '1665956709605'
+  alias: Sonos Arc - Night Mode
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+    id: 23u
+  - platform: time
+    at: 07:00:00
+    id: 7u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 23u
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.arc_night_sound
+    - conditions:
+      - condition: trigger
+        id: 7u
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.arc_night_sound
+  mode: single
+- id: '1668894765492'
+  alias: Doorbell - Silence
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+    id: 23u
+  - platform: time
+    at: 07:00:00
+    id: 7u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 23u
+      sequence:
+      - service: select.select_option
+        data:
+          option: None
+        target:
+          entity_id: select.front_door_chime_type
+    - conditions:
+      - condition: trigger
+        id: 7u
+      sequence:
+      - service: select.select_option
+        data:
+          option: Mechanical
+        target:
+          entity_id: select.front_door_chime_type
+  mode: single
+- id: '1669672166253'
+  alias: Motion - Front Door
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.front_door_person_detected
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      after: '23:00:00'
+    - condition: sun
+      before: sunrise
+  action:
+  - service: scene.create
+    data:
+      scene_id: old
+      snapshot_entities: 'light.oprit_deur_spot_links, light.oprit_deur_spot_rechts '
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+    target:
+      entity_id: light.voordeur_spots
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: scene.turn_on
+    target:
+      entity_id: scene.old
+    metadata: {}
+  mode: single
+- id: '1670066692363'
+  alias: Sexy Time
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: media_player.volume_set
+    data:
+      volume_level: 4
+    target:
+      entity_id: media_player.bedroom_clocks
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.bedroom_clocks
+    data:
+      media_content_id: ''
+      media_content_type: ''
+    metadata: {}
+  - service: light.turn_on
+    data:
+      color_name: red
+      brightness_pct: 15
+    target:
+      entity_id:
+      - light.aimees_lamp
+      - light.fabians_lamp
+  - service: light.turn_off
     data: {}
     target:
-      entity_id: switch.sonic_charger_switch
+      entity_id: light.slaapkamer_lamp
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.spotify_spotify
+    data:
+      media_content_id: spotify:playlist:37i9dQZF1F0sijgNaJdgit
+      media_content_type: spotify://playlist
+    metadata:
+      title: Your Top Songs 2022
+      thumbnail: https://wrapped-images.spotifycdn.com/image/yts-2022/large/your-top-songs-2022_large_en.jpg
+      media_class: playlist
+      children_media_class: track
+      navigateIds:
+      - {}
+      - media_content_type: spotify://current_user_playlists
+        media_content_id: current_user_playlists
+  mode: single
+- id: '1671116264677'
+  alias: Aimee Nightstand - Lamp
+  description: ''
+  use_blueprint:
+    path: rhl2401/zigbee2mqtt_aqara_wireless_switch.yaml
+    input:
+      action_sensor: sensor.bedroom_light_button_aimee_click
+      press_single:
+      - if:
+        - condition: state
+          entity_id: light.aimees_lamp
+          state: 'off'
+        then:
+        - if:
+          - condition: time
+            after: '22:00:00'
+            before: 08:00:00
+          then:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 10
+            target:
+              entity_id: light.aimees_lamp
+          else:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 60
+            target:
+              entity_id: light.aimees_lamp
+        else:
+        - service: light.turn_off
+          data: {}
+          target:
+            entity_id: light.aimees_lamp
+- id: '1671139318685'
+  alias: Fabian Nightstand - Lamp
+  description: ''
+  use_blueprint:
+    path: rhl2401/zigbee2mqtt_aqara_wireless_switch.yaml
+    input:
+      action_sensor: bedroom light
+      press_single:
+      - if:
+        - condition: state
+          entity_id: light.fabians_lamp
+          state: 'off'
+        then:
+        - if:
+          - condition: time
+            after: '22:00:00'
+            before: 08:00:00
+          then:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 10
+            target:
+              entity_id: light.fabians_lamp
+          else:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 60
+            target:
+              entity_id: light.fabians_lamp
+        else:
+        - service: light.turn_off
+          data: {}
+          target:
+            entity_id: light.fabians_lamp
+- id: '1671141742724'
+  alias: Fabian Nightstand - Lamp
+  description: ''
+  use_blueprint:
+    path: rhl2401/zigbee2mqtt_aqara_wireless_switch.yaml
+    input:
+      action_sensor: sensor.bedroom_light_button_fabian_click
+      press_single:
+      - if:
+        - condition: state
+          state: 'off'
+          entity_id: light.fabians_lamp
+        then:
+        - if:
+          - condition: time
+            after: '22:00:00'
+            before: 08:00:00
+          then:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 10
+            target:
+              entity_id: light.fabians_lamp
+          else:
+          - service: light.turn_on
+            data:
+              color_temp: 500
+              brightness_pct: 60
+            target:
+              entity_id: light.fabians_lamp
+        else:
+        - service: light.turn_off
+          data: {}
+          target:
+            entity_id: light.fabians_lamp
+- id: '1671196902663'
+  alias: Daily Climate - Bathroom - Winter
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:00:00
+    id: 6u
+  - platform: time
+    at: 09:00:00
+    id: 9u
+  - platform: time
+    at: '16:00:00'
+    id: 16u
+  - platform: time
+    at: '22:00:00'
+    id: 22u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 6u
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: 21
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+    - conditions:
+      - condition: trigger
+        id: 9u
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: 19
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+    - conditions:
+      - condition: trigger
+        id: 16u
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: 21
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+    - conditions:
+      - condition: trigger
+        id: 22u
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: 19
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+  mode: single
+- id: '1672576491390'
+  alias: Update Entities
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '15'
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id:
+      - sensor.evcharger_nmha_consumed_total
+      device_id:
+      - 280f490d99df01d066d3582af9e08c12
+      - f1bb63ac0e7d0be562a868ed93960d63
+  mode: single
+- id: '1673381642262'
+  alias: Bathroom Mirror
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.badkamer_spots
+    to: 'on'
+    id: 'On'
+  - platform: state
+    entity_id:
+    - light.badkamer_spots
+    to: 'off'
+    id: 'Off'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 'On'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.badkamer_spiegel
+    - conditions:
+      - condition: trigger
+        id: 'Off'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.badkamer_spiegel
+  mode: single
+- id: '1673994870483'
+  alias: 3D Printer - Job Complete
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+    above: 99.99
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_fabian
+    data:
+      message: 3D print is klaar
+      title: 'OctoPrint '
+  mode: single
+- id: '1674315346744'
+  alias: Trash Notifications
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.waste_moved
+    to: 'on'
+    for:
+      hours: 12
+      minutes: 0
+      seconds: 0
+    id: moved
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: MARK_WASTE_MOVED
+    id: confirm
+  - platform: time_pattern
+    hours: /1
+    id: time
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: moved
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.waste_moved
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.waste_reminder
+    - conditions:
+      - condition: trigger
+        id: confirm
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id:
+          - input_boolean.waste_moved
+          - input_boolean.trash_outside
+      - service: notify.notify
+        data:
+          message: '{{ states.sensor.afvalwijzer_tomorrow_formatted.state }} is aan
+            de straat gezet'
+          title: Afval
+          data:
+            push:
+              badge: 0
+    - conditions:
+      - condition: trigger
+        id: time
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: input_boolean.waste_moved
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.waste_reminder
+          state: 'on'
+        - condition: time
+          after: '18:00:00'
+          before: '23:00:00'
+        - condition: template
+          value_template: '{{ states(''sensor.afvalwijzer_tomorrow_formatted'') !=
+            ''Geen'' }}'
+      sequence:
+      - service: notify.notify
+        data:
+          title: Afval
+          message: '{{ states.sensor.afvalwijzer_tomorrow_formatted.state }} wordt
+            opgehaald op {{ (as_timestamp(now()) + (24*3600)) | timestamp_custom("%d-%m-%Y",
+            True) }}'
+          data:
+            actions:
+            - action: MARK_WASTE_MOVED
+              title: Afval verwerkt
+              activationMode: background
+              authenticationRequired: 'no'
+              destructive: 'yes'
+              behavior: default
+            push:
+              badge: 0
+            action_data:
+              entity_id: input_boolean.trash_outside
+  mode: single
+- id: '1674512683507'
+  alias: Bedroom AC Temperature Override
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: /30
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: MHI-AC-Ctrl/Bedroom/set/Troom
+      payload_template: '{{ states.climate[''slaapkamer_thermostaat''].attributes.current_temperature
+        }}'
+  mode: single
+- id: '1675723135677'
+  alias: Afzuigkap On/Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.all_kitchen_lights
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.afzuigkap
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.afzuigkap
+  mode: single
+- id: '1677009677956'
+  alias: Logeerkamer - Jaloezieën Remote
+  description: ''
+  use_blueprint:
+    path: Siumba/Z2M-IKEA-Blind-Remote.yaml
+    input:
+      cover:
+        entity_id: cover.logeerkamer_jaloezieen
+      remote: sensor.guest_room_blind_remote_action
+- id: '1678028075802'
+  alias: Vacation Mode - Climates
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.vacation_mode
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'on'
+    then:
+    - service: homematicip_local.enable_away_mode_by_duration
+      data:
+        hours: 999
+        away_temperature: 15
+      target:
+        entity_id: climate.woonkamer_thermostaat
+    else:
+    - service: homematicip_local.disable_away_mode
+      data: {}
+      target:
+        entity_id: climate.woonkamer_thermostaat
+  mode: single
+- id: '1681885403338'
+  alias: Guest Room - Climate/Window
+  description: ''
+  use_blueprint:
+    path: Siumba/HomematicIPLocal_Climate-Window.yaml
+    input:
+      window_entity: binary_sensor.guest_room_window_contact
+      climate_entity: climate.logeerkamer_thermostaat
+- id: '1684269741867'
+  alias: Living Room Climate/Window
+  description: ''
+  use_blueprint:
+    path: Siumba/HomematicIPLocal_Climate-Window.yaml
+    input:
+      window_entity: binary_sensor.living_room_doors_windows
+      climate_entity: climate.woonkamer_thermostaat
+      open_delay: 120
+- id: '1684450191306'
+  alias: Airco off
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:00:00
+  condition: []
+  action:
+  - service: climate.turn_off
+    data: {}
+    target:
+      entity_id: climate.airconditioner_bedroom
+  mode: single
+- id: '1684694030250'
+  alias: Daily Climate - Bathroom - Summer
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:00:00
+    id: 6u
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 6u
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: 16
+        target:
+          entity_id: climate.mts200_c8a9_thermostat
+  mode: single
+- id: '1684705827227'
+  alias: Climate - Summer Mode
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.summer_mode
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'off'
+    then:
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: week_program_1
+      target:
+        entity_id:
+        - climate.badkamer_thermostaat
+        - climate.bureau_thermostaat
+        - climate.logeerkamer_thermostaat
+        - climate.woonkamer_thermostaat
+        - climate.slaapkamer_thermostaat
+    else:
+    - service: climate.set_preset_mode
+      data:
+        preset_mode: week_program_2
+      target:
+        entity_id:
+        - climate.badkamer_thermostaat
+        - climate.bureau_thermostaat
+        - climate.logeerkamer_thermostaat
+        - climate.slaapkamer_thermostaat
+        - climate.woonkamer_thermostaat
+  mode: single
+- id: '1686472287044'
+  alias: Tropic Mode
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.openweathermap_forecast_temperature
+    above: 22
+    id: above22
+  - platform: numeric_state
+    entity_id: sensor.openweathermap_forecast_temperature
+    below: 22
+    id: below22
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: above22
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.tropic_mode
+    - conditions:
+      - condition: trigger
+        id: below22
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.tropic_mode
+  mode: single
+- id: '1686473367951'
+  alias: Staircase ON
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.staircase
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_fabian
+    data:
+      message: Trap
   mode: single

@@ -6,6 +6,6 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Logeerkamer
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.logeerkamer_lamp

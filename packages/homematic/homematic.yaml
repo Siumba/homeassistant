@@ -1,0 +1,15 @@
+# sensor:
+#   - platform: template
+#     sensors:
+############################################################################
+#                                                                          #
+#   Bedroom                                                                #
+#                                                                          #
+############################################################################
+
+# bedroom_current_temp:
+#   friendly_name: "Bedroom Temperature"
+#   unit_of_measurement: "°C"
+#   icon_template: mdi:thermometer
+#   value_template: >-
+#     {{ state_attr('climate.slaapkamer_thermostaat', 'current_temperature') }}

@@ -3,8 +3,15 @@ columns: 2
 square: false
 cards:
   - type: "custom:button-card"
-    template:
-      - card_cover_buttons
+    template: card_cover
+    entity: cover.logeerkamer_jaloezieen
     variables:
-      ulm_card_cover_buttons_name: "Slaapkamer Rolgordijn"
-      ulm_card_cover_buttons_entity: cover.slaapkamer_rolgordijn
+      ulm_card_cover_name: "Woonkamer Jaloezieën"
+  - type: "custom:button-card"
+    template: card_cover
+    entity: cover.slaapkamer_rolgordijn
+  - type: "custom:button-card"
+    template: card_cover
+    entity: cover.logeerkamer_jaloezieen
+    variables:
+      ulm_card_cover_name: "Logeerkamer Jaloezieën"

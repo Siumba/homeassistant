@@ -1,0 +1,276 @@
+sensor:
+  # Calculate Remaining Power
+  - platform: template
+    sensors:
+      wasmachine_kwh:
+        value_template: >
+          {{ states('sensor.wasmachine_energy_counter') | float * 0.001 }}
+        unit_of_measurement: "kWh"
+        unique_id: wasmachine_kwh
+        friendly_name: Wasmachine (kWh)
+      droger_kwh:
+        value_template: >
+          {{ states('sensor.droger_energy_counter') | float * 0.001 }}
+        unit_of_measurement: "kWh"
+        unique_id: droger_kwh
+        friendly_name: Droger (kWh)
+
+utility_meter:
+  ### Energie ###
+  hourly_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: hourly
+    unique_id: hourly_energy_meter
+    net_consumption: true
+  daily_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: daily
+    unique_id: daily_energy_meter
+    net_consumption: true
+  monthly_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: monthly
+    unique_id: monthly_energy_meter
+    net_consumption: true
+  yearly_energy_meter:
+    source: sensor.actual_consumption_kwh
+    cycle: yearly
+    unique_id: yearly_energy_meter
+    net_consumption: true
+  hourly_energy_meter_net:
+    source: sensor.net_consumption_kwh
+    cycle: hourly
+    unique_id: hourly_energy_meter_net
+    net_consumption: true
+  daily_energy_meter_net:
+    source: sensor.net_consumption_kwh
+    cycle: daily
+    unique_id: daily_energy_meter_net
+    net_consumption: true
+  weekly_energy_meter_net:
+    source: sensor.net_consumption_kwh
+    cycle: weekly
+    unique_id: weekly_energy_meter_net
+    net_consumption: true
+  monthly_energy_meter_net:
+    source: sensor.net_consumption_kwh
+    cycle: monthly
+    unique_id: monthly_energy_meter_net
+    net_consumption: true
+  yearly_energy_meter_net:
+    source: sensor.net_consumption_kwh
+    cycle: yearly
+    unique_id: yearly_energy_meter_net
+    net_consumption: true
+  hourly_energy_meter_no_wallbox:
+    source: sensor.actual_consumption_no_wallbox_kwh
+    cycle: hourly
+    unique_id: hourly_energy_meter_no_wallbox
+    net_consumption: true
+  daily_energy_meter_no_wallbox:
+    source: sensor.actual_consumption_no_wallbox_kwh
+    cycle: daily
+    unique_id: daily_energy_meter_no_wallbox
+    net_consumption: true
+  weekly_energy_meter_no_wallbox:
+    source: sensor.actual_consumption_no_wallbox_kwh
+    cycle: weekly
+    unique_id: weekly_energy_meter_no_wallbox
+    net_consumption: true
+  monthly_energy_meter_no_wallbox:
+    source: sensor.actual_consumption_no_wallbox_kwh
+    cycle: monthly
+    unique_id: monthly_energy_meter_no_wallbox
+    net_consumption: true
+  yearly_energy_meter_no_wallbox:
+    source: sensor.actual_consumption_no_wallbox_kwh
+    cycle: yearly
+    unique_id: yearly_energy_meter_no_wallbox
+    net_consumption: true
+  hourly_energy_meter_return:
+    source: sensor.net_production_kwh
+    cycle: hourly
+    unique_id: hourly_energy_meter_return
+    net_consumption: true
+  daily_energy_meter_return:
+    source: sensor.net_production_kwh
+    cycle: daily
+    unique_id: daily_energy_meter_return
+    net_consumption: true
+  weekly_energy_meter_return:
+    source: sensor.net_production_kwh
+    cycle: weekly
+    unique_id: weekly_energy_meter_return
+    net_consumption: true
+  monthly_energy_meter_return:
+    source: sensor.net_production_kwh
+    cycle: monthly
+    unique_id: monthly_energy_meter_return
+    net_consumption: true
+  yearly_energy_meter_return:
+    source: sensor.net_production_kwh
+    cycle: yearly
+    unique_id: yearly_energy_meter_return
+    net_consumption: true
+  ### Gas ###
+  hourly_gas_meter:
+    source: sensor.gas_meter_gas_consumption
+    cycle: hourly
+    unique_id: hourly_gas_meter
+    net_consumption: true
+  daily_gas_meter:
+    source: sensor.gas_meter_gas_consumption
+    cycle: daily
+    unique_id: daily_gas_meter
+    net_consumption: true
+  weekly_gas_meter:
+    source: sensor.gas_meter_gas_consumption
+    cycle: weekly
+    unique_id: weekly_gas_meter
+    net_consumption: true
+  monthly_gas_meter:
+    source: sensor.gas_meter_gas_consumption
+    cycle: monthly
+    unique_id: monthly_gas_meter
+    net_consumption: true
+  yearly_gas_meter:
+    source: sensor.gas_meter_gas_consumption
+    cycle: yearly
+    unique_id: yearly_gas_meter
+    net_consumption: true
+  ### Zonnepanelen ###
+  util_solaredge_hourly:
+    source: sensor.solaredge_ac_energy_kwh
+    cycle: hourly
+    unique_id: util_solaredge_hourly
+    net_consumption: true
+  util_solaredge_daily:
+    source: sensor.solaredge_ac_energy_kwh
+    cycle: daily
+    unique_id: util_solaredge_daily
+    net_consumption: true
+  util_solaredge_weekly:
+    source: sensor.solaredge_ac_energy_kwh
+    cycle: weekly
+    unique_id: util_solaredge_weekly
+    net_consumption: true
+  util_solaredge_monthly:
+    source: sensor.solaredge_ac_energy_kwh
+    cycle: monthly
+    unique_id: util_solaredge_monthly
+    net_consumption: true
+  util_solaredge_yearly:
+    source: sensor.solaredge_ac_energy_kwh
+    cycle: yearly
+    unique_id: util_solaredge_yearly
+    net_consumption: true
+  util_solaredge_consumption_hourly:
+    source: sensor.actual_solar_consumption_kwh
+    cycle: hourly
+    unique_id: util_solaredge_consumption_hourly
+    net_consumption: true
+  util_solaredge_consumption_daily:
+    source: sensor.actual_solar_consumption_kwh
+    cycle: daily
+    unique_id: util_solaredge_consumption_daily
+    net_consumption: true
+  util_solaredge_consumption_weekly:
+    source: sensor.actual_solar_consumption_kwh
+    cycle: weekly
+    unique_id: util_solaredge_consumption_weekly
+    net_consumption: true
+  util_solaredge_consumption_monthly:
+    source: sensor.actual_solar_consumption_kwh
+    cycle: monthly
+    unique_id: util_solaredge_consumption_monthly
+    net_consumption: true
+  util_solaredge_consumption_yearly:
+    source: sensor.actual_solar_consumption_kwh
+    cycle: yearly
+    unique_id: util_solaredge_consumption_yearly
+    net_consumption: true
+
+  ### Water ###
+  util_water_usage_hourly:
+    source: sensor.water_total
+    cycle: hourly
+    unique_id: util_water_usage_hourly
+  util_water_usage_daily:
+    source: sensor.water_total
+    cycle: daily
+    unique_id: util_water_usage_daily
+  util_water_usage_weekly:
+    source: sensor.water_total
+    cycle: weekly
+    unique_id: util_water_usage_weekly
+  util_water_usage_monthly:
+    source: sensor.water_total
+    cycle: monthly
+    unique_id: util_water_usage_monthly
+  util_water_usage_yearly:
+    source: sensor.water_total
+    cycle: yearly
+    unique_id: util_water_usage_yearly
+  ### Laadpaal ###
+  util_wallbox_hourly:
+    source: sensor.evcharger_nmha_consumed_total
+    cycle: hourly
+    unique_id: util_wallbox_hourly
+  util_wallbox_daily:
+    source: sensor.evcharger_nmha_consumed_total
+    cycle: daily
+    unique_id: util_wallbox_daily
+  util_wallbox_weekly:
+    source: sensor.evcharger_nmha_consumed_total
+    cycle: weekly
+    unique_id: util_wallbox_weekly
+  util_wallbox_monthly:
+    source: sensor.evcharger_nmha_consumed_total
+    cycle: monthly
+    unique_id: util_wallbox_monthly
+  util_wallbox_yearly:
+    source: sensor.evcharger_nmha_consumed_total
+    cycle: yearly
+    unique_id: util_wallbox_yearly
+  ### Wasmachine ###
+  util_wasmachine_hourly:
+    source: sensor.wasmachine_kwh
+    cycle: hourly
+    unique_id: util_wasmachine_hourly
+  util_wasmachine_daily:
+    source: sensor.wasmachine_kwh
+    cycle: daily
+    unique_id: util_wasmachine_daily
+  util_wasmachine_weekly:
+    source: sensor.wasmachine_kwh
+    cycle: weekly
+    unique_id: util_wasmachine_weekly
+  util_wasmachine_monthly:
+    source: sensor.wasmachine_kwh
+    cycle: monthly
+    unique_id: util_wasmachine_monthly
+  util_wasmachine_yearly:
+    source: sensor.wasmachine_kwh
+    cycle: yearly
+    unique_id: util_wasmachine_yearly
+  ### Droger ###
+  util_droger_hourly:
+    source: sensor.droger_kwh
+    cycle: hourly
+    unique_id: util_droger_hourly
+  util_droger_daily:
+    source: sensor.droger_kwh
+    cycle: daily
+    unique_id: util_droger_daily
+  util_droger_weekly:
+    source: sensor.droger_kwh
+    cycle: weekly
+    unique_id: util_droger_weekly
+  util_droger_monthly:
+    source: sensor.droger_kwh
+    cycle: monthly
+    unique_id: util_droger_monthly
+  util_droger_yearly:
+    source: sensor.droger_kwh
+    cycle: yearly
+    unique_id: util_droger_yearly

@@ -34,7 +34,7 @@ group:
       - light.driepoot_lamp
       - light.keuken_lamp
       - light.keuken_spots
-      - light.tuin_lampen
+      - light.garden_lights
       - light.overkapping_spots
       - light.gang_beneden
       - light.overloop_spots
@@ -169,5 +169,5 @@ group:
   all_person_entities:
     name: All Persons Entities
     entities:
-      - person.fabian
-      - person.aimee
+      - input_boolean.aimee_home
+      - input_boolean.fabian_home

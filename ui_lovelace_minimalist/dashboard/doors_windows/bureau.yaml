@@ -1,0 +1,20 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template:
+      - card_binary_sensor
+      - custom_battery_info
+    entity: binary_sensor.bureau_window_left_contact
+    variables:
+      ulm_show_last_changed: false
+      ulm_card_binary_sensor_name: "Bureau Raam Links"
+  - type: "custom:button-card"
+    template:
+      - card_binary_sensor
+      - custom_battery_info
+    entity: binary_sensor.bureau_window_right_contact
+    variables:
+      ulm_show_last_changed: false
+      ulm_card_binary_sensor_name: "Bureau Raam Rechts"

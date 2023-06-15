@@ -5,12 +5,18 @@ cards:
   - type: "custom:button-card"
     template: card_light
     variables:
-      ulm_card_light_name: Keuken
-      ulm_card_light_enable_popup: true
-    entity: light.keuken_lamp
-
+      ulm_card_light_name: Spots
+      ulm_card_light_enable_popup: false
+    entity: light.keuken_spots
   - type: "custom:button-card"
     template: card_light
     variables:
-      ulm_card_light_name: Spots
-    entity: light.keuken_spots
+      ulm_card_light_name: Spoelbak
+      ulm_card_light_enable_popup: false
+    entity: light.keuken_spoelbak
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Keuken Hoeklamp
+      ulm_card_light_enable_popup: false
+    entity: light.keuken_hoeklamp

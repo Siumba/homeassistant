@@ -4,28 +4,18 @@ frontend:
 #Enable Cloud
 cloud:
 
-# Checks for available updates
-updater:
-
 #Enables lovelace
 lovelace:
   mode: yaml
-  resources: !include /config/lovelace-library/resources.yaml
-  dashboards:
-    lovelace-minimalist:
-      mode: yaml
-      filename: /config/ui_lovelace_minimalist/dashboard/ui-lovelace.yaml
-      title: "Minimalist"
-      icon: mdi:view-dashboard
-      show_in_sidebar: true
-      require_admin: false
-#     lovelace-wallpanel:
-#       mode: yaml
-#       filename: ui-wallpanel.yaml
-#       title: "Wall Panel"
-#       icon: mdi:view-dashboard
-#       show_in_sidebar: true
-#       require_admin: false
+  resources: !include /config/resources.yaml
+  # dashboards:
+  #   lovelace-minimalist:
+  #     mode: yaml
+  #     filename: /config/ui-lovelace.yaml
+  #     title: "iHouse"
+  #     icon: mdi:view-dashboard
+  #     show_in_sidebar: true
+  #     require_admin: false
 
 sensor:
   - platform: template
@@ -36,13 +26,19 @@ sensor:
 # Enables configuration UI
 config:
 
+zeroconf:
+
+conversation:
+
 my:
 
 energy:
 
 media_source:
 
-browser_mod:
+input_number:
+input_text:
+input_datetime:
 
 # Track the sun
 sun:

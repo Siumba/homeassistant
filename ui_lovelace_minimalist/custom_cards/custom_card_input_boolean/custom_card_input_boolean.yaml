@@ -1,0 +1,88 @@
+# custom_card_power_outlet_blue:
+#   template:
+#     - "icon_info_bg"
+#     - "ulm_language_variables"
+#   state:
+#     - styles:
+#         icon:
+#           - color: "rgba(var(--color-blue),1)"
+#         label:
+#           - color: "rgba(var(--color-blue-text),1)"
+#         name:
+#           - color: "rgba(var(--color-blue-text),1)"
+#         img_cell:
+#           - background-color: "rgba(var(--color-blue), 0.2)"
+#         card:
+#           - background-color: "rgba(var(--color-background-blue), var(--opacity-bg))"
+#       id: "on"
+#       value: "on"
+
+---
+custom_card_input_boolean:
+  template:
+    - "icon_more_info_new"
+    - "ulm_actions_card"
+    - "ulm_translation_engine"
+  state:
+    - styles:
+        icon:
+          - color: "rgba(var(--color-blue),1)"
+        label:
+          - color: "rgba(var(--color-blue-text),1)"
+        name:
+          - color: "rgba(var(--color-blue-text),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-blue), 0.2)"
+        card:
+          - background-color: "rgba(var(--color-background-blue), var(--opacity-bg))"
+      id: "on"
+      value: "on"
+  custom_fields:
+    item1:
+      card:
+        type: "custom:button-card"
+        template:
+          - "icon_more_info"
+        custom_fields:
+          item1:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              icon: "[[[ return variables.ulm_card_icon ]]]"
+              tap_action:
+                action: "call-service"
+                service: "switch.toggle"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+              state:
+                - styles:
+                    icon:
+                      - color: "rgba(var(--color-blue),1)"
+                    label:
+                      - color: "rgba(var(--color-blue-text),1)"
+                    name:
+                      - color: "rgba(var(--color-blue-text),1)"
+                    img_cell:
+                      - background-color: "rgba(var(--color-blue), 0.2)"
+                    card:
+                      - background-color: "rgba(var(--color-background-blue), var(--opacity-bg))"
+                  id: "on"
+                  value: "on"
+          item2:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              name: "[[[ return variables.ulm_card_name != '' ? variables.ulm_card_name : entity.entity_id ]]]"
+              label: "[[[ return variables.ulm_translation_state ]]]"
+              state:
+                - styles:
+                    icon:
+                      - color: "rgba(var(--color-blue),1)"
+                    label:
+                      - color: "rgba(var(--color-blue-text),1)"
+                    name:
+                      - color: "rgba(var(--color-blue-text),1)"
+                    img_cell:
+                      - background-color: "rgba(var(--color-blue), 0.2)"
+                  id: "on"
+                  value: "on"

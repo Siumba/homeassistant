@@ -1,0 +1,16 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Spots
+      ulm_card_light_enable_popup: false
+      ulm_card_light_enable_color: true
+    entity: light.badkamer_spots
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Spiegel
+    entity: light.badkamer_spiegel

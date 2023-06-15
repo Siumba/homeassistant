@@ -255,7 +255,7 @@ sensor:
         value_template: >-
           {% set count = namespace(value=0) %}
           {% for entity_id in state_attr('group.all_person_entities','entity_id') %}
-            {% if (states(entity_id) == 'home') %}
+            {% if (states(entity_id) == 'on') %}
               {% set count.value = count.value + 1 %}
             {% endif %}
           {% endfor %}

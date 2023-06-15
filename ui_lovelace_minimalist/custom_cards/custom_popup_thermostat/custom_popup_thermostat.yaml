@@ -1,0 +1,13 @@
+---
+custom_popup_thermostat:
+  hold_action:
+    action: "fire-dom-event"
+    browser_mod:
+      service: "browser_mod.popup"
+      data:
+        large: true
+        hide_header: true
+        content:
+          type: "custom:button-card"
+          template: "custom_popup_thermostat_temperature"
+          entity: "[[[ return entity.entity_id ]]]"

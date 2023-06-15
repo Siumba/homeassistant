@@ -6,7 +6,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Slaapkamer
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.slaapkamer_lamp
 
@@ -14,7 +14,7 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Fabian's Lamp
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.fabians_lamp
 
@@ -22,6 +22,14 @@ cards:
     template: card_light
     variables:
       ulm_card_light_name: Aimee's Lamp
-      ulm_card_light_enable_popup: true
+      ulm_card_light_enable_popup: false
       ulm_card_light_enable_color: true
     entity: light.aimees_lamp
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
+      ulm_card_light_name: Lichtstrip
+      ulm_card_light_enable_popup: false
+      ulm_card_light_enable_color: true
+    entity: light.slaapkamer_lichtstrip

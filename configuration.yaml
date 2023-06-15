@@ -2,17 +2,25 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-http:
-  base_url: !secret external_url
+# http:
+#   base_url: !secret external_url
 
 homeassistant:
   external_url: !secret external_url
   internal_url: !secret internal_url
 
   packages: !include_dir_named packages
-  customize: !include customize.yaml
-  name: iHouse
+  # customize: !include customize.yaml
+  name: Home
   time_zone: Europe/Amsterdam
+  country: NL
   latitude: !secret latitude
   longitude: !secret longitude
   elevation: 20
+
+zone:
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 16
+    icon: mdi:home

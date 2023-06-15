@@ -1,0 +1,134 @@
+mqtt:
+  cover:
+    - name: "Logeerkamer Jaloezie Links - Homekit"
+      # command_topic: "Blinds-Up-Left/blindsCommand"
+      position_topic: "Blinds-Up-Left/positionState"
+      set_position_topic: "Blinds-Up-Left/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 70
+      position_closed: 0
+    - name: "Logeerkamer Jaloezie Rechts - Homekit"
+      # command_topic: "Blinds-Up-Right/blindsCommand"
+      position_topic: "Blinds-Up-Right/positionState"
+      set_position_topic: "Blinds-Up-Right/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 70
+      position_closed: 0
+    - name: "Logeerkamer Jaloezie Links - Raw"
+      # command_topic: "Blinds-Up-Left/blindsCommand"
+      position_topic: "Blinds-Up-Left/positionState"
+      set_position_topic: "Blinds-Up-Left/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 125
+      position_closed: 0
+    - name: "Logeerkamer Jaloezie Rechts - Raw"
+      # command_topic: "Blinds-Up-Right/blindsCommand"
+      position_topic: "Blinds-Up-Right/positionState"
+      set_position_topic: "Blinds-Up-Right/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 125
+      position_closed: 0
+    - name: "Logeerkamer Jaloezie Links"
+      # command_topic: "Blinds-Up-Left/blindsCommand"
+      tilt_status_topic: "Blinds-Up-Left/positionState"
+      tilt_command_topic: "Blinds-Up-Left/positionCommand"
+      position_topic: "Blinds-Up-Left/positionState"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      tilt_max: 50
+      tilt_min: 0
+      tilt_opened_value: 100
+      tilt_closed_value: 0
+    - name: "Logeerkamer Jaloezie Rechts"
+      # command_topic: "Blinds-Up-Right/blindsCommand"
+      tilt_status_topic: "Blinds-Up-Right/positionState"
+      tilt_command_topic: "Blinds-Up-Right/positionCommand"
+      position_topic: "Blinds-Up-Right/positionState"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      tilt_max: 50
+      tilt_min: 0
+      tilt_opened_value: 100
+      tilt_closed_value: 0
+    - name: "Woonkamer Jaloezie Links - Homekit"
+      # command_topic: "Blinds-Down-Left/blindsCommand"
+      position_topic: "Blinds-Down-Left/positionState"
+      set_position_topic: "Blinds-Down-Left/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 62
+      position_closed: 0
+    - name: "Woonkamer Jaloezie Rechts - Homekit"
+      # command_topic: "Blinds-Down-Right/blindsCommand"
+      position_topic: "Blinds-Down-Right/positionState"
+      set_position_topic: "Blinds-Down-Right/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 62
+      position_closed: 0
+    - name: "Woonkamer Jaloezie Links - Raw"
+      # command_topic: "Blinds-Down-Left/blindsCommand"
+      position_topic: "Blinds-Down-Left/positionState"
+      set_position_topic: "Blinds-Down-Left/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 125
+      position_closed: 0
+    - name: "Woonkamer Jaloezie Rechts - Raw"
+      # command_topic: "Blinds-Down-Right/blindsCommand"
+      position_topic: "Blinds-Down-Right/positionState"
+      set_position_topic: "Blinds-Down-Right/positionCommand"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      position_open: 125
+      position_closed: 0
+    - name: "Woonkamer Jaloezie Links"
+      # command_topic: "Blinds-Down-Left/blindsCommand"
+      tilt_status_topic: "Blinds-Down-Left/positionState"
+      tilt_command_topic: "Blinds-Down-Left/positionCommand"
+      position_topic: "Blinds-Down-Left/positionState"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      tilt_max: 62
+      tilt_min: 0
+      tilt_opened_value: 100
+      tilt_closed_value: 0
+    - name: "Woonkamer Jaloezie Rechts"
+      # command_topic: "Blinds-Down-Right/blindsCommand"
+      tilt_status_topic: "Blinds-Down-Right/positionState"
+      tilt_command_topic: "Blinds-Down-Right/positionCommand"
+      position_topic: "Blinds-Down-Right/positionState"
+      retain: false
+      payload_open: "CLOSE"
+      payload_close: "OPEN"
+      payload_stop: "STOP"
+      tilt_max: 62
+      tilt_min: 0
+      tilt_opened_value: 100
+      tilt_closed_value: 0

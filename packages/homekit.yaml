@@ -12,15 +12,69 @@ homekit:
         - binary_sensor.garden_door_contact
         - binary_sensor.guest_room_window_contact
         - binary_sensor.kitchen_door_contact
+        - sensor.badkamer_thermostaat_battery
+        - sensor.bureau_thermostaat_battery
+        - sensor.logeerkamer_thermostaat_battery
+        - sensor.slaapkamer_thermostaat_battery
+        - sensor.woonkamer_thermostaat_battery
         - cover.slaapkamer_rolgordijn
         - cover.slaapkamer_rolluik
         - cover.bureau_rolluik
-        - climate.bedroom_ac
-        - light.tuin_lampen
-        - light.keuken_spots
-        - switch.coffee_machine_power
+        - climate.airconditioner_bedroom
+        - climate.badkamer_thermostaat
+        - climate.mts200_c8a9_thermostat
+        - climate.bureau_thermostaat
+        - climate.slaapkamer_thermostaat
+        - climate.logeerkamer_thermostaat
+        - climate.woonkamer_thermostaat
+        - sensor.slaapkamer_rolgordijn_batterij
+        - light.garden_lights
+        - switch.koffiezetapparaat
+        - alarm_control_panel.alarmo
+        - input_boolean.aimee_home
+        - input_boolean.fabian_home
+        - input_boolean.vacation_mode
+        - switch.droger
+        - switch.wasmachine
+        - climate.sonic_hvac_climate_system
+        - cover.logeerkamer_jaloezieen_homekit
+        - cover.woonkamer_jaloezieen_homekit
+        - input_boolean.sleep_in_mode
+        - script.living_room_tv_reset
+        - button.titan_sleep
     entity_config:
-      switch.coffee_machine_power:
+      alarm_control_panel.alarmo:
+        code: !secret alarm_code
+        name: iHouse Alarm
+      climate.airconditioner_bedroom:
+        name: Slaapkamer Airco
+      climate.mts200_c8a9_thermostat:
+        name: Badkamer Vloerverwarming
+      climate.badkamer_thermostaat:
+        name: Badkamer Thermostaat
+        linked_battery_sensor: sensor.badkamer_thermostaat_battery
+        low_battery_threshold: 20
+      climate.bureau_thermostaat:
+        name: Bureau Thermostaat
+        linked_battery_sensor: sensor.bureau_thermostaat_battery
+        low_battery_threshold: 20
+      climate.logeerkamer_thermostaat:
+        name: Logeerkamer Thermostaat
+        linked_battery_sensor: sensor.logeerkamer_thermostaat_battery
+        low_battery_threshold: 20
+      climate.slaapkamer_thermostaat:
+        name: Slaapkamer Thermostaat
+        linked_battery_sensor: sensor.slaapkamer_thermostaat_battery
+        low_battery_threshold: 20
+      climate.woonkamer_thermostaat:
+        name: Woonkamer Thermostaat
+        linked_battery_sensor: sensor.woonkamer_thermostaat_battery
+        low_battery_threshold: 20
+      climate.sonic_hvac_climate_system:
+        name: Tesla Airco
+      light.garden_lights:
+        name: Tuin Lampen
+      switch.koffiezetapparaat:
         name: Koffiezetapparaat
       binary_sensor.bedroom_window_left_contact:
         name: Slaapkamer Raam Links
@@ -33,44 +87,32 @@ homekit:
       binary_sensor.front_door_contact:
         name: Voordeur
       binary_sensor.garden_door_contact:
-        name: Tuindeur
+        name: Tuindeuren
       binary_sensor.guest_room_window_contact:
-        name: Logeerkamer
+        name: Logeerkamer Raam
       binary_sensor.kitchen_door_contact:
         name: Keukendeur
-  - port: 51235
-    name: OLED TV Bridge
-    mode: accessory
-    filter:
-      include_entities:
-        - media_player.oled_tv
-    entity_config:
-      media_player.oled_tv:
-        name: OLED TV
-        feature_list:
-          - feature: on_off
-
-    # entity_config:
-    #   alarm_control_panel.home:
-    #     code: 1234
-    # binary_sensor.front_door_state:
-    #   linked_battery_sensor: binary_sensor.front_door_low_bat
-    # binary_sensor.garden_door_state:
-    #   linked_battery_sensor: binary_sensor.garden_door_low_bat
-    # binary_sensor.kitchen_door_state:
-    #   linked_battery_sensor: binary_sensor.living_room_low_bat
-    #     low_battery_threshold: 31
-    #   light.kitchen_table:
-    #     name: Kitchen Table Light
-    #   lock.front_door:
-    #     code: 1234
-    #   media_player.living_room:
-    #     feature_list:
-    #       - feature: on_off
-    #       - feature: play_pause
-    #       - feature: play_stop
-    #       - feature: toggle_mute
-    #   switch.bedroom_outlet:
-    #     type: outlet
-    #   camera.back_porch:
-    #     support_audio: True
+      cover.slaapkamer_rolluik:
+        name: Slaapkamer Rolluik
+      cover.bureau_rolluik:
+        name: Bureau Rolluik
+      cover.slaapkamer_rolgordijn:
+        linked_battery_sensor: sensor.slaapkamer_rolgordijn_batterij
+        low_battery_threshold: 20
+        name: Slaapkamer Rolgordijn
+      input_boolean.aimee_home:
+        name: Aimee Thuis
+      input_boolean.fabian_home:
+        name: Fabian Thuis
+      input_boolean.vacation_mode:
+        name: Vakantie Modus
+      input_boolean.sleep_in_mode:
+        name: Uitslaap Modus
+      script.living_room_tv_reset:
+        name: Woonkamer TV Reset
+      cover.logeerkamer_jaloezieen_homekit:
+        name: Logeerkamer Jaloezieën
+      cover.woonkamer_jaloezieen_homekit:
+        name: Woonkamer Jaloezieën
+      button.titan_sleep:
+        name: Titan Sleep

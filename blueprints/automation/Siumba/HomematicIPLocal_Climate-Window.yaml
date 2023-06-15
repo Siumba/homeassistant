@@ -1,0 +1,84 @@
+blueprint:
+  name: Window Open, Notify HomeMatic CCU
+  description: An automation blueprint that reduces the set temperature of your climate
+    device or group if a window sensor is open for more than the preset wait time.
+    It uses the Homematic window sensor channel to set the temperature to the "Open-window
+    temperature" set in the device configuration. You should set the "Mode for temperature
+    fall detection" to Inactive to avoid conflicts. It waits until the window is closed
+    again in order to restore the climate entity temperature. It has an optional blocking
+    entity to prevent the automation running unnecessarily, for example during the
+    Summer season.
+  domain: automation
+  input:
+    window_entity:
+      name: Window Sensor
+      description: The window sensor that will control the climate entity.
+      selector:
+        entity:
+          domain: binary_sensor
+          device_class: window
+          multiple: false
+    open_delay:
+      name: Windows Open Wait Time
+      description: Time to delay after window opens before notifying HomeMatic.
+      default: 30
+      selector:
+        number:
+          min: 0.0
+          max: 600.0
+          unit_of_measurement: seconds
+          mode: slider
+          step: 1.0
+    blocking_entity:
+      name: (OPTIONAL) Blocking Entity
+      description: If this entity's state is on, it will prevent the automation from
+        running. E.g. summer mode or away mode.
+      default:
+      selector:
+        entity:
+          domain: input_boolean
+          multiple: false
+    climate_entity:
+      name: Climate Device
+      description: The climate entity that is controlled by the window sensor.
+      selector:
+        entity:
+          domain: climate
+          multiple: false
+  source_url: https://github.com/Siumba/Homematic-Local-Climate-Window/blob/master/HomematicIPLocal_Climate-Window.yaml
+variables:
+  blocking_entity: !input blocking_entity
+  climate_target: !input climate_entity
+  climate_id: '{{ state_attr( climate_target, "id") }}'
+  open_delay: !input open_delay
+trigger:
+- platform: state
+  entity_id: !input window_entity
+  to: 'on'
+  for: !input open_delay
+condition:
+- condition: template
+  value_template: '{{ (blocking_entity == none) or (states[blocking_entity].state
+    == ''off'') }}'
+action:
+- service: homematicip_local.set_device_value
+  data:
+    device_id: '{{ device_id(climate_target)}}'
+    channel: 1
+    parameter: WINDOW_STATE
+    value: '1'
+    value_type: int
+- wait_for_trigger:
+  - platform: state
+    entity_id: !input window_entity
+    to: 'off'
+  continue_on_timeout: false
+- service: homematicip_local.set_device_value
+  data:
+    device_id: '{{ device_id(climate_target) }}'
+    channel: 1
+    parameter: WINDOW_STATE
+    value: '0'
+    value_type: int
+mode: restart
+max_exceeded: silent

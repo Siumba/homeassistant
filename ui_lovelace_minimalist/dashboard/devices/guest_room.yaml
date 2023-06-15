@@ -1,0 +1,16 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: card_power_outlet
+    variables:
+      ulm_card_power_outlet_consumption_sensor: sensor.wasmachine_power
+      ulm_card_power_outlet_name: Wasmachine
+    entity: switch.wasmachine
+  - type: "custom:button-card"
+    template: card_power_outlet
+    variables:
+      ulm_card_power_outlet_consumption_sensor: sensor.droger_power
+      ulm_card_power_outlet_name: Droger
+    entity: switch.droger

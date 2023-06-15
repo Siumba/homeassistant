@@ -1,0 +1,28 @@
+type: grid
+columns: 2
+square: false
+cards:
+  - type: "custom:button-card"
+    template: custom_card_input_boolean
+    entity: binary_sensor.kookplaat
+    variables:
+      ulm_card_name: Kookplaat
+      ulm_card_icon: mdi:train-car-flatbed
+  - type: "custom:button-card"
+    template: custom_card_input_boolean
+    entity: switch.oven
+    variables:
+      ulm_card_name: Oven
+      ulm_card_icon: mdi:stove
+  - type: "custom:button-card"
+    template: custom_card_input_boolean
+    entity: switch.012010386220001066_bsh_common_setting_powerstate
+    variables:
+      ulm_card_name: Vaatwasser
+      ulm_card_icon: mdi:dishwasher
+  - type: "custom:button-card"
+    template: custom_card_input_boolean
+    entity: switch.koffiezetapparaat
+    variables:
+      ulm_card_name: Koffiezetapparaat
+      ulm_card_icon: mdi:coffee

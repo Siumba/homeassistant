@@ -2,22 +2,29 @@ cover:
   - platform: template
     covers:
       slaapkamer_rolgordijn:
+        unique_id: slaapkamer_rolgordijn
         friendly_name: Slaapkamer Rolgordijn
-        position_template: "{{ 100 - (state_attr('cover.rollerblind_0003', 'current_position') | int) }}"
+        position_template: "{{ 100 - (state_attr('cover.rollerblind_0001', 'current_position') | int) }}"
         open_cover:
           service: cover.close_cover
           data:
-            entity_id: cover.rollerblind_0003
+            entity_id: cover.rollerblind_0001
         close_cover:
           service: cover.open_cover
           data:
-            entity_id: cover.rollerblind_0003
+            entity_id: cover.rollerblind_0001
         stop_cover:
           service: cover.stop_cover
           data:
-            entity_id: cover.rollerblind_0003
+            entity_id: cover.rollerblind_0001
         set_cover_position:
           service: cover.set_cover_position
           data:
-            entity_id: cover.rollerblind_0003
+            entity_id: cover.rollerblind_0001
             position: "{{ 100 - (position) }}"
+
+sensor:
+  - platform: template
+    sensors:
+      slaapkamer_rolgordijn_batterij:
+        value_template: "{{ states('sensor.rollerblind_battery_0001') }}"

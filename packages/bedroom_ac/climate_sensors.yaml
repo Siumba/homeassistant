@@ -1,11 +1,3 @@
-binary_sensor:
-  - platform: threshold
-    entity_id: sensor.airconditioner_bedroom_current_temp
-    lower: 21
-    upper: 99
-    hysteresis: 0.0
-    name: airconditioner_bedroom_threshold
-
 sensor:
   - platform: template
     sensors:
@@ -63,4 +55,11 @@ sensor:
         unit_of_measurement: "°C"
         icon_template: mdi:thermometer
         value_template: >-
-          {{ state_attr('weather.ihouse', 'temperature') }}
+          {{ state_attr('weather.forecast_home', 'temperature') }}
+
+binary_sensor:
+  - platform: template
+    sensors:
+      airconditioner_bedroom_state:
+        friendly_name: "Airconditioner Bedroom State"
+        value_template: "{{ not is_state('climate.airconditioner_bedroom','off') }}"
