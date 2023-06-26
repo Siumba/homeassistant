@@ -6,8 +6,8 @@ custom_popup_thermostat_temperature:
   show_units: false
   styles:
     grid:
-      - grid-template-areas: "'header' 'content1' 'buttons' 'footer'"
-      - grid-template-rows: "16vh 42vh 14vh 14vh"
+      - grid-template-areas: "'header' 'content1' 'buttons' 'fan_modes' 'swing_modes' 'footer'"
+      - grid-template-rows: "12vh 34vh 9vh 9vh 12vh 12vh"
       - grid-template-columns: "1fr"
       - column-gap: "30px"
     card:
@@ -23,22 +23,36 @@ custom_popup_thermostat_temperature:
         - align-self: "start"
         - width: "50%"
         - margin: "0 auto"
+      fan_modes:
+        - align-self: "start"
+        - width: "50%"
+        - margin: "0 auto"
+      swing_modes:
+        - align-self: "start"
+        - width: "50%"
+        - margin: "0 auto"
       footer:
         - align-self: "start"
         - margin-top: "25px"
   extra_styles: |
     @media (max-width: 800px) {
       #container {
-        grid-template-rows: 16vh 52vh 14vh 14vh !important;
+        grid-template-rows: 12vh 34vh 9vh 9vh 12vh 12vh !important;
       }
       #buttons {
+        width: 100% !important;
+      }
+      #fan_modes {
+        width: 100% !important;
+      }
+      #swing_modes {
         width: 100% !important;
       }
   custom_fields:
     header:
       card:
         type: "custom:button-card"
-        template: "custom_new_popup_header"
+        template: "popup_header"
         entity: "[[[ return entity.entity_id ]]]"
     content1:
       card:
@@ -586,6 +600,483 @@ custom_popup_thermostat_temperature:
                 - operator: "template"
                   value: "[[[ return entity.attributes.preset_mode == 'activity' ]]]"
                   styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+    fan_modes:
+      card:
+        type: "custom:button-card"
+        styles:
+          grid:
+            - grid-template-areas: >
+                [[[
+                      var areas = [];
+                      if (entity.attributes.fan_modes.includes("1")) {
+                          areas.push("one");
+                      }
+                      if (entity.attributes.fan_modes.includes("2")) {
+                          areas.push("two");
+                      }
+                      if (entity.attributes.fan_modes.includes("3")) {
+                          areas.push("three");
+                      }
+                      if (entity.attributes.fan_modes.includes("4")) {
+                          areas.push("four");
+                      }
+                      if (entity.attributes.fan_modes.includes("auto")) {
+                          areas.push("auto");
+                      }
+                      return "\"" + areas.join(" ") + "\"";
+                ]]]
+            - grid-template-columns: >
+                [[[
+                    var columns = [];
+                    if (entity.attributes.fan_modes.includes("1")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.fan_modes.includes("2")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.fan_modes.includes("3")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.fan_modes.includes("4")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.fan_modes.includes("auto")) {
+                        columns.push("1fr");
+                    }
+                    return columns.join(" ");
+                ]]]
+            - grid-template-rows: "min-content"
+            - justify-items: "center"
+          card:
+            - box-shadow: "none"
+            - padding: "0px"
+            - border-radius: "21px"
+            - background-color: "rgba(var(--color-theme),0.1)"
+          custom_fields:
+            one:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.fan_modes.includes("1")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            two:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.fan_modes.includes("2")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            three:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.fan_modes.includes("3") ) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            four:
+              - display: >
+                  [[[
+                    if ( !variables?.ulm_card_thermostat_preset_mode && entity.attributes.fan_modes.includes("4")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            swing:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("auto")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+
+        custom_fields:
+          one:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:fan-speed-1"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_fan_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  fan_mode: "1"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.fan_mode == 1 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          two:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:fan-speed-2"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_fan_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  fan_mode: "2"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.fan_mode == 2 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          three:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:fan-speed-3"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_fan_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  fan_mode: "3"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.fan_mode == 3 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          four:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:fan-plus"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_fan_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  fan_mode: "4"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.fan_mode == 4 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          auto:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:fan-auto"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_fan_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  fan_mode: "auto"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.fan_mode == 'auto' && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+    swing_modes:
+      card:
+        type: "custom:button-card"
+        styles:
+          grid:
+            - grid-template-areas: >
+                [[[
+                      var areas = [];
+                      if (entity.attributes.swing_modes.includes("1")) {
+                          areas.push("one");
+                      }
+                      if (entity.attributes.swing_modes.includes("2")) {
+                          areas.push("two");
+                      }
+                      if (entity.attributes.swing_modes.includes("3")) {
+                          areas.push("three");
+                      }
+                      if (entity.attributes.swing_modes.includes("4")) {
+                          areas.push("four");
+                      }
+                      if (entity.attributes.swing_modes.includes("Swing")) {
+                          areas.push("swing");
+                      }
+                      return "\"" + areas.join(" ") + "\"";
+                ]]]
+            - grid-template-columns: >
+                [[[
+                    var columns = [];
+                    if (entity.attributes.swing_modes.includes("1")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.swing_modes.includes("2")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.swing_modes.includes("3")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.swing_modes.includes("4")) {
+                        columns.push("1fr");
+                    }
+                    if (entity.attributes.swing_modes.includes("Swing")) {
+                        columns.push("1fr");
+                    }
+                    return columns.join(" ");
+                ]]]
+            - grid-template-rows: "min-content"
+            - justify-items: "center"
+          card:
+            - box-shadow: "none"
+            - padding: "0px"
+            - border-radius: "21px"
+            - background-color: "rgba(var(--color-theme),0.1)"
+          custom_fields:
+            one:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("1")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            two:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("2")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            three:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("3") ) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            four:
+              - display: >
+                  [[[
+                    if ( !variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("4")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+            auto:
+              - display: >
+                  [[[
+                    if (!variables?.ulm_card_thermostat_preset_mode && entity.attributes.swing_modes.includes("Swing")) {
+                        return "block";
+                    } else {
+                        return "none";
+                    }
+                  ]]]
+
+        custom_fields:
+          one:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:arrow-right"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_swing_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  swing_mode: "1"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+                  - transform: "rotate(85deg)"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.swing_mode == 1 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          two:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:arrow-right"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_swing_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  swing_mode: "2"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+                  - transform: "rotate(65deg)"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.swing_mode == 2 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          three:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:arrow-right"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_swing_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  swing_mode: "3"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+                  - transform: "rotate(45deg)"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.swing_mode == 3 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          four:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:arrow-right"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_swing_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  swing_mode: "4"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+                  - transform: "rotate(25deg)"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.swing_mode == 4 && entity.state != 'off' ]]]"
+                  styles:
+                    card:
+                      - background-color: "var(--card-background-color)"
+                      - box-shadow: "var( --ha-card-box-shadow)"
+                      - transform: "scale(0.95)"
+          swing:
+            card:
+              type: "custom:button-card"
+              entity: "[[[ return entity.entity_id ]]]"
+              template: "widget_icon"
+              icon: "mdi:cached"
+              tap_action:
+                action: "call-service"
+                service: "climate.set_swing_mode"
+                service_data:
+                  entity_id: "[[[ return entity.entity_id ]]]"
+                  swing_mode: "Swing"
+              styles:
+                card:
+                  - background-color: "transparent"
+                  - height: "42px"
+                  - width: "42px"
+                  - border-radius: "50%"
+                  - box-shadow: "none"
+              state:
+                - operator: template
+                  value: "[[[ return entity.attributes.swing_mode == 'Swing' && entity.state != 'off' ]]]"
+                  # spin: true
+                  styles:
+                    icon:
+                      - animation: "rotating 10s infinite alternate"
                     card:
                       - background-color: "var(--card-background-color)"
                       - box-shadow: "var( --ha-card-box-shadow)"

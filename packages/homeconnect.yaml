@@ -1,6 +1,6 @@
 home_connect_alt:
-  client_id: E4DEE57C532C46B67277F8707CC9F180DCC6F78CACE4FD4200F9BE0AA2A92604
-  client_secret: 5A036CB23E6AFA3497761FF4070EC59397C834E99623DD8FC888C90138FA549B
+  client_id: !secret home_connect_id
+  client_secret: !secret home_connect_secret
   language: nl
   sensor_value_translation: server
 

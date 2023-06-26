@@ -48,18 +48,12 @@ custom_card_imswel_person:
         return null;
       }
     ]]]
-  # label: >
-  #   [[[
-  #     let state = states[variables.ulm_card_imswel_person_entity].state
-  #     let option = ["home", "not_home", "unavailable", "unknown"]
-  #     return (option.includes(state)) ? variables.ulm_translation_state : state;
-  #   ]]]
-  # label: >
-  #   [[[
-  #       let state = states[variables.ulm_card_imswel_person_entity].state;
-  #       return hass.resources[hass["language"]]["component.person" + ".state._." + state] ? hass.resources[hass["language"]]["component.person" + ".state._." + state] : state;
-  #   ]]]
-  label: "[[[ return variables.ulm_translation_state; ]]]"
+  label: >
+    [[[
+      let state = states[variables.ulm_card_imswel_person_entity].state
+      let option = ["home", "not_home", "unavailable", "unknown"]
+      return hass.resources[hass["language"]]["component.person.entity_component._.state." + state] ? hass.resources[hass["language"]]["component.person.entity_component._.state." + state] : state;
+    ]]]
   name: "[[[ return states[variables.ulm_card_imswel_person_entity].attributes.friendly_name ]]]"
   entity: "[[[ return variables.ulm_card_imswel_person_entity; ]]]"
   styles:

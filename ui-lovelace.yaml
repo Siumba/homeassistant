@@ -1,5 +1,6 @@
 ---
 button_card_templates: !include_dir_merge_named "/config/custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
+# button_card_templates: !include_dir_merge_named "/config/button_card_templates"
 
 title: "iHouse"
 theme: "minimalist-desktop"

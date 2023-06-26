@@ -1563,17 +1563,3 @@
         target:
           entity_id: input_boolean.tropic_mode
   mode: single
-- id: '1686473367951'
-  alias: Staircase ON
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - light.staircase
-    to: 'on'
-  condition: []
-  action:
-  - service: notify.mobile_app_iphone_fabian
-    data:
-      message: Trap
-  mode: single

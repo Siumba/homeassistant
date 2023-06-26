@@ -21,6 +21,14 @@ cards:
   - type: "custom:button-card"
     template: card_light
     variables:
+      ulm_card_light_name: TV Kast
+      ulm_card_light_enable_popup: false
+      ulm_card_light_enable_color: true
+    entity: light.tv_cabinet
+
+  - type: "custom:button-card"
+    template: card_light
+    variables:
       ulm_card_light_name: Woonkamer
       ulm_card_light_enable_popup: false
     entity: light.woonkamer_lamp

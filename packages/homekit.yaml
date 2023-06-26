@@ -42,6 +42,7 @@ homekit:
         - input_boolean.sleep_in_mode
         - script.living_room_tv_reset
         - button.titan_sleep
+        - light.tv_cabinet
     entity_config:
       alarm_control_panel.alarmo:
         code: !secret alarm_code
@@ -116,3 +117,5 @@ homekit:
         name: Woonkamer Jaloezieën
       button.titan_sleep:
         name: Titan Sleep
+      light.tv_cabinet:
+        name: TV Kast

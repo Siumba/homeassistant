@@ -73,7 +73,25 @@ custom_card_input_boolean:
               type: "custom:button-card"
               entity: "[[[ return entity.entity_id ]]]"
               name: "[[[ return variables.ulm_card_name != '' ? variables.ulm_card_name : entity.entity_id ]]]"
-              label: "[[[ return variables.ulm_translation_state ]]]"
+              label: >-
+                [[[
+                    var label = variables.ulm_translation_state;
+                      if (typeof(entity) !== 'undefined' && entity !== undefined){
+                      let state = entity.state;
+                      let d_class = entity.attributes.device_class;
+                      let def = ["unknown", "unavailable"];
+                      let lang = hass["language"];
+                      let action = entity.attributes.hvac_action;
+                      let domain = entity.entity_id.substr(0, entity.entity_id.indexOf("."));
+                      var mode = hass.resources[lang]["state_attributes." + domain + ".hvac_action." + action];
+                      if (def.includes(state)) {
+                        var mode = hass.resources[lang]["state.default." + state ];
+                      }
+                      var label = hass.resources[lang]["component." + domain + ".state._." + state];
+  
+                      };
+                    return label;
+                ]]]
               state:
                 - styles:
                     icon:

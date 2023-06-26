@@ -1,0 +1,8 @@
+binary_sensor.bureau_microphone:
+  excluded: true
+  hidden: true
+device_tracker.sonos_bureau:
+  excluded: true
+  hidden: true
+number.bureau_treble:
+  hidden: true

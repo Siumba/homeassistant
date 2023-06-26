@@ -215,6 +215,13 @@ cards:
         square: false
         cards:
           - type: "custom:button-card"
+            template: custom_card_ac
+            entity: climate.airconditioner_bedroom
+            variables:
+              ulm_card_ac_name: Airco
+              ulm_card_ac_enable_collapse: true
+              ulm_card_ac_enable_popup: true
+          - type: "custom:button-card"
             template: custom_card_tv_button
             entity: media_player.tv_living_room
             name: OLED TV
@@ -225,25 +232,6 @@ cards:
             variables:
               ulm_card_name: Koffiezetapparaat
               ulm_card_icon: mdi:coffee
-          - type: "custom:button-card"
-            template: card_light
-            variables:
-              ulm_card_light_name: Plafondstraler
-              ulm_card_light_enable_popup: false
-              ulm_card_light_enable_color: true
-            entity: light.plafondstraler
-          - type: "custom:button-card"
-            template: card_light
-            variables:
-              ulm_card_light_name: Eettafel
-              ulm_card_light_enable_popup: false
-            entity: light.eettafel
-          - type: "custom:button-card"
-            template: card_light
-            variables:
-              ulm_card_light_name: Keuken Spots
-              ulm_card_light_enable_popup: false
-            entity: light.keuken_spots
           - type: "custom:button-card"
             template: card_light
             variables:
@@ -258,6 +246,25 @@ cards:
               ulm_card_light_enable_popup: false
               ulm_card_light_enable_color: true
             entity: light.overkapping_spots
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: TV Kast
+              ulm_card_light_enable_popup: false
+              ulm_card_light_enable_color: true
+            entity: light.tv_cabinet
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Eettafel
+              ulm_card_light_enable_popup: false
+            entity: light.eettafel
+          - type: "custom:button-card"
+            template: card_light
+            variables:
+              ulm_card_light_name: Keuken Spots
+              ulm_card_light_enable_popup: false
+            entity: light.keuken_spots
       - type: "custom:button-card"
         template: card_title
         name: "Kamers"

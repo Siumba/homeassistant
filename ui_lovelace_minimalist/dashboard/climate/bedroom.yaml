@@ -6,9 +6,9 @@ cards:
     template: custom_card_ac
     entity: climate.airconditioner_bedroom
     variables:
-      ulm_card_thermostat_name: Airco
-      ulm_card_thermostat_enable_collapse: true
-      ulm_card_thermostat_enable_popup: true
+      ulm_card_ac_name: Airco
+      ulm_card_ac_enable_collapse: true
+      ulm_card_ac_enable_popup: true
   - type: "custom:button-card"
     template: custom_card_thermostat
     entity: climate.slaapkamer_thermostaat

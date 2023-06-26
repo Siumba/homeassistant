@@ -1,0 +1,12 @@
+bureau:
+  icon: ''
+  floor: ''
+  disabled: true
+gang:
+  icon: ''
+  floor: ''
+  disabled: true
+woonkamer:
+  icon: ''
+  floor: ''
+  disabled: true
